@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ON Design Lab</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300;400&display=swap');
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#0e0e0e;--fg:#f0ede8;--dim:rgba(240,237,232,0.32);
+  --border:rgba(240,237,232,0.09);--accent:#c8b89a;--r:13px;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--fg);font-family:'DM Mono',monospace;font-weight:300;overflow-x:hidden;}
+
+/* Nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:26px 48px;background:rgba(14,14,14,0.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.logo{font-family:'Cormorant Garamond',serif;font-size:22px;letter-spacing:5px;font-weight:300;color:var(--fg);text-decoration:none;}
+.nav-links{display:flex;gap:32px;}
+.nav-links a{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color 0.3s;}
+.nav-links a:hover{color:var(--fg);}
+
+/* Hero */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 48px 64px;border-bottom:1px solid var(--border);}
+.hero-tag{font-size:10px;letter-spacing:4px;color:var(--dim);text-transform:uppercase;margin-bottom:20px;}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(64px,9vw,148px);font-weight:300;line-height:0.93;letter-spacing:-3px;margin-bottom:40px;}
+.hero-title em{font-style:italic;color:var(--accent);}
+.hero-sub{display:flex;gap:48px;align-items:flex-end;border-top:1px solid var(--border);padding-top:28px;flex-wrap:wrap;}
+.hero-desc{max-width:500px;font-size:12px;line-height:2;color:var(--dim);letter-spacing:0.5px;}
+.hero-cities{margin-left:auto;text-align:right;font-size:10px;letter-spacing:3px;color:var(--dim);text-transform:uppercase;line-height:2.4;}
+
+/* Section */
+section{padding:112px 48px;border-bottom:1px solid var(--border);}
+.sec-hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:72px;}
+.sec-num{font-size:10px;letter-spacing:3px;color:var(--dim);}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,5vw,68px);font-weight:300;letter-spacing:-1px;}
+
+/* About */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;}
+.statement{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.4vw,34px);font-weight:300;line-height:1.5;font-style:italic;color:var(--accent);margin-bottom:28px;}
+.body-txt{font-size:12px;line-height:2.1;color:var(--dim);}
+.cl-label{font-size:10px;letter-spacing:3px;color:var(--dim);text-transform:uppercase;margin-bottom:14px;}
+.cl-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);}
+.cl{padding:13px 16px;background:var(--bg);transition:background 0.2s;}
+.cl:hover{background:rgba(240,237,232,0.03);}
+.cn{font-size:11px;letter-spacing:0.5px;margin-bottom:3px;}
+.ct{font-size:9px;letter-spacing:2px;color:var(--dim);text-transform:uppercase;}
+
+/* Projects */
+.proj{display:grid;grid-template-columns:72px 1fr 1fr;gap:40px;padding:44px 0;border-bottom:1px solid var(--border);align-items:start;}
+.proj:last-child{border-bottom:none;}
+.pn{font-size:10px;letter-spacing:3px;color:var(--dim);padding-top:6px;}
+.proj-name{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,2.8vw,42px);font-weight:300;letter-spacing:-1px;margin-bottom:8px;line-height:1.05;}
+.proj-meta{display:flex;gap:16px;font-size:10px;letter-spacing:2px;color:var(--dim);text-transform:uppercase;flex-wrap:wrap;}
+.proj-concept{font-size:12px;line-height:2;color:var(--dim);padding-top:4px;}
+.proj-concept strong{display:block;color:var(--fg);margin-bottom:8px;font-size:12px;font-weight:400;letter-spacing:0.3px;}
+
+/* Images */
+.proj-imgs{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:20px;}
+.proj-imgs img{width:100%;aspect-ratio:4/3;object-fit:cover;filter:grayscale(15%);transition:filter 0.5s,transform 0.5s;cursor:pointer;}
+.proj-imgs img:hover{filter:grayscale(0%);transform:scale(1.01);}
+
+/* Team */
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:44px;}
+.person{border-top:1px solid var(--border);padding-top:28px;}
+.p-role{font-size:9px;letter-spacing:3px;color:var(--dim);text-transform:uppercase;margin-bottom:9px;}
+.p-name{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;letter-spacing:-0.5px;margin-bottom:4px;}
+.p-name-cn{font-style:italic;font-size:17px;color:var(--accent);}
+.p-edu{font-size:10px;letter-spacing:1px;color:var(--dim);margin-bottom:16px;line-height:1.9;}
+.p-bio{font-size:11px;line-height:2;color:var(--dim);}
+.p-cv{margin-top:16px;}
+.cv-row{display:flex;justify-content:space-between;font-size:10px;letter-spacing:1px;padding:6px 0;border-bottom:1px solid var(--border);color:var(--dim);}
+.cv-row strong{color:var(--fg);}
+
+/* Awards */
+.aw-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);}
+.aw{padding:20px;background:var(--bg);transition:background 0.2s;}
+.aw:hover{background:rgba(240,237,232,0.03);}
+.aw-yr{font-size:9px;letter-spacing:3px;color:var(--dim);margin-bottom:6px;}
+.aw-name{font-size:11px;letter-spacing:0.5px;line-height:1.6;margin-bottom:4px;}
+.aw-prize{font-size:10px;letter-spacing:1px;color:var(--dim);}
+
+/* Quote */
+.quote-sec{padding:112px 48px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center;text-align:center;}
+.big-q{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3.2vw,50px);font-weight:300;font-style:italic;line-height:1.5;color:var(--accent);max-width:780px;}
+
+/* Lightbox */
+.lb{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.93);z-index:999;align-items:center;justify-content:center;}
+.lb.open{display:flex;}
+.lb img{max-width:90vw;max-height:90vh;object-fit:contain;}
+.lb-close{position:absolute;top:24px;right:32px;font-size:28px;color:var(--dim);cursor:pointer;transition:color 0.2s;}
+.lb-close:hover{color:var(--fg);}
+
+/* Footer */
+footer{padding:56px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;letter-spacing:4px;}
+.f-copy{font-size:10px;letter-spacing:2px;color:var(--dim);}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.8s ease,transform 0.8s ease;}
+.reveal.in{opacity:1;transform:none;}
+
+/* RWD */
+@media(max-width:768px){
+  nav{padding:18px 24px;} .nav-links{display:none;}
+  .hero,section{padding-left:24px;padding-right:24px;}
+  .about-grid{grid-template-columns:1fr;}
+  .proj{grid-template-columns:36px 1fr;gap:18px;}
+  .proj-concept{display:none;}
+  .proj-imgs{grid-template-columns:repeat(2,1fr);}
+  .quote-sec,footer{padding:72px 24px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="#">ON</a>
+  <div class="nav-links">
+    <a href="#about">關於</a>
+    <a href="#work">作品</a>
+    <a href="#team">團隊</a>
+    <a href="#awards">獎項</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-tag reveal">ON Design Lab, Ltd. — 品牌空間設計</div>
+  <h1 class="hero-title reveal">品牌邏輯，<br><em>翻譯成空間。</em></h1>
+  <div class="hero-sub reveal">
+    <p class="hero-desc">品牌形象諮詢 · 空間設計 · 展廳設計 · 建築設計<br>設計師、品牌經營者、工程落地，三個角色同時在場。</p>
+    <div class="hero-cities">上海<br>紐約<br>台灣</div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="sec-hd reveal"><span class="sec-num">01</span><h2 class="sec-title">關於 ON</h2></div>
+  <div class="about-grid reveal">
+    <div>
+      <p class="statement">「邏輯驅動方法，<br>直覺傳達情感。」</p>
+      <p class="body-txt">ON 做的不是風格，是品牌在空間裡說話的方式。設計師、品牌經營者、工程落地三個角色同時在場，這是我們和其他設計公司最根本的差異。<br><br>我們相信每一個設計決策都應該有可以被說清楚的理由。動線、材質、光、比例，都是品牌邏輯的延伸，不是美感的堆疊。</p>
+    </div>
+    <div>
+      <div class="cl-label">合作客戶</div>
+      <div class="cl-grid">
+        <div class="cl"><div class="cn">Urban Revivo</div><div class="ct">中國快奢時尚</div></div>
+        <div class="cl"><div class="cn">R. Sanderson</div><div class="ct">高端精品女鞋</div></div>
+        <div class="cl"><div class="cn">話梅</div><div class="ct">美妝集合品牌</div></div>
+        <div class="cl"><div class="cn">ELLE Café</div><div class="ct">時尚餐飲</div></div>
+        <div class="cl"><div class="cn">de nuit</div><div class="ct">法式精緻料理</div></div>
+        <div class="cl"><div class="cn">樂活酒窖</div><div class="ct">酒窖品牌空間</div></div>
+        <div class="cl"><div class="cn">MOFT</div><div class="ct">科技配件品牌</div></div>
+        <div class="cl"><div class="cn">Arabica %</div><div class="ct">精品咖啡</div></div>
+        <div class="cl"><div class="cn">J.Lindeberg</div><div class="ct">北歐高爾夫時裝</div></div>
+        <div class="cl"><div class="cn">名創優品</div><div class="ct">生活用品連鎖</div></div>
+        <div class="cl"><div class="cn">恆隆行</div><div class="ct">精品電器集合</div></div>
+        <div class="cl"><div class="cn">綾致集團</div><div class="ct">時裝品牌集團</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="sec-hd reveal"><span class="sec-num">02</span><h2 class="sec-title">精選作品</h2></div>
+
+  <div class="proj reveal">
+    <div class="pn">001</div>
+    <div><div class="proj-name">R. Sanderson</div><div class="proj-meta"><span>品牌旗艦店</span><span>臺灣</span><span>170 m²</span></div></div>
+    <div class="proj-concept"><strong>好的零售空間，讓人多走三步才離開。</strong>入口縮口引導進入，動線設計三個節點形成內縮三角環，讓每次轉向都有新的展示等待。VIP 試穿區在動線末端，以曲面與龕洞圍塑，讓人在最放鬆的狀態下做決定。品牌識別從門把開始。</div>
+    <div class="proj-imgs">
+      <img src="images/R.Sanderson/01.jpg" alt="R.Sanderson" onclick="lb(this.src)">
+      <img src="images/R.Sanderson/02.jpg" alt="R.Sanderson" onclick="lb(this.src)">
+      <img src="images/R.Sanderson/03.jpg" alt="R.Sanderson" onclick="lb(this.src)">
+    </div>
+  </div>
+
+  <div class="proj reveal">
+    <div class="pn">002</div>
+    <div><div class="proj-name">Urban Revivo 新加坡</div><div class="proj-meta"><span>品牌旗艦店</span><span>新加坡</span><span>1,800 m²</span></div></div>
+    <div class="proj-concept"><strong>1800 平方公尺，讓人記得的不是大，而是層次。</strong>大型快奢品牌旗艦店最容易犯的錯，是用面積說話。新加坡店選擇用拱型序列取代尺度感，白色拱廊從立面延伸到室內，形成連續的空間節奏。顧客感受的不是「大」，而是「還有下一個」。</div>
+    <div class="proj-imgs">
+      <img src="images/UrbanRevivo-SG/01.jpg" alt="Urban Revivo SG" onclick="lb(this.src)">
+      <img src="images/UrbanRevivo-SG/02.jpg" alt="Urban Revivo SG" onclick="lb(this.src)">
+      <img src="images/UrbanRevivo-SG/03.jpg" alt="Urban Revivo SG" onclick="lb(this.src)">
+    </div>
+  </div>
+
+  <div class="proj reveal">
+    <div class="pn">003</div>
+    <div><div class="proj-name">Urban Revivo 成都</div><div class="proj-meta"><span>品牌旗艦店</span><span>成都</span><span>2,280 m²</span></div></div>
+    <div class="proj-concept"><strong>快時尚品牌需要的不是美感，是讓人願意進來的理由。</strong>黑色量體、石材紋理與有機雕塑放在入口，製造視覺反差。進入後，空間語彙轉向有機流動樓梯、雲形天頂、橙色錐形量體。兩個語境的切換，本身就是一種品牌主張。</div>
+    <div class="proj-imgs">
+      <img src="images/UrbanRevivo-CD/01.jpg" alt="Urban Revivo CD" onclick="lb(this.src)">
+      <img src="images/UrbanRevivo-CD/02.jpg" alt="Urban Revivo CD" onclick="lb(this.src)">
+      <img src="images/UrbanRevivo-CD/03.jpg" alt="Urban Revivo CD" onclick="lb(this.src)">
+    </div>
+  </div>
+
+  <div class="proj reveal">
+    <div class="pn">004</div>
+    <div><div class="proj-name">La Vie Wine</div><div class="proj-meta"><span>酒窖品牌空間</span><span>臺灣</span><span>1,388 m²</span></div></div>
+    <div class="proj-concept"><strong>地下室是城市裡消失感最強的空間，這是它的優勢。</strong>La Vie 的設計起點是一個問題——如何讓人走進來的瞬間感覺離開了台北。立面以深藍色與拱型門洞建立第一層轉換。螺旋樓梯讓下降變成一種進入儀式。</div>
+    <div class="proj-imgs">
+      <img src="images/三名園/01.jpg" alt="La Vie Wine" onclick="lb(this.src)">
+      <img src="images/三名園/02.jpg" alt="La Vie Wine" onclick="lb(this.src)">
+      <img src="images/三名園/03.jpg" alt="La Vie Wine" onclick="lb(this.src)">
+    </div>
+  </div>
+
+  <div class="proj reveal">
+    <div class="pn">005</div>
+    <div><div class="proj-name">de nuit</div><div class="proj-meta"><span>法式精緻料理</span><span>臺灣</span><span>420 m²</span></div></div>
+    <div class="proj-concept"><strong>餐廳的氣氛，從你走進來之前就開始了。</strong>de nuit 的品牌核心是「夜的精緻」。灰色立面壓低視覺，霓虹招牌是唯一的亮點，製造夜晚的儀式感。低照度、訂製天花、深色佈局讓人感覺「已經是晚上了」。</div>
+    <div class="proj-imgs">
+      <img src="images/de-nuit/WEI_1231-編輯.jpg" alt="de nuit" onclick="lb(this.src)">
+      <img src="images/de-nuit/02.jpg" alt="de nuit" onclick="lb(this.src)">
+      <img src="images/de-nuit/03.jpg" alt="de nuit" onclick="lb(this.src)">
+    </div>
+  </div>
+
+  <div class="proj reveal">
+    <div class="pn">006</div>
+    <div><div class="proj-name">浪花花藝</div><div class="proj-meta"><span>花藝品牌</span><span>臺灣</span><span>138 m²</span></div></div>
+    <div class="proj-concept"><strong>花藝品牌的空間，應該讓植物比設計更搶眼。</strong>浪花的策略是退場——鋼構格柵天花引入漫射光，牆面以白色為底，室外庭院作為第一個視線落點。進入後的核心是一張石頭桌，花在其上。</div>
+    <div class="proj-imgs">
+      <img src="images/浪花/_WEI8848-編輯.jpg" alt="浪花花藝" onclick="lb(this.src)">
+      <img src="images/浪花/02.jpg" alt="浪花花藝" onclick="lb(this.src)">
+      <img src="images/浪花/03.jpg" alt="浪花花藝" onclick="lb(this.src)">
+    </div>
+  </div>
+
+  <div class="proj reveal">
+    <div class="pn">007</div>
+    <div><div class="proj-name">Monte</div><div class="proj-meta"><span>餐飲品牌</span><span>臺灣</span><span>90 m²</span></div></div>
+    <div class="proj-concept"><strong>設計的工作是讓食物成為唯一的主角。</strong>Monte 是一個高度聚焦的餐飲品牌。開放廚房是空間的重心，不鏽鋼弧形吧台將視線引導向料理台。材質刻意克制：水泥、金屬管線、木百葉，讓空間有一種「工作場所」的專注感。</div>
+    <div class="proj-imgs">
+      <img src="images/Monte/_WEI0473-編輯.jpg" alt="Monte" onclick="lb(this.src)">
+      <img src="images/Monte/02.jpg" alt="Monte" onclick="lb(this.src)">
+      <img src="images/Monte/03.jpg" alt="Monte" onclick="lb(this.src)">
+    </div>
+  </div>
+
+  <div class="proj reveal">
+    <div class="pn">008</div>
+    <div><div class="proj-name">ELLE Café</div><div class="proj-meta"><span>餐飲品牌</span><span>臺灣</span><span>158 m²</span></div></div>
+    <div class="proj-concept"><strong>時尚媒體的空間，白天和夜晚要說兩種語言。</strong>白天空間清晰、自然光漫反射，像一本在日光下被翻閱的雜誌。夜晚，中島吧台的桃紅光從內部透出，成為夜晚的唯一主角。兩種光線，兩種語言，一個品牌身份。</div>
+    <div class="proj-imgs">
+      <img src="images/ELLECafe/_WEI7050-編輯.jpg" alt="ELLE Café" onclick="lb(this.src)">
+      <img src="images/ELLECafe/02.jpg" alt="ELLE Café" onclick="lb(this.src)">
+      <img src="images/ELLECafe/03.jpg" alt="ELLE Café" onclick="lb(this.src)">
+    </div>
+  </div>
+
+  <div class="proj reveal">
+    <div class="pn">009</div>
+    <div><div class="proj-name">慕診所</div><div class="proj-meta"><span>醫美品牌</span><span>臺灣</span><span>226 m²</span></div></div>
+    <div class="proj-concept"><strong>讓病人在踏進診所之前，身體就已經開始放鬆。</strong>慕診所以六棵樹和格柵玻璃建立兩層景深，前景是真實的綠，背景是森林圖像，讓人在街道上就開始切換狀態。進入後，弧形接待台、磨石地板、竹簾廊道延續這個「已經在森林裡」的空間邏輯。</div>
+    <div class="proj-imgs">
+      <img src="images/慕診所/WEI_0134-編輯.jpg" alt="慕診所" onclick="lb(this.src)">
+      <img src="images/慕診所/02.jpg" alt="慕診所" onclick="lb(this.src)">
+      <img src="images/慕診所/03.jpg" alt="慕診所" onclick="lb(this.src)">
+    </div>
+  </div>
+
+  <div class="proj reveal">
+    <div class="pn">010</div>
+    <div><div class="proj-name">Cava Baja</div><div class="proj-meta"><span>餐飲品牌</span><span>臺灣</span><span>180 m²</span></div></div>
+    <div class="proj-concept"><strong>西班牙酒館的精神不是風格，是讓人放鬆的理由。</strong>磚牆、木門、馬賽克吧台、鑄鐵格柵，每個材質都在服務同一件事：讓人感覺這個地方「已經存在很久了」。庭院作為緩衝區，讓進入成為一個有節奏的過程。</div>
+    <div class="proj-imgs">
+      <img src="images/CavaBaja/_WEI4054-編輯.jpg" alt="Cava Baja" onclick="lb(this.src)">
+      <img src="images/CavaBaja/02.jpg" alt="Cava Baja" onclick="lb(this.src)">
+      <img src="images/CavaBaja/03.jpg" alt="Cava Baja" onclick="lb(this.src)">
+    </div>
+  </div>
+
+  <div class="proj reveal">
+    <div class="pn">011</div>
+    <div><div class="proj-name">Fire Play</div><div class="proj-meta"><span>餐飲品牌</span><span>臺灣</span><span>108 m²</span></div></div>
+    <div class="proj-concept"><strong>這個品牌要讓人進門的第一秒就知道這裡不一樣。</strong>立面以黑色為底，兩側展示櫃放置品牌裝置藝術，用視覺衝擊代替招牌說明。裸露管線天花、銅板吧台、手工刻字牆面讓空間本身成為品牌的一部分。這不是餐廳設計，這是品牌裝置。</div>
+    <div class="proj-imgs">
+      <img src="images/FirePlay/01.jpg" alt="Fire Play" onclick="lb(this.src)">
+      <img src="images/FirePlay/02.jpg" alt="Fire Play" onclick="lb(this.src)">
+      <img src="images/FirePlay/03.jpg" alt="Fire Play" onclick="lb(this.src)">
+    </div>
+  </div>
+
+  <div class="proj reveal">
+    <div class="pn">012</div>
+    <div><div class="proj-name">華逸能源</div><div class="proj-meta"><span>新能源品牌辦公室</span><span>臺灣</span><span>220 m²</span></div></div>
+    <div class="proj-concept"><strong>品牌邏輯建構辦公室，每個決定都服務品牌的運作方式。</strong>天花板不封板，是因為管路要好維修，不是風格選擇。CI 藍色直接噴在裸露天花，品牌定色因此進入空間最大的視覺面。每一個決定都有運作邏輯。</div>
+    <div class="proj-imgs">
+      <img src="images/華逸能源/01.jpg" alt="華逸能源" onclick="lb(this.src)">
+      <img src="images/華逸能源/02.jpg" alt="華逸能源" onclick="lb(this.src)">
+      <img src="images/華逸能源/03.jpg" alt="華逸能源" onclick="lb(this.src)">
+    </div>
+  </div>
+
+  <div class="proj reveal">
+    <div class="pn">013</div>
+    <div><div class="proj-name">新創視</div><div class="proj-meta"><span>形象概念店</span><span>臺灣</span><span>102 m²</span></div></div>
+    <div class="proj-concept"><strong>眼鏡品牌的展示邏輯：讓人看見產品之前先感覺到品牌。</strong>新創視是一個有五十年歷史的台灣眼鏡品牌。空間以暖木色為主調，建立親近感。陳列邏輯從「展示眼鏡」轉向「展示生活方式」。品牌歷史被重新詮釋為一種值得信任的厚度。</div>
+    <div class="proj-imgs">
+      <img src="images/新創視/01.jpg" alt="新創視" onclick="lb(this.src)">
+      <img src="images/新創視/02.jpg" alt="新創視" onclick="lb(this.src)">
+      <img src="images/新創視/03.jpg" alt="新創視" onclick="lb(this.src)">
+    </div>
+  </div>
+
+  <div class="proj reveal">
+    <div class="pn">014</div>
+    <div><div class="proj-name">樂樽爐端燒</div><div class="proj-meta"><span>餐飲品牌</span><span>臺灣</span><span>100 m²</span></div></div>
+    <div class="proj-concept"><strong>白色是這個空間的第一層設計語言。</strong>白色立面將街道雜訊壓下，讓人先安靜再被引導進來。推門之後，木格柵、暗色天花、料理檯上的光開始說話。格柵間距依視線計算，讓每個座位都被同一組框景服務。爐端燒的核心是食物和火。</div>
+    <div class="proj-imgs">
+      <img src="images/樂樽爐端燒/01.jpg" alt="樂樽爐端燒" onclick="lb(this.src)">
+      <img src="images/樂樽爐端燒/02.jpg" alt="樂樽爐端燒" onclick="lb(this.src)">
+      <img src="images/樂樽爐端燒/03.jpg" alt="樂樽爐端燒" onclick="lb(this.src)">
+    </div>
+  </div>
+
+</section>
+
+<div class="quote-sec">
+  <p class="big-q reveal">「每一個設計決策，<br>都應該有可以被說清楚的理由。」</p>
+</div>
+
+<section id="team">
+  <div class="sec-hd reveal"><span class="sec-num">03</span><h2 class="sec-title">核心團隊</h2></div>
+  <div class="team-grid">
+    <div class="person reveal">
+      <div class="p-role">創始合夥人</div>
+      <div class="p-name">Mo Tsai <span class="p-name-cn">蔡曜牟</span></div>
+      <div class="p-edu">室內設計碩士 · 中原大學</div>
+      <p class="p-bio">Mo Tsai 同時做三件事：設計空間、經營品牌、以投資人的角度站在業主的位置思考。2019 年起深度參與 de nuit 的經營，同時持有股份。這段經歷讓他確信：設計不是服務，是品牌的一部分。</p>
+      <div class="p-cv">
+        <div class="cv-row"><strong>ON Design Lab</strong><span>創始合夥人</span></div>
+        <div class="cv-row"><strong>德紐股份有限公司</strong><span>品牌經營總監</span></div>
+        <div class="cv-row"><strong>中國科技大學</strong><span>講師</span></div>
+      </div>
+    </div>
+    <div class="person reveal">
+      <div class="p-role">創始合夥人</div>
+      <div class="p-name">David C. Chen <span class="p-name-cn">陳紀中</span></div>
+      <div class="p-edu">建築碩士 · 賓夕法尼亞大學 · 英國建築聯盟<br>藝術學士 · 紐約視覺藝術學院</div>
+      <p class="p-bio">曾任職於 Zaha Hadid Architects、UN Studio，擔任 CHANEL 亞太區設計經理、URBAN REVIVO 品牌形象中心總經理。2023 IPDA 年度前 100 名年輕設計師。目前擔任 SCAD 客座教授。</p>
+      <div class="p-cv">
+        <div class="cv-row"><strong>URBAN REVIVO</strong><span>品牌形象中心總經理</span></div>
+        <div class="cv-row"><strong>SCAD 薩凡納藝術大學</strong><span>室內設計教授</span></div>
+        <div class="cv-row"><strong>香奈兒 CHANEL</strong><span>亞太地區設計經理</span></div>
+        <div class="cv-row"><strong>Zaha Hadid Architects</strong><span>建築師</span></div>
+      </div>
+    </div>
+    <div class="person reveal">
+      <div class="p-role">工程實務總監</div>
+      <div class="p-name">Dean Hsieh <span class="p-name-cn">謝景年</span></div>
+      <div class="p-edu">學士 · 淡江大學</div>
+      <p class="p-bio">背景橫跨室內工程、醫療空間經營與財務規劃。在 ON 的角色是確保設計落地的方式可以被商業邏輯支撐。同時也是 Musee du Nuage 共同創辦人及 Nuvola Spa 創辦人。</p>
+      <div class="p-cv">
+        <div class="cv-row"><strong>ON Design</strong><span>室內工程總監</span></div>
+        <div class="cv-row"><strong>Musee du Nuage</strong><span>財務長暨醫療科技協調人</span></div>
+        <div class="cv-row"><strong>Nuvola Spa</strong><span>創辦人</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="awards">
+  <div class="sec-hd reveal"><span class="sec-num">04</span><h2 class="sec-title">媒體獎項</h2></div>
+  <div class="aw-grid reveal">
+    <div class="aw"><div class="aw-yr">2024</div><div class="aw-name">Paris GRANDPRIX</div><div class="aw-prize">最佳年輕設計公司獎</div></div>
+    <div class="aw"><div class="aw-yr">2024</div><div class="aw-name">IIDA 義大利國際設計獎</div><div class="aw-prize">專案設計獎</div></div>
+    <div class="aw"><div class="aw-yr">2023</div><div class="aw-name">iF 設計獎</div><div class="aw-prize">專案設計獎</div></div>
+    <div class="aw"><div class="aw-yr">2023</div><div class="aw-name">MUSE 設計獎</div><div class="aw-prize">鉑金獎 + 金獎</div></div>
+    <div class="aw"><div class="aw-yr">2023</div><div class="aw-name">米其林指南</div><div class="aw-prize">一星 · de nuit</div></div>
+    <div class="aw"><div class="aw-yr">2023</div><div class="aw-name">IPDA</div><div class="aw-prize">年度前 100 名年輕設計師</div></div>
+    <div class="aw"><div class="aw-yr">2022</div><div class="aw-name">AMP 美國建築大師獎</div><div class="aw-prize">設計獎</div></div>
+    <div class="aw"><div class="aw-yr">2022</div><div class="aw-name">SBID</div><div class="aw-prize">亞洲最佳零售品牌空間</div></div>
+    <div class="aw"><div class="aw-yr">2022</div><div class="aw-name">IDEA-TOPS</div><div class="aw-prize">亞洲前五最佳零售品牌空間</div></div>
+    <div class="aw"><div class="aw-yr">2020</div><div class="aw-name">Maison & Objet</div><div class="aw-prize">設計銀獎</div></div>
+    <div class="aw"><div class="aw-yr">2020</div><div class="aw-name">IDA 國際設計獎</div><div class="aw-prize">設計銀獎</div></div>
+    <div class="aw"><div class="aw-yr">2016</div><div class="aw-name">iF 設計獎</div><div class="aw-prize">專案設計獎</div></div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-logo">ON</div>
+  <div class="f-copy">© 2025 ON Design Lab, Ltd. · 上海 · 紐約 · 台灣</div>
+</footer>
+
+<!-- Lightbox -->
+<div class="lb" id="lb" onclick="closelb()">
+  <span class="lb-close" onclick="closelb()">×</span>
+  <img id="lb-img" src="" alt="">
+</div>
+
+<script>
+function lb(src){document.getElementById('lb-img').src=src;document.getElementById('lb').classList.add('open');}
+function closelb(){document.getElementById('lb').classList.remove('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closelb();});
+
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});
+},{threshold:0.07,rootMargin:'0px 0px -24px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
