@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — ON Design Lab</title>
+<style>
+  :root {
+    --bg: #0e0e0c; --bg2: #141412;
+    --line: #252520; --white: #f0efe8;
+    --muted: #4a4a44; --dim: #2a2a26; --accent: #666660;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background: var(--bg); color: var(--white); min-height: 100vh; display: flex; flex-direction: column; }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 20px 40px; border-bottom: 0.5px solid var(--line); position: sticky; top: 0; background: var(--bg); z-index: 100; }
+  .nav-logo { font-size: 10px; font-weight: 300; letter-spacing: 0.26em; text-transform: uppercase; color: var(--white); text-decoration: none; }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-link { font-size: 9px; font-weight: 300; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding-bottom: 2px; border-bottom: 0.5px solid transparent; transition: all 0.2s; }
+  .nav-link:hover { color: var(--white); border-color: var(--white); }
+  .nav-link.active { color: var(--white); border-color: var(--white); }
+
+  .wrap { flex: 1; display: flex; flex-direction: column; justify-content: center; max-width: 560px; padding: 60px 40px; }
+  .heading { font-size: 28px; font-weight: 300; letter-spacing: 0.04em; color: var(--white); margin-bottom: 10px; }
+  .sub { font-size: 11px; font-weight: 300; color: var(--muted); line-height: 1.8; margin-bottom: 32px; }
+  .email { display: inline-block; font-size: 11px; letter-spacing: 0.07em; color: var(--muted); text-decoration: none; margin-bottom: 40px; transition: color 0.2s; }
+  .email:hover { color: var(--white); }
+
+  .form-group { margin-bottom: 0; }
+  label { display: block; font-size: 8px; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; margin-top: 22px; }
+  input, textarea {
+    width: 100%; background: transparent; border: none;
+    border-bottom: 0.5px solid var(--line);
+    color: var(--white); font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 11px; font-weight: 300; padding: 6px 0; outline: none;
+    letter-spacing: 0.04em; transition: border-color 0.25s; resize: none;
+  }
+  input:focus, textarea:focus { border-bottom-color: var(--accent); }
+  textarea { height: 68px; }
+
+  .btn-send { margin-top: 32px; display: inline-block; font-size: 8px; font-weight: 300; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); border: 0.5px solid var(--line); padding: 12px 28px; cursor: pointer; background: none; font-family: inherit; transition: all 0.2s; }
+  .btn-send:hover { color: var(--white); border-color: var(--accent); }
+
+  .footer { padding: 20px 40px; border-top: 0.5px solid var(--line); font-size: 9px; color: var(--dim); letter-spacing: 0.14em; }
+  .footer a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .footer a:hover { color: var(--white); }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo" href="../index.html">ON Design Lab</a>
+  <div class="nav-links">
+    <a class="nav-link" href="../commercial/index.html">Commercial</a>
+    <a class="nav-link" href="../residential/index.html">Residential</a>
+    <a class="nav-link active" href="../info/index.html">Info</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <h1 class="heading">Contact</h1>
+  <p class="sub">有合作提案或案件諮詢，歡迎聯絡。</p>
+  <a class="email" href="mailto:info@ondesignlabltd.com">info@ondesignlabltd.com</a>
+
+  <form onsubmit="return false;">
+    <label>Name</label>
+    <input type="text" autocomplete="name">
+
+    <label>Email</label>
+    <input type="email" autocomplete="email">
+
+    <label>Message</label>
+    <textarea rows="4"></textarea>
+
+    <button class="btn-send" type="submit">Send</button>
+  </form>
+</div>
+
+<div class="footer">
+  <a href="../info/index.html">← Info</a>
+</div>
+
+</body>
+</html>

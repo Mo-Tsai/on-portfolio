@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ON Design Lab</title>
+<style>
+  :root {
+    --bg: #0e0e0c;
+    --white: #f0efe8;
+    --res-bg: #f0efe8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; overflow: hidden; }
+
+  .landing {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+  }
+
+  .side {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: opacity 0.4s ease;
+    text-decoration: none;
+  }
+  .side:hover { opacity: 0.82; }
+  .side-com { background: var(--bg); }
+  .side-res { background: var(--res-bg); }
+
+  .divider {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background: #777;
+    transform: translateX(-50%);
+    z-index: 20;
+    pointer-events: none;
+  }
+
+  .logo-wrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 30;
+    pointer-events: none;
+    display: flex;
+    width: 320px;
+    height: 220px;
+  }
+  .logo-half {
+    width: 160px;
+    height: 220px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .logo-half img {
+    width: 320px;
+    height: 220px;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+  }
+  .logo-half-r img {
+    margin-left: -160px;
+    filter: invert(1);
+  }
+
+  .label {
+    position: absolute;
+    bottom: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none;
+  }
+  .side:hover .label { opacity: 1; transform: translateY(0); }
+  .label-en {
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+  }
+  .label-zh {
+    font-size: 8px;
+    font-weight: 300;
+    letter-spacing: 0.16em;
+    opacity: 0.45;
+  }
+  .side-com .label-en,
+  .side-com .label-zh { color: var(--white); }
+  .side-res .label-en,
+  .side-res .label-zh { color: var(--bg); }
+</style>
+</head>
+<body>
+<div class="landing">
+  <a class="side side-com" href="commercial/index.html">
+    <div class="label">
+      <span class="label-en">Commercial</span>
+      <span class="label-zh">商業空間</span>
+    </div>
+  </a>
+  <div class="divider"></div>
+  <a class="side side-res" href="residential/index.html">
+    <div class="label">
+      <span class="label-en">Residential</span>
+      <span class="label-zh">住家空間</span>
+    </div>
+  </a>
+  <div class="logo-wrap">
+    <div class="logo-half logo-half-l">
+      <img src="assets/ON_White_logo.png" alt="ON">
+    </div>
+    <div class="logo-half logo-half-r">
+      <img src="assets/ON_White_logo.png" alt="ON">
+    </div>
+  </div>
+</div>
+</body>
+</html>

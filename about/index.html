@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — ON Design Lab</title>
+<style>
+  :root {
+    --bg: #0e0e0c; --bg2: #141412; --bg3: #1a1a17;
+    --line: #252520; --white: #f0efe8;
+    --muted: #4a4a44; --dim: #2a2a26; --accent: #666660;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background: var(--bg); color: var(--white); }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 20px 40px; border-bottom: 0.5px solid var(--line); position: sticky; top: 0; background: var(--bg); z-index: 100; }
+  .nav-logo { font-size: 10px; font-weight: 300; letter-spacing: 0.26em; text-transform: uppercase; color: var(--white); text-decoration: none; }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-link { font-size: 9px; font-weight: 300; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding-bottom: 2px; border-bottom: 0.5px solid transparent; transition: all 0.2s; }
+  .nav-link:hover { color: var(--white); border-color: var(--white); }
+  .nav-link.active { color: var(--white); border-color: var(--white); }
+
+  .opening { padding: 64px 40px 48px; border-bottom: 0.5px solid var(--line); max-width: 860px; }
+  .question { font-size: clamp(24px, 4vw, 40px); font-weight: 300; font-style: italic; letter-spacing: 0.02em; line-height: 1.3; color: var(--white); margin-bottom: 14px; }
+  .question-zh { font-size: 13px; font-weight: 300; color: var(--accent); letter-spacing: 0.05em; line-height: 1.7; }
+
+  .method { padding: 48px 40px; border-bottom: 0.5px solid var(--line); max-width: 660px; }
+  .method p { font-size: 12px; font-weight: 300; color: var(--accent); line-height: 2.05; letter-spacing: 0.02em; margin-bottom: 18px; }
+  .method p.en { font-style: italic; color: var(--dim); font-size: 11px; }
+
+  .bio { padding: 40px 40px; border-bottom: 0.5px solid var(--line); }
+  .bio-photo { width: 160px; height: 200px; background: var(--bg2); margin-bottom: 24px; display: flex; align-items: center; justify-content: center; }
+  .bio-photo span { font-size: 8px; color: var(--dim); letter-spacing: 0.12em; text-transform: uppercase; }
+  .bio-name { font-size: 13px; font-weight: 400; letter-spacing: 0.12em; color: var(--white); margin-bottom: 4px; }
+  .bio-role { font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 18px; }
+  .bio-awards { font-size: 11px; font-weight: 300; color: var(--muted); line-height: 1.9; letter-spacing: 0.03em; }
+
+  .bottom { padding: 24px 40px; display: flex; gap: 32px; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; }
+  .bottom a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .bottom a:hover { color: var(--white); }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo" href="../index.html">ON Design Lab</a>
+  <div class="nav-links">
+    <a class="nav-link" href="../commercial/index.html">Commercial</a>
+    <a class="nav-link" href="../residential/index.html">Residential</a>
+    <a class="nav-link active" href="../info/index.html">Info</a>
+  </div>
+</nav>
+
+<!-- Opening -->
+<div class="opening">
+  <p class="question">What does a brand sound like<br>when it has no words?</p>
+  <p class="question-zh">當品牌失去語言，空間就是它唯一的聲音。</p>
+</div>
+
+<!-- Method -->
+<div class="method">
+  <p>品牌翻譯成空間，是 ON Design Lab 的工作核心。我們相信設計的起點不是風格，而是品牌的核心信念。一個空間應該做的第一件事，是讓走進去的人感受到品牌的態度——在他們看到任何產品之前，在任何文字出現之前。</p>
+  <p>這個過程不是裝飾，是翻譯。把品牌語言轉換成空間的光線、材質、動線、比例——每一個決定都必須有邏輯，每一個邏輯都必須回到品牌。</p>
+  <p class="en">Brand logic translated into space. Every material decision, every circulation path, every proportion — each one a sentence in a language the body understands before the mind does.</p>
+</div>
+
+<!-- Bio -->
+<div class="bio">
+  <div class="bio-photo"><span>Photo</span></div>
+  <div class="bio-name">Mo Tsai</div>
+  <div class="bio-role">Founder &amp; Creative Director, ON Design Lab</div>
+  <div class="bio-awards">
+    iF Design Award 2023<br>
+    MUSE Design Awards 2023<br>
+    Michelin Guide — de nuit
+  </div>
+</div>
+
+<div class="bottom">
+  <a href="../info/index.html">← Back to Info</a>
+  <a href="../contact/index.html">Contact →</a>
+</div>
+
+</body>
+</html>

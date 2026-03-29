@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Info — ON Design Lab</title>
+<style>
+  :root {
+    --bg: #0e0e0c; --bg2: #141412; --bg3: #1a1a17;
+    --line: #252520; --white: #f0efe8;
+    --muted: #4a4a44; --dim: #2a2a26; --accent: #666660;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background: var(--bg); color: var(--white); }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 20px 40px; border-bottom: 0.5px solid var(--line); position: sticky; top: 0; background: var(--bg); z-index: 100; }
+  .nav-logo { font-size: 10px; font-weight: 300; letter-spacing: 0.26em; text-transform: uppercase; color: var(--white); text-decoration: none; }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-link { font-size: 9px; font-weight: 300; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding-bottom: 2px; border-bottom: 0.5px solid transparent; transition: all 0.2s; }
+  .nav-link:hover { color: var(--white); border-color: var(--white); }
+  .nav-link.active { color: var(--white); border-color: var(--white); }
+
+  .section { padding: 52px 40px 40px; border-bottom: 0.5px solid var(--line); max-width: 760px; }
+  .section-tag { font-size: 9px; font-weight: 300; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; }
+  .studio-name { font-size: 36px; font-weight: 300; letter-spacing: 0.04em; color: var(--white); margin-bottom: 6px; }
+  .studio-sub { font-size: 13px; font-weight: 300; color: var(--accent); letter-spacing: 0.08em; margin-bottom: 28px; }
+  .body-zh { font-size: 12px; font-weight: 300; color: var(--accent); line-height: 2; max-width: 560px; margin-bottom: 16px; }
+  .body-en { font-size: 11px; font-weight: 300; color: var(--dim); line-height: 1.85; max-width: 560px; font-style: italic; }
+
+  .services-title { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+  .service-item { font-size: 11px; font-weight: 300; color: var(--accent); padding: 10px 0; border-bottom: 0.5px solid var(--line); letter-spacing: 0.04em; }
+  .service-item:last-child { border-bottom: none; }
+
+  .award-row { display: flex; justify-content: space-between; align-items: baseline; padding: 10px 0; border-bottom: 0.5px solid var(--line); }
+  .award-name { font-size: 11px; font-weight: 300; color: var(--accent); letter-spacing: 0.04em; }
+  .award-year { font-size: 9px; color: var(--muted); letter-spacing: 0.12em; }
+
+  .contact-link { display: block; font-size: 11px; font-weight: 300; color: var(--muted); letter-spacing: 0.06em; padding: 8px 0; text-decoration: none; transition: color 0.2s; }
+  .contact-link:hover { color: var(--white); }
+
+  .about-link { display: inline-block; margin-top: 20px; font-size: 9px; font-weight: 300; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); text-decoration: none; border-bottom: 0.5px solid transparent; transition: all 0.2s; }
+  .about-link:hover { color: var(--white); border-color: var(--white); }
+
+  .footer { padding: 20px 40px; border-top: 0.5px solid var(--line); display: flex; gap: 32px; font-size: 9px; color: var(--muted); letter-spacing: 0.18em; }
+  .footer a { color: var(--muted); text-decoration: none; text-transform: uppercase; transition: color 0.2s; }
+  .footer a:hover { color: var(--white); }
+  .footer span { color: var(--dim); }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo" href="../index.html">ON Design Lab</a>
+  <div class="nav-links">
+    <a class="nav-link" href="../commercial/index.html">Commercial</a>
+    <a class="nav-link" href="../residential/index.html">Residential</a>
+    <a class="nav-link active" href="index.html">Info</a>
+  </div>
+</nav>
+
+<!-- Studio Intro -->
+<div class="section">
+  <p class="section-tag">Studio</p>
+  <div class="studio-name">ON Design Lab</div>
+  <div class="studio-sub">品牌翻譯成空間</div>
+  <p class="body-zh">我們不從風格出發。我們從品牌的核心邏輯出發，找到空間應該說的話，讓每一個設計決定都是品牌語言的延伸。</p>
+  <p class="body-en">We don't start from style. We start from brand logic — translating the core belief of a brand into spatial decisions that speak without words.</p>
+  <a class="about-link" href="../about/index.html">About the Studio →</a>
+</div>
+
+<!-- Services -->
+<div class="section">
+  <p class="services-title">Services</p>
+  <div class="service-item">商業空間設計 — 餐飲 / 零售 / 辦公</div>
+  <div class="service-item">住家空間設計 — 住宅 / 樣品屋</div>
+  <div class="service-item">品牌空間策略諮詢</div>
+</div>
+
+<!-- Awards -->
+<div class="section">
+  <p class="services-title">Recognition</p>
+  <div class="award-row">
+    <span class="award-name">iF Design Award — La Vie Wine Cellar</span>
+    <span class="award-year">2023</span>
+  </div>
+  <div class="award-row">
+    <span class="award-name">MUSE Design Awards</span>
+    <span class="award-year">2023</span>
+  </div>
+  <div class="award-row">
+    <span class="award-name">Michelin Guide — de nuit</span>
+    <span class="award-year">—</span>
+  </div>
+</div>
+
+<!-- Contact -->
+<div class="section">
+  <p class="services-title">Contact</p>
+  <a class="contact-link" href="mailto:info@ondesignlabltd.com">info@ondesignlabltd.com</a>
+  <a class="contact-link" href="https://www.instagram.com/ondesignlabltd/" target="_blank" rel="noopener">Instagram @ondesignlabltd</a>
+  <a class="contact-link" href="../contact/index.html">Send a message →</a>
+</div>
+
+<div class="footer">
+  <a href="../commercial/index.html">← Commercial</a>
+  <a href="../residential/index.html">Residential →</a>
+  <span>© 2026 ON Design Lab</span>
+</div>
+
+</body>
+</html>
