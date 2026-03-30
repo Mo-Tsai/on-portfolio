@@ -6,55 +6,130 @@
 <title>新創視眼鏡 — ON Design Lab</title>
 <style>
   :root {
-    --bg: #0e0e0c; --bg2: #141412; --bg3: #1a1a17;
-    --line: #252520; --white: #f0efe8;
-    --muted: #4a4a44; --dim: #2a2a26; --accent: #666660;
+    --bg:    #0e0e0c;
+    --bg2:   #141412;
+    --line:  #252520;
+    --white: #f0efe8;
+    --muted: #4a4a44;
+    --dim:   #2a2a26;
+    --accent:#666660;
   }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background: var(--bg); color: var(--white); }
-  .nav { display: flex; align-items: center; justify-content: space-between; padding: 20px 40px; border-bottom: 0.5px solid var(--line); position: sticky; top: 0; background: var(--bg); z-index: 100; }
-  .nav-logo { font-size: 10px; font-weight: 300; letter-spacing: 0.26em; text-transform: uppercase; color: var(--white); text-decoration: none; }
-  .nav-links { display: flex; gap: 28px; }
-  .nav-link { font-size: 9px; font-weight: 300; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding-bottom: 2px; border-bottom: 0.5px solid transparent; transition: all 0.2s; }
-  .nav-link:hover { color: var(--white); border-color: var(--white); }
-  .nav-link.active { color: var(--white); border-color: var(--white); }
-  .back { display: inline-block; padding: 20px 40px 0; font-size: 9px; font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
-  .back:hover { color: var(--white); }
-  .hero-img { height: 420px; background: var(--bg3); display: flex; align-items: center; justify-content: center; position: relative; margin-top: 18px; overflow: hidden; }
-  .hero-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .hero-ph { font-size: 9px; color: var(--dim); letter-spacing: 0.12em; text-transform: uppercase; }
-  .hero-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 32px 40px; background: linear-gradient(transparent, rgba(14,14,12,0.88)); }
-  .hero-title { font-size: 32px; font-weight: 300; color: var(--white); letter-spacing: 0.04em; margin-bottom: 8px; }
-  .hero-meta { display: flex; gap: 12px; align-items: center; }
-  .hero-type { font-size: 8px; color: var(--muted); letter-spacing: 0.2em; text-transform: uppercase; }
-  .hero-dot { width: 2px; height: 2px; background: var(--muted); border-radius: 50%; }
-  .body { padding: 40px 40px 0; max-width: 720px; }
-  .desc-zh { font-size: 12px; font-weight: 300; color: var(--accent); line-height: 2; border-left: 0.5px solid var(--line); padding-left: 20px; margin-bottom: 20px; }
-  .desc-en { font-size: 11px; font-weight: 300; color: var(--dim); line-height: 1.85; border-left: 0.5px solid var(--dim); padding-left: 20px; font-style: italic; margin-bottom: 52px; }
-  .section-label { font-size: 8px; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: var(--muted); padding: 0 40px; margin-bottom: 12px; }
-  .g1 { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--line); margin-bottom: 1px; }
-  .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); margin-bottom: 1px; }
-  .g-tall { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); margin-bottom: 1px; }
-  .g-tall-r { display: flex; flex-direction: column; gap: 1px; }
-  .ph { background: var(--bg2); display: flex; align-items: center; justify-content: center; overflow: hidden; }
-  .ph img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .ph-label { font-size: 8px; color: var(--dim); letter-spacing: 0.1em; text-transform: uppercase; }
-  .ph-full { height: 360px; } .ph-half { height: 220px; }
-  .ph-wide { height: 280px; } .ph-tall { height: 460px; }
-  .ph-tall-half { flex: 1; min-height: 0; }
-  .floorplan { padding: 36px 40px; border-top: 0.5px solid var(--line); }
-  .floorplan-label { font-size: 8px; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
-  .floorplan-box { background: var(--bg2); height: 200px; display: flex; align-items: center; justify-content: center; }
-  .floorplan-box span { font-size: 8px; color: var(--dim); letter-spacing: 0.1em; text-transform: uppercase; }
-  .bottom { padding: 28px 40px; border-top: 0.5px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
-  .bottom-nav { font-size: 9px; font-weight: 300; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
-  .bottom-nav:hover { color: var(--white); }
-  .bowerbird { font-size: 9px; font-weight: 300; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); text-decoration: none; border: 0.5px solid var(--line); padding: 10px 20px; transition: all 0.2s; }
-  .bowerbird:hover { color: var(--white); border-color: var(--accent); }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; background:var(--bg); color:var(--white); }
+
+  /* ── NAV ── */
+  .nav { display:flex; align-items:center; justify-content:space-between; padding:20px 40px; border-bottom:0.5px solid var(--line); position:sticky; top:0; background:var(--bg); z-index:200; }
+  .nav-logo { font-size:10px; font-weight:300; letter-spacing:0.26em; text-transform:uppercase; color:var(--white); text-decoration:none; }
+  .nav-links { display:flex; gap:28px; }
+  .nav-link { font-size:9px; font-weight:300; letter-spacing:0.22em; text-transform:uppercase; color:var(--muted); text-decoration:none; padding-bottom:2px; border-bottom:0.5px solid transparent; transition:all 0.2s; }
+  .nav-link:hover, .nav-link.active { color:var(--white); border-color:var(--white); }
+
+  /* ── BACK ── */
+  .back { display:inline-block; padding:20px 40px 0; font-size:9px; font-weight:300; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color 0.2s; }
+  .back:hover { color:var(--white); }
+
+  /* ── HERO ── */
+  .hero-img { width:100%; height:85vh; overflow:hidden; position:relative; margin-top:18px; }
+  .hero-img img { width:100%; height:100%; object-fit:cover; object-position:center 50%; display:block; }
+  .hero-overlay { position:absolute; bottom:0; left:0; right:0; padding:40px 48px; background:linear-gradient(transparent, rgba(14,14,12,0.9)); pointer-events:none; }
+  .hero-title { font-size:36px; font-weight:300; color:var(--white); letter-spacing:0.04em; margin-bottom:10px; }
+  .hero-meta { display:flex; gap:12px; align-items:center; }
+  .hero-type { font-size:9px; color:var(--muted); letter-spacing:0.22em; text-transform:uppercase; }
+  .hero-dot { width:2px; height:2px; background:var(--muted); border-radius:50%; }
+
+  /* ── TEXT AREA ── */
+  .intro { max-width:640px; padding:80px 60px 80px 60px; margin:0; }
+  .meta-row { display:flex; gap:48px; margin-bottom:52px; padding-bottom:32px; border-bottom:0.5px solid var(--line); }
+  .meta-label { font-size:9px; letter-spacing:0.22em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
+  .meta-value { font-size:14px; font-weight:300; color:var(--white); letter-spacing:0.06em; }
+  .desc-zh { font-size:15px; line-height:2.1; color:var(--accent); border-left:none; padding-left:0; margin-bottom:28px; }
+  .desc-en { font-size:13px; line-height:1.9; color:var(--dim); font-style:italic; border-left:none; padding-left:0; }
+
+  /* Floor plan in text area */
+  .plan { padding:40px 60px; max-width:640px; }
+  .plan-label { font-size:8px; letter-spacing:0.28em; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
+  .plan img { width:100%; height:auto; display:block; }
+
+  /* ── PHOTO AREA ── */
+  .photos { width:100%; }
+
+  /* 所有照片統一左右留白 20% */
+  .p-full, .p-2col, .p-asymm, .p-contained { padding:0 20%; }
+
+  .p-full img { width:100%; height:auto; display:block; }
+
+  .p-2col { display:grid; grid-template-columns:1fr 1fr; gap:3px; }
+  .p-cell { position:relative; }
+  .p-cell img { width:100%; height:auto; display:block; }
+
+  .p-asymm { display:grid; grid-template-columns:1fr 1fr; gap:3px; align-items:stretch; }
+  .p-asymm-left img { width:100%; height:100%; object-fit:cover; display:block; }
+  .p-asymm-right { display:flex; flex-direction:column; gap:3px; }
+  .p-asymm-right .p-cell { flex:1; }
+  .p-asymm-right .p-cell img { width:100%; height:100%; object-fit:cover; display:block; }
+
+  /* 雜誌文字段落 */
+  .editorial { max-width:560px; padding:64px 60px; margin:0 auto; text-align:center; }
+  .editorial p { font-size:13px; font-weight:300; color:var(--muted); line-height:2.1; }
+  .editorial p + p { margin-top:20px; }
+
+  .gap-row { height:24px; background:var(--bg); }
+  /* 平面圖區塊：置中，有側邊留白 */
+  .p-plan-row { padding:48px 20%; text-align:center; }
+  .p-plan-row .plan-label { font-size:8px; letter-spacing:0.28em; text-transform:uppercase; color:var(--muted); margin-bottom:20px; }
+  .p-plan-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .p-plan-grid img { width:100%; height:auto; display:block; }
+  .p-plan-row img { width:100%; height:auto; display:block; }
+
+  /* ── THUMBNAIL STRIP ── */
+  .thumb-strip { display:flex; overflow-x:auto; gap:4px; padding:4px 0; scrollbar-width:none; }
+  .thumb-strip::-webkit-scrollbar { display:none; }
+  .thumb { flex-shrink:0; width:120px; height:80px; overflow:hidden; cursor:pointer; opacity:0.6; transition:opacity 0.2s; }
+  .thumb:hover { opacity:1; }
+  .thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+
+  /* ── LIGHTBOX ── */
+  .lightbox { position:fixed; inset:0; background:rgba(0,0,0,0.95); z-index:1000; display:flex; align-items:center; justify-content:center; }
+  #lb-img { max-width:90vw; max-height:90vh; object-fit:contain; }
+  .lb-close { position:absolute; top:24px; right:32px; font-size:32px; color:var(--white); cursor:pointer; font-weight:300; line-height:1; user-select:none; }
+  .lb-prev, .lb-next { position:absolute; top:50%; transform:translateY(-50%); font-size:48px; color:var(--white); cursor:pointer; font-weight:300; padding:0 24px; opacity:0.5; transition:opacity 0.2s; user-select:none; line-height:1; }
+  .lb-prev { left:0; } .lb-next { right:0; }
+  .lb-prev:hover, .lb-next:hover { opacity:1; }
+
+  /* ── BOTTOM ── */
+  .bottom { padding:28px 40px; border-top:0.5px solid var(--line); display:flex; justify-content:space-between; align-items:center; margin-top:40px; }
+  .bottom-nav { font-size:9px; font-weight:300; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color 0.2s; }
+  .bottom-nav:hover { color:var(--white); }
+  .bowerbird { font-size:9px; font-weight:300; letter-spacing:0.22em; text-transform:uppercase; color:var(--muted); text-decoration:none; border:0.5px solid var(--line); padding:10px 20px; transition:all 0.2s; }
+  .bowerbird:hover { color:var(--white); border-color:var(--accent); }
+
+  /* ── RWD ── */
+  @media (max-width: 768px) {
+    .intro { padding:48px 24px; max-width:100%; }
+    .desc-zh { font-size:14px; }
+    .desc-en { font-size:12px; }
+    .p-2col { grid-template-columns:1fr; }
+    .p-asymm { grid-template-columns:1fr; }
+    .p-asymm-left { display:none; }
+    .p-full, .p-2col, .p-asymm, .p-contained { padding:0 5%; }
+    .editorial { padding:40px 24px; }
+    .thumb { width:90px; height:60px; }
+    .hero-img { height:60vh; }
+    .nav { padding:16px 20px; }
+    .back { padding:16px 20px 0; }
+  }
 </style>
+<meta name="description" content="新創視眼鏡 | ON Design Lab 設計作品">
+<meta property="og:title" content="新創視眼鏡 — ON Design Lab">
+<meta property="og:description" content="新創視眼鏡 | ON Design Lab — 台北品牌空間設計事務所">
+<meta property="og:image" content="https://ondesignlabltd.com/images/new-vision/00.jpg">
+<meta property="og:url" content="https://ondesignlabltd.com/commercial/new-vision/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
 
+<!-- NAV -->
 <nav class="nav">
   <a class="nav-logo" href="../../index.html">ON Design Lab</a>
   <div class="nav-links">
@@ -66,6 +141,7 @@
 
 <a class="back" href="../index.html">← Commercial</a>
 
+<!-- HERO -->
 <div class="hero-img">
   <img src="../../images/new-vision/01.jpg" alt="新創視眼鏡">
   <div class="hero-overlay">
@@ -80,47 +156,115 @@
   </div>
 </div>
 
-<div class="body">
-  <p class="desc-zh">[待補文案]</p>
-  <p class="desc-en">[Design statement — to be provided]</p>
-</div>
-
-<p class="section-label">Photos</p>
-
-<div class="g1">
-  <div class="ph ph-full"><img src="../../images/new-vision/02.jpg"></div>
-</div>
-<div class="g2">
-  <div class="ph ph-half"><img src="../../images/new-vision/05.jpg"></div>
-  <div class="ph ph-half"><img src="../../images/new-vision/06.jpg"></div>
-</div>
-<div class="g1">
-  <div class="ph ph-wide"><img src="../../images/new-vision/07.jpg"></div>
-</div>
-<div class="g-tall">
-  <div class="ph ph-tall"><img src="../../images/new-vision/08.jpg"></div>
-  <div class="g-tall-r">
-    <div class="ph ph-tall-half"><img src="../../images/new-vision/09.jpg"></div>
-    <div class="ph ph-tall-half"><img src="../../images/new-vision/10.jpg"></div>
+<!-- TEXT AREA -->
+<div class="intro">
+  <div class="meta-row">
+    <div class="meta-item">
+      <div class="meta-label">類型</div>
+      <div class="meta-value">零售空間</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">地點</div>
+      <div class="meta-value">Taipei, Taiwan</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">年份</div>
+      <div class="meta-value">2023</div>
+    </div>
   </div>
-</div>
-<div class="g2">
-  <div class="ph ph-half"><img src="../../images/new-vision/12.jpg"></div>
-  <div class="ph ph-half"><img src="../../images/new-vision/13.jpg"></div>
+  <p class="desc-zh">[設計說明文字將放置於此。空間的每一個決定，都在回答一個問題。]</p>
+  <p class="desc-en">[Design description placeholder. Every spatial decision answers a question.]</p>
 </div>
 
-<div class="floorplan">
-  <div class="floorplan-label">Floor Plan</div>
-  <div class="floorplan-box">
-    <img src="../../images/new-vision/Floor plan-1.JPG" alt="Floor Plan" style="width:100%;height:100%;object-fit:contain;">
+<!-- PHOTO AREA -->
+<div class="photos">
+  <div class="p-full"><img src="../../images/new-vision/02.jpg" alt=""></div>
+  <div class="p-2col">
+    <div class="p-cell"><img src="../../images/new-vision/05.jpg" alt=""></div>
+    <div class="p-cell"><img src="../../images/new-vision/06.jpg" alt=""></div>
   </div>
+  <div class="gap-row"></div>
+  <div class="editorial"><p>材質與光線的對話，是這個空間最核心的語言。每一個細節都經過精心考量，讓功能與美學在此交匯。</p></div>
+  <div class="p-full"><img src="../../images/new-vision/07.jpg" alt=""></div>
+  <div class="p-asymm">
+    <div class="p-asymm-left p-cell"><img src="../../images/new-vision/08.jpg" alt=""></div>
+    <div class="p-asymm-right">
+      <div class="p-cell"><img src="../../images/new-vision/09.jpg" alt=""></div>
+      <div class="p-cell"><img src="../../images/new-vision/10.jpg" alt=""></div>
+    </div>
+  </div>
+  <!-- 平面圖 -->
+  <div class="p-plan-row">
+    <p class="plan-label">Floor Plan</p>
+    <div class="p-plan-grid">
+      <img src="../../images/new-vision/Floor plan-1.JPG" alt="Plan 1">
+      <img src="../../images/new-vision/Floor plan-2.JPG" alt="Plan 2">
+    </div>
+  </div>
+
+  <div class="editorial"><p>動線的設計決定了人在空間裡的感受。從入口到最深處，每一步都是設計者的一個問答。</p></div>
+  <div class="p-2col">
+    <div class="p-cell"><img src="../../images/new-vision/12.jpg" alt=""></div>
+    <div class="p-cell"><img src="../../images/new-vision/13.jpg" alt=""></div>
+  </div>
+  <div class="gap-row"></div>
 </div>
 
+<!-- THUMBNAIL STRIP -->
+<div class="thumb-strip">
+  <div class="thumb" onclick="openLightbox(0)"><img src="../../images/new-vision/01.jpg" alt=""></div>
+  <div class="thumb" onclick="openLightbox(1)"><img src="../../images/new-vision/02.jpg" alt=""></div>
+  <div class="thumb" onclick="openLightbox(2)"><img src="../../images/new-vision/05.jpg" alt=""></div>
+  <div class="thumb" onclick="openLightbox(3)"><img src="../../images/new-vision/06.jpg" alt=""></div>
+  <div class="thumb" onclick="openLightbox(4)"><img src="../../images/new-vision/07.jpg" alt=""></div>
+  <div class="thumb" onclick="openLightbox(5)"><img src="../../images/new-vision/08.jpg" alt=""></div>
+  <div class="thumb" onclick="openLightbox(6)"><img src="../../images/new-vision/09.jpg" alt=""></div>
+  <div class="thumb" onclick="openLightbox(7)"><img src="../../images/new-vision/10.jpg" alt=""></div>
+  <div class="thumb" onclick="openLightbox(8)"><img src="../../images/new-vision/12.jpg" alt=""></div>
+  <div class="thumb" onclick="openLightbox(9)"><img src="../../images/new-vision/13.jpg" alt=""></div>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lightbox" style="display:none">
+  <div class="lb-close" onclick="closeLightbox()">×</div>
+  <div class="lb-prev" onclick="lbPrev()">‹</div>
+  <img id="lb-img" src="" alt="">
+  <div class="lb-next" onclick="lbNext()">›</div>
+</div>
+
+<!-- BOTTOM NAV -->
 <div class="bottom">
   <a class="bottom-nav" href="../dunnan-9f/index.html">← 敦南摩天辦公室 9F</a>
   <a class="bowerbird" href="#">View on BowerBird →</a>
-  <a class="bottom-nav" href="../de-nuit/index.html">de nuit →</a>
+  <a class="bottom-nav" href="../lalaport/index.html">Urban Revivo LaLaport →</a>
 </div>
+
+<script>
+  const lbPhotos = [
+    '../../images/new-vision/01.jpg',
+    '../../images/new-vision/02.jpg',
+    '../../images/new-vision/05.jpg',
+    '../../images/new-vision/06.jpg',
+    '../../images/new-vision/07.jpg',
+    '../../images/new-vision/08.jpg',
+    '../../images/new-vision/09.jpg',
+    '../../images/new-vision/10.jpg',
+    '../../images/new-vision/12.jpg',
+    '../../images/new-vision/13.jpg'
+  ];
+  let lbIndex = 0;
+  function openLightbox(i) { lbIndex=i; document.getElementById('lb-img').src=lbPhotos[i]; document.getElementById('lightbox').style.display='flex'; document.body.style.overflow='hidden'; }
+  function closeLightbox() { document.getElementById('lightbox').style.display='none'; document.body.style.overflow=''; }
+  function lbNext() { lbIndex=(lbIndex+1)%lbPhotos.length; document.getElementById('lb-img').src=lbPhotos[lbIndex]; }
+  function lbPrev() { lbIndex=(lbIndex-1+lbPhotos.length)%lbPhotos.length; document.getElementById('lb-img').src=lbPhotos[lbIndex]; }
+  document.addEventListener('keydown', e => {
+    if (document.getElementById('lightbox').style.display==='flex') {
+      if (e.key==='ArrowRight') lbNext();
+      if (e.key==='ArrowLeft') lbPrev();
+      if (e.key==='Escape') closeLightbox();
+    }
+  });
+</script>
 
 </body>
 </html>
