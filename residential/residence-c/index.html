@@ -8,7 +8,7 @@
   :root {
     --bg: #f0efe8; --bg2: #e8e7df; --bg3: #dddcd5;
     --line: rgba(14,14,12,0.1); --text: #0e0e0c;
-    --muted: #8a8a7e; --dim: rgba(14,14,12,0.22); --accent: #555550;
+    --muted: #8a8a7e; --dim: rgba(14,14,12,0.22); --accent: #3a3a36;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); }
@@ -18,43 +18,58 @@
   .nav-link { font-size: 9px; font-weight: 300; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding-bottom: 2px; border-bottom: 0.5px solid transparent; transition: all 0.2s; }
   .nav-link:hover { color: var(--text); border-color: var(--text); }
   .nav-link.active { color: var(--text); border-color: var(--text); }
-  .back { display: inline-block; padding: 20px 40px 0; font-size: 9px; font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
-  .back:hover { color: var(--text); }
-  .hero-img { height: 420px; background: var(--bg3); display: flex; align-items: center; justify-content: center; position: relative; margin-top: 18px; overflow: hidden; }
-  .hero-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .hero-ph { font-size: 9px; color: var(--dim); letter-spacing: 0.12em; text-transform: uppercase; }
-  .hero-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 32px 40px; background: linear-gradient(transparent, rgba(240,239,232,0.9)); }
-  .hero-title { font-size: 32px; font-weight: 300; color: var(--text); letter-spacing: 0.04em; margin-bottom: 8px; }
-  .hero-meta { display: flex; gap: 12px; align-items: center; }
+  .hero-img { position: relative; height: 520px; overflow: hidden; background: var(--bg3); }
+  .hero-img > img { width: 100%; height: 100%; object-fit: cover; object-position: center 50%; display: block; }
+  .hero-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 32px 40px 36px; background: linear-gradient(transparent, rgba(240,239,232,0.92)); }
+  .hero-title { font-size: 36px; font-weight: 300; color: var(--text); letter-spacing: 0.04em; margin-bottom: 10px; }
+  .hero-meta { display: flex; gap: 10px; align-items: center; }
   .hero-type { font-size: 8px; color: var(--muted); letter-spacing: 0.2em; text-transform: uppercase; }
   .hero-dot { width: 2px; height: 2px; background: var(--muted); border-radius: 50%; }
-  .body { padding: 40px 40px 0; max-width: 720px; }
-  .desc-zh { font-size: 12px; font-weight: 300; color: var(--accent); line-height: 2; border-left: 0.5px solid var(--line); padding-left: 20px; margin-bottom: 20px; }
-  .desc-en { font-size: 11px; font-weight: 300; color: var(--dim); line-height: 1.85; border-left: 0.5px solid var(--dim); padding-left: 20px; font-style: italic; margin-bottom: 52px; }
-  .section-label { font-size: 8px; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: var(--muted); padding: 0 40px; margin-bottom: 12px; }
-  .g1 { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--line); margin-bottom: 1px; }
-  .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); margin-bottom: 1px; }
-  .g-tall { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); margin-bottom: 1px; }
-  .g-tall-r { display: flex; flex-direction: column; gap: 1px; }
-  .ph { background: var(--bg2); display: flex; align-items: center; justify-content: center; overflow: hidden; }
-  .ph img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .ph-label { font-size: 8px; color: var(--dim); letter-spacing: 0.1em; text-transform: uppercase; }
-  .ph-full { height: 360px; } .ph-half { height: 220px; }
-  .ph-wide { height: 280px; } .ph-tall { height: 460px; }
-  .ph-tall-half { flex: 1; min-height: 0; }
-  .floorplan { padding: 36px 40px; border-top: 0.5px solid var(--line); }
-  .floorplan-label { font-size: 8px; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
-  .floorplan-box { background: var(--bg2); height: 200px; display: flex; align-items: center; justify-content: center; }
-  .floorplan-box span { font-size: 8px; color: var(--dim); letter-spacing: 0.1em; text-transform: uppercase; }
-  .bottom { padding: 28px 40px; border-top: 0.5px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
+  .intro { padding: 72px 20% 80px; }
+  .meta-row { display: flex; gap: 48px; margin-bottom: 40px; }
+  .meta-label { font-size: 9px; font-weight: 300; letter-spacing: 0.26em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .meta-val { font-size: 14px; font-weight: 300; color: var(--text); letter-spacing: 0.04em; }
+  .desc-zh { font-size: 15px; font-weight: 300; color: var(--accent); line-height: 2.1; margin-bottom: 24px; }
+  .desc-en { font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.9; font-style: italic; }
+  .section-label { font-size: 8px; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: var(--muted); padding: 0 20% 14px; }
+  .photos { padding-bottom: 60px; }
+  .p-full, .p-2col, .p-asymm { padding: 0 20%; margin-bottom: 3px; }
+  .p-full img { width: 100%; height: auto; display: block; }
+  .p-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
+  .p-cell img { width: 100%; height: auto; display: block; }
+  .p-asymm { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; align-items: start; }
+  .p-asymm-left img { width: 100%; height: auto; display: block; }
+  .p-asymm-right { display: flex; flex-direction: column; gap: 3px; }
+  .p-asymm-right img { width: 100%; height: auto; display: block; }
+  .editorial { padding: 52px 20%; }
+  .editorial p { font-size: 13px; font-weight: 300; color: var(--muted); line-height: 2.1; }
+  .thumb-label { font-size: 8px; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: var(--muted); padding: 40px 20% 14px; }
+  .thumb-strip { display: flex; overflow-x: auto; gap: 3px; padding: 0 20% 40px; scrollbar-width: none; }
+  .thumb-strip::-webkit-scrollbar { display: none; }
+  .thumb { flex-shrink: 0; width: 120px; height: 80px; overflow: hidden; cursor: pointer; opacity: 0.5; transition: opacity 0.2s; }
+  .thumb:hover { opacity: 1; }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .lightbox { position: fixed; inset: 0; background: rgba(240,239,232,0.97); z-index: 1000; display: flex; align-items: center; justify-content: center; }
+  #lb-img { max-width: 90vw; max-height: 90vh; object-fit: contain; display: block; }
+  .lb-close { position: absolute; top: 24px; right: 32px; font-size: 28px; color: var(--text); cursor: pointer; font-weight: 300; opacity: 0.5; transition: opacity 0.2s; }
+  .lb-close:hover { opacity: 1; }
+  .lb-prev, .lb-next { position: absolute; top: 50%; transform: translateY(-50%); font-size: 40px; color: var(--text); cursor: pointer; font-weight: 300; padding: 0 24px; opacity: 0.3; transition: opacity 0.2s; }
+  .lb-prev { left: 0; } .lb-next { right: 0; }
+  .lb-prev:hover, .lb-next:hover { opacity: 0.8; }
+  .bottom { padding: 28px 20%; border-top: 0.5px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
   .bottom-nav { font-size: 9px; font-weight: 300; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
   .bottom-nav:hover { color: var(--text); }
   .bowerbird { font-size: 9px; font-weight: 300; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); text-decoration: none; border: 0.5px solid var(--line); padding: 10px 20px; transition: all 0.2s; }
   .bowerbird:hover { color: var(--text); border-color: var(--accent); }
+  @media (max-width: 768px) {
+    .intro { padding: 48px 5% 60px; }
+    .p-full, .p-2col, .p-asymm, .editorial, .thumb-strip, .thumb-label, .section-label, .bottom { padding-left: 5%; padding-right: 5%; }
+    .p-2col, .p-asymm { grid-template-columns: 1fr; }
+    .hero-img { height: 60vh; }
+  }
 </style>
 </head>
 <body>
-
 <nav class="nav">
   <a class="nav-logo" href="../../index.html">ON Design Lab</a>
   <div class="nav-links">
@@ -63,9 +78,6 @@
     <a class="nav-link" href="../../info/index.html">Info</a>
   </div>
 </nav>
-
-<a class="back" href="../index.html">← Residential</a>
-
 <div class="hero-img">
   <img src="../../images/residence-c/01.jpg" alt="Residence C">
   <div class="hero-overlay">
@@ -79,48 +91,105 @@
     </div>
   </div>
 </div>
-
-<div class="body">
+<div class="intro">
+  <div class="meta-row">
+    <div class="meta-item"><div class="meta-label">類型</div><div class="meta-val">住家空間</div></div>
+    <div class="meta-item"><div class="meta-label">地點</div><div class="meta-val">Taipei, Taiwan</div></div>
+    <div class="meta-item"><div class="meta-label">年份</div><div class="meta-val">—</div></div>
+  </div>
   <p class="desc-zh">[待補文案]</p>
   <p class="desc-en">[Design statement — to be provided]</p>
 </div>
-
 <p class="section-label">Photos</p>
-
-<div class="g1">
-  <div class="ph ph-full"><img src="../../images/residence-c/02.jpg"></div>
-</div>
-<div class="g2">
-  <div class="ph ph-half"><img src="../../images/residence-c/03.jpg"></div>
-  <div class="ph ph-half"><img src="../../images/residence-c/04.jpg"></div>
-</div>
-<div class="g1">
-  <div class="ph ph-wide"><img src="../../images/residence-c/05.jpg"></div>
-</div>
-<div class="g-tall">
-  <div class="ph ph-tall"><img src="../../images/residence-c/06.jpg"></div>
-  <div class="g-tall-r">
-    <div class="ph ph-tall-half"><img src="../../images/residence-c/07.jpg"></div>
-    <div class="ph ph-tall-half"><img src="../../images/residence-c/08.jpg"></div>
+<div class="photos">
+  <div class="p-full"><img src="../../images/residence-c/02.jpg" alt=""></div>
+  <div class="p-2col">
+    <div class="p-cell"><img src="../../images/residence-c/03.jpg" alt=""></div>
+    <div class="p-cell"><img src="../../images/residence-c/04.jpg" alt=""></div>
   </div>
-</div>
-<div class="g2">
-  <div class="ph ph-half"><img src="../../images/residence-c/09.jpg"></div>
-  <div class="ph ph-half"><img src="../../images/residence-c/10.jpg"></div>
-</div>
-
-<div class="floorplan">
-  <div class="floorplan-label">Floor Plan</div>
-  <div class="floorplan-box">
-    <span>平面圖</span>
+  <div class="p-asymm">
+    <div class="p-asymm-left"><img src="../../images/residence-c/05.jpg" alt=""></div>
+    <div class="p-asymm-right">
+      <img src="../../images/residence-c/06.jpg" alt="">
+      <img src="../../images/residence-c/07.jpg" alt="">
+    </div>
   </div>
-</div>
 
+  <div class="editorial"><p>材質與光線的對話，是這個空間最核心的語言。每一個細節都經過精心考量，讓功能與美學在此交匯。</p></div>
+
+  <div class="p-full"><img src="../../images/residence-c/08.jpg" alt=""></div>
+  <div class="p-asymm">
+    <div class="p-asymm-left"><img src="../../images/residence-c/09.jpg" alt=""></div>
+    <div class="p-asymm-right">
+      <img src="../../images/residence-c/10.jpg" alt="">
+      <img src="../../images/residence-c/11.jpg" alt="">
+    </div>
+  </div>
+
+  <div class="editorial"><p>動線的設計決定了人在空間裡的感受。從入口到最深處，每一步都是設計者對居住者生活的回應。</p></div>
+
+  <div class="p-full"><img src="../../images/residence-c/12.jpg" alt=""></div>
+  <div class="p-asymm">
+    <div class="p-asymm-left"><img src="../../images/residence-c/13.jpg" alt=""></div>
+    <div class="p-asymm-right">
+      <img src="../../images/residence-c/14.jpg" alt="">
+      <img src="../../images/residence-c/15.jpg" alt="">
+    </div>
+  </div>
+
+  <div class="editorial"><p>細節是空間誠意的所在。材質的選擇、比例的拿援，在這裡呈現設計者對居住品質最直接的表態。</p></div>
+
+  <div class="p-full"><img src="../../images/residence-c/16.jpg" alt=""></div>
+  <div class="p-asymm">
+    <div class="p-asymm-left"><img src="../../images/residence-c/17.jpg" alt=""></div>
+    <div class="p-asymm-right">
+      <img src="../../images/residence-c/18.jpg" alt="">
+      <img src="../../images/residence-c/19.jpg" alt="">
+    </div>
+  </div>
+  <div class="p-full"><img src="../../images/residence-c/20.jpg" alt=""></div>
+  <div class="p-asymm">
+    <div class="p-asymm-left"><img src="../../images/residence-c/21.jpg" alt=""></div>
+    <div class="p-asymm-right">
+      <img src="../../images/residence-c/22.jpg" alt="">
+      <img src="../../images/residence-c/23.jpg" alt="">
+    </div>
+  </div>
+  <div class="p-full"><img src="../../images/residence-c/24.jpg" alt=""></div>
+  <div class="p-full"><img src="../../images/residence-c/25.jpg" alt=""></div>
+</div>
+<p class="thumb-label">All Photos</p>
+<div class="thumb-strip" id="thumbStrip"></div>
+<div id="lightbox" class="lightbox" style="display:none">
+  <div class="lb-close" onclick="closeLightbox()">×</div>
+  <div class="lb-prev" onclick="lbPrev()">‹</div>
+  <img id="lb-img" src="">
+  <div class="lb-next" onclick="lbNext()">›</div>
+</div>
 <div class="bottom">
   <a class="bottom-nav" href="../residence-k/index.html">← Residence K</a>
   <a class="bowerbird" href="#">View on BowerBird →</a>
   <a class="bottom-nav" href="../residence-v/index.html">Residence V →</a>
 </div>
-
+<script>
+const lbPhotos = ['../../images/residence-c/01.jpg', '../../images/residence-c/02.jpg', '../../images/residence-c/03.jpg', '../../images/residence-c/04.jpg', '../../images/residence-c/05.jpg', '../../images/residence-c/06.jpg', '../../images/residence-c/07.jpg', '../../images/residence-c/08.jpg', '../../images/residence-c/09.jpg', '../../images/residence-c/10.jpg', '../../images/residence-c/11.jpg', '../../images/residence-c/12.jpg', '../../images/residence-c/13.jpg', '../../images/residence-c/14.jpg', '../../images/residence-c/15.jpg', '../../images/residence-c/16.jpg', '../../images/residence-c/17.jpg', '../../images/residence-c/18.jpg', '../../images/residence-c/19.jpg', '../../images/residence-c/20.jpg', '../../images/residence-c/21.jpg', '../../images/residence-c/22.jpg', '../../images/residence-c/23.jpg', '../../images/residence-c/24.jpg', '../../images/residence-c/25.jpg'];
+let lbIndex = 0;
+const strip = document.getElementById('thumbStrip');
+lbPhotos.forEach((src, i) => {
+  const d = document.createElement('div'); d.className = 'thumb'; d.onclick = () => openLightbox(i);
+  const img = document.createElement('img'); img.src = src; d.appendChild(img); strip.appendChild(d);
+});
+function openLightbox(i) { lbIndex = i; document.getElementById('lb-img').src = lbPhotos[i]; document.getElementById('lightbox').style.display = 'flex'; }
+function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; }
+function lbNext() { lbIndex = (lbIndex + 1) % lbPhotos.length; document.getElementById('lb-img').src = lbPhotos[lbIndex]; }
+function lbPrev() { lbIndex = (lbIndex - 1 + lbPhotos.length) % lbPhotos.length; document.getElementById('lb-img').src = lbPhotos[lbIndex]; }
+document.addEventListener('keydown', e => {
+  if (document.getElementById('lightbox').style.display === 'flex') {
+    if (e.key === 'ArrowRight') lbNext();
+    if (e.key === 'ArrowLeft') lbPrev();
+    if (e.key === 'Escape') closeLightbox();
+  }
+});
+</script>
 </body>
 </html>

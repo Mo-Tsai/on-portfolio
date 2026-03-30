@@ -18,18 +18,21 @@
   .nav-link { font-size: 9px; font-weight: 300; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding-bottom: 2px; border-bottom: 0.5px solid transparent; transition: all 0.2s; }
   .nav-link:hover { color: var(--text); border-color: var(--text); }
   .nav-link.active { color: var(--text); border-color: var(--text); }
-  .hero { padding: 52px 40px 36px; }
+  .hero { padding: 52px 10% 36px; }
   .hero-tag { font-size: 9px; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
   .hero-h { font-size: 30px; font-weight: 300; letter-spacing: 0.02em; color: var(--text); line-height: 1.25; margin-bottom: 12px; }
   .hero-sub { font-size: 11px; font-weight: 300; color: var(--muted); line-height: 1.85; max-width: 460px; }
-  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); }
-  .cell { background: var(--bg); position: relative; overflow: hidden; cursor: pointer; aspect-ratio: 4 / 3; display: block; text-decoration: none; transition: opacity 0.25s; }
+  .grid-wrap { padding: 0 10%; }
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; background: var(--line); }
+  .cell { background: var(--bg); position: relative; overflow: hidden; cursor: pointer; aspect-ratio: 3 / 2; display: block; text-decoration: none; transition: opacity 0.25s; }
   .cell:hover { opacity: 0.82; }
+  .cell img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; filter: grayscale(1); transition: filter 0.2s ease; }
+  .cell:hover img { filter: grayscale(0); }
   .cell-ph { width: 100%; height: 100%; background: var(--bg2); display: flex; align-items: center; justify-content: center; }
   .cell-ph span { font-size: 8px; color: var(--dim); letter-spacing: 0.12em; text-transform: uppercase; }
   .cell-meta { position: absolute; bottom: 16px; left: 18px; }
   .cell-name { font-size: 12px; font-weight: 300; color: var(--text); letter-spacing: 0.06em; }
-  .footer { padding: 18px 40px; border-top: 0.5px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
+  .footer { padding: 18px 10%; border-top: 0.5px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
   .footer-count { font-size: 9px; color: var(--dim); letter-spacing: 0.14em; }
   .footer-info { font-size: 9px; color: var(--muted); letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; transition: color 0.2s; }
   .footer-info:hover { color: var(--text); }
@@ -52,7 +55,7 @@
   <p class="hero-sub">住家空間的設計從居住者的生活方式出發。每一個空間決定，都是對生活本質的回應。</p>
 </div>
 
-<div class="grid">
+<div class="grid-wrap"><div class="grid">
   <a class="cell" href="residence-g/index.html"><img src="../images/residence-g/00.jpg" alt="Residence G" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">Residence G</div></div></a>
   <a class="cell" href="residence-s/index.html"><img src="../images/residence-s/00.jpg" alt="Residence S" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">Residence S</div></div></a>
   <a class="cell" href="residence-h/index.html"><img src="../images/residence-h/00.jpg" alt="Residence H" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">Residence H</div></div></a>
@@ -64,7 +67,7 @@
   <a class="cell" href="residence-v/index.html"><img src="../images/residence-v/00.jpg" alt="Residence V" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">Residence V</div></div></a>
   <a class="cell" href="residence-m/index.html"><img src="../images/residence-m/00.jpg" alt="Residence M" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">Residence M</div></div></a>
   <a class="cell" href="residence-r/index.html"><img src="../images/residence-r/00.jpg" alt="Residence R" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">Residence R</div></div></a>
-</div>
+</div></div>
 
 <div class="footer">
   <span class="footer-count">11 projects</span>
