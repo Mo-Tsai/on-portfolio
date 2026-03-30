@@ -38,6 +38,13 @@
   .cell-meta { position: absolute; bottom: 16px; left: 18px; z-index: 2; }
   .cell-name { font-size: 12px; font-weight: 300; color: var(--white); letter-spacing: 0.06em; text-shadow: 0 1px 6px rgba(0,0,0,0.7); }
   .cell-tag { font-size: 8px; color: rgba(240,239,232,0.55); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 4px; }
+  /* 手機：霧面黑色遮層 + 案名置中 */
+  @media (hover: none) {
+    .cell::after { content: ''; position: absolute; inset: 0; background: rgba(10,10,8,0.48); z-index: 1; }
+    .cell-meta { inset: 0; bottom: 0; left: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0; }
+    .cell-name { font-size: 11px; letter-spacing: 0.14em; text-shadow: none; }
+    .cell-tag { font-size: 7px; opacity: 0.7; margin-top: 6px; }
+  }
   .footer { padding: 18px 10%; border-top: 0.5px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
   .footer-count { font-size: 9px; color: var(--dim); letter-spacing: 0.14em; }
   .footer-info { font-size: 9px; color: var(--muted); letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; transition: color 0.2s; }
