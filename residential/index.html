@@ -37,9 +37,9 @@
   .cell-name { font-size: 12px; font-weight: 300; color: var(--text); letter-spacing: 0.06em; }
   /* 手機：霧面黑色遮層 + 案名置中 */
   @media (hover: none) {
-    .cell::after { content: ''; position: absolute; inset: 0; background: rgba(10,10,8,0.48); z-index: 1; }
-    .cell-meta { inset: 0; bottom: 0; left: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0; }
-    .cell-name { font-size: 11px; font-weight: 300; color: #f0efe8; letter-spacing: 0.14em; text-shadow: none; }
+    .cell::after { content: ''; position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: rgba(10,10,8,0.48); z-index: 1; }
+    .cell-meta { position: absolute; top: 0; right: 0; bottom: 0 !important; left: 0 !important; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0; z-index: 2; }
+    .cell-name { font-size: 11px; font-weight: 300; color: #f0efe8; letter-spacing: 0.14em; }
   }
   .footer { padding: 18px 10%; border-top: 0.5px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
   .footer-count { font-size: 9px; color: var(--dim); letter-spacing: 0.14em; }
