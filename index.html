@@ -106,6 +106,22 @@
   .side-com .label-zh { color: var(--white); }
   .side-res .label-en,
   .side-res .label-zh { color: var(--bg); }
+
+  @keyframes breathe {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.9; }
+  }
+
+  @media (hover: none) {
+    .label {
+      opacity: 1;
+      transform: translateY(0);
+      animation: breathe 3.2s ease-in-out infinite;
+    }
+    .side-res .label { animation-delay: 0.4s; }
+    .label-en { font-size: 13px; letter-spacing: 0.28em; }
+    .label-zh { font-size: 10px; letter-spacing: 0.18em; opacity: 0.6; }
+  }
 </style>
 <meta name="description" content="ON Design Lab — 台北品牌空間設計事務所，專注商業空間與住家設計，品牌翻譯成空間。">
 <meta name="keywords" content="室內設計,台北,商業空間設計,住家設計,餐廳設計,品牌空間,ON Design Lab">
