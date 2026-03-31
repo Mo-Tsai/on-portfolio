@@ -102,3 +102,5 @@
     .back { padding:16px 20px 0; }
     .bottom { padding:20px 20px; }
   }
+.ed-zh { font-size:13px; font-weight:300; color:var(--muted); line-height:2.1; margin-bottom:16px; }
+.ed-en { font-size:12px; font-weight:300; color:var(--dim); line-height:2.0; font-style:italic; }
