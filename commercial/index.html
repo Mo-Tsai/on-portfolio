@@ -20,11 +20,7 @@
   .nav-links { display: flex; gap: 28px; }
   .nav-link { font-size: 9px; font-weight: 300; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding-bottom: 2px; border-bottom: 0.5px solid transparent; transition: all 0.2s; }
   .nav-link:hover, .nav-link.active { color: var(--white); border-color: var(--white); }
-  .hero { padding: 52px 10% 36px; }
-  .hero-tag { font-size: 9px; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
-  .hero-h { font-size: 30px; font-weight: 300; letter-spacing: 0.02em; color: var(--white); line-height: 1.25; margin-bottom: 12px; }
-  .hero-sub { font-size: 11px; font-weight: 300; color: var(--muted); line-height: 1.85; max-width: 460px; }
-  .grid-wrap { padding: 0 10%; }
+  .grid-wrap { padding: 20px 10% 0; }
   .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; background: var(--bg); }
   .cell { background: var(--bg); position: relative; overflow: hidden; aspect-ratio: 3/2; display: block; text-decoration: none; transition: opacity 0.3s; }
   @media (hover: hover) {
@@ -36,20 +32,25 @@
   .cell-ph span { font-size: 8px; color: var(--dim); letter-spacing: 0.12em; text-transform: uppercase; }
   .cell img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; transition: filter 0.2s ease; }
   .cell-meta { position: absolute; bottom: 16px; left: 18px; z-index: 2; }
-  .cell-name { font-size: 12px; font-weight: 300; color: var(--white); letter-spacing: 0.06em; text-shadow: 0 1px 6px rgba(0,0,0,0.7); }
-  .cell-tag { font-size: 8px; color: rgba(240,239,232,0.55); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 4px; }
+  .cell-name { font-size: 14px; font-weight: 300; color: var(--white); letter-spacing: 0.06em; text-shadow: 0 1px 6px rgba(0,0,0,0.7); }
+  .cell-tag { font-size: 8px; color: rgba(240,239,232,0.55); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 5px; }
   /* 手機：霧面黑色遮層 + 案名置中 */
   @media (hover: none) {
     .cell::after { content: ''; position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: rgba(10,10,8,0.48); z-index: 1; }
     .cell-meta { position: absolute; top: 0; right: 0; bottom: 0 !important; left: 0 !important; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0; z-index: 2; }
-    .cell-name { font-size: 11px; letter-spacing: 0.14em; text-shadow: none; }
+    .cell-name { font-size: 13px; letter-spacing: 0.12em; text-shadow: none; }
     .cell-tag { font-size: 7px; opacity: 0.7; margin-top: 6px; }
   }
-  .footer { padding: 18px 10%; border-top: 0.5px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
+  .footer { padding: 18px 10%; border-top: 0.5px solid var(--line); display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
   .footer-count { font-size: 9px; color: var(--dim); letter-spacing: 0.14em; }
   .footer-info { font-size: 9px; color: var(--muted); letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; transition: color 0.2s; }
   .footer-info:hover { color: var(--white); }
-  @media (max-width: 600px) { .grid-wrap { padding: 0; } .grid { grid-template-columns: 1fr; gap: 4px; } .nav { padding: 16px 20px; } .hero { padding: 36px 20px 24px; } }
+  @media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; gap: 4px; }
+    .grid-wrap { padding: 0; }
+    .nav { padding: 16px 20px; }
+    .footer { padding: 16px 20px; }
+  }
 </style>
 <meta name="description" content="ON Design Lab 商業空間作品集 — 餐飲、零售、辦公空間設計，品牌邏輯翻譯成空間語言。">
 <meta name="keywords" content="室內設計,台北,商業空間設計,餐廳設計,零售設計,ON Design Lab">
@@ -69,31 +70,27 @@
     <a class="nav-link" href="../info/index.html">Info</a>
   </div>
 </nav>
-<div class="hero">
-  <p class="hero-tag">Commercial Space</p>
-  <h1 class="hero-h">Brand logic<br>translated into space.</h1>
-  <p class="hero-sub">商業空間的設計不從風格出發，從品牌的核心邏輯出發。每一個空間決定，都是品牌語言的延伸。</p>
-</div>
 <div class="grid-wrap"><div class="grid">
-  <a class="cell" href="de-nuit/index.html"><img src="../images/de-nuit/00.jpg" alt="de nuit" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">de nuit</div><div class="cell-tag">餐飲</div></div></a>
-  <a class="cell" href="monte/index.html"><img src="../images/monte/00.jpg" alt="Monte" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">Monte</div><div class="cell-tag">餐飲</div></div></a>
-  <a class="cell" href="r-sanderson/index.html"><img src="../images/r-sanderson/00.jpg" alt="R. Sanderson" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">R. Sanderson</div><div class="cell-tag">零售</div></div></a>
-  <a class="cell" href="lezun/index.html"><img src="../images/lezun/00.jpg" alt="樂樽爐端燒" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">樂樽爐端燒</div><div class="cell-tag">餐飲</div></div></a>
-  <a class="cell" href="mu-clinic/index.html"><img src="../images/mu-clinic/00.jpg" alt="慕診所" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">慕診所</div><div class="cell-tag">其他</div></div></a>
-  <a class="cell" href="dunhua-32f/index.html"><img src="../images/dunhua-32f/00.jpg" alt="敦化32F" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">敦化摩天辦公室 32F</div><div class="cell-tag">辦公</div></div></a>
-  <a class="cell" href="elle-cafe/index.html"><img src="../images/elle-cafe/00.jpg" alt="ELLE Café" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">ELLE Café</div><div class="cell-tag">餐飲</div></div></a>
-  <a class="cell" href="fire-play/index.html"><img src="../images/fire-play/00.jpg" alt="Fire Play" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">Fire Play</div><div class="cell-tag">餐飲</div></div></a>
-  <a class="cell" href="iron-chef/index.html"><img src="../images/iron-chef/00.jpg" alt="IRON CHEF" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">IRON CHEF</div><div class="cell-tag">餐飲</div></div></a>
-  <a class="cell" href="cava-baja/index.html"><img src="../images/cava-baja/00.jpg" alt="Cava Baja" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">Cava Baja</div><div class="cell-tag">餐飲</div></div></a>
-  <a class="cell" href="retrodandy/index.html"><img src="../images/retrodandy/00.jpg" alt="Retrodandy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">Retrodandy</div><div class="cell-tag">零售</div></div></a>
-  <a class="cell" href="wave-flower/index.html"><img src="../images/wave-flower/00.jpg" alt="浪花花藝" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">浪花花藝 Wave Flower</div><div class="cell-tag">零售</div></div></a>
-  <a class="cell" href="yun-jiao/index.html"><img src="../images/yun-jiao/00.jpg" alt="耘角" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">耘角</div><div class="cell-tag">餐飲</div></div></a>
-  <a class="cell" href="dunnan-9f/index.html"><img src="../images/dunnan-9f/00.jpg" alt="敦南9F" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">敦南摩天辦公室 9F</div><div class="cell-tag">辦公</div></div></a>
-  <a class="cell" href="new-vision/index.html"><img src="../images/new-vision/00.jpg" alt="新創視眼鏡" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">新創視眼鏡</div><div class="cell-tag">零售</div></div></a>
-  <a class="cell" href="lalaport/index.html"><img src="../images/lalaport/00.jpg" alt="Urban Revivo 新加坡" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">Urban Revivo 新加坡</div><div class="cell-tag">零售</div></div></a>
+  <a class="cell" href="de-nuit/index.html"><img src="../images/de-nuit/00.jpg" alt="de nuit" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">de nuit</div><div class="cell-tag">餐飲 F&amp;B</div></div></a>
+  <a class="cell" href="monte/index.html"><img src="../images/monte/00.jpg" alt="Monte" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">Monte</div><div class="cell-tag">餐飲 F&amp;B</div></div></a>
+  <a class="cell" href="r-sanderson/index.html"><img src="../images/r-sanderson/00.jpg" alt="R. Sanderson" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">R. Sanderson</div><div class="cell-tag">零售 Retail</div></div></a>
+  <a class="cell" href="lezun/index.html"><img src="../images/lezun/00.jpg" alt="樂樽爐端燒" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">樂樽爐端燒</div><div class="cell-tag">餐飲 F&amp;B</div></div></a>
+  <a class="cell" href="mu-clinic/index.html"><img src="../images/mu-clinic/00.jpg" alt="慕診所" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">慕診所</div><div class="cell-tag">其他 Other</div></div></a>
+  <a class="cell" href="dunhua-32f/index.html"><img src="../images/dunhua-32f/00.jpg" alt="敦化32F" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">敦化摩天辦公室 32F</div><div class="cell-tag">辦公 Office</div></div></a>
+  <a class="cell" href="elle-cafe/index.html"><img src="../images/elle-cafe/00.jpg" alt="ELLE Café" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">ELLE Café</div><div class="cell-tag">餐飲 F&amp;B</div></div></a>
+  <a class="cell" href="fire-play/index.html"><img src="../images/fire-play/00.jpg" alt="Fire Play" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">Fire Play</div><div class="cell-tag">餐飲 F&amp;B</div></div></a>
+  <a class="cell" href="iron-chef/index.html"><img src="../images/iron-chef/00.jpg" alt="IRON CHEF" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">IRON CHEF</div><div class="cell-tag">餐飲 F&amp;B</div></div></a>
+  <a class="cell" href="cava-baja/index.html"><img src="../images/cava-baja/00.jpg" alt="Cava Baja" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">Cava Baja</div><div class="cell-tag">餐飲 F&amp;B</div></div></a>
+  <a class="cell" href="retrodandy/index.html"><img src="../images/retrodandy/00.jpg" alt="Retrodandy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">Retrodandy</div><div class="cell-tag">零售 Retail</div></div></a>
+  <a class="cell" href="wave-flower/index.html"><img src="../images/wave-flower/00.jpg" alt="浪花花藝" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">浪花花藝 Wave Flower</div><div class="cell-tag">零售 Retail</div></div></a>
+  <a class="cell" href="yun-jiao/index.html"><img src="../images/yun-jiao/00.jpg" alt="耘角" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">耘角</div><div class="cell-tag">餐飲 F&amp;B</div></div></a>
+  <a class="cell" href="dunnan-9f/index.html"><img src="../images/dunnan-9f/00.jpg" alt="敦南9F" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">敦南摩天辦公室 9F</div><div class="cell-tag">辦公 Office</div></div></a>
+  <a class="cell" href="new-vision/index.html"><img src="../images/new-vision/00.jpg" alt="新創視眼鏡" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">新創視眼鏡</div><div class="cell-tag">零售 Retail</div></div></a>
+  <a class="cell" href="lalaport/index.html"><img src="../images/lalaport/00.jpg" alt="恆隆行_南港LaLaport" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">恆隆行_南港LaLaport</div><div class="cell-tag">零售 Retail</div></div></a>
+  <a class="cell" href="la-vie-wine/index.html"><img src="../images/la-vie-wine/00.jpg" alt="La Vie Wine 樂活酒窖" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cell-ph" style="display:none"><span>Cover photo</span></div><div class="cell-meta"><div class="cell-name">La Vie Wine 樂活酒窖</div><div class="cell-tag">零售 Retail</div></div></a>
 </div></div>
 <div class="footer">
-  <span class="footer-count">16 projects</span>
+  <span class="footer-count">17 projects</span>
   <a class="footer-info" href="../info/index.html">Info →</a>
 </div>
 </body>
