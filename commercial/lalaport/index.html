@@ -33,9 +33,11 @@
   .intro { max-width:560px; padding:80px 40px; margin:0 auto; text-align:center; }
   .desc-zh { font-size:15px; line-height:2.1; color:var(--accent); margin-bottom:28px; }
   .desc-en { font-size:13px; line-height:1.9; color:var(--dim); font-style:italic; }
-  .plan { max-width:560px; margin:0 auto; padding:0 40px 60px; }
-  .plan-label { font-size:8px; letter-spacing:0.28em; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
-  .plan img { width:100%; height:auto; display:block; }
+  /* 平面圖區塊（文字區下方）*/
+  .plans { max-width:560px; margin:0 auto; padding:0 40px 60px; }
+  .plans-label { font-size:8px; letter-spacing:0.28em; text-transform:uppercase; color:var(--muted); margin-bottom:16px; }
+  .plans-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+  .plans-grid img { width:100%; height:auto; display:block; }
   .photos { width:100%; }
   .p-full, .p-2col, .p-asymm { padding:0 20%; }
   .p-full img { width:100%; height:auto; display:block; }
@@ -49,7 +51,6 @@
   .p-asymm-right .p-cell img { width:100%; height:100%; object-fit:cover; display:block; }
   .editorial { max-width:560px; padding:64px 40px; margin:0 auto; text-align:center; }
   .editorial p { font-size:13px; font-weight:300; color:var(--muted); line-height:2.1; }
-  .editorial p + p { margin-top:20px; }
   .gap-row { height:3px; background:var(--bg); }
   .thumb-label { font-size:8px; font-weight:300; letter-spacing:0.28em; text-transform:uppercase; color:var(--muted); padding:32px 40px 12px; }
   .thumb-strip { display:flex; overflow-x:auto; gap:4px; padding:0 40px 32px; scrollbar-width:none; }
@@ -70,7 +71,8 @@
   .bowerbird:hover { color:var(--white); border-color:var(--accent); }
   @media (max-width: 768px) {
     .intro { padding:48px 24px; max-width:100%; }
-    .plan { max-width:100%; padding:0 24px 48px; }
+    .plans { max-width:100%; padding:0 24px 48px; }
+    .plans-grid { grid-template-columns:1fr; }
     .p-2col { grid-template-columns:1fr; }
     .p-asymm { grid-template-columns:1fr; }
     .p-asymm-left { display:none; }
@@ -94,6 +96,7 @@
 <meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
+
 <nav class="nav">
   <a class="nav-logo" href="../../index.html">ON Design Lab</a>
   <div class="nav-links">
@@ -102,7 +105,9 @@
     <a class="nav-link" href="../../info/index.html">Info</a>
   </div>
 </nav>
+
 <a class="back" href="../index.html">← Commercial</a>
+
 <div class="hero-img">
   <img src="../../images/lalaport/00.jpg" alt="恆隆行_南港LaLaport">
   <div class="hero-overlay">
@@ -116,37 +121,53 @@
     </div>
   </div>
 </div>
+
 <div class="intro">
-  <p class="desc-zh">[待補文案]</p>
+  <p class="desc-zh">[設計說明待補 — 恆隆行_南港LaLaport]</p>
   <p class="desc-en">[Design statement — to be provided]</p>
 </div>
-<div class="plan">
-  <p class="plan-label">Floor Plan</p>
-  <img src="../../images/lalaport/plan.jpg" onerror="this.parentElement.style.display='none'" alt="Floor Plan">
+
+<!-- 平面圖（文字區下方）-->
+<div class="plans">
+  <p class="plans-label">Floor Plans</p>
+  <div class="plans-grid">
+    <img src="../../images/lalaport/plan_1.jpg" alt="Floor Plan 1">
+    <img src="../../images/lalaport/plan_2.jpg" alt="Floor Plan 2">
+    <img src="../../images/lalaport/plan_3.jpg" alt="Floor Plan 3">
+    <img src="../../images/lalaport/plan_4.jpg" alt="Floor Plan 4">
+  </div>
 </div>
+
 <div class="photos">
+
   <div class="p-2col">
     <div class="p-cell"><img src="../../images/lalaport/01.jpg" alt="01"></div>
     <div class="p-cell"><img src="../../images/lalaport/03.jpg" alt="03"></div>
   </div>
   <div class="gap-row"></div>
+
   <div class="p-2col">
     <div class="p-cell"><img src="../../images/lalaport/04.jpg" alt="04"></div>
     <div class="p-cell"><img src="../../images/lalaport/05.jpg" alt="05"></div>
   </div>
   <div class="gap-row"></div>
+
   <div class="editorial"><p>[待補說明文字]</p></div>
+
   <div class="p-2col">
     <div class="p-cell"><img src="../../images/lalaport/07.jpg" alt="07"></div>
     <div class="p-cell"><img src="../../images/lalaport/08.jpg" alt="08"></div>
   </div>
   <div class="gap-row"></div>
+
   <div class="p-2col">
     <div class="p-cell"><img src="../../images/lalaport/10.jpg" alt="10"></div>
     <div class="p-cell"><img src="../../images/lalaport/12.jpg" alt="12"></div>
   </div>
   <div class="gap-row"></div>
+
 </div>
+
 <p class="thumb-label">All Photos</p>
 <div class="thumb-strip">
   <div class="thumb" onclick="openLightbox(0)"><img src="../../images/lalaport/01.jpg" alt="01"></div>
@@ -158,17 +179,20 @@
   <div class="thumb" onclick="openLightbox(6)"><img src="../../images/lalaport/10.jpg" alt="10"></div>
   <div class="thumb" onclick="openLightbox(7)"><img src="../../images/lalaport/12.jpg" alt="12"></div>
 </div>
+
 <div id="lightbox" class="lightbox" style="display:none">
   <div class="lb-close" onclick="closeLightbox()">×</div>
   <div class="lb-prev" onclick="lbPrev()">‹</div>
   <img id="lb-img" src="" alt="">
   <div class="lb-next" onclick="lbNext()">›</div>
 </div>
+
 <div class="bottom">
   <a class="bottom-nav" href="../new-vision/index.html">← 新創視眼鏡</a>
   <a class="bowerbird" href="#">View on BowerBird →</a>
-  <a class="bottom-nav" href="../la-vie-wine/index.html">La Vie Wine 樂活酒窖 →</a>
+  <a class="bottom-nav" href="../la-vie-wine/index.html">La Vie Wine →</a>
 </div>
+
 <script>
   const lbPhotos = [
     '../../images/lalaport/01.jpg',
@@ -193,5 +217,6 @@
     }
   });
 </script>
+
 </body>
 </html>
