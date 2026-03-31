@@ -4,112 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>敦南摩天辦公室 9F — ON Design Lab</title>
-<style>
-  :root {
-    --bg:    #0e0e0c;
-    --bg2:   #141412;
-    --line:  #252520;
-    --white: #f0efe8;
-    --muted: #4a4a44;
-    --dim:   #2a2a26;
-    --accent:#666660;
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; background:var(--bg); color:var(--white); }
-
-  /* ── NAV ── */
-  .nav { display:flex; align-items:center; justify-content:space-between; padding:20px 40px; border-bottom:0.5px solid var(--line); position:sticky; top:0; background:var(--bg); z-index:200; }
-  .nav-logo { font-size:10px; font-weight:300; letter-spacing:0.26em; text-transform:uppercase; color:var(--white); text-decoration:none; }
-  .nav-links { display:flex; gap:28px; }
-  .nav-link { font-size:9px; font-weight:300; letter-spacing:0.22em; text-transform:uppercase; color:var(--muted); text-decoration:none; padding-bottom:2px; border-bottom:0.5px solid transparent; transition:all 0.2s; }
-  .nav-link:hover, .nav-link.active { color:var(--white); border-color:var(--white); }
-
-  /* ── BACK ── */
-  .back { display:inline-block; padding:20px 40px 0; font-size:9px; font-weight:300; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color 0.2s; }
-  .back:hover { color:var(--white); }
-
-  /* ── HERO ── */
-  .hero-img { width:100%; height:85vh; overflow:hidden; position:relative; margin-top:18px; }
-  .hero-img img { width:100%; height:100%; object-fit:cover; object-position:center 50%; display:block; }
-  .hero-overlay { position:absolute; bottom:0; left:0; right:0; padding:40px 48px; background:linear-gradient(transparent, rgba(14,14,12,0.9)); pointer-events:none; }
-  .hero-title { font-size:36px; font-weight:300; color:var(--white); letter-spacing:0.04em; margin-bottom:10px; }
-  .hero-meta { display:flex; gap:12px; align-items:center; }
-  .hero-type { font-size:9px; color:var(--muted); letter-spacing:0.22em; text-transform:uppercase; }
-  .hero-dot { width:2px; height:2px; background:var(--muted); border-radius:50%; }
-
-  /* ── TEXT AREA ── */
-  .intro { max-width:640px; padding:80px 60px; margin:0; }
-  .desc-zh { font-size:15px; line-height:2.1; color:var(--accent); margin-bottom:28px; }
-  .desc-en { font-size:13px; line-height:1.9; color:var(--dim); font-style:italic; }
-
-  /* Floor plan */
-  .plan { padding:40px 60px; max-width:640px; }
-  .plan-label { font-size:8px; letter-spacing:0.28em; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
-  .plan img { width:100%; height:auto; display:block; }
-
-  /* ── PHOTO AREA ── */
-  .photos { width:100%; }
-
-  .p-full img { width:100%; height:auto; display:block; }
-
-  .p-2col { display:grid; grid-template-columns:1fr 1fr; gap:3px; }
-  .p-cell { position:relative; }
-  .p-cell img { width:100%; height:auto; display:block; }
-
-  .p-asymm { display:grid; grid-template-columns:1fr 1fr; gap:3px; align-items:stretch; }
-  .p-asymm-left img { width:100%; height:100%; object-fit:cover; display:block; }
-  .p-asymm-right { display:flex; flex-direction:column; gap:3px; }
-  .p-asymm-right .p-cell { flex:1; }
-  .p-asymm-right .p-cell img { width:100%; height:100%; object-fit:cover; display:block; }
-
-  /* 雜誌文字段落 */
-  .editorial { max-width:640px; padding:64px 60px; }
-  .editorial p { font-size:13px; font-weight:300; color:var(--muted); line-height:2.1; }
-  .editorial p + p { margin-top:20px; }
-
-  .gap-row { height:3px; background:var(--bg); }
-
-  /* ── THUMBNAIL STRIP ── */
-  .thumb-label { font-size:8px; font-weight:300; letter-spacing:0.28em; text-transform:uppercase; color:var(--muted); padding:32px 40px 12px; }
-  .thumb-strip { display:flex; overflow-x:auto; gap:4px; padding:4px 0 32px; scrollbar-width:none; }
-  .thumb-strip::-webkit-scrollbar { display:none; }
-  .thumb { flex-shrink:0; width:120px; height:80px; overflow:hidden; cursor:pointer; opacity:0.6; transition:opacity 0.2s; }
-  .thumb:hover { opacity:1; }
-  .thumb img { width:100%; height:100%; object-fit:cover; display:block; }
-
-  /* ── LIGHTBOX ── */
-  .lightbox { position:fixed; inset:0; background:rgba(0,0,0,0.95); z-index:1000; display:flex; align-items:center; justify-content:center; }
-  #lb-img { max-width:90vw; max-height:90vh; object-fit:contain; }
-  .lb-close { position:absolute; top:24px; right:32px; font-size:32px; color:var(--white); cursor:pointer; font-weight:300; line-height:1; user-select:none; }
-  .lb-prev, .lb-next { position:absolute; top:50%; transform:translateY(-50%); font-size:48px; color:var(--white); cursor:pointer; font-weight:300; padding:0 24px; opacity:0.5; transition:opacity 0.2s; user-select:none; line-height:1; }
-  .lb-prev { left:0; } .lb-next { right:0; }
-  .lb-prev:hover, .lb-next:hover { opacity:1; }
-
-  /* ── BOTTOM ── */
-  .bottom { padding:28px 40px; border-top:0.5px solid var(--line); display:flex; justify-content:space-between; align-items:center; margin-top:16px; }
-  .bottom-nav { font-size:9px; font-weight:300; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color 0.2s; }
-  .bottom-nav:hover { color:var(--white); }
-  .bowerbird { font-size:9px; font-weight:300; letter-spacing:0.22em; text-transform:uppercase; color:var(--muted); text-decoration:none; border:0.5px solid var(--line); padding:10px 20px; transition:all 0.2s; }
-  .bowerbird:hover { color:var(--white); border-color:var(--accent); }
-
-  /* ── RWD ── */
-  @media (max-width: 768px) {
-    .intro { padding:48px 24px; max-width:100%; }
-    .plan { padding:24px 24px 40px; max-width:100%; }
-    .desc-zh { font-size:14px; }
-    .desc-en { font-size:12px; }
-    .p-2col { grid-template-columns:1fr; }
-    .p-asymm { grid-template-columns:1fr; }
-    .p-asymm-left { display:none; }
-    .editorial { padding:40px 24px; max-width:100%; }
-    .thumb { width:90px; height:60px; }
-    .thumb-label { padding:24px 20px 10px; }
-    .hero-img { height:60vh; }
-    .nav { padding:16px 20px; }
-    .back { padding:16px 20px 0; }
-    .bottom { padding:20px 20px; }
-  }
-</style>
+<link rel="stylesheet" href="../../assets/commercial.css">
 <meta name="description" content="敦南摩天辦公室 9F | ON Design Lab 設計作品">
 <meta property="og:title" content="敦南摩天辦公室 9F — ON Design Lab">
 <meta property="og:description" content="敦南摩天辦公室 9F | ON Design Lab — 台北品牌空間設計事務所">
@@ -134,7 +29,7 @@
 
 <!-- ═══ HERO ═══ -->
 <div class="hero-img">
-  <img src="../../images/dunnan-9f/00.jpg" alt="敦南摩天辦公室 9F">
+  <img src="../../images/dunnan-9f/00.jpg" loading="eager" decoding="async" alt="敦南摩天辦公室 9F">
   <div class="hero-overlay">
     <div class="hero-title">敦南摩天辦公室 9F</div>
     <div class="hero-meta">
@@ -156,42 +51,42 @@
 <!-- Floor Plan（無圖自動隱藏）-->
 <div class="plan">
   <p class="plan-label">Floor Plan</p>
-  <img src="../../images/dunnan-9f/plan.jpg" onerror="this.parentElement.style.display='none'" alt="Floor Plan">
+  <img src="../../images/dunnan-9f/plan.jpg" onerror="this.parentElement.style.display='none'" loading="lazy" decoding="async" alt="Floor Plan">
 </div>
 
 <!-- ═══ PHOTO AREA ═══ -->
 <div class="photos">
 
-  <div class="p-full"><img src="../../images/dunnan-9f/01.jpg" alt="01"></div>
+  <div class="p-full"><img loading="lazy" decoding="async" src="../../images/dunnan-9f/01.jpg" alt="01"></div>
   <div class="gap-row"></div>
 
   <div class="p-2col">
-    <div class="p-cell"><img src="../../images/dunnan-9f/02.jpg" alt="02"></div>
-    <div class="p-cell"><img src="../../images/dunnan-9f/03.jpg" alt="03"></div>
+    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/dunnan-9f/02.jpg" alt="02"></div>
+    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/dunnan-9f/03.jpg" alt="03"></div>
   </div>
   <div class="gap-row"></div>
 
   <div class="p-asymm">
-    <div class="p-asymm-left p-cell"><img src="../../images/dunnan-9f/04.jpg" alt="04"></div>
+    <div class="p-asymm-left p-cell"><img loading="lazy" decoding="async" src="../../images/dunnan-9f/04.jpg" alt="04"></div>
     <div class="p-asymm-right">
-      <div class="p-cell"><img src="../../images/dunnan-9f/05.jpg" alt="05"></div>
-      <div class="p-cell"><img src="../../images/dunnan-9f/06.jpg" alt="06"></div>
+      <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/dunnan-9f/05.jpg" alt="05"></div>
+      <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/dunnan-9f/06.jpg" alt="06"></div>
     </div>
   </div>
   <div class="gap-row"></div>
 
   <div class="p-2col">
-    <div class="p-cell"><img src="../../images/dunnan-9f/07.jpg" alt="07"></div>
-    <div class="p-cell"><img src="../../images/dunnan-9f/08.jpg" alt="08"></div>
+    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/dunnan-9f/07.jpg" alt="07"></div>
+    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/dunnan-9f/08.jpg" alt="08"></div>
   </div>
   <div class="gap-row"></div>
 
-  <div class="p-full"><img src="../../images/dunnan-9f/09.jpg" alt="09"></div>
+  <div class="p-full"><img loading="lazy" decoding="async" src="../../images/dunnan-9f/09.jpg" alt="09"></div>
   <div class="gap-row"></div>
 
   <div class="p-2col">
-    <div class="p-cell"><img src="../../images/dunnan-9f/14.jpg" alt="14"></div>
-    <div class="p-cell"><img src="../../images/dunnan-9f/15.jpg" alt="15"></div>
+    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/dunnan-9f/14.jpg" alt="14"></div>
+    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/dunnan-9f/15.jpg" alt="15"></div>
   </div>
   <div class="gap-row"></div>
 
@@ -200,17 +95,17 @@
 <!-- ═══ THUMBNAILS ═══ -->
 <p class="thumb-label">All Photos</p>
 <div class="thumb-strip">
-  <div class="thumb" onclick="openLightbox(0)"><img src="../../images/dunnan-9f/01.jpg" alt="01"></div>
-  <div class="thumb" onclick="openLightbox(1)"><img src="../../images/dunnan-9f/02.jpg" alt="02"></div>
-  <div class="thumb" onclick="openLightbox(2)"><img src="../../images/dunnan-9f/03.jpg" alt="03"></div>
-  <div class="thumb" onclick="openLightbox(3)"><img src="../../images/dunnan-9f/04.jpg" alt="04"></div>
-  <div class="thumb" onclick="openLightbox(4)"><img src="../../images/dunnan-9f/05.jpg" alt="05"></div>
-  <div class="thumb" onclick="openLightbox(5)"><img src="../../images/dunnan-9f/06.jpg" alt="06"></div>
-  <div class="thumb" onclick="openLightbox(6)"><img src="../../images/dunnan-9f/07.jpg" alt="07"></div>
-  <div class="thumb" onclick="openLightbox(7)"><img src="../../images/dunnan-9f/08.jpg" alt="08"></div>
-  <div class="thumb" onclick="openLightbox(8)"><img src="../../images/dunnan-9f/09.jpg" alt="09"></div>
-  <div class="thumb" onclick="openLightbox(9)"><img src="../../images/dunnan-9f/14.jpg" alt="14"></div>
-  <div class="thumb" onclick="openLightbox(10)"><img src="../../images/dunnan-9f/15.jpg" alt="15"></div>
+  <div class="thumb" onclick="openLightbox(0)"><img loading="lazy" decoding="async" src="../../images/dunnan-9f/01.jpg" width="120" height="80" alt="01"></div>
+  <div class="thumb" onclick="openLightbox(1)"><img loading="lazy" decoding="async" src="../../images/dunnan-9f/02.jpg" width="120" height="80" alt="02"></div>
+  <div class="thumb" onclick="openLightbox(2)"><img loading="lazy" decoding="async" src="../../images/dunnan-9f/03.jpg" width="120" height="80" alt="03"></div>
+  <div class="thumb" onclick="openLightbox(3)"><img loading="lazy" decoding="async" src="../../images/dunnan-9f/04.jpg" width="120" height="80" alt="04"></div>
+  <div class="thumb" onclick="openLightbox(4)"><img loading="lazy" decoding="async" src="../../images/dunnan-9f/05.jpg" width="120" height="80" alt="05"></div>
+  <div class="thumb" onclick="openLightbox(5)"><img loading="lazy" decoding="async" src="../../images/dunnan-9f/06.jpg" width="120" height="80" alt="06"></div>
+  <div class="thumb" onclick="openLightbox(6)"><img loading="lazy" decoding="async" src="../../images/dunnan-9f/07.jpg" width="120" height="80" alt="07"></div>
+  <div class="thumb" onclick="openLightbox(7)"><img loading="lazy" decoding="async" src="../../images/dunnan-9f/08.jpg" width="120" height="80" alt="08"></div>
+  <div class="thumb" onclick="openLightbox(8)"><img loading="lazy" decoding="async" src="../../images/dunnan-9f/09.jpg" width="120" height="80" alt="09"></div>
+  <div class="thumb" onclick="openLightbox(9)"><img loading="lazy" decoding="async" src="../../images/dunnan-9f/14.jpg" width="120" height="80" alt="14"></div>
+  <div class="thumb" onclick="openLightbox(10)"><img loading="lazy" decoding="async" src="../../images/dunnan-9f/15.jpg" width="120" height="80" alt="15"></div>
 </div>
 
 <!-- ═══ LIGHTBOX ═══ -->
