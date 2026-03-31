@@ -27,12 +27,19 @@
   .method p { font-size: 12px; font-weight: 300; color: var(--accent); line-height: 2.05; letter-spacing: 0.02em; margin-bottom: 18px; }
   .method p.en { font-style: italic; color: var(--dim); font-size: 11px; }
 
-  .bio { padding: 40px 40px; border-bottom: 0.5px solid var(--line); }
-  .bio-photo { width: 160px; height: 200px; background: var(--bg2); margin-bottom: 24px; display: flex; align-items: center; justify-content: center; }
-  .bio-photo span { font-size: 8px; color: var(--dim); letter-spacing: 0.12em; text-transform: uppercase; }
-  .bio-name { font-size: 13px; font-weight: 400; letter-spacing: 0.12em; color: var(--white); margin-bottom: 4px; }
-  .bio-role { font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 18px; }
-  .bio-awards { font-size: 11px; font-weight: 300; color: var(--muted); line-height: 1.9; letter-spacing: 0.03em; }
+  .founders { max-width: 720px; padding: 80px 60px; display: flex; flex-direction: column; gap: 64px; border-bottom: 0.5px solid var(--line); }
+  .founder { display: grid; grid-template-columns: 160px 1fr; gap: 40px; align-items: start; }
+  .founder-photo img { width: 160px; height: 200px; object-fit: cover; object-position: top; display: block; filter: grayscale(20%); }
+  .founder-name { font-size: 16px; font-weight: 300; color: #c8c7c0; letter-spacing: 0.06em; margin-bottom: 4px; }
+  .founder-name-zh { font-size: 13px; color: var(--muted); margin-left: 10px; letter-spacing: 0.1em; }
+  .founder-title { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; border-bottom: 0.5px solid var(--line); padding-bottom: 12px; }
+  .founder-bio-zh { font-size: 13px; line-height: 2.0; color: #8a8a82; margin-bottom: 12px; }
+  .founder-bio-en { font-size: 12px; line-height: 1.9; color: #6a6a62; font-style: italic; }
+  @media (max-width: 768px) {
+    .founders { padding: 48px 24px; gap: 48px; }
+    .founder { grid-template-columns: 1fr; gap: 20px; }
+    .founder-photo img { width: 120px; height: 150px; }
+  }
 
   .bottom { padding: 24px 40px; display: flex; gap: 32px; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; }
   .bottom a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
@@ -63,17 +70,46 @@
   <p class="en">Brand logic translated into space. Every material decision, every circulation path, every proportion — each one a sentence in a language the body understands before the mind does.</p>
 </div>
 
-<!-- Bio -->
-<div class="bio">
-  <div class="bio-photo"><span>Photo</span></div>
-  <div class="bio-name">Mo Tsai</div>
-  <div class="bio-role">Founder &amp; Creative Director, ON Design Lab</div>
-  <div class="bio-awards">
-    iF Design Award 2023<br>
-    MUSE Design Awards 2023<br>
-    Michelin Guide — de nuit
+<!-- Founders -->
+<section class="founders">
+
+  <div class="founder">
+    <div class="founder-photo">
+      <img src="../人物/蔡曜牟.jpg" alt="Mo Tsai" loading="lazy" decoding="async">
+    </div>
+    <div class="founder-info">
+      <div class="founder-name">Mo Tsai <span class="founder-name-zh">蔡曜牟</span></div>
+      <div class="founder-title">Founder &amp; Creative Director</div>
+      <p class="founder-bio-zh">Mo 同時做三件事：設計空間、經營品牌、以投資人的角度站在業主的位置思考。2019 年起深度參與 de nuit 的品牌經營並持有股份，這段經歷讓他確信：設計不是服務，是品牌的一部分。</p>
+      <p class="founder-bio-en">Mo operates at the intersection of design, brand strategy, and business investment — bringing all three perspectives to every project.</p>
+    </div>
   </div>
-</div>
+
+  <div class="founder">
+    <div class="founder-photo">
+      <img src="../人物/陳紀中.jpg" alt="David C. Chen" loading="lazy" decoding="async">
+    </div>
+    <div class="founder-info">
+      <div class="founder-name">David C. Chen <span class="founder-name-zh">陳紀中</span></div>
+      <div class="founder-title">Co-Founder &amp; Design Director</div>
+      <p class="founder-bio-zh">David 的背景橫跨建築、零售品牌與視覺陳列。曾任職於扎哈哈迪德建築師事務所、CHANEL 亞太區設計經理、URBAN REVIVO 品牌形象中心總經理，現兼任美國 SCAD 薩凡納藝術大學客座教授。</p>
+      <p class="founder-bio-en">With experience at Zaha Hadid Architects, CHANEL Asia Pacific, and URBAN REVIVO, David brings a methodology that bridges brand scale and design precision.</p>
+    </div>
+  </div>
+
+  <div class="founder">
+    <div class="founder-photo">
+      <img src="../人物/謝景年.jpg" alt="Dean Hsieh" loading="lazy" decoding="async">
+    </div>
+    <div class="founder-info">
+      <div class="founder-name">Dean Hsieh <span class="founder-name-zh">謝景年</span></div>
+      <div class="founder-title">Co-Founder &amp; Director of Operations</div>
+      <p class="founder-bio-zh">Dean 負責商業與醫療空間的全流程工程管理。他的背景同時涵蓋財務規劃與品牌創業，確保每個設計決定都能被商業邏輯支撐。</p>
+      <p class="founder-bio-en">Dean bridges design execution and business logic — managing full-cycle project delivery while bringing firsthand experience as a brand founder.</p>
+    </div>
+  </div>
+
+</section>
 
 <div class="bottom">
   <a href="../info/index.html">← Back to Info</a>
