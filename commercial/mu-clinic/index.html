@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>慕診所 — ON Design Lab</title>
+<title>慕診所 Mu Clinic — ON Design Lab</title>
 <style>
   :root {
     --bg:    #0e0e0c;
@@ -16,13 +16,19 @@
   }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; background:var(--bg); color:var(--white); }
+
+  /* ── NAV ── */
   .nav { display:flex; align-items:center; justify-content:space-between; padding:20px 40px; border-bottom:0.5px solid var(--line); position:sticky; top:0; background:var(--bg); z-index:200; }
   .nav-logo { font-size:10px; font-weight:300; letter-spacing:0.26em; text-transform:uppercase; color:var(--white); text-decoration:none; }
   .nav-links { display:flex; gap:28px; }
   .nav-link { font-size:9px; font-weight:300; letter-spacing:0.22em; text-transform:uppercase; color:var(--muted); text-decoration:none; padding-bottom:2px; border-bottom:0.5px solid transparent; transition:all 0.2s; }
   .nav-link:hover, .nav-link.active { color:var(--white); border-color:var(--white); }
+
+  /* ── BACK ── */
   .back { display:inline-block; padding:20px 40px 0; font-size:9px; font-weight:300; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color 0.2s; }
   .back:hover { color:var(--white); }
+
+  /* ── HERO ── */
   .hero-img { width:100%; height:85vh; overflow:hidden; position:relative; margin-top:18px; }
   .hero-img img { width:100%; height:100%; object-fit:cover; object-position:center 50%; display:block; }
   .hero-overlay { position:absolute; bottom:0; left:0; right:0; padding:40px 48px; background:linear-gradient(transparent, rgba(14,14,12,0.9)); pointer-events:none; }
@@ -30,54 +36,73 @@
   .hero-meta { display:flex; gap:12px; align-items:center; }
   .hero-type { font-size:9px; color:var(--muted); letter-spacing:0.22em; text-transform:uppercase; }
   .hero-dot { width:2px; height:2px; background:var(--muted); border-radius:50%; }
+
+  /* ── TEXT AREA ── */
   .intro { max-width:640px; padding:80px 60px; margin:0; }
   .desc-zh { font-size:15px; line-height:2.1; color:var(--accent); margin-bottom:28px; }
   .desc-en { font-size:13px; line-height:1.9; color:var(--dim); font-style:italic; }
+
+  /* Floor plan */
   .plan { padding:40px 60px; max-width:640px; }
   .plan-label { font-size:8px; letter-spacing:0.28em; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
   .plan img { width:100%; height:auto; display:block; }
+
+  /* ── PHOTO AREA ── */
   .photos { width:100%; }
-  .p-full, .p-2col, .p-asymm { padding:0; }
+
   .p-full img { width:100%; height:auto; display:block; }
+
   .p-2col { display:grid; grid-template-columns:1fr 1fr; gap:3px; }
   .p-cell { position:relative; }
   .p-cell img { width:100%; height:auto; display:block; }
+
   .p-asymm { display:grid; grid-template-columns:1fr 1fr; gap:3px; align-items:stretch; }
   .p-asymm-left img { width:100%; height:100%; object-fit:cover; display:block; }
   .p-asymm-right { display:flex; flex-direction:column; gap:3px; }
   .p-asymm-right .p-cell { flex:1; }
   .p-asymm-right .p-cell img { width:100%; height:100%; object-fit:cover; display:block; }
+
+  /* 雜誌文字段落 */
   .editorial { max-width:640px; padding:64px 60px; }
   .editorial p { font-size:13px; font-weight:300; color:var(--muted); line-height:2.1; }
   .editorial p + p { margin-top:20px; }
+
   .gap-row { height:3px; background:var(--bg); }
+
+  /* ── THUMBNAIL STRIP ── */
   .thumb-label { font-size:8px; font-weight:300; letter-spacing:0.28em; text-transform:uppercase; color:var(--muted); padding:32px 40px 12px; }
-  .thumb-strip { display:flex; overflow-x:auto; gap:4px; padding:0 40px 32px; scrollbar-width:none; }
+  .thumb-strip { display:flex; overflow-x:auto; gap:4px; padding:4px 0 32px; scrollbar-width:none; }
   .thumb-strip::-webkit-scrollbar { display:none; }
   .thumb { flex-shrink:0; width:120px; height:80px; overflow:hidden; cursor:pointer; opacity:0.6; transition:opacity 0.2s; }
   .thumb:hover { opacity:1; }
   .thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+
+  /* ── LIGHTBOX ── */
   .lightbox { position:fixed; inset:0; background:rgba(0,0,0,0.95); z-index:1000; display:flex; align-items:center; justify-content:center; }
   #lb-img { max-width:90vw; max-height:90vh; object-fit:contain; }
   .lb-close { position:absolute; top:24px; right:32px; font-size:32px; color:var(--white); cursor:pointer; font-weight:300; line-height:1; user-select:none; }
   .lb-prev, .lb-next { position:absolute; top:50%; transform:translateY(-50%); font-size:48px; color:var(--white); cursor:pointer; font-weight:300; padding:0 24px; opacity:0.5; transition:opacity 0.2s; user-select:none; line-height:1; }
   .lb-prev { left:0; } .lb-next { right:0; }
   .lb-prev:hover, .lb-next:hover { opacity:1; }
+
+  /* ── BOTTOM ── */
   .bottom { padding:28px 40px; border-top:0.5px solid var(--line); display:flex; justify-content:space-between; align-items:center; margin-top:16px; }
   .bottom-nav { font-size:9px; font-weight:300; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color 0.2s; }
   .bottom-nav:hover { color:var(--white); }
   .bowerbird { font-size:9px; font-weight:300; letter-spacing:0.22em; text-transform:uppercase; color:var(--muted); text-decoration:none; border:0.5px solid var(--line); padding:10px 20px; transition:all 0.2s; }
   .bowerbird:hover { color:var(--white); border-color:var(--accent); }
+
+  /* ── RWD ── */
   @media (max-width: 768px) {
     .intro { padding:48px 24px; max-width:100%; }
     .plan { padding:24px 24px 40px; max-width:100%; }
+    .desc-zh { font-size:14px; }
+    .desc-en { font-size:12px; }
     .p-2col { grid-template-columns:1fr; }
     .p-asymm { grid-template-columns:1fr; }
     .p-asymm-left { display:none; }
-    .p-full, .p-2col, .p-asymm { padding:0; }
     .editorial { padding:40px 24px; max-width:100%; }
     .thumb { width:90px; height:60px; }
-    .thumb-strip { padding:0 20px 24px; }
     .thumb-label { padding:24px 20px 10px; }
     .hero-img { height:60vh; }
     .nav { padding:16px 20px; }
@@ -85,15 +110,17 @@
     .bottom { padding:20px 20px; }
   }
 </style>
-<meta name="description" content="慕診所 | ON Design Lab 設計作品">
-<meta property="og:title" content="慕診所 — ON Design Lab">
-<meta property="og:description" content="慕診所 | ON Design Lab — 台北品牌空間設計事務所">
+<meta name="description" content="慕診所 Mu Clinic | ON Design Lab 設計作品">
+<meta property="og:title" content="慕診所 Mu Clinic — ON Design Lab">
+<meta property="og:description" content="慕診所 Mu Clinic | ON Design Lab — 台北品牌空間設計事務所">
 <meta property="og:image" content="https://ondesignlabltd.com/images/mu-clinic/00.jpg">
 <meta property="og:url" content="https://ondesignlabltd.com/commercial/mu-clinic/">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
+
+<!-- NAV -->
 <nav class="nav">
   <a class="nav-logo" href="../../index.html">ON Design Lab</a>
   <div class="nav-links">
@@ -102,132 +129,177 @@
     <a class="nav-link" href="../../info/index.html">Info</a>
   </div>
 </nav>
+
 <a class="back" href="../index.html">← Commercial</a>
+
+<!-- ═══ HERO ═══ -->
 <div class="hero-img">
-  <img src="../../images/mu-clinic/00.jpg" alt="慕診所">
+  <img src="../../images/mu-clinic/00.jpg" alt="慕診所 Mu Clinic">
   <div class="hero-overlay">
-    <div class="hero-title">慕診所</div>
+    <div class="hero-title">慕診所 Mu Clinic</div>
     <div class="hero-meta">
-      <span class="hero-type">Other</span>
+      <span class="hero-type">Clinic</span>
       <div class="hero-dot"></div>
-      <span class="hero-type">其他空間</span>
+      <span class="hero-type">醫療空間</span>
       <div class="hero-dot"></div>
       <span class="hero-type">Taipei</span>
     </div>
   </div>
 </div>
+
+<!-- ═══ TEXT AREA ═══ -->
 <div class="intro">
-  <p class="desc-zh">[待補文案]</p>
-  <p class="desc-en">[Design statement — to be provided]</p>
+  <p class="desc-zh">大部分的診所，從外面就讓你準備好緊張了。玻璃招牌、冷白燈光，身體在你開門之前早已進入戒備狀態。慕診所二店從立面開始重新設計這個時刻——不是讓診所看起來比較美，而是讓走近的人，身體先鬆一點。六棵樹種在庭院平台上，森林影像輸出在玻璃格柵後面。一層是真實的綠，一層是抽象的樹林——兩個景深疊在一起，製造出一種錯覺：你不是在走進一棟建築，你是在走進一個地方。真實的植栽選擇落地種植，格柵後的森林影像刻意抽象化——放鬆不來自「像真的自然」，而來自「讓人脫離當下的城市感」。設計在這裡做的事，不是裝飾，是提前給出一個訊號：你可以放鬆了。</p>
+  <p class="desc-en">Most clinics prepare you to be tense before you arrive. Glass signage, cold white lighting — the body enters alert mode before the door even opens. Mu Clinic's second location redesigns that moment at the facade: not to make the clinic look more beautiful, but to let the approaching person's body relax first. Six trees are planted in the courtyard terrace; a forest image is printed behind the glass grille. One layer is real green; one layer is abstract forest — two depths overlap to create an illusion: you are not walking into a building, you are walking into a place. The plants are planted in the ground, not in pots. The printed forest is deliberately abstracted — because relaxation doesn't come from "looking like real nature," but from "allowing departure from the city." Design here is not decoration. It is an early signal: you can relax now.</p>
 </div>
+
+<!-- Floor Plan（無圖自動隱藏）-->
 <div class="plan">
   <p class="plan-label">Floor Plan</p>
   <img src="../../images/mu-clinic/plan.jpg" onerror="this.parentElement.style.display='none'" alt="Floor Plan">
 </div>
+
+<!-- ═══ PHOTO AREA ═══ -->
 <div class="photos">
+
+  <div class="p-full"><img src="../../images/mu-clinic/01.jpg" alt="01"></div>
+  <div class="gap-row"></div>
+
   <div class="p-2col">
-    <div class="p-cell"><img src="../../images/mu-clinic/01.jpg" alt="01"></div>
     <div class="p-cell"><img src="../../images/mu-clinic/02.jpg" alt="02"></div>
+    <div class="p-cell"><img src="../../images/mu-clinic/03.jpg" alt="03"></div>
   </div>
   <div class="gap-row"></div>
-  <div class="p-asymm">
-    <div class="p-asymm-left p-cell"><img src="../../images/mu-clinic/03.jpg" alt="03"></div>
-    <div class="p-asymm-right">
-      <div class="p-cell"><img src="../../images/mu-clinic/21.jpg" alt="21"></div>
-      <div class="p-cell"><img src="../../images/mu-clinic/25.jpg" alt="25"></div>
-    </div>
-  </div>
+
   <div class="p-asymm">
     <div class="p-asymm-left p-cell"><img src="../../images/mu-clinic/04.jpg" alt="04"></div>
     <div class="p-asymm-right">
-      <div class="p-cell"><img src="../../images/mu-clinic/37.jpg" alt="37"></div>
-      <div class="p-cell"><img src="../../images/mu-clinic/41.jpg" alt="41"></div>
+      <div class="p-cell"><img src="../../images/mu-clinic/05.jpg" alt="05"></div>
+      <div class="p-cell"><img src="../../images/mu-clinic/21.jpg" alt="21"></div>
     </div>
   </div>
+  <div class="gap-row"></div>
+
   <div class="p-2col">
-    <div class="p-cell"><img src="../../images/mu-clinic/05.jpg" alt="05"></div>
+    <div class="p-cell"><img src="../../images/mu-clinic/25.jpg" alt="25"></div>
     <div class="p-cell"><img src="../../images/mu-clinic/26.jpg" alt="26"></div>
   </div>
   <div class="gap-row"></div>
+
+  <div class="p-full"><img src="../../images/mu-clinic/28.jpg" alt="28"></div>
+  <div class="gap-row"></div>
+
   <div class="p-2col">
-    <div class="p-cell"><img src="../../images/mu-clinic/28.jpg" alt="28"></div>
     <div class="p-cell"><img src="../../images/mu-clinic/29.jpg" alt="29"></div>
-  </div>
-  <div class="p-2col">
-    <div class="p-cell"><img src="../../images/mu-clinic/39.jpg" alt="39"></div>
-    <div class="p-cell"><img src="../../images/mu-clinic/43.jpg" alt="43"></div>
+    <div class="p-cell"><img src="../../images/mu-clinic/37.jpg" alt="37"></div>
   </div>
   <div class="gap-row"></div>
-  <div class="p-full"><img src="../../images/mu-clinic/47.jpg" alt="47"></div>
+
+  <div class="p-asymm">
+    <div class="p-asymm-left p-cell"><img src="../../images/mu-clinic/39.jpg" alt="39"></div>
+    <div class="p-asymm-right">
+      <div class="p-cell"><img src="../../images/mu-clinic/41.jpg" alt="41"></div>
+      <div class="p-cell"><img src="../../images/mu-clinic/43.jpg" alt="43"></div>
+    </div>
+  </div>
+  <div class="gap-row"></div>
+
   <div class="p-2col">
+    <div class="p-cell"><img src="../../images/mu-clinic/47.jpg" alt="47"></div>
     <div class="p-cell"><img src="../../images/mu-clinic/56.jpg" alt="56"></div>
-    <div class="p-cell"><img src="../../images/mu-clinic/58.jpg" alt="58"></div>
   </div>
   <div class="gap-row"></div>
+
+  <div class="p-full"><img src="../../images/mu-clinic/58.jpg" alt="58"></div>
+  <div class="gap-row"></div>
+
 </div>
+
+<!-- ═══ THUMBNAILS ═══ -->
 <p class="thumb-label">All Photos</p>
 <div class="thumb-strip">
   <div class="thumb" onclick="openLightbox(0)"><img src="../../images/mu-clinic/01.jpg" alt="01"></div>
   <div class="thumb" onclick="openLightbox(1)"><img src="../../images/mu-clinic/02.jpg" alt="02"></div>
   <div class="thumb" onclick="openLightbox(2)"><img src="../../images/mu-clinic/03.jpg" alt="03"></div>
-  <div class="thumb" onclick="openLightbox(3)"><img src="../../images/mu-clinic/21.jpg" alt="21"></div>
-  <div class="thumb" onclick="openLightbox(4)"><img src="../../images/mu-clinic/25.jpg" alt="25"></div>
-  <div class="thumb" onclick="openLightbox(5)"><img src="../../images/mu-clinic/04.jpg" alt="04"></div>
-  <div class="thumb" onclick="openLightbox(6)"><img src="../../images/mu-clinic/37.jpg" alt="37"></div>
-  <div class="thumb" onclick="openLightbox(7)"><img src="../../images/mu-clinic/41.jpg" alt="41"></div>
-  <div class="thumb" onclick="openLightbox(8)"><img src="../../images/mu-clinic/05.jpg" alt="05"></div>
-  <div class="thumb" onclick="openLightbox(9)"><img src="../../images/mu-clinic/26.jpg" alt="26"></div>
-  <div class="thumb" onclick="openLightbox(10)"><img src="../../images/mu-clinic/28.jpg" alt="28"></div>
-  <div class="thumb" onclick="openLightbox(11)"><img src="../../images/mu-clinic/29.jpg" alt="29"></div>
-  <div class="thumb" onclick="openLightbox(12)"><img src="../../images/mu-clinic/39.jpg" alt="39"></div>
+  <div class="thumb" onclick="openLightbox(3)"><img src="../../images/mu-clinic/04.jpg" alt="04"></div>
+  <div class="thumb" onclick="openLightbox(4)"><img src="../../images/mu-clinic/05.jpg" alt="05"></div>
+  <div class="thumb" onclick="openLightbox(5)"><img src="../../images/mu-clinic/21.jpg" alt="21"></div>
+  <div class="thumb" onclick="openLightbox(6)"><img src="../../images/mu-clinic/25.jpg" alt="25"></div>
+  <div class="thumb" onclick="openLightbox(7)"><img src="../../images/mu-clinic/26.jpg" alt="26"></div>
+  <div class="thumb" onclick="openLightbox(8)"><img src="../../images/mu-clinic/28.jpg" alt="28"></div>
+  <div class="thumb" onclick="openLightbox(9)"><img src="../../images/mu-clinic/29.jpg" alt="29"></div>
+  <div class="thumb" onclick="openLightbox(10)"><img src="../../images/mu-clinic/37.jpg" alt="37"></div>
+  <div class="thumb" onclick="openLightbox(11)"><img src="../../images/mu-clinic/39.jpg" alt="39"></div>
+  <div class="thumb" onclick="openLightbox(12)"><img src="../../images/mu-clinic/41.jpg" alt="41"></div>
   <div class="thumb" onclick="openLightbox(13)"><img src="../../images/mu-clinic/43.jpg" alt="43"></div>
   <div class="thumb" onclick="openLightbox(14)"><img src="../../images/mu-clinic/47.jpg" alt="47"></div>
   <div class="thumb" onclick="openLightbox(15)"><img src="../../images/mu-clinic/56.jpg" alt="56"></div>
   <div class="thumb" onclick="openLightbox(16)"><img src="../../images/mu-clinic/58.jpg" alt="58"></div>
 </div>
+
+<!-- ═══ LIGHTBOX ═══ -->
 <div id="lightbox" class="lightbox" style="display:none">
   <div class="lb-close" onclick="closeLightbox()">×</div>
   <div class="lb-prev" onclick="lbPrev()">‹</div>
   <img id="lb-img" src="" alt="">
   <div class="lb-next" onclick="lbNext()">›</div>
 </div>
+
+<!-- ═══ BOTTOM NAV ═══ -->
 <div class="bottom">
   <a class="bottom-nav" href="../lezun/index.html">← 樂樽爐端燒</a>
   <a class="bowerbird" href="#">View on BowerBird →</a>
   <a class="bottom-nav" href="../lalaport/index.html">恆隆行_南港LaLaport →</a>
 </div>
+
 <script>
   const lbPhotos = [
     '../../images/mu-clinic/01.jpg',
     '../../images/mu-clinic/02.jpg',
     '../../images/mu-clinic/03.jpg',
+    '../../images/mu-clinic/04.jpg',
+    '../../images/mu-clinic/05.jpg',
     '../../images/mu-clinic/21.jpg',
     '../../images/mu-clinic/25.jpg',
-    '../../images/mu-clinic/04.jpg',
-    '../../images/mu-clinic/37.jpg',
-    '../../images/mu-clinic/41.jpg',
-    '../../images/mu-clinic/05.jpg',
     '../../images/mu-clinic/26.jpg',
     '../../images/mu-clinic/28.jpg',
     '../../images/mu-clinic/29.jpg',
+    '../../images/mu-clinic/37.jpg',
     '../../images/mu-clinic/39.jpg',
+    '../../images/mu-clinic/41.jpg',
     '../../images/mu-clinic/43.jpg',
     '../../images/mu-clinic/47.jpg',
     '../../images/mu-clinic/56.jpg',
     '../../images/mu-clinic/58.jpg',
   ];
   let lbIndex = 0;
-  function openLightbox(i) { lbIndex=i; document.getElementById('lb-img').src=lbPhotos[i]; document.getElementById('lightbox').style.display='flex'; document.body.style.overflow='hidden'; }
-  function closeLightbox() { document.getElementById('lightbox').style.display='none'; document.body.style.overflow=''; }
-  function lbNext() { lbIndex=(lbIndex+1)%lbPhotos.length; document.getElementById('lb-img').src=lbPhotos[lbIndex]; }
-  function lbPrev() { lbIndex=(lbIndex-1+lbPhotos.length)%lbPhotos.length; document.getElementById('lb-img').src=lbPhotos[lbIndex]; }
+
+  function openLightbox(i) {
+    lbIndex = i;
+    document.getElementById('lb-img').src = lbPhotos[i];
+    document.getElementById('lightbox').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  function lbNext() {
+    lbIndex = (lbIndex + 1) % lbPhotos.length;
+    document.getElementById('lb-img').src = lbPhotos[lbIndex];
+  }
+  function lbPrev() {
+    lbIndex = (lbIndex - 1 + lbPhotos.length) % lbPhotos.length;
+    document.getElementById('lb-img').src = lbPhotos[lbIndex];
+  }
   document.addEventListener('keydown', e => {
-    if (document.getElementById('lightbox').style.display==='flex') {
-      if (e.key==='ArrowRight') lbNext();
-      if (e.key==='ArrowLeft') lbPrev();
-      if (e.key==='Escape') closeLightbox();
+    if (document.getElementById('lightbox').style.display === 'flex') {
+      if (e.key === 'ArrowRight') lbNext();
+      if (e.key === 'ArrowLeft') lbPrev();
+      if (e.key === 'Escape') closeLightbox();
     }
   });
 </script>
+
 </body>
 </html>
