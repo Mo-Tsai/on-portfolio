@@ -3,6 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ON Design Lab — 品牌翻譯成空間</title>
+<meta name="description" content="ON Design Lab 是台北的品牌空間設計工作室。我們不從風格出發，從品牌邏輯出發，將核心信念翻譯成空間語言。">
+<meta property="og:title" content="ON Design Lab — 品牌翻譯成空間">
+<meta property="og:description" content="台北品牌空間設計工作室。iF Design Award · Michelin Guide de nuit。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ondesignlabltd.com/">
+<meta property="og:image" content="https://ondesignlabltd.com/images/de-nuit/08.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://ondesignlabltd.com/">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;background:#0a0a0a;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;overflow:hidden}
@@ -18,8 +27,8 @@ a{color:#fafaf8;text-decoration:none}
 #curtain-logo{
   opacity:0;animation:cFade .8s ease .4s forwards;
 }
-@keyframes cFade{0%{opacity:0;transform:translateY(6px)}100%{opacity:1;transform:translateY(0)}}
 #curtain-logo img{width:72px;height:auto;display:block}
+@keyframes cFade{0%{opacity:0;transform:translateY(6px)}100%{opacity:1;transform:translateY(0)}}
 
 .page{
   height:100vh;display:grid;grid-template-columns:1fr 1fr;
@@ -37,10 +46,7 @@ a{color:#fafaf8;text-decoration:none}
   filter:brightness(.45);
   transition:filter .7s ease,transform .9s ease;
 }
-.half:hover .half-bg{
-  filter:brightness(.65);
-  transform:scale(1.04);
-}
+.half:hover .half-bg{filter:brightness(.65);transform:scale(1.04)}
 
 .half-content{
   position:relative;z-index:2;width:100%;
@@ -69,8 +75,6 @@ a{color:#fafaf8;text-decoration:none}
   transform:scaleY(0);transform-origin:center;
   transition:transform .9s ease .3s;
 }
-.page.visible ~ .split,
-.page.visible + .split{transform:scaleY(1)}
 
 .logo{
   position:fixed;top:50%;left:50%;
@@ -84,14 +88,15 @@ a{color:#fafaf8;text-decoration:none}
 .page.visible .logo{opacity:1}
 
 @media(max-width:680px){
-  .page{grid-template-columns:1fr;grid-template-rows:1fr 1fr}
+  .page{grid-template-columns:1fr;grid-template-rows:1fr 1fr;height:100vh}
+  .half{height:50vh}
   .split{display:none}
   .logo{top:2rem;transform:translateX(-50%)}
   .half:first-child .half-bg{
-    background-image:url('/assets/home-mobile-commercial.jpg') !important;
+    background-image:url('/手機首頁兩張/商業.jpg') !important;
   }
   .half:last-child .half-bg{
-    background-image:url('/assets/home-mobile-residential.jpg') !important;
+    background-image:url('/手機首頁兩張/住家.jpg') !important;
   }
   .half-content{padding:1.5rem}
 }
@@ -100,7 +105,9 @@ a{color:#fafaf8;text-decoration:none}
 <body>
 
 <div id="curtain">
-  <div id="curtain-logo"><img src="https://ondesignlabltd.com/assets/ON_White_logo.png" alt="ON"></div>
+  <div id="curtain-logo">
+    <img src="/assets/ON_White_logo.png" alt="ON">
+  </div>
 </div>
 
 <div class="page" id="page">
@@ -136,7 +143,7 @@ a{color:#fafaf8;text-decoration:none}
 setTimeout(()=>{
   document.getElementById('curtain').classList.add('out');
   setTimeout(()=>{
-    const p = document.getElementById('page');
+    const p=document.getElementById('page');
     p.classList.add('visible');
     document.getElementById('split').style.transform='scaleY(1)';
   },500);
