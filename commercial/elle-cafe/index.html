@@ -103,29 +103,6 @@
 
 </div>
 
-<!-- ═══ THUMBNAILS ═══ -->
-<p class="thumb-label">All Photos</p>
-<div class="thumb-strip">
-  <div class="thumb" onclick="openLightbox(0)"><img loading="lazy" decoding="async" src="../../images/elle-cafe/01.jpg" width="120" height="80" alt="01"></div>
-  <div class="thumb" onclick="openLightbox(1)"><img loading="lazy" decoding="async" src="../../images/elle-cafe/02.jpg" width="120" height="80" alt="02"></div>
-  <div class="thumb" onclick="openLightbox(2)"><img loading="lazy" decoding="async" src="../../images/elle-cafe/04.jpg" width="120" height="80" alt="04"></div>
-  <div class="thumb" onclick="openLightbox(3)"><img loading="lazy" decoding="async" src="../../images/elle-cafe/05.jpg" width="120" height="80" alt="05"></div>
-  <div class="thumb" onclick="openLightbox(4)"><img loading="lazy" decoding="async" src="../../images/elle-cafe/07.jpg" width="120" height="80" alt="07"></div>
-  <div class="thumb" onclick="openLightbox(5)"><img loading="lazy" decoding="async" src="../../images/elle-cafe/08.jpg" width="120" height="80" alt="08"></div>
-  <div class="thumb" onclick="openLightbox(6)"><img loading="lazy" decoding="async" src="../../images/elle-cafe/09.jpg" width="120" height="80" alt="09"></div>
-  <div class="thumb" onclick="openLightbox(7)"><img loading="lazy" decoding="async" src="../../images/elle-cafe/18.jpg" width="120" height="80" alt="18"></div>
-  <div class="thumb" onclick="openLightbox(8)"><img loading="lazy" decoding="async" src="../../images/elle-cafe/20.jpg" width="120" height="80" alt="20"></div>
-  <div class="thumb" onclick="openLightbox(9)"><img loading="lazy" decoding="async" src="../../images/elle-cafe/27.jpg" width="120" height="80" alt="27"></div>
-  <div class="thumb" onclick="openLightbox(10)"><img loading="lazy" decoding="async" src="../../images/elle-cafe/31.jpg" width="120" height="80" alt="31"></div>
-</div>
-
-<!-- ═══ LIGHTBOX ═══ -->
-<div id="lightbox" class="lightbox" style="display:none">
-  <div class="lb-close" onclick="closeLightbox()">×</div>
-  <div class="lb-prev" onclick="lbPrev()">‹</div>
-  <img id="lb-img" src="" alt="">
-  <div class="lb-next" onclick="lbNext()">›</div>
-</div>
 
 <!-- ═══ BOTTOM NAV ═══ -->
 <div class="bottom">
@@ -134,48 +111,39 @@
   <a class="bottom-nav" href="../dunhua-32f/index.html">敦化摩天辦公室 32F →</a>
 </div>
 
+
+
+<!-- Lightbox -->
+<div id="lb" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.93);align-items:center;justify-content:center;">
+  <button id="lb-close" style="position:absolute;top:1.5rem;right:2rem;font-size:24px;opacity:.5;cursor:pointer;background:none;border:none;color:#fafaf8;transition:opacity .2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.5">&#10005;</button>
+  <button id="lb-prev" style="position:absolute;top:50%;transform:translateY(-50%);left:1rem;background:none;border:none;color:#fafaf8;font-size:2rem;opacity:.3;cursor:pointer;padding:1rem;transition:opacity .2s;" onmouseover="this.style.opacity=.9" onmouseout="this.style.opacity=.3">&#8249;</button>
+  <img id="lb-img" src="" alt="" style="max-width:90vw;max-height:88vh;object-fit:contain;display:block;">
+  <button id="lb-next" style="position:absolute;top:50%;transform:translateY(-50%);right:1rem;background:none;border:none;color:#fafaf8;font-size:2rem;opacity:.3;cursor:pointer;padding:1rem;transition:opacity .2s;" onmouseover="this.style.opacity=.9" onmouseout="this.style.opacity=.3">&#8250;</button>
+  <span id="lb-counter" style="position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);font-size:11px;opacity:.35;letter-spacing:.1em;color:#fafaf8;"></span>
+</div>
 <script>
-  const lbPhotos = [
-    '../../images/elle-cafe/01.jpg',
-    '../../images/elle-cafe/02.jpg',
-    '../../images/elle-cafe/04.jpg',
-    '../../images/elle-cafe/05.jpg',
-    '../../images/elle-cafe/07.jpg',
-    '../../images/elle-cafe/08.jpg',
-    '../../images/elle-cafe/09.jpg',
-    '../../images/elle-cafe/18.jpg',
-    '../../images/elle-cafe/20.jpg',
-    '../../images/elle-cafe/27.jpg',
-    '../../images/elle-cafe/31.jpg',
-  ];
-  let lbIndex = 0;
-
-  function openLightbox(i) {
-    lbIndex = i;
-    document.getElementById('lb-img').src = lbPhotos[i];
-    document.getElementById('lightbox').style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-  }
-  function closeLightbox() {
-    document.getElementById('lightbox').style.display = 'none';
-    document.body.style.overflow = '';
-  }
-  function lbNext() {
-    lbIndex = (lbIndex + 1) % lbPhotos.length;
-    document.getElementById('lb-img').src = lbPhotos[lbIndex];
-  }
-  function lbPrev() {
-    lbIndex = (lbIndex - 1 + lbPhotos.length) % lbPhotos.length;
-    document.getElementById('lb-img').src = lbPhotos[lbIndex];
-  }
-  document.addEventListener('keydown', e => {
-    if (document.getElementById('lightbox').style.display === 'flex') {
-      if (e.key === 'ArrowRight') lbNext();
-      if (e.key === 'ArrowLeft') lbPrev();
-      if (e.key === 'Escape') closeLightbox();
-    }
+(function(){
+  const imgs=[...document.querySelectorAll('img[src]:not([src=""])')]
+    .filter(i=>!i.closest('#lb'));
+  const srcs=imgs.map(i=>i.src);
+  const lb=document.getElementById('lb');
+  const lbImg=document.getElementById('lb-img');
+  const lbC=document.getElementById('lb-counter');
+  let cur=0;
+  function show(i){cur=i;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;lb.style.display='flex';}
+  function close(){lb.style.display='none';lbImg.src='';}
+  imgs.forEach((img,i)=>{img.style.cursor='zoom-in';img.addEventListener('click',()=>show(i));});
+  document.getElementById('lb-close').onclick=close;
+  document.getElementById('lb-prev').onclick=()=>{cur=(cur-1+srcs.length)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;};
+  document.getElementById('lb-next').onclick=()=>{cur=(cur+1)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;};
+  lb.addEventListener('click',e=>{if(e.target===lb)close();});
+  document.addEventListener('keydown',e=>{
+    if(lb.style.display==='none')return;
+    if(e.key==='ArrowLeft')document.getElementById('lb-prev').click();
+    if(e.key==='ArrowRight')document.getElementById('lb-next').click();
+    if(e.key==='Escape')close();
   });
+})();
 </script>
-
 </body>
 </html>
