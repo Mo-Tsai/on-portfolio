@@ -149,11 +149,34 @@
 <div class="editorial">
 <p>鋼琴留在臥室裡，不是裝飾，是尺度的參照。它的深褐色與木皮的灰綠、織物軟件形成平衡，也讓房間裡有一件東西是有年份的。一個有年份的物件，會讓新做的東西安靜下來——不是因為對比，而是因為它提供了一個已經存在的重心，讓空間不需要再去尋找自己的位置。</p>
 </div>
-</div><div class="bottom">
+</div>
+<p class="thumb-label">All Photos</p>
+<div class="thumb-strip">
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-g/01.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-g/08.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-g/02.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-g/03.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-g/04.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-g/05.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-g/06.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-g/07.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-g/09.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-g/10.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-g/11.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-g/12.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-g/13.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-g/14.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-g/15.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-g/16.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-g/17.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-g/18.jpg" alt=""></div>
+</div>
+<div class="bottom">
   <a class="bottom-nav" href="../residence-l/index.html">← Residence L</a>
   <a class="bowerbird" href="#">View on BowerBird →</a>
   <a class="bottom-nav" href="../residence-s/index.html">Residence S →</a>
 </div>
+
 
 <!-- Lightbox -->
 <div id="lb" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.93);align-items:center;justify-content:center;">
@@ -166,7 +189,7 @@
 <script>
 (function(){
   const imgs=[...document.querySelectorAll('img[src]:not([src=""])')]
-    .filter(i=>!i.closest('#lb'));
+    .filter(i=>!i.closest('#lb')&&!i.closest('.thumb-strip'));
   const srcs=imgs.map(i=>i.src);
   const lb=document.getElementById('lb');
   const lbImg=document.getElementById('lb-img');
@@ -175,6 +198,14 @@
   function show(i){cur=i;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;lb.style.display='flex';}
   function close(){lb.style.display='none';lbImg.src='';}
   imgs.forEach((img,i)=>{img.style.cursor='zoom-in';img.addEventListener('click',()=>show(i));});
+  document.querySelectorAll('.thumb-strip .thumb').forEach(t=>{
+    t.style.cursor='zoom-in';
+    t.addEventListener('click',()=>{
+      const s=t.querySelector('img').src;
+      const i=srcs.findIndex(x=>x===s);
+      if(i>=0)show(i);
+    });
+  });
   document.getElementById('lb-close').onclick=close;
   document.getElementById('lb-prev').onclick=()=>{cur=(cur-1+srcs.length)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;};
   document.getElementById('lb-next').onclick=()=>{cur=(cur+1)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;};

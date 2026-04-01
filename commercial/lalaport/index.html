@@ -97,11 +97,24 @@
 
 
 <!-- ═══ BOTTOM NAV ═══ -->
+
+<p class="thumb-label">All Photos</p>
+<div class="thumb-strip">
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/lalaport/01.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/lalaport/03.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/lalaport/04.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/lalaport/05.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/lalaport/07.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/lalaport/08.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/lalaport/10.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/lalaport/12.jpg" alt=""></div>
+</div>
 <div class="bottom">
   <a class="bottom-nav" href="../mu-clinic/index.html">← 慕診所 Mu Clinic</a>
   <a class="bowerbird" href="#">View on BowerBird →</a>
   <a class="bottom-nav" href="../elle-cafe/index.html">ELLE Café →</a>
 </div>
+
 
 
 
@@ -116,7 +129,7 @@
 <script>
 (function(){
   const imgs=[...document.querySelectorAll('img[src]:not([src=""])')]
-    .filter(i=>!i.closest('#lb'));
+    .filter(i=>!i.closest('#lb')&&!i.closest('.thumb-strip'));
   const srcs=imgs.map(i=>i.src);
   const lb=document.getElementById('lb');
   const lbImg=document.getElementById('lb-img');
@@ -125,6 +138,14 @@
   function show(i){cur=i;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;lb.style.display='flex';}
   function close(){lb.style.display='none';lbImg.src='';}
   imgs.forEach((img,i)=>{img.style.cursor='zoom-in';img.addEventListener('click',()=>show(i));});
+  document.querySelectorAll('.thumb-strip .thumb').forEach(t=>{
+    t.style.cursor='zoom-in';
+    t.addEventListener('click',()=>{
+      const s=t.querySelector('img').src;
+      const i=srcs.findIndex(x=>x===s);
+      if(i>=0)show(i);
+    });
+  });
   document.getElementById('lb-close').onclick=close;
   document.getElementById('lb-prev').onclick=()=>{cur=(cur-1+srcs.length)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;};
   document.getElementById('lb-next').onclick=()=>{cur=(cur+1)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;};

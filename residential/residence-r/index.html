@@ -147,11 +147,37 @@
 <div class="gap-row"></div>
 <div class="p-2col"><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-r/20.jpg" alt=""></div><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-r/21.jpg" alt=""></div></div>
 <div class="gap-row"></div>
-</div><div class="bottom">
+</div>
+<p class="thumb-label">All Photos</p>
+<div class="thumb-strip">
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-r/01.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-r/02.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-r/03.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-r/04.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-r/05.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-r/06.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-r/07.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-r/08.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-r/09.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-r/10.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-r/11.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-r/12.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-r/13.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-r/14.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-r/15.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-r/16.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-r/17.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-r/18.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-r/19.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-r/20.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-r/21.jpg" alt=""></div>
+</div>
+<div class="bottom">
   <a class="bottom-nav" href="../residence-h/index.html">← Residence H</a>
   <a class="bowerbird" href="#">View on BowerBird →</a>
   <a class="bottom-nav" href="../residence-c/index.html">Residence C →</a>
 </div>
+
 
 <!-- Lightbox -->
 <div id="lb" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.93);align-items:center;justify-content:center;">
@@ -164,7 +190,7 @@
 <script>
 (function(){
   const imgs=[...document.querySelectorAll('img[src]:not([src=""])')]
-    .filter(i=>!i.closest('#lb'));
+    .filter(i=>!i.closest('#lb')&&!i.closest('.thumb-strip'));
   const srcs=imgs.map(i=>i.src);
   const lb=document.getElementById('lb');
   const lbImg=document.getElementById('lb-img');
@@ -173,6 +199,14 @@
   function show(i){cur=i;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;lb.style.display='flex';}
   function close(){lb.style.display='none';lbImg.src='';}
   imgs.forEach((img,i)=>{img.style.cursor='zoom-in';img.addEventListener('click',()=>show(i));});
+  document.querySelectorAll('.thumb-strip .thumb').forEach(t=>{
+    t.style.cursor='zoom-in';
+    t.addEventListener('click',()=>{
+      const s=t.querySelector('img').src;
+      const i=srcs.findIndex(x=>x===s);
+      if(i>=0)show(i);
+    });
+  });
   document.getElementById('lb-close').onclick=close;
   document.getElementById('lb-prev').onclick=()=>{cur=(cur-1+srcs.length)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;};
   document.getElementById('lb-next').onclick=()=>{cur=(cur+1)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;};

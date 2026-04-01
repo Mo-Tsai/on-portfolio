@@ -146,11 +146,27 @@
 <div class="editorial">
 <p>進口壁紙讓客廳與臥室有材質的手感和深度，不需要依賴造型來製造層次。紋理在光影下自己說話——白天一種閱讀，夜間另一種。空間不需要在不同時刻切換語言，光線改變，紋理就跟著改變。這是一種安靜的豐富，不依賴視覺衝擊，而依賴材質本身的時間感。</p>
 </div>
-</div><div class="bottom">
+</div>
+<p class="thumb-label">All Photos</p>
+<div class="thumb-strip">
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-k/01.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-k/02.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-k/03.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-k/04.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-k/05.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-k/06.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-k/07.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-k/08.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-k/09.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-k/10.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-k/11.jpg" alt=""></div>
+</div>
+<div class="bottom">
   <a class="bottom-nav" href="../residence-o/index.html">← Residence O</a>
   <a class="bowerbird" href="#">View on BowerBird →</a>
   <a class="bottom-nav" href="../residence-v/index.html">Residence V →</a>
 </div>
+
 
 <!-- Lightbox -->
 <div id="lb" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.93);align-items:center;justify-content:center;">
@@ -163,7 +179,7 @@
 <script>
 (function(){
   const imgs=[...document.querySelectorAll('img[src]:not([src=""])')]
-    .filter(i=>!i.closest('#lb'));
+    .filter(i=>!i.closest('#lb')&&!i.closest('.thumb-strip'));
   const srcs=imgs.map(i=>i.src);
   const lb=document.getElementById('lb');
   const lbImg=document.getElementById('lb-img');
@@ -172,6 +188,14 @@
   function show(i){cur=i;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;lb.style.display='flex';}
   function close(){lb.style.display='none';lbImg.src='';}
   imgs.forEach((img,i)=>{img.style.cursor='zoom-in';img.addEventListener('click',()=>show(i));});
+  document.querySelectorAll('.thumb-strip .thumb').forEach(t=>{
+    t.style.cursor='zoom-in';
+    t.addEventListener('click',()=>{
+      const s=t.querySelector('img').src;
+      const i=srcs.findIndex(x=>x===s);
+      if(i>=0)show(i);
+    });
+  });
   document.getElementById('lb-close').onclick=close;
   document.getElementById('lb-prev').onclick=()=>{cur=(cur-1+srcs.length)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;};
   document.getElementById('lb-next').onclick=()=>{cur=(cur+1)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;};

@@ -150,11 +150,33 @@
 <div class="editorial">
 <p>茶室結合書房，不只是機能的整合，而是一種儀式性的安排。從公共領域走向臥室，這個空間要你先停下來，讓步伐換節奏，讓視線換景。衛浴以白色鈦鋼石一體延伸地壁，保有白石的純淨，同時避開天然石材的養護門檻——讓整潔成為可以持續的狀態，而不是需要維護的風格。</p>
 </div>
-</div><div class="bottom">
+</div>
+<p class="thumb-label">All Photos</p>
+<div class="thumb-strip">
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-v/01.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-v/02.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-v/03.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-v/04.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-v/05.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-v/06.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-v/07.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-v/08.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-v/09.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-v/10.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-v/11.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-v/12.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-v/13.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-v/14.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-v/15.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-v/16.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-v/17.jpg" alt=""></div>
+</div>
+<div class="bottom">
   <a class="bottom-nav" href="../residence-k/index.html">← Residence K</a>
   <a class="bowerbird" href="#">View on BowerBird →</a>
   <a class="bottom-nav" href="../residence-m/index.html">Residence M →</a>
 </div>
+
 
 <!-- Lightbox -->
 <div id="lb" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.93);align-items:center;justify-content:center;">
@@ -167,7 +189,7 @@
 <script>
 (function(){
   const imgs=[...document.querySelectorAll('img[src]:not([src=""])')]
-    .filter(i=>!i.closest('#lb'));
+    .filter(i=>!i.closest('#lb')&&!i.closest('.thumb-strip'));
   const srcs=imgs.map(i=>i.src);
   const lb=document.getElementById('lb');
   const lbImg=document.getElementById('lb-img');
@@ -176,6 +198,14 @@
   function show(i){cur=i;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;lb.style.display='flex';}
   function close(){lb.style.display='none';lbImg.src='';}
   imgs.forEach((img,i)=>{img.style.cursor='zoom-in';img.addEventListener('click',()=>show(i));});
+  document.querySelectorAll('.thumb-strip .thumb').forEach(t=>{
+    t.style.cursor='zoom-in';
+    t.addEventListener('click',()=>{
+      const s=t.querySelector('img').src;
+      const i=srcs.findIndex(x=>x===s);
+      if(i>=0)show(i);
+    });
+  });
   document.getElementById('lb-close').onclick=close;
   document.getElementById('lb-prev').onclick=()=>{cur=(cur-1+srcs.length)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;};
   document.getElementById('lb-next').onclick=()=>{cur=(cur+1)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;};
