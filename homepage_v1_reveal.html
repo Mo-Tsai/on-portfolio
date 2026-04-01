@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;background:#0a0a0a;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;overflow:hidden}
+a{color:#fafaf8;text-decoration:none}
+
+#curtain{
+  position:fixed;inset:0;z-index:200;
+  background:#0a0a0a;
+  display:flex;align-items:center;justify-content:center;
+  transition:opacity 1s ease;
+}
+#curtain.out{opacity:0;pointer-events:none}
+#curtain-logo{
+  opacity:0;animation:cFade .8s ease .4s forwards;
+}
+@keyframes cFade{0%{opacity:0;transform:translateY(6px)}100%{opacity:1;transform:translateY(0)}}
+#curtain-logo img{width:72px;height:auto;display:block}
+
+.page{
+  height:100vh;display:grid;grid-template-columns:1fr 1fr;
+  opacity:0;transition:opacity .8s ease;
+}
+.page.visible{opacity:1}
+
+.half{
+  position:relative;overflow:hidden;cursor:pointer;
+  display:flex;align-items:flex-end;
+}
+.half-bg{
+  position:absolute;inset:0;
+  background-size:cover;background-position:center;
+  filter:brightness(.45);
+  transition:filter .7s ease,transform .9s ease;
+}
+.half:hover .half-bg{
+  filter:brightness(.65);
+  transform:scale(1.04);
+}
+
+.half-content{
+  position:relative;z-index:2;width:100%;
+  padding:2.5rem;
+  border-top:1px solid rgba(255,255,255,.12);
+  display:flex;justify-content:space-between;align-items:flex-end;
+  opacity:0;transform:translateY(10px);
+  transition:opacity .6s ease,transform .6s ease;
+}
+.page.visible .half-content{opacity:1;transform:translateY(0)}
+.page.visible .half:nth-child(2) .half-content{transition-delay:.12s}
+
+.label-en{font-size:10px;letter-spacing:.22em;color:rgba(255,255,255,.35);text-transform:uppercase;margin-bottom:.5rem}
+.label-zh{font-size:clamp(1.2rem,2.4vw,1.8rem);font-weight:300;letter-spacing:.04em;color:#fafaf8}
+.label-count{font-size:10px;letter-spacing:.1em;color:rgba(255,255,255,.22);margin-top:.4rem}
+.label-arrow{
+  font-size:1.4rem;color:rgba(255,255,255,.2);
+  transition:color .3s,transform .3s;
+}
+.half:hover .label-arrow{color:rgba(255,255,255,.75);transform:translateX(5px)}
+
+.split{
+  position:fixed;top:0;bottom:0;left:50%;
+  width:1px;background:rgba(255,255,255,.1);
+  z-index:10;pointer-events:none;
+  transform:scaleY(0);transform-origin:center;
+  transition:transform .9s ease .3s;
+}
+.page.visible ~ .split,
+.page.visible + .split{transform:scaleY(1)}
+
+.logo{
+  position:fixed;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  z-index:20;font-size:11px;letter-spacing:.3em;
+  color:rgba(255,255,255,.45);
+  pointer-events:none;white-space:nowrap;
+  opacity:0;transition:opacity .6s ease .5s;
+  text-shadow:0 1px 12px rgba(0,0,0,.6);
+}
+.page.visible .logo{opacity:1}
+
+@media(max-width:680px){
+  .page{grid-template-columns:1fr;grid-template-rows:1fr 1fr}
+  .split{display:none}
+  .logo{top:2rem;transform:translateX(-50%)}
+  .half:first-child .half-bg{
+    background-image:url('C:/Users/Mo_Tsai/Desktop/Google Drive/自動化測試資料夾/ONwebsite/手機首頁兩張/商業.jpg') !important;
+  }
+  .half:last-child .half-bg{
+    background-image:url('C:/Users/Mo_Tsai/Desktop/Google Drive/自動化測試資料夾/ONwebsite/手機首頁兩張/住家.jpg') !important;
+  }
+  .half-content{padding:1.5rem}
+}
+</style>
+</head>
+<body>
+
+<div id="curtain">
+  <div id="curtain-logo"><img src="https://ondesignlabltd.com/assets/ON_White_logo.png" alt="ON"></div>
+</div>
+
+<div class="page" id="page">
+  <a href="/commercial/index.html" class="half">
+    <div class="half-bg" style="background-image:url('https://ondesignlabltd.com/images/de-nuit/08.jpg')"></div>
+    <div class="half-content">
+      <div>
+        <p class="label-en">Commercial</p>
+        <p class="label-zh">商業空間</p>
+        <p class="label-count">16 projects</p>
+      </div>
+      <span class="label-arrow">→</span>
+    </div>
+  </a>
+
+  <a href="/residential/index.html" class="half">
+    <div class="half-bg" style="background-image:url('https://ondesignlabltd.com/images/residence-g/00.jpg')"></div>
+    <div class="half-content">
+      <div>
+        <p class="label-en">Residential</p>
+        <p class="label-zh">住家空間</p>
+        <p class="label-count">11 projects</p>
+      </div>
+      <span class="label-arrow">→</span>
+    </div>
+  </a>
+</div>
+
+<div class="logo">ON DESIGN LAB</div>
+<div class="split" id="split"></div>
+
+<script>
+setTimeout(()=>{
+  document.getElementById('curtain').classList.add('out');
+  setTimeout(()=>{
+    const p = document.getElementById('page');
+    p.classList.add('visible');
+    document.getElementById('split').style.transform='scaleY(1)';
+  },500);
+},1800);
+</script>
+</body>
+</html>

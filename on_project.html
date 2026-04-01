@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>de nuit — ON Design Lab</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--black:#0a0a0a;--white:#fafaf8;--dim:rgba(255,255,255,.07)}
+html,body{background:var(--black);color:var(--white);font-family:'Helvetica Neue',Helvetica,Arial,sans-serif}
+a{color:inherit;text-decoration:none}
+
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.5rem 2.5rem;
+  background:rgba(10,10,10,.88);backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+nav .logo{font-size:12px;letter-spacing:.18em}
+nav ul{list-style:none;display:flex;gap:2.5rem}
+nav ul li a{font-size:11px;letter-spacing:.12em;opacity:.4;transition:opacity .2s}
+nav ul li a:hover{opacity:1}
+
+/* Hero — full bleed */
+.hero{
+  position:relative;width:100%;height:100vh;overflow:hidden;
+  display:flex;align-items:flex-end;
+}
+.hero img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;filter:brightness(.55);
+}
+.hero-caption{
+  position:relative;z-index:2;
+  padding:3rem 2.5rem;
+  display:flex;justify-content:space-between;align-items:flex-end;
+  width:100%;
+  border-top:1px solid rgba(255,255,255,.1);
+}
+.hero-title{font-size:clamp(2.5rem,7vw,6rem);font-weight:200;letter-spacing:-.02em;line-height:.95}
+.hero-meta{text-align:right}
+.hero-meta p{font-size:11px;letter-spacing:.12em;opacity:.35;line-height:1.9}
+
+/* Content */
+.content{max-width:1100px;margin:0 auto}
+
+/* Intro — large statement */
+.intro{
+  display:grid;grid-template-columns:1fr 1fr;
+  border-bottom:1px solid var(--dim);
+}
+@media(max-width:700px){.intro{grid-template-columns:1fr}}
+.intro-left{
+  padding:5rem 2.5rem;
+  border-right:1px solid var(--dim);
+}
+.intro-quote{
+  font-size:clamp(1.3rem,2.5vw,1.9rem);font-weight:200;
+  line-height:1.55;letter-spacing:-.01em;opacity:.9;
+}
+.intro-right{
+  padding:5rem 2.5rem;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:3rem}
+.meta-item p:first-child{font-size:9px;letter-spacing:.2em;opacity:.25;text-transform:uppercase;margin-bottom:.4rem}
+.meta-item p:last-child{font-size:13px;opacity:.7}
+.intro-en{font-size:12px;line-height:1.9;opacity:.32;font-style:italic}
+
+/* Plan */
+.plan-section{padding:4rem 2.5rem;border-bottom:1px solid var(--dim)}
+.section-eyebrow{font-size:9px;letter-spacing:.22em;opacity:.22;text-transform:uppercase;margin-bottom:2rem}
+.plan-section img{width:100%;display:block;filter:brightness(.85);cursor:zoom-in}
+.plan-section img:hover{filter:brightness(1)}
+
+/* Magazine grid */
+.mag-row{
+  display:grid;gap:1px;background:var(--dim);
+  border-bottom:1px solid var(--dim);
+}
+.mag-row.r-full{grid-template-columns:1fr}
+.mag-row.r-6040{grid-template-columns:6fr 4fr}
+.mag-row.r-4060{grid-template-columns:4fr 6fr}
+.mag-row.r-half{grid-template-columns:1fr 1fr}
+.mag-row.r-third{grid-template-columns:1fr 1fr 1fr}
+@media(max-width:600px){
+  .mag-row.r-6040,.mag-row.r-4060,.mag-row.r-half,.mag-row.r-third{grid-template-columns:1fr}
+}
+.mag-cell{background:var(--black);overflow:hidden;position:relative}
+.mag-cell img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  filter:brightness(.82);transition:filter .4s,transform .55s;cursor:zoom-in;
+}
+.mag-cell:hover img{filter:brightness(1);transform:scale(1.03)}
+.mag-cell.tall{aspect-ratio:3/4}
+.mag-cell.wide{aspect-ratio:16/9}
+.mag-cell.sq{aspect-ratio:1}
+
+/* Text interlude */
+.text-break{
+  display:grid;grid-template-columns:120px 1fr 1fr;gap:3rem;
+  padding:4rem 2.5rem;border-bottom:1px solid var(--dim);
+  align-items:start;
+}
+@media(max-width:700px){.text-break{grid-template-columns:1fr;gap:1.5rem}}
+.tb-num{font-size:9px;letter-spacing:.2em;opacity:.2;text-transform:uppercase;padding-top:.2rem}
+.tb-zh{font-size:14px;line-height:1.95;opacity:.68}
+.tb-en{font-size:12px;line-height:1.9;opacity:.3;font-style:italic}
+
+/* Project nav */
+.proj-nav{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:2.5rem;border-top:1px solid var(--dim);
+}
+.proj-nav a{font-size:11px;letter-spacing:.1em;opacity:.3;transition:opacity .2s}
+.proj-nav a:hover{opacity:.9}
+.proj-nav .back{font-size:10px;letter-spacing:.15em;opacity:.2}
+
+/* Lightbox */
+#lb{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.95);align-items:center;justify-content:center}
+#lb.open{display:flex}
+#lb img{max-width:92vw;max-height:90vh;object-fit:contain}
+#lb-close{position:absolute;top:1.5rem;right:2rem;font-size:22px;opacity:.4;cursor:pointer;background:none;border:none;color:var(--white);transition:opacity .2s}
+#lb-close:hover{opacity:1}
+#lb-prev,#lb-next{position:absolute;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--white);font-size:2rem;opacity:.25;cursor:pointer;padding:1rem;transition:opacity .2s}
+#lb-prev:hover,#lb-next:hover{opacity:.9}
+#lb-prev{left:.5rem}
+#lb-next{right:.5rem}
+#lb-counter{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);font-size:10px;opacity:.3;letter-spacing:.1em}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/index.html" class="logo">ON DESIGN LAB</a>
+  <ul>
+    <li><a href="/commercial/index.html">Commercial</a></li>
+    <li><a href="/residential/index.html">Residential</a></li>
+    <li><a href="/info/index.html">Info</a></li>
+  </ul>
+</nav>
+
+<!-- Full bleed hero -->
+<div class="hero">
+  <img src="https://ondesignlabltd.com/images/de-nuit/08.jpg" alt="de nuit">
+  <div class="hero-caption">
+    <h1 class="hero-title">de nuit</h1>
+    <div class="hero-meta">
+      <p>餐飲空間</p>
+      <p>Taipei, Taiwan</p>
+      <p>2022</p>
+      <p>Michelin Guide</p>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- Intro statement -->
+  <div class="intro">
+    <div class="intro-left">
+      <p class="intro-quote">侍酒師的工作動線<br>和客人的感受動線，<br>可以同時成立嗎？</p>
+    </div>
+    <div class="intro-right">
+      <div class="meta-grid">
+        <div class="meta-item"><p>類型</p><p>餐飲空間</p></div>
+        <div class="meta-item"><p>地點</p><p>Taipei</p></div>
+        <div class="meta-item"><p>年份</p><p>2022</p></div>
+        <div class="meta-item"><p>Recognition</p><p>Michelin Guide</p></div>
+      </div>
+      <p class="intro-en">The design of de nuit begins not with atmosphere, but with a question: can the sommelier's working logic and the guest's experiential logic coexist?</p>
+    </div>
+  </div>
+
+  <!-- Floor plan -->
+  <div class="plan-section">
+    <p class="section-eyebrow">Floor Plan</p>
+    <img src="https://ondesignlabltd.com/images/de-nuit/plan.jpg" alt="Floor Plan">
+  </div>
+
+  <!-- Image block 1 — full -->
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="https://ondesignlabltd.com/images/de-nuit/02.jpg" alt=""></div>
+  </div>
+
+  <!-- Text break -->
+  <div class="text-break">
+    <p class="tb-num">01</p>
+    <p class="tb-zh">入口處的弧形吧台，是整個空間的第一個問答。它既是侍酒師的工作站，也是客人進入用餐狀態的過渡地帶。材質選用深色石材與拉絲銅件，在光線的映照下，讓邊界變得模糊而有層次。</p>
+    <p class="tb-en">The curved bar at the entrance is the first question and answer of the space — both the sommelier's workstation and the threshold through which guests transition into the dining experience.</p>
+  </div>
+
+  <!-- Image block 2 — 60/40 -->
+  <div class="mag-row r-6040">
+    <div class="mag-cell tall"><img src="https://ondesignlabltd.com/images/de-nuit/03.jpg" alt=""></div>
+    <div class="mag-cell tall"><img src="https://ondesignlabltd.com/images/de-nuit/05.jpg" alt=""></div>
+  </div>
+
+  <!-- Image block 3 — full -->
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="https://ondesignlabltd.com/images/de-nuit/06.jpg" alt=""></div>
+  </div>
+
+  <!-- Text break -->
+  <div class="text-break">
+    <p class="tb-num">02</p>
+    <p class="tb-zh">主 dining 區採用訂製半圓形卡座，將私密性與開放感並置。天花板以手工折件的金屬波浪板收尾，呼應酒窖的意象，同時創造出獨特的聲學環境，讓對話在喧囂中保有隱私。</p>
+    <p class="tb-en">The custom semi-circular banquettes place intimacy and openness side by side. The ceiling — hand-folded metal wave panels — echoes the wine cellar while creating an acoustic environment where conversation holds privacy within noise.</p>
+  </div>
+
+  <!-- Image block 4 — 40/60 -->
+  <div class="mag-row r-4060">
+    <div class="mag-cell sq"><img src="https://ondesignlabltd.com/images/de-nuit/07.jpg" alt=""></div>
+    <div class="mag-cell sq"><img src="https://ondesignlabltd.com/images/de-nuit/09.jpg" alt=""></div>
+  </div>
+
+  <!-- Image block 5 — full -->
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="https://ondesignlabltd.com/images/de-nuit/14.jpg" alt=""></div>
+  </div>
+
+  <!-- Text break -->
+  <div class="text-break">
+    <p class="tb-num">03</p>
+    <p class="tb-zh">燈光設計是整個空間最重要的敘事工具。暖白光源以不同角度和強度分層佈置，讓每一張桌子都擁有屬於自己的光環境，而整體氛圍仍保持一致的深沉與專注。</p>
+    <p class="tb-en">Lighting is the primary narrative instrument. Warm-white sources layered at different angles and intensities give each table its own light environment, while the overall atmosphere holds its depth and focus.</p>
+  </div>
+
+  <!-- Image block 6 — thirds -->
+  <div class="mag-row r-third">
+    <div class="mag-cell sq"><img src="https://ondesignlabltd.com/images/de-nuit/23.jpg" alt=""></div>
+    <div class="mag-cell sq"><img src="https://ondesignlabltd.com/images/de-nuit/24.jpg" alt=""></div>
+    <div class="mag-cell sq"><img src="https://ondesignlabltd.com/images/de-nuit/25.jpg" alt=""></div>
+  </div>
+
+  <!-- Project nav -->
+  <div class="proj-nav">
+    <a href="/commercial/lezun/index.html">← 樂樽爐端燒</a>
+    <a href="/commercial/index.html" class="back">Commercial</a>
+    <a href="/commercial/r-sanderson/index.html">R. Sanderson →</a>
+  </div>
+
+</div>
+
+<!-- Lightbox -->
+<div id="lb">
+  <button id="lb-close">✕</button>
+  <button id="lb-prev">‹</button>
+  <img id="lb-img" src="" alt="">
+  <button id="lb-next">›</button>
+  <span id="lb-counter"></span>
+</div>
+
+<script>
+const imgs=[...document.querySelectorAll('.mag-cell img, .plan-section img')];
+const srcs=imgs.map(i=>i.src);
+const lb=document.getElementById('lb');
+const lbImg=document.getElementById('lb-img');
+const lbC=document.getElementById('lb-counter');
+let cur=0;
+function open(i){cur=i;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;lb.classList.add('open')}
+function close(){lb.classList.remove('open');lbImg.src=''}
+imgs.forEach((img,i)=>img.addEventListener('click',()=>open(i)));
+document.getElementById('lb-close').onclick=close;
+document.getElementById('lb-prev').onclick=()=>{cur=(cur-1+srcs.length)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length};
+document.getElementById('lb-next').onclick=()=>{cur=(cur+1)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length};
+lb.addEventListener('click',e=>{if(e.target===lb)close()});
+document.addEventListener('keydown',e=>{
+  if(!lb.classList.contains('open'))return;
+  if(e.key==='ArrowLeft')document.getElementById('lb-prev').click();
+  if(e.key==='ArrowRight')document.getElementById('lb-next').click();
+  if(e.key==='Escape')close();
+});
+</script>
+</body>
+</html>
