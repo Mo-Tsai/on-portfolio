@@ -74,6 +74,14 @@ nav ul li a:hover{opacity:1}
 .plan-section img{width:100%;display:block;filter:brightness(.85);cursor:zoom-in}
 .plan-section img:hover{filter:brightness(1)}
 
+/* Thumb strip */
+.thumb-label{font-size:9px;letter-spacing:.22em;opacity:.22;text-transform:uppercase;padding:2rem 2.5rem .8rem;display:block}
+.thumb-strip{display:flex;overflow-x:auto;gap:4px;padding:0 2.5rem 2.5rem;scrollbar-width:none;border-bottom:1px solid var(--dim)}
+.thumb-strip::-webkit-scrollbar{display:none}
+.thumb{flex-shrink:0;width:100px;height:67px;overflow:hidden;cursor:pointer;opacity:.45;transition:opacity .2s}
+.thumb:hover{opacity:1}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+
 /* Magazine grid */
 .mag-row{
   display:grid;gap:1px;background:var(--dim);
@@ -176,7 +184,7 @@ nav ul li a:hover{opacity:1}
   <!-- Floor plan -->
   <div class="plan-section">
     <p class="section-eyebrow">Floor Plan</p>
-    <img src="https://ondesignlabltd.com/images/de-nuit/plan.jpg" alt="Floor Plan">
+    <img src="https://ondesignlabltd.com/images/de-nuit/plan.jpg" alt="Floor Plan" onerror="this.closest('.plan-section').style.display='none'">
   </div>
 
   <!-- Image block 1 — full -->
@@ -234,6 +242,21 @@ nav ul li a:hover{opacity:1}
     <div class="mag-cell sq"><img src="https://ondesignlabltd.com/images/de-nuit/25.jpg" alt=""></div>
   </div>
 
+  <!-- All Photos -->
+  <span class="thumb-label">All Photos</span>
+  <div class="thumb-strip">
+    <div class="thumb"><img loading="lazy" src="https://ondesignlabltd.com/images/de-nuit/02.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="https://ondesignlabltd.com/images/de-nuit/03.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="https://ondesignlabltd.com/images/de-nuit/05.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="https://ondesignlabltd.com/images/de-nuit/06.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="https://ondesignlabltd.com/images/de-nuit/07.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="https://ondesignlabltd.com/images/de-nuit/09.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="https://ondesignlabltd.com/images/de-nuit/14.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="https://ondesignlabltd.com/images/de-nuit/23.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="https://ondesignlabltd.com/images/de-nuit/24.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="https://ondesignlabltd.com/images/de-nuit/25.jpg" alt=""></div>
+  </div>
+
   <!-- Project nav -->
   <div class="proj-nav">
     <a href="/commercial/lezun/index.html">← 樂樽爐端燒</a>
@@ -262,6 +285,13 @@ let cur=0;
 function open(i){cur=i;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;lb.classList.add('open')}
 function close(){lb.classList.remove('open');lbImg.src=''}
 imgs.forEach((img,i)=>img.addEventListener('click',()=>open(i)));
+document.querySelectorAll('.thumb').forEach(t=>{
+  t.addEventListener('click',()=>{
+    const s=t.querySelector('img').src;
+    const i=srcs.findIndex(x=>x===s);
+    if(i>=0)open(i);
+  });
+});
 document.getElementById('lb-close').onclick=close;
 document.getElementById('lb-prev').onclick=()=>{cur=(cur-1+srcs.length)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length};
 document.getElementById('lb-next').onclick=()=>{cur=(cur+1)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length};
