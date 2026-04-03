@@ -1,174 +1,228 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cava Baja — ON Design Lab</title>
-<link rel="stylesheet" href="../../assets/commercial.css">
-<meta name="description" content="Cava Baja | ON Design Lab 設計作品">
-<meta property="og:title" content="Cava Baja — ON Design Lab">
-<meta property="og:description" content="Cava Baja | ON Design Lab — 台北品牌空間設計事務所">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cava Baja &mdash; ON Design Lab</title>
+<meta name="description" content="Cava Baja 餐飲空間 | ON Design Lab">
+<meta property="og:title" content="Cava Baja &mdash; ON Design Lab">
 <meta property="og:image" content="https://ondesignlabltd.com/images/cava-baja/00.jpg">
-<meta property="og:url" content="https://ondesignlabltd.com/commercial/cava-baja/">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--black:#0a0a0a;--white:#fafaf8;--dim:rgba(255,255,255,.07)}
+html,body{background:var(--black);color:var(--white);font-family:'Helvetica Neue',Helvetica,Arial,sans-serif}
+a{color:inherit;text-decoration:none}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.5rem 2.5rem;background:rgba(10,10,10,.88);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
+nav .logo{font-size:12px;letter-spacing:.18em}
+nav ul{list-style:none;display:flex;gap:2.5rem}
+nav ul li a{font-size:11px;letter-spacing:.12em;opacity:.4;transition:opacity .2s}
+nav ul li a:hover{opacity:1}
+
+.hero{position:relative;width:100%;height:100vh;overflow:hidden;display:flex;align-items:flex-end}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.55)}
+.hero-caption{position:relative;z-index:2;padding:3rem 2.5rem;width:100%;border-top:1px solid rgba(255,255,255,.1)}
+.hero-title{font-size:clamp(2.5rem,7vw,6rem);font-weight:200;letter-spacing:-.02em;line-height:.95;margin-bottom:.6rem}
+.hero-tags{font-size:11px;letter-spacing:.12em;opacity:.35}
+
+.content{max-width:1100px;margin:0 auto}
+.intro{max-width:720px;padding:5rem 2.5rem;border-bottom:1px solid var(--dim)}
+.intro-zh{font-size:16px;line-height:2.05;opacity:.75;margin-bottom:2.5rem}
+.intro-en{font-size:13px;line-height:1.95;opacity:.28;font-style:italic}
+
+.plan-section{padding:4rem 2.5rem;border-bottom:1px solid var(--dim)}
+.plan-section.hidden{display:none}
+.plan-eyebrow{font-size:9px;letter-spacing:.22em;opacity:.22;text-transform:uppercase;margin-bottom:2rem}
+.plan-section img{width:100%;display:block;filter:brightness(.85);cursor:zoom-in}
+.plan-section img:hover{filter:brightness(1)}
+
+.mag-row{display:grid;gap:1px;background:var(--dim);border-bottom:1px solid var(--dim)}
+.mag-row.r-full{grid-template-columns:1fr}
+.mag-row.r-6040{grid-template-columns:6fr 4fr}
+.mag-row.r-half{grid-template-columns:1fr 1fr}
+.mag-row.r-third{grid-template-columns:1fr 1fr 1fr}
+@media(max-width:600px){.mag-row.r-6040,.mag-row.r-half,.mag-row.r-third{grid-template-columns:1fr}}
+.mag-cell{background:var(--black);overflow:hidden}
+.mag-cell img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.82);transition:filter .4s,transform .55s;cursor:zoom-in}
+.mag-cell:hover img{filter:brightness(1);transform:scale(1.03)}
+.mag-cell.tall{aspect-ratio:3/4}
+.mag-cell.wide{aspect-ratio:16/9}
+.mag-cell.sq{aspect-ratio:1}
+
+.text-break{max-width:720px;padding:4rem 2.5rem;border-bottom:1px solid var(--dim)}
+.tb-num{font-size:9px;letter-spacing:.2em;opacity:.2;text-transform:uppercase;margin-bottom:1.5rem}
+.tb-zh{font-size:14px;line-height:2.05;opacity:.68;margin-bottom:1.8rem}
+.tb-en{font-size:12px;line-height:1.95;opacity:.27;font-style:italic}
+
+.proj-nav{display:flex;justify-content:space-between;align-items:center;padding:2.5rem;border-top:1px solid var(--dim)}
+.proj-nav a{font-size:11px;letter-spacing:.1em;opacity:.3;transition:opacity .2s}
+.proj-nav a:hover{opacity:.9}
+.proj-nav .back{font-size:10px;letter-spacing:.15em;opacity:.2}
+
+#lb{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.95);align-items:center;justify-content:center}
+#lb.open{display:flex}
+#lb img{max-width:92vw;max-height:90vh;object-fit:contain}
+#lb-close{position:absolute;top:1.5rem;right:2rem;font-size:22px;opacity:.4;cursor:pointer;background:none;border:none;color:var(--white)}
+#lb-close:hover{opacity:1}
+#lb-prev,#lb-next{position:absolute;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--white);font-size:2rem;opacity:.25;cursor:pointer;padding:1rem;transition:opacity .2s}
+#lb-prev:hover,#lb-next:hover{opacity:.9}
+#lb-prev{left:.5rem}
+#lb-next{right:.5rem}
+#lb-counter{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);font-size:10px;opacity:.3;letter-spacing:.1em}
+
+.thumb-label{font-size:9px;letter-spacing:.22em;opacity:.22;text-transform:uppercase;padding:2.5rem 2.5rem 1rem;max-width:1100px;margin:0 auto}
+.thumb-strip{display:flex;gap:2px;overflow-x:auto;padding:0 2.5rem 2rem;max-width:1100px;margin:0 auto;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.15) transparent}
+.thumb-strip::-webkit-scrollbar{height:4px}
+.thumb-strip::-webkit-scrollbar-track{background:transparent}
+.thumb-strip::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:2px}
+.thumb{flex:0 0 auto;width:100px;height:68px;overflow:hidden;cursor:zoom-in;opacity:.5;transition:opacity .3s}
+.thumb:hover{opacity:1}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+</style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="nav">
-  <a class="nav-logo" href="../../index.html">ON Design Lab</a>
-  <div class="nav-links">
-    <a class="nav-link active" href="../index.html">Commercial</a>
-    <a class="nav-link" href="../../residential/index.html">Residential</a>
-    <a class="nav-link" href="../../info/index.html">Info</a>
-  </div>
+<nav>
+  <a href="/index.html" class="logo">ON DESIGN LAB</a>
+  <ul>
+    <li><a href="/commercial/index.html">Commercial</a></li>
+    <li><a href="/residential/index.html">Residential</a></li>
+    <li><a href="/info/index.html">Info</a></li>
+  </ul>
 </nav>
 
-<a class="back" href="../index.html">← Commercial</a>
-
-<!-- ═══ HERO ═══ -->
-<div class="hero-img">
+<div class="hero">
   <img src="../../images/cava-baja/00.jpg" fetchpriority="high" loading="eager" decoding="async" alt="Cava Baja">
-  <div class="hero-overlay">
-    <div class="hero-title">Cava Baja</div>
-    <div class="hero-meta">
-      <span class="hero-type">F&amp;B</span>
-      <div class="hero-dot"></div>
-      <span class="hero-type">餐飲空間</span>
-      <div class="hero-dot"></div>
-      <span class="hero-type">Taipei</span>
-    </div>
+  <div class="hero-caption">
+    <h1 class="hero-title">Cava Baja</h1>
+    <p class="hero-tags">餐飲空間 &middot; Taipei</p>
   </div>
 </div>
 
-<!-- ═══ TEXT AREA ═══ -->
-<div class="intro">
-  <p class="desc-zh">Cava Baja 要做的不是「西班牙風格」，而是那種走進老酒館之後身體自然鬆下來的感受。磚牆、木門、馬賽克吧台、钔鐵格柵——每個材質都在服務同一件事：讓人感覺這個地方「已經存在很久了」。庭院作為緩衝區，讓進入成為一個有節奏的過程，而不是直接沖進室內。</p>
-  <p class="desc-en">Cava Baja is not about Spanish style — it is about the feeling of walking into an old bar and having your body relax without being asked. Brick walls, wooden doors, mosaic bar top, cast iron grilles — every material serves the same purpose: making the place feel like it has always been here. The courtyard acts as a buffer, giving entrance a rhythm rather than an abrupt arrival.</p>
+<div class="content">
+
+  <div class="intro">
+    <p class="intro-zh">讓人感覺這個地方「已經存在很久了」。</p>
+    <p class="intro-en">Making a place feel like it has always been here.</p>
+  </div>
+
+
+
+  <div class="mag-row r-half">
+    <div class="mag-cell sq"><img src="../../images/cava-baja/01.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell sq"><img src="../../images/cava-baja/02.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/cava-baja/03.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">01</p>
+    <p class="tb-zh">Cava Baja 要做的不是「西班牙風格」，而是那種走進老酒館之後身體自然鬆下來的感受。磚牆、木門、馬賽克吧台、鑄鐵格柵——每個材質都在服務同一件事。庭院作為緩衝區，讓進入成為一個有節奏的過程，而不是直接沖進室內。</p>
+    <p class="tb-en">Cava Baja is not about Spanish style — it is about the feeling of walking into an old bar and having your body relax without being asked. Brick walls, wooden doors, mosaic bar top, cast-iron grilles — every material serves the same purpose. The courtyard acts as a buffer, giving entrance a rhythm rather than an abrupt arrival.</p>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/cava-baja/06.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/cava-baja/12.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">02</p>
+    <p class="tb-zh">磚牆和鑄鐵格柵不是風格選擇，是時間感的建構。讓一個空間看起來「已經存在很久了」，需要的不是仿舊，而是材質本身的厚度。</p>
+    <p class="tb-en">Brick walls and cast-iron grilles are not a style choice — they are the construction of a sense of time. Making a space feel like it has always been here requires not imitation of age, but the inherent weight of the materials themselves.</p>
+  </div>
+  <div class="mag-row r-half">
+    <div class="mag-cell sq"><img src="../../images/cava-baja/13.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell sq"><img src="../../images/cava-baja/17.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">03</p>
+    <p class="tb-zh">馬賽克吧台是整個空間最具操作力的元素。馬賽克不是展示性的材料，它的解讀方式是觸覺的、跟手指有關的。吧台的高度和寬度放寬，讓人坐下來之後手自然落在台面上。這不是設計細節，是放鬆的序列。</p>
+    <p class="tb-en">The mosaic bar top is the space's most operative element. Mosaic is not a visual material — it is read by touch, by fingertips. The bar is widened and lowered so when you sit, your hands naturally rest on the surface. This is not a design detail; it is a sequence of relaxation.</p>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/cava-baja/18.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/cava-baja/19.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">04</p>
+    <p class="tb-zh">庭院的存在讓進入有了層次。庭院將一步切成兩段：先進來，停一下，再進去。這個停頓讓座位的期待能夠累積，而不是被直接消耗。</p>
+    <p class="tb-en">The courtyard gives entrance its layers. One step becomes two: enter, pause, then go in. That pause lets anticipation accumulate rather than being spent at once.</p>
+  </div>
+  <div class="mag-row r-half">
+    <div class="mag-cell sq"><img src="../../images/cava-baja/20.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell sq"><img src="../../images/cava-baja/22.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">05</p>
+    <p class="tb-zh">Cava Baja 最後要回答的問題不是「怎麼做出西班牙風格」，而是「怎麼讓一個新的空間擁有老地方才有的自在」。答案不在裝飾裡，在材質的選擇、座位的間距、光線的溫度——這些加在一起，讓人的身體比腦子更早知道：可以放鬆了。</p>
+    <p class="tb-en">Cava Baja's final question is not how to create Spanish style but how to give a new space the ease only old places possess. The answer is not in decoration — it is in material choice, seat spacing, light temperature. Together, they let the body know before the mind: you can relax.</p>
+  </div>
+
+  <p class="thumb-label">All Photos</p>
+  <div class="thumb-strip">
+    <div class="thumb"><img loading="lazy" src="../../images/cava-baja/01.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/cava-baja/02.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/cava-baja/03.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/cava-baja/06.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/cava-baja/12.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/cava-baja/13.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/cava-baja/17.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/cava-baja/18.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/cava-baja/19.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/cava-baja/20.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/cava-baja/22.jpg" alt=""></div>
+  </div>
+
+  <div class="proj-nav">
+    <a href="/commercial/fire-play/index.html">&larr; Fire Play</a>
+    <a href="/commercial/index.html" class="back">Commercial</a>
+    <a href="/commercial/yun-jiao/index.html">耘角 &rarr;</a>
+  </div>
+
 </div>
 
-<!-- Floor Plan（無圖自動隱藏）-->
-<div class="plan">
-  <p class="plan-label">Floor Plan</p>
-  <img src="../../images/cava-baja/plan.jpg" onerror="this.parentElement.style.display='none'" loading="lazy" decoding="async" alt="Floor Plan">
-</div>
-
-<!-- ═══ PHOTO AREA ═══ -->
-<div class="photos">
-
-  <div class="p-full"><img loading="lazy" decoding="async" src="../../images/cava-baja/01.jpg" alt="01"></div>
-  <div class="gap-row"></div>
-
-  <div class="p-2col">
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/cava-baja/02.jpg" alt="02"></div>
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/cava-baja/03.jpg" alt="03"></div>
-  </div>
-  <div class="gap-row"></div>
-
-  <div class="editorial">
-    <p>磚牆和鑔鐵格柵不是風格選擇，是時間感的建構。讓一個空間看起來「已經存在很久了」，需要的不是仿舊，而是材質本身的厚度。新的磚煆了会有裂縫，新的钔鐵生锈之後會有飛鑢，這些不是缺陷，是空間問歲的方式。</p>
-  </div>
-
-  <div class="p-asymm">
-    <div class="p-asymm-left p-cell"><img loading="lazy" decoding="async" src="../../images/cava-baja/06.jpg" alt="06"></div>
-    <div class="p-asymm-right">
-      <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/cava-baja/12.jpg" alt="12"></div>
-      <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/cava-baja/13.jpg" alt="13"></div>
-    </div>
-  </div>
-  <div class="gap-row"></div>
-
-  <div class="editorial">
-    <p>馬賽克吧台是整個空間最具担作力的元素。馬賽克不是展示性的材料，它的解讀方式是觸覺的、跟手指有關的。吧台的高度和寬度放寬，讓人坐下來之後手自然落在台面上。這不是設計細節，是放鬆的序列。</p>
-  </div>
-
-  <div class="p-2col">
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/cava-baja/17.jpg" alt="17"></div>
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/cava-baja/18.jpg" alt="18"></div>
-  </div>
-  <div class="gap-row"></div>
-
-  <div class="p-full"><img loading="lazy" decoding="async" src="../../images/cava-baja/19.jpg" alt="19"></div>
-  <div class="gap-row"></div>
-
-  <div class="p-2col">
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/cava-baja/20.jpg" alt="20"></div>
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/cava-baja/22.jpg" alt="22"></div>
-  </div>
-  <div class="gap-row"></div>
-
-  <div class="editorial">
-    <p>庭院的存在讓進入有了層次。在加安的商業區，走進一家餐廳通常是一步的事。庭院將這一步切成兩段：先進來，停一下，再進去。這個停頓讓庺座的期待能夠累積，而不是被直接消耗。</p>
-  </div>
-
-</div>
-
-
-<!-- ═══ BOTTOM NAV ═══ -->
-
-<p class="thumb-label">All Photos</p>
-<div class="thumb-strip">
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/cava-baja/01.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/cava-baja/02.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/cava-baja/03.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/cava-baja/06.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/cava-baja/12.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/cava-baja/13.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/cava-baja/17.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/cava-baja/18.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/cava-baja/19.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/cava-baja/20.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/cava-baja/22.jpg" alt=""></div>
-</div>
-<div class="bottom">
-  <a class="bottom-nav" href="../fire-play/index.html">← Fire Play</a>
-  <a class="bowerbird" href="#">View on BowerBird →</a>
-  <a class="bottom-nav" href="../yun-jiao/index.html">耘角 Yun Jiao →</a>
-</div>
-
-
-
-
-<!-- Lightbox -->
-<div id="lb" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.93);align-items:center;justify-content:center;">
-  <button id="lb-close" style="position:absolute;top:1.5rem;right:2rem;font-size:24px;opacity:.5;cursor:pointer;background:none;border:none;color:#fafaf8;transition:opacity .2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.5">&#10005;</button>
-  <button id="lb-prev" style="position:absolute;top:50%;transform:translateY(-50%);left:1rem;background:none;border:none;color:#fafaf8;font-size:2rem;opacity:.3;cursor:pointer;padding:1rem;transition:opacity .2s;" onmouseover="this.style.opacity=.9" onmouseout="this.style.opacity=.3">&#8249;</button>
-  <img id="lb-img" src="" alt="" style="max-width:90vw;max-height:88vh;object-fit:contain;display:block;">
-  <button id="lb-next" style="position:absolute;top:50%;transform:translateY(-50%);right:1rem;background:none;border:none;color:#fafaf8;font-size:2rem;opacity:.3;cursor:pointer;padding:1rem;transition:opacity .2s;" onmouseover="this.style.opacity=.9" onmouseout="this.style.opacity=.3">&#8250;</button>
-  <span id="lb-counter" style="position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);font-size:11px;opacity:.35;letter-spacing:.1em;color:#fafaf8;"></span>
+<div id="lb">
+  <button id="lb-close">&#10005;</button>
+  <button id="lb-prev">&#8249;</button>
+  <img id="lb-img" src="" alt="">
+  <button id="lb-next">&#8250;</button>
+  <span id="lb-counter"></span>
 </div>
 <script>
 (function(){
-  const imgs=[...document.querySelectorAll('img[src]:not([src=""])')]
-    .filter(i=>!i.closest('#lb')&&!i.closest('.thumb-strip'));
-  const srcs=imgs.map(i=>i.src);
-  const lb=document.getElementById('lb');
-  const lbImg=document.getElementById('lb-img');
-  const lbC=document.getElementById('lb-counter');
-  let cur=0;
-  function show(i){cur=i;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;lb.style.display='flex';}
-  function close(){lb.style.display='none';lbImg.src='';}
-  imgs.forEach((img,i)=>{img.style.cursor='zoom-in';img.addEventListener('click',()=>show(i));});
-  document.querySelectorAll('.thumb-strip .thumb').forEach(t=>{
-    t.style.cursor='zoom-in';
-    t.addEventListener('click',()=>{
-      const s=t.querySelector('img').src;
-      const i=srcs.findIndex(x=>x===s);
-      if(i>=0)show(i);
+  var imgs=[].slice.call(document.querySelectorAll('.mag-cell img, .plan-section:not(.hidden) img'));
+  var srcs=imgs.map(function(i){return i.src});
+  var lb=document.getElementById('lb');
+  var lbImg=document.getElementById('lb-img');
+  var lbC=document.getElementById('lb-counter');
+  var cur=0;
+  function show(i){cur=i;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;lb.classList.add('open')}
+  function close(){lb.classList.remove('open');lbImg.src=''}
+  imgs.forEach(function(img,i){img.addEventListener('click',function(){show(i)})});
+  [].slice.call(document.querySelectorAll('.thumb-strip .thumb')).forEach(function(t){
+    t.addEventListener('click',function(){
+      var s=t.querySelector('img').src;
+      var i=srcs.findIndex(function(x){return x===s});
+      if(i>=0)show(i);else{srcs.push(s);show(srcs.length-1)}
     });
   });
   document.getElementById('lb-close').onclick=close;
-  document.getElementById('lb-prev').onclick=()=>{cur=(cur-1+srcs.length)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;};
-  document.getElementById('lb-next').onclick=()=>{cur=(cur+1)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;};
-  lb.addEventListener('click',e=>{if(e.target===lb)close();});
-  document.addEventListener('keydown',e=>{
-    if(lb.style.display==='none')return;
+  document.getElementById('lb-prev').onclick=function(){cur=(cur-1+srcs.length)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length};
+  document.getElementById('lb-next').onclick=function(){cur=(cur+1)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length};
+  lb.addEventListener('click',function(e){if(e.target===lb)close()});
+  document.addEventListener('keydown',function(e){
+    if(!lb.classList.contains('open'))return;
     if(e.key==='ArrowLeft')document.getElementById('lb-prev').click();
     if(e.key==='ArrowRight')document.getElementById('lb-next').click();
     if(e.key==='Escape')close();
   });
 })();
 </script>
+
 </body>
 </html>

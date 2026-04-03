@@ -1,182 +1,241 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>R. Sanderson — ON Design Lab</title>
-<link rel="stylesheet" href="../../assets/commercial.css">
-<meta name="description" content="R. Sanderson | ON Design Lab 設計作品">
-<meta property="og:title" content="R. Sanderson — ON Design Lab">
-<meta property="og:description" content="R. Sanderson | ON Design Lab — 台北品牌空間設計事務所">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>R. Sanderson &mdash; ON Design Lab</title>
+<meta name="description" content="R. Sanderson 零售空間 | ON Design Lab">
+<meta property="og:title" content="R. Sanderson &mdash; ON Design Lab">
 <meta property="og:image" content="https://ondesignlabltd.com/images/r-sanderson/00.jpg">
-<meta property="og:url" content="https://ondesignlabltd.com/commercial/r-sanderson/">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--black:#0a0a0a;--white:#fafaf8;--dim:rgba(255,255,255,.07)}
+html,body{background:var(--black);color:var(--white);font-family:'Helvetica Neue',Helvetica,Arial,sans-serif}
+a{color:inherit;text-decoration:none}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.5rem 2.5rem;background:rgba(10,10,10,.88);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
+nav .logo{font-size:12px;letter-spacing:.18em}
+nav ul{list-style:none;display:flex;gap:2.5rem}
+nav ul li a{font-size:11px;letter-spacing:.12em;opacity:.4;transition:opacity .2s}
+nav ul li a:hover{opacity:1}
+
+.hero{position:relative;width:100%;height:100vh;overflow:hidden;display:flex;align-items:flex-end}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.55)}
+.hero-caption{position:relative;z-index:2;padding:3rem 2.5rem;width:100%;border-top:1px solid rgba(255,255,255,.1)}
+.hero-title{font-size:clamp(2.5rem,7vw,6rem);font-weight:200;letter-spacing:-.02em;line-height:.95;margin-bottom:.6rem}
+.hero-tags{font-size:11px;letter-spacing:.12em;opacity:.35}
+
+.content{max-width:1100px;margin:0 auto}
+.intro{max-width:720px;padding:5rem 2.5rem;border-bottom:1px solid var(--dim)}
+.intro-zh{font-size:16px;line-height:2.05;opacity:.75;margin-bottom:2.5rem}
+.intro-en{font-size:13px;line-height:1.95;opacity:.28;font-style:italic}
+
+.plan-section{padding:4rem 2.5rem;border-bottom:1px solid var(--dim)}
+.plan-section.hidden{display:none}
+.plan-eyebrow{font-size:9px;letter-spacing:.22em;opacity:.22;text-transform:uppercase;margin-bottom:2rem}
+.plan-section img{width:100%;display:block;filter:brightness(.85);cursor:zoom-in}
+.plan-section img:hover{filter:brightness(1)}
+
+.mag-row{display:grid;gap:1px;background:var(--dim);border-bottom:1px solid var(--dim)}
+.mag-row.r-full{grid-template-columns:1fr}
+.mag-row.r-6040{grid-template-columns:6fr 4fr}
+.mag-row.r-half{grid-template-columns:1fr 1fr}
+.mag-row.r-third{grid-template-columns:1fr 1fr 1fr}
+@media(max-width:600px){.mag-row.r-6040,.mag-row.r-half,.mag-row.r-third{grid-template-columns:1fr}}
+.mag-cell{background:var(--black);overflow:hidden}
+.mag-cell img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.82);transition:filter .4s,transform .55s;cursor:zoom-in}
+.mag-cell:hover img{filter:brightness(1);transform:scale(1.03)}
+.mag-cell.tall{aspect-ratio:3/4}
+.mag-cell.wide{aspect-ratio:16/9}
+.mag-cell.sq{aspect-ratio:1}
+
+.text-break{max-width:720px;padding:4rem 2.5rem;border-bottom:1px solid var(--dim)}
+.tb-num{font-size:9px;letter-spacing:.2em;opacity:.2;text-transform:uppercase;margin-bottom:1.5rem}
+.tb-zh{font-size:14px;line-height:2.05;opacity:.68;margin-bottom:1.8rem}
+.tb-en{font-size:12px;line-height:1.95;opacity:.27;font-style:italic}
+
+.proj-nav{display:flex;justify-content:space-between;align-items:center;padding:2.5rem;border-top:1px solid var(--dim)}
+.proj-nav a{font-size:11px;letter-spacing:.1em;opacity:.3;transition:opacity .2s}
+.proj-nav a:hover{opacity:.9}
+.proj-nav .back{font-size:10px;letter-spacing:.15em;opacity:.2}
+
+#lb{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.95);align-items:center;justify-content:center}
+#lb.open{display:flex}
+#lb img{max-width:92vw;max-height:90vh;object-fit:contain}
+#lb-close{position:absolute;top:1.5rem;right:2rem;font-size:22px;opacity:.4;cursor:pointer;background:none;border:none;color:var(--white)}
+#lb-close:hover{opacity:1}
+#lb-prev,#lb-next{position:absolute;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--white);font-size:2rem;opacity:.25;cursor:pointer;padding:1rem;transition:opacity .2s}
+#lb-prev:hover,#lb-next:hover{opacity:.9}
+#lb-prev{left:.5rem}
+#lb-next{right:.5rem}
+#lb-counter{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);font-size:10px;opacity:.3;letter-spacing:.1em}
+
+.thumb-label{font-size:9px;letter-spacing:.22em;opacity:.22;text-transform:uppercase;padding:2.5rem 2.5rem 1rem;max-width:1100px;margin:0 auto}
+.thumb-strip{display:flex;gap:2px;overflow-x:auto;padding:0 2.5rem 2rem;max-width:1100px;margin:0 auto;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.15) transparent}
+.thumb-strip::-webkit-scrollbar{height:4px}
+.thumb-strip::-webkit-scrollbar-track{background:transparent}
+.thumb-strip::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:2px}
+.thumb{flex:0 0 auto;width:100px;height:68px;overflow:hidden;cursor:zoom-in;opacity:.5;transition:opacity .3s}
+.thumb:hover{opacity:1}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+</style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="nav">
-  <a class="nav-logo" href="../../index.html">ON Design Lab</a>
-  <div class="nav-links">
-    <a class="nav-link active" href="../index.html">Commercial</a>
-    <a class="nav-link" href="../../residential/index.html">Residential</a>
-    <a class="nav-link" href="../../info/index.html">Info</a>
-  </div>
+<nav>
+  <a href="/index.html" class="logo">ON DESIGN LAB</a>
+  <ul>
+    <li><a href="/commercial/index.html">Commercial</a></li>
+    <li><a href="/residential/index.html">Residential</a></li>
+    <li><a href="/info/index.html">Info</a></li>
+  </ul>
 </nav>
 
-<a class="back" href="../index.html">← Commercial</a>
-
-<!-- ═══ HERO ═══ -->
-<div class="hero-img">
+<div class="hero">
   <img src="../../images/r-sanderson/00.jpg" fetchpriority="high" loading="eager" decoding="async" alt="R. Sanderson">
-  <div class="hero-overlay">
-    <div class="hero-title">R. Sanderson</div>
-    <div class="hero-meta">
-      <span class="hero-type">F&amp;B</span>
-      <div class="hero-dot"></div>
-      <span class="hero-type">餐飲空間</span>
-      <div class="hero-dot"></div>
-      <span class="hero-type">Taipei</span>
-    </div>
+  <div class="hero-caption">
+    <h1 class="hero-title">R. Sanderson</h1>
+    <p class="hero-tags">零售空間 &middot; Taipei</p>
   </div>
 </div>
 
-<!-- ═══ TEXT AREA ═══ -->
-<div class="intro">
-  <p class="desc-zh">R. Sanderson 的入口刻意內縮。你不是走進一個空間，你是被引導進去的。這個縮口不是美學決定，是一個讓身體先於眼睛進場的策略——當你的腳先移動，你的注意力才會跟上。</p>
-  <p class="desc-en">R. Sanderson's entrance is deliberately compressed. You are not walking into a space — you are being guided in. This constriction is not an aesthetic decision; it is a strategy that lets the body enter before the eyes do.</p>
-</div>
+<div class="content">
 
-<!-- Floor Plan（無圖自動隱藏）-->
-<div class="plan">
-  <p class="plan-label">Floor Plan</p>
-  <img src="../../images/r-sanderson/plan.jpg" onerror="this.parentElement.style.display='none'" loading="lazy" decoding="async" alt="Floor Plan">
-</div>
-
-<!-- ═══ PHOTO AREA ═══ -->
-<div class="photos">
-
-  <div class="p-full"><img loading="lazy" decoding="async" src="../../images/r-sanderson/01.jpg" alt="01"></div>
-  <div class="gap-row"></div>
-
-  <div class="p-2col">
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/r-sanderson/02.jpg" alt="02"></div>
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/r-sanderson/03.jpg" alt="03"></div>
+  <div class="intro">
+    <p class="intro-zh">你不是走進一個空間，你是被引導進去的。</p>
+    <p class="intro-en">You are not walking into a space — you are being guided in.</p>
   </div>
-  <div class="gap-row"></div>
 
-  <div class="p-asymm">
-    <div class="p-asymm-left p-cell"><img loading="lazy" decoding="async" src="../../images/r-sanderson/06.jpg" alt="06"></div>
-    <div class="p-asymm-right">
-      <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/r-sanderson/08.jpg" alt="08"></div>
-      <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/r-sanderson/11.jpg" alt="11"></div>
-    </div>
+  <!-- PLAN -->
+  <div class="plan-section">
+    <p class="plan-eyebrow">Floor Plan</p>
+    <img src="../../images/r-sanderson/plan.jpg" loading="lazy" alt="Floor Plan">
   </div>
-  <div class="editorial">
-  <p class="ed-zh">零售空間最常把所有答案擺在入口，但一眼看完，就不需要移動了；不移動，就沒有更多的慾望。路徑才是零售設計真正的產品。進門後，動線導向三個節點，構成一個內縮的三角環，每次轉向都有一個未曾預期的展示在等著你。</p>
-  <p class="ed-en">Retail spaces typically put all the answers at the entrance, but once you see everything, you stop moving; and without movement, desire cannot accumulate. The path is the product. Inside, the route guides through three nodes forming an inward triangle — at each turn, an unexpected display waits.</p>
-</div>
-  <div class="gap-row"></div>
 
-  <div class="p-2col">
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/r-sanderson/13.jpg" alt="13"></div>
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/r-sanderson/14.jpg" alt="14"></div>
+
+  <div class="mag-row r-half">
+    <div class="mag-cell sq"><img src="../../images/r-sanderson/01.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell sq"><img src="../../images/r-sanderson/02.jpg" loading="lazy" alt=""></div>
   </div>
-  <div class="gap-row"></div>
-
-  <div class="p-full"><img loading="lazy" decoding="async" src="../../images/r-sanderson/15.jpg" alt="15"></div>
-  <div class="editorial">
-  <p class="ed-zh">動線末端是 VIP 試穿區，曲面牆圍塑，尺度稍稍放大，讓人在不自覺間放慢、坐下、停留。空間不是容器，是節奏。決策發生在最放鬆的時刻。</p>
-  <p class="ed-en">At the end of the path, the VIP fitting area: curved walls, expanded scale, a place where people slow down without knowing why. Space is not a container. It is rhythm. Decisions happen in the most relaxed moment.</p>
-</div>
-  <div class="gap-row"></div>
-
-  <div class="p-2col">
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/r-sanderson/16.jpg" alt="16"></div>
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/r-sanderson/19.jpg" alt="19"></div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/r-sanderson/03.jpg" loading="lazy" alt=""></div>
   </div>
-  <div class="gap-row"></div>
-
-  <div class="p-2col">
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/r-sanderson/20.jpg" alt="20"></div>
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/r-sanderson/22.jpg" alt="22"></div>
+  <div class="text-break">
+    <p class="tb-num">01</p>
+    <p class="tb-zh">R. Sanderson 的入口刻意內縮。這個縮口不是美學決定，是一個讓身體先於眼睛進場的策略——當你的腳先移動，你的注意力才會跟上。</p>
+    <p class="tb-en">R. Sanderson's entrance is deliberately compressed. This constriction is not an aesthetic decision — it is a strategy that lets the body enter before the eyes. When your feet move first, your attention follows.</p>
   </div>
-  <div class="gap-row"></div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/r-sanderson/06.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="mag-row r-half">
+    <div class="mag-cell sq"><img src="../../images/r-sanderson/08.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell sq"><img src="../../images/r-sanderson/11.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">02</p>
+    <p class="tb-zh">零售空間最常把所有答案擺在入口，但一眼看完，就不需要移動了；不移動，就沒有更多的慾望。路徑才是零售設計真正的產品。進門後，動線導向三個節點，構成一個內縮的三角環，每次轉向都有一個未曾預期的展示在等著你。</p>
+    <p class="tb-en">Retail spaces typically place all answers at the entrance, but once everything is seen, movement stops — and without movement, desire cannot accumulate. The path is the real product. Inside, the route leads through three nodes forming an inward triangle; at each turn, an unexpected display waits.</p>
+  </div>
+  <div class="mag-row r-half">
+    <div class="mag-cell sq"><img src="../../images/r-sanderson/13.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell sq"><img src="../../images/r-sanderson/14.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/r-sanderson/15.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">03</p>
+    <p class="tb-zh">動線末端是 VIP 試穿區，曲面牆圍塑，尺度稍稍放大，讓人在不自覺間放慢、坐下、停留。空間不是容器，是節奏。決策發生在最放鬆的時刻。</p>
+    <p class="tb-en">At the end of the path sits the VIP fitting area — curved walls, expanded scale, a place where people slow without knowing why. Space is not a container; it is rhythm. Decisions happen in the most relaxed moment.</p>
+  </div>
+  <div class="mag-row r-6040">
+    <div class="mag-cell tall"><img src="../../images/r-sanderson/16.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell tall"><img src="../../images/r-sanderson/19.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/r-sanderson/20.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">04</p>
+    <p class="tb-zh">材質從入口到內部逐漸轉暖。外部立面以金屬與玻璃建立理性的第一印象，進入後木質與皮革接手，觸感從冷轉溫。這個轉變不是刻意的風格切換，是動線本身的情緒曲線——從街道的速度，到試穿時的靜止。</p>
+    <p class="tb-en">Materials warm progressively from entrance to interior. The facade — metal and glass — establishes a rational first impression; inside, wood and leather take over, touch shifting from cool to warm. This transition is not a deliberate style change; it is the emotional curve of the path itself — from the speed of the street to the stillness of trying on.</p>
+  </div>
+  <div class="mag-row r-6040">
+    <div class="mag-cell tall"><img src="../../images/r-sanderson/22.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell tall"><img src="../../images/r-sanderson/23.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">05</p>
+    <p class="tb-zh">整個空間的燈光沒有使用主燈。軌道燈沿著動線方向排列，每一組光源只照亮一個節點的展示。走在路徑上的人不會意識到光在引導自己——這就是好的零售燈光：讓人以為自己是自由移動的，但每一步都在設計裡。</p>
+    <p class="tb-en">The space uses no main fixture. Track lights align with the circulation path; each group illuminates only one node's display. The person on the path never realizes light is guiding them — this is what good retail lighting does: making people believe they move freely while every step stays within the design.</p>
+  </div>
 
-  <div class="p-full"><img loading="lazy" decoding="async" src="../../images/r-sanderson/23.jpg" alt="23"></div>
-  <div class="gap-row"></div>
+  <p class="thumb-label">All Photos</p>
+  <div class="thumb-strip">
+    <div class="thumb"><img loading="lazy" src="../../images/r-sanderson/01.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/r-sanderson/02.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/r-sanderson/03.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/r-sanderson/06.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/r-sanderson/08.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/r-sanderson/11.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/r-sanderson/13.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/r-sanderson/14.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/r-sanderson/15.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/r-sanderson/16.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/r-sanderson/19.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/r-sanderson/20.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/r-sanderson/22.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/r-sanderson/23.jpg" alt=""></div>
+  </div>
+
+  <div class="proj-nav">
+    <a href="/commercial/dunnan-9f/index.html">&larr; 敦南摩天辦公室 9F</a>
+    <a href="/commercial/index.html" class="back">Commercial</a>
+    <a href="/commercial/lezun/index.html">樂樽爐端燒 &rarr;</a>
+  </div>
 
 </div>
 
-
-<!-- ═══ BOTTOM NAV ═══ -->
-
-<p class="thumb-label">All Photos</p>
-<div class="thumb-strip">
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/r-sanderson/01.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/r-sanderson/02.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/r-sanderson/03.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/r-sanderson/06.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/r-sanderson/08.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/r-sanderson/11.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/r-sanderson/13.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/r-sanderson/14.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/r-sanderson/15.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/r-sanderson/16.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/r-sanderson/19.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/r-sanderson/20.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/r-sanderson/22.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/r-sanderson/23.jpg" alt=""></div>
-</div>
-<div class="bottom">
-  <a class="bottom-nav" href="../dunnan-9f/index.html">← 敦南摩天辦公室 9F</a>
-  <a class="bowerbird" href="#">View on BowerBird →</a>
-  <a class="bottom-nav" href="../lezun/index.html">樂樽爐端燒 →</a>
-</div>
-
-
-
-
-<!-- Lightbox -->
-<div id="lb" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.93);align-items:center;justify-content:center;">
-  <button id="lb-close" style="position:absolute;top:1.5rem;right:2rem;font-size:24px;opacity:.5;cursor:pointer;background:none;border:none;color:#fafaf8;transition:opacity .2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.5">&#10005;</button>
-  <button id="lb-prev" style="position:absolute;top:50%;transform:translateY(-50%);left:1rem;background:none;border:none;color:#fafaf8;font-size:2rem;opacity:.3;cursor:pointer;padding:1rem;transition:opacity .2s;" onmouseover="this.style.opacity=.9" onmouseout="this.style.opacity=.3">&#8249;</button>
-  <img id="lb-img" src="" alt="" style="max-width:90vw;max-height:88vh;object-fit:contain;display:block;">
-  <button id="lb-next" style="position:absolute;top:50%;transform:translateY(-50%);right:1rem;background:none;border:none;color:#fafaf8;font-size:2rem;opacity:.3;cursor:pointer;padding:1rem;transition:opacity .2s;" onmouseover="this.style.opacity=.9" onmouseout="this.style.opacity=.3">&#8250;</button>
-  <span id="lb-counter" style="position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);font-size:11px;opacity:.35;letter-spacing:.1em;color:#fafaf8;"></span>
+<div id="lb">
+  <button id="lb-close">&#10005;</button>
+  <button id="lb-prev">&#8249;</button>
+  <img id="lb-img" src="" alt="">
+  <button id="lb-next">&#8250;</button>
+  <span id="lb-counter"></span>
 </div>
 <script>
 (function(){
-  const imgs=[...document.querySelectorAll('img[src]:not([src=""])')]
-    .filter(i=>!i.closest('#lb')&&!i.closest('.thumb-strip'));
-  const srcs=imgs.map(i=>i.src);
-  const lb=document.getElementById('lb');
-  const lbImg=document.getElementById('lb-img');
-  const lbC=document.getElementById('lb-counter');
-  let cur=0;
-  function show(i){cur=i;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;lb.style.display='flex';}
-  function close(){lb.style.display='none';lbImg.src='';}
-  imgs.forEach((img,i)=>{img.style.cursor='zoom-in';img.addEventListener('click',()=>show(i));});
-  document.querySelectorAll('.thumb-strip .thumb').forEach(t=>{
-    t.style.cursor='zoom-in';
-    t.addEventListener('click',()=>{
-      const s=t.querySelector('img').src;
-      const i=srcs.findIndex(x=>x===s);
-      if(i>=0)show(i);
+  var imgs=[].slice.call(document.querySelectorAll('.mag-cell img, .plan-section:not(.hidden) img'));
+  var srcs=imgs.map(function(i){return i.src});
+  var lb=document.getElementById('lb');
+  var lbImg=document.getElementById('lb-img');
+  var lbC=document.getElementById('lb-counter');
+  var cur=0;
+  function show(i){cur=i;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;lb.classList.add('open')}
+  function close(){lb.classList.remove('open');lbImg.src=''}
+  imgs.forEach(function(img,i){img.addEventListener('click',function(){show(i)})});
+  [].slice.call(document.querySelectorAll('.thumb-strip .thumb')).forEach(function(t){
+    t.addEventListener('click',function(){
+      var s=t.querySelector('img').src;
+      var i=srcs.findIndex(function(x){return x===s});
+      if(i>=0)show(i);else{srcs.push(s);show(srcs.length-1)}
     });
   });
   document.getElementById('lb-close').onclick=close;
-  document.getElementById('lb-prev').onclick=()=>{cur=(cur-1+srcs.length)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;};
-  document.getElementById('lb-next').onclick=()=>{cur=(cur+1)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;};
-  lb.addEventListener('click',e=>{if(e.target===lb)close();});
-  document.addEventListener('keydown',e=>{
-    if(lb.style.display==='none')return;
+  document.getElementById('lb-prev').onclick=function(){cur=(cur-1+srcs.length)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length};
+  document.getElementById('lb-next').onclick=function(){cur=(cur+1)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length};
+  lb.addEventListener('click',function(e){if(e.target===lb)close()});
+  document.addEventListener('keydown',function(e){
+    if(!lb.classList.contains('open'))return;
     if(e.key==='ArrowLeft')document.getElementById('lb-prev').click();
     if(e.key==='ArrowRight')document.getElementById('lb-next').click();
     if(e.key==='Escape')close();
   });
 })();
 </script>
+
 </body>
 </html>

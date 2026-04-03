@@ -1,227 +1,264 @@
-﻿<!DOCTYPE html>
-<html lang="zh-TW">
+<!DOCTYPE html>
+<html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Residence C — ON Design Lab</title>
-<style>
-  :root {
-    --bg: #f0efe8; --bg2: #e8e7df;
-    --line: rgba(14,14,12,0.1); --text: #0e0e0c;
-    --muted: #8a8a7e; --dim: rgba(14,14,12,0.22); --accent: #3a3a36;
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; background:var(--bg); color:var(--text); }
-  .nav { display:flex; align-items:center; justify-content:space-between; padding:20px 40px; border-bottom:0.5px solid var(--line); position:sticky; top:0; background:var(--bg); z-index:200; }
-  .nav-logo { font-size:10px; font-weight:300; letter-spacing:0.26em; text-transform:uppercase; color:var(--text); text-decoration:none; }
-  .nav-links { display:flex; gap:28px; }
-  .nav-link { font-size:9px; font-weight:300; letter-spacing:0.22em; text-transform:uppercase; color:var(--muted); text-decoration:none; padding-bottom:2px; border-bottom:0.5px solid transparent; transition:all 0.2s; }
-  .nav-link:hover, .nav-link.active { color:var(--text); border-color:var(--text); }
-  .back { display:inline-block; padding:20px 40px 0; font-size:9px; font-weight:300; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color 0.2s; }
-  .back:hover { color:var(--text); }
-  .hero-img { width:100%; height:85vh; overflow:hidden; position:relative; margin-top:18px; }
-  .hero-img img { width:100%; height:100%; object-fit:cover; object-position:center 50%; display:block; }
-  .hero-overlay { position:absolute; bottom:0; left:0; right:0; padding:40px 48px; background:linear-gradient(transparent, rgba(240,239,232,0.92)); pointer-events:none; }
-  .hero-title { font-size:36px; font-weight:300; color:var(--text); letter-spacing:0.04em; margin-bottom:10px; }
-  .hero-meta { display:flex; gap:12px; align-items:center; }
-  .hero-type { font-size:9px; color:var(--muted); letter-spacing:0.22em; text-transform:uppercase; }
-  .hero-dot { width:2px; height:2px; background:var(--muted); border-radius:50%; }
-  .intro { max-width:640px; padding:80px 60px; margin:0; }
-  .desc-zh { font-size:15px; line-height:2.1; color:var(--accent); margin-bottom:28px; }
-  .desc-en { font-size:13px; line-height:1.9; color:var(--muted); font-style:italic; }
-  .plan { padding:40px 60px; max-width:640px; }
-  .plan-label { font-size:8px; letter-spacing:0.28em; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
-  .plan img { width:100%; height:auto; display:block; }
-  .photos { width:100%; padding: 0 50px; }
-  .p-full, .p-2col, .p-asymm { padding:0; }
-  .p-full img { width:100%; height:auto; display:block; }
-  .p-2col { display:grid; grid-template-columns:1fr 1fr; gap:3px; }
-  .p-cell { position:relative; cursor:pointer; }
-  .p-cell img { width:100%; height:auto; display:block; }
-  .p-asymm { display:grid; grid-template-columns:1fr 1fr; gap:3px; align-items:stretch; }
-  .p-asymm-left img { width:100%; height:100%; object-fit:cover; display:block; }
-  .p-asymm-right { display:flex; flex-direction:column; gap:3px; }
-  .p-asymm-right .p-cell { flex:1; }
-  .p-asymm-right .p-cell img { width:100%; height:100%; object-fit:cover; display:block; }
-  .editorial { max-width:640px; padding:64px 60px; }
-  .editorial p { font-size:13px; font-weight:300; color:var(--muted); line-height:2.1; }
-  .editorial p + p { margin-top:20px; }
-  .gap-row { height:3px; background:var(--bg); }
-  .thumb-label { font-size:8px; font-weight:300; letter-spacing:0.28em; text-transform:uppercase; color:var(--muted); padding:32px 40px 12px; }
-  .thumb-strip { display:flex; overflow-x:auto; gap:4px; padding:0 40px 32px; scrollbar-width:none; }
-  .thumb-strip::-webkit-scrollbar { display:none; }
-  .thumb { flex-shrink:0; width:120px; height:80px; overflow:hidden; cursor:pointer; opacity:0.5; transition:opacity 0.2s; }
-  .thumb:hover { opacity:1; }
-  .thumb img { width:100%; height:100%; object-fit:cover; display:block; }
-  .lightbox { position:fixed; inset:0; background:rgba(240,239,232,0.97); z-index:1000; display:flex; align-items:center; justify-content:center; }
-  #lb-img { max-width:90vw; max-height:90vh; object-fit:contain; }
-  .lb-close { position:absolute; top:24px; right:32px; font-size:32px; color:var(--text); cursor:pointer; font-weight:300; line-height:1; user-select:none; opacity:0.5; transition:opacity 0.2s; }
-  .lb-close:hover { opacity:1; }
-  .lb-prev, .lb-next { position:absolute; top:50%; transform:translateY(-50%); font-size:48px; color:var(--text); cursor:pointer; font-weight:300; padding:0 24px; opacity:0.3; transition:opacity 0.2s; user-select:none; line-height:1; }
-  .lb-prev { left:0; } .lb-next { right:0; }
-  .lb-prev:hover, .lb-next:hover { opacity:0.8; }
-  .bottom { padding:28px 40px; border-top:0.5px solid var(--line); display:flex; justify-content:space-between; align-items:center; margin-top:16px; }
-  .bottom-nav { font-size:9px; font-weight:300; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color 0.2s; }
-  .bottom-nav:hover { color:var(--text); }
-  .bowerbird { font-size:9px; font-weight:300; letter-spacing:0.22em; text-transform:uppercase; color:var(--muted); text-decoration:none; border:0.5px solid var(--line); padding:10px 20px; transition:all 0.2s; }
-  .bowerbird:hover { color:var(--text); border-color:var(--accent); }
-  @media (max-width: 768px) {
-    .intro { padding:48px 24px; max-width:100%; }
-    .plan { padding:24px 24px 40px; max-width:100%; }
-    .p-2col { grid-template-columns:1fr; }
-    .p-asymm { grid-template-columns:1fr; }
-    .p-asymm-left { display:none; }
-    .p-full, .p-2col, .p-asymm { padding:0; }
-    .editorial { padding:40px 24px; max-width:100%; }
-    .thumb { width:90px; height:60px; }
-    .thumb-strip { padding:0 20px 24px; }
-    .thumb-label { padding:24px 20px 10px; }
-    .hero-img { height:60vh; }
-    .nav { padding:16px 20px; }
-    .back { padding:16px 20px 0; }
-    .bottom { padding:20px 20px; }
-  }
-</style>
-<meta name="description" content="Residence C | ON Design Lab 設計作品">
-<meta property="og:title" content="Residence C — ON Design Lab">
-<meta property="og:description" content="Residence C | ON Design Lab — 台北品牌空間設計事務所">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Residence C &mdash; ON Design Lab</title>
+<meta name="description" content="Residence C 住家空間 | ON Design Lab">
+<meta property="og:title" content="Residence C &mdash; ON Design Lab">
 <meta property="og:image" content="https://ondesignlabltd.com/images/residence-c/00.jpg">
-<meta property="og:url" content="https://ondesignlabltd.com/residential/residence-c/">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--black:#0a0a0a;--white:#fafaf8;--dim:rgba(255,255,255,.07)}
+html,body{background:var(--black);color:var(--white);font-family:'Helvetica Neue',Helvetica,Arial,sans-serif}
+a{color:inherit;text-decoration:none}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.5rem 2.5rem;background:rgba(10,10,10,.88);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
+nav .logo{font-size:12px;letter-spacing:.18em}
+nav ul{list-style:none;display:flex;gap:2.5rem}
+nav ul li a{font-size:11px;letter-spacing:.12em;opacity:.4;transition:opacity .2s}
+nav ul li a:hover{opacity:1}
+
+.hero{position:relative;width:100%;height:100vh;overflow:hidden;display:flex;align-items:flex-end}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.55)}
+.hero-caption{position:relative;z-index:2;padding:3rem 2.5rem;width:100%;border-top:1px solid rgba(255,255,255,.1)}
+.hero-title{font-size:clamp(2.5rem,7vw,6rem);font-weight:200;letter-spacing:-.02em;line-height:.95;margin-bottom:.6rem}
+.hero-tags{font-size:11px;letter-spacing:.12em;opacity:.35}
+
+.content{max-width:1100px;margin:0 auto}
+.intro{max-width:720px;padding:5rem 2.5rem;border-bottom:1px solid var(--dim)}
+.intro-zh{font-size:16px;line-height:2.05;opacity:.75;margin-bottom:2.5rem}
+.intro-en{font-size:13px;line-height:1.95;opacity:.28;font-style:italic}
+
+.plan-section{padding:4rem 2.5rem;border-bottom:1px solid var(--dim)}
+.plan-section.hidden{display:none}
+.plan-eyebrow{font-size:9px;letter-spacing:.22em;opacity:.22;text-transform:uppercase;margin-bottom:2rem}
+.plan-section img{width:100%;display:block;filter:brightness(.85);cursor:zoom-in}
+.plan-section img:hover{filter:brightness(1)}
+
+.mag-row{display:grid;gap:1px;background:var(--dim);border-bottom:1px solid var(--dim)}
+.mag-row.r-full{grid-template-columns:1fr}
+.mag-row.r-6040{grid-template-columns:6fr 4fr}
+.mag-row.r-half{grid-template-columns:1fr 1fr}
+.mag-row.r-third{grid-template-columns:1fr 1fr 1fr}
+@media(max-width:600px){.mag-row.r-6040,.mag-row.r-half,.mag-row.r-third{grid-template-columns:1fr}}
+.mag-cell{background:var(--black);overflow:hidden}
+.mag-cell img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.82);transition:filter .4s,transform .55s;cursor:zoom-in}
+.mag-cell:hover img{filter:brightness(1);transform:scale(1.03)}
+.mag-cell.tall{aspect-ratio:3/4}
+.mag-cell.wide{aspect-ratio:16/9}
+.mag-cell.sq{aspect-ratio:1}
+
+.text-break{max-width:720px;padding:4rem 2.5rem;border-bottom:1px solid var(--dim)}
+.tb-num{font-size:9px;letter-spacing:.2em;opacity:.2;text-transform:uppercase;margin-bottom:1.5rem}
+.tb-zh{font-size:14px;line-height:2.05;opacity:.68;margin-bottom:1.8rem}
+.tb-en{font-size:12px;line-height:1.95;opacity:.27;font-style:italic}
+
+.proj-nav{display:flex;justify-content:space-between;align-items:center;padding:2.5rem;border-top:1px solid var(--dim)}
+.proj-nav a{font-size:11px;letter-spacing:.1em;opacity:.3;transition:opacity .2s}
+.proj-nav a:hover{opacity:.9}
+.proj-nav .back{font-size:10px;letter-spacing:.15em;opacity:.2}
+
+#lb{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.95);align-items:center;justify-content:center}
+#lb.open{display:flex}
+#lb img{max-width:92vw;max-height:90vh;object-fit:contain}
+#lb-close{position:absolute;top:1.5rem;right:2rem;font-size:22px;opacity:.4;cursor:pointer;background:none;border:none;color:var(--white)}
+#lb-close:hover{opacity:1}
+#lb-prev,#lb-next{position:absolute;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--white);font-size:2rem;opacity:.25;cursor:pointer;padding:1rem;transition:opacity .2s}
+#lb-prev:hover,#lb-next:hover{opacity:.9}
+#lb-prev{left:.5rem}
+#lb-next{right:.5rem}
+#lb-counter{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);font-size:10px;opacity:.3;letter-spacing:.1em}
+
+.thumb-label{font-size:9px;letter-spacing:.22em;opacity:.22;text-transform:uppercase;padding:2.5rem 2.5rem 1rem;max-width:1100px;margin:0 auto}
+.thumb-strip{display:flex;gap:2px;overflow-x:auto;padding:0 2.5rem 2rem;max-width:1100px;margin:0 auto;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.15) transparent}
+.thumb-strip::-webkit-scrollbar{height:4px}
+.thumb-strip::-webkit-scrollbar-track{background:transparent}
+.thumb-strip::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:2px}
+.thumb{flex:0 0 auto;width:100px;height:68px;overflow:hidden;cursor:zoom-in;opacity:.5;transition:opacity .3s}
+.thumb:hover{opacity:1}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+</style>
 </head>
 <body>
-<nav class="nav">
-  <a class="nav-logo" href="../../index.html">ON Design Lab</a>
-  <div class="nav-links">
-    <a class="nav-link" href="../../commercial/index.html">Commercial</a>
-    <a class="nav-link active" href="../index.html">Residential</a>
-    <a class="nav-link" href="../../info/index.html">Info</a>
-  </div>
+
+<nav>
+  <a href="/index.html" class="logo">ON DESIGN LAB</a>
+  <ul>
+    <li><a href="/commercial/index.html">Commercial</a></li>
+    <li><a href="/residential/index.html">Residential</a></li>
+    <li><a href="/info/index.html">Info</a></li>
+  </ul>
 </nav>
-<a class="back" href="../index.html">← Residential</a>
-<div class="hero-img">
-  <img fetchpriority="high" loading="eager" decoding="async" src="../../images/residence-c/00.jpg" alt="Residence C">
-  <div class="hero-overlay">
-    <div class="hero-title">Residence C</div>
-    <div class="hero-meta">
-      <span class="hero-type">Residential</span>
-      <div class="hero-dot"></div>
-      <span class="hero-type">住家空間</span>
-      <div class="hero-dot"></div>
-      <span class="hero-type">Taipei</span>
-    </div>
+
+<div class="hero">
+  <img src="../../images/residence-c/00.jpg" fetchpriority="high" loading="eager" decoding="async" alt="Residence C">
+  <div class="hero-caption">
+    <h1 class="hero-title">Residence C</h1>
+    <p class="hero-tags">住家空間 &middot; Taipei</p>
   </div>
 </div>
-<div class="intro">
-  <p class="desc-zh" style="display:none">[待補文案]</p>
-  <p class="desc-en" style="display:none">[Design statement — to be provided]</p>
-</div>
-<div class="plan">
-  <p class="plan-label">Floor Plan</p>
-  <img loading="lazy" decoding="async" src="../../images/residence-c/plan.jpg" onerror="this.parentElement.style.display='none'" alt="Floor Plan">
-</div>
-<div class="photos">
-<div class="gap-row"></div>
-<div class="p-full"><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-c/01.jpg" alt=""></div></div>
-<div class="gap-row"></div>
-<div class="p-2col"><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-c/02.jpg" alt=""></div><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-c/03.jpg" alt=""></div></div>
-<div class="gap-row"></div>
-<div class="p-asymm"><div class="p-asymm-left p-cell"><img loading="lazy" decoding="async" src="../../images/residence-c/04.jpg" alt=""></div><div class="p-asymm-right"><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-c/05.jpg" alt=""></div><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-c/06.jpg" alt=""></div></div></div>
-<div class="gap-row"></div>
-<div class="p-2col"><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-c/07.jpg" alt=""></div><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-c/08.jpg" alt=""></div></div>
-<div class="gap-row"></div>
-<div class="p-full"><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-c/09.jpg" alt=""></div></div>
-<div class="gap-row"></div>
-<div class="p-full"><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-c/10.jpg" alt=""></div></div>
-<div class="gap-row"></div>
-<div class="p-2col"><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-c/11.jpg" alt=""></div><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-c/12.jpg" alt=""></div></div>
-<div class="gap-row"></div>
-<div class="p-asymm"><div class="p-asymm-left p-cell"><img loading="lazy" decoding="async" src="../../images/residence-c/13.jpg" alt=""></div><div class="p-asymm-right"><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-c/14.jpg" alt=""></div><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-c/15.jpg" alt=""></div></div></div>
-<div class="gap-row"></div>
-<div class="p-2col"><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-c/16.jpg" alt=""></div><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-c/17.jpg" alt=""></div></div>
-<div class="gap-row"></div>
-<div class="p-full"><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-c/18.jpg" alt=""></div></div>
-<div class="gap-row"></div>
-<div class="p-full"><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-c/19.jpg" alt=""></div></div>
-<div class="gap-row"></div>
-<div class="p-2col"><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-c/20.jpg" alt=""></div><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-c/21.jpg" alt=""></div></div>
-<div class="gap-row"></div>
-<div class="p-2col"><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-c/22.jpg" alt=""></div><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-c/23.jpg" alt=""></div></div>
-<div class="gap-row"></div>
-</div>
-<p class="thumb-label">All Photos</p>
-<div class="thumb-strip">
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-c/01.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-c/02.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-c/03.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-c/04.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-c/05.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-c/06.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-c/07.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-c/08.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-c/09.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-c/10.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-c/11.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-c/12.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-c/13.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-c/14.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-c/15.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-c/16.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-c/17.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-c/18.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-c/19.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-c/20.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-c/21.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-c/22.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-c/23.jpg" alt=""></div>
-</div>
-<div class="bottom">
-  <a class="bottom-nav" href="../residence-r/index.html">← Residence R</a>
-  <a class="bowerbird" href="#">View on BowerBird →</a>
-  <a class="bottom-nav" href="../residence-l/index.html">Residence L →</a>
-</div>
+
+<div class="content">
+
+  <div class="intro">
+    <p class="intro-zh">天花板不是結構的結束，是空間敘事的開始。</p>
+    <p class="intro-en">The ceiling is not where structure ends — it is where spatial narrative begins.</p>
+  </div>
 
 
-<!-- Lightbox -->
-<div id="lb" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.93);align-items:center;justify-content:center;">
-  <button id="lb-close" style="position:absolute;top:1.5rem;right:2rem;font-size:24px;opacity:.5;cursor:pointer;background:none;border:none;color:#fafaf8;transition:opacity .2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.5">&#10005;</button>
-  <button id="lb-prev" style="position:absolute;top:50%;transform:translateY(-50%);left:1rem;background:none;border:none;color:#fafaf8;font-size:2rem;opacity:.3;cursor:pointer;padding:1rem;transition:opacity .2s;" onmouseover="this.style.opacity=.9" onmouseout="this.style.opacity=.3">&#8249;</button>
-  <img id="lb-img" src="" alt="" style="max-width:90vw;max-height:88vh;object-fit:contain;display:block;">
-  <button id="lb-next" style="position:absolute;top:50%;transform:translateY(-50%);right:1rem;background:none;border:none;color:#fafaf8;font-size:2rem;opacity:.3;cursor:pointer;padding:1rem;transition:opacity .2s;" onmouseover="this.style.opacity=.9" onmouseout="this.style.opacity=.3">&#8250;</button>
-  <span id="lb-counter" style="position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);font-size:11px;opacity:.35;letter-spacing:.1em;color:#fafaf8;"></span>
+
+  <div class="mag-row r-half">
+    <div class="mag-cell sq"><img src="../../images/residence-c/01.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell sq"><img src="../../images/residence-c/02.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="mag-row r-6040">
+    <div class="mag-cell tall"><img src="../../images/residence-c/03.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell tall"><img src="../../images/residence-c/04.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/residence-c/05.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">01</p>
+    <p class="tb-zh">這個案子最強烈的手勢是天花板。弧形造型從玄關延伸到公共區域，水泥粉光與石材交接處嵌入燈帶，讓曲面的輪廓在不同角度被光勾勒出來。天花板不再是被動的頂面，而是空間裡最主動的表情。</p>
+    <p class="tb-en">The strongest gesture here is the ceiling. Curved forms extend from the entrance through the common area; light strips embedded at the junction of cement finish and stone trace the contour from every angle. The ceiling is no longer a passive overhead plane — it is the space's most active expression.</p>
+  </div>
+  <div class="mag-row r-third">
+    <div class="mag-cell sq"><img src="../../images/residence-c/06.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell sq"><img src="../../images/residence-c/07.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell sq"><img src="../../images/residence-c/08.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="mag-row r-half">
+    <div class="mag-cell sq"><img src="../../images/residence-c/09.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell sq"><img src="../../images/residence-c/10.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">02</p>
+    <p class="tb-zh">灰色系的水泥塗料覆蓋了牆面與天花的大部分面積，讓空間保持統一的色調底。深色石材在關鍵位置出現——吧台檯面、玄關落地面——不是為了對比，而是為了給視線一個停靠的重量。</p>
+    <p class="tb-en">Grey cement coating covers most wall and ceiling surfaces, maintaining a unified tonal base. Dark stone appears at key moments — bar top, entrance flooring — not for contrast, but to give the eye a place to rest with weight.</p>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/residence-c/11.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="mag-row r-6040">
+    <div class="mag-cell tall"><img src="../../images/residence-c/12.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell tall"><img src="../../images/residence-c/13.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="mag-row r-half">
+    <div class="mag-cell sq"><img src="../../images/residence-c/14.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell sq"><img src="../../images/residence-c/15.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">03</p>
+    <p class="tb-zh">弧形不只存在於天花。吧台的邊緣、櫃體的轉角、甚至門框的收邊，都以弧線處理。直角在這個空間裡被系統性地消除——不是為了柔軟的感覺，而是為了讓視線在空間裡移動時不被截斷。</p>
+    <p class="tb-en">Curves are not limited to the ceiling. The bar's edge, cabinet corners, even door-frame trim — all treated with arcs. Right angles are systematically eliminated, not for softness but so the eye is never interrupted as it moves through the space.</p>
+  </div>
+  <div class="mag-row r-6040">
+    <div class="mag-cell tall"><img src="../../images/residence-c/16.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell tall"><img src="../../images/residence-c/17.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/residence-c/18.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/residence-c/19.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">04</p>
+    <p class="tb-zh">燈帶是這個家的隱藏主角。它藏在弧形天花的邊緣、石材的接縫、櫃體的底部——從來不直接出現，但它定義了每一個面的輪廓。拿掉燈帶，這些造型就只是造型；有了光，它們才成為空間。</p>
+    <p class="tb-en">The LED strip is the hidden protagonist. It hides at the edges of curved ceilings, stone joints, cabinet bases — never appearing directly, but defining the contour of every surface. Without the light, these forms are just forms; with light, they become space.</p>
+  </div>
+  <div class="mag-row r-half">
+    <div class="mag-cell sq"><img src="../../images/residence-c/20.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell sq"><img src="../../images/residence-c/21.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/residence-c/22.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/residence-c/23.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">05</p>
+    <p class="tb-zh">這個家的設計態度是：讓建築語言進入室內。弧形天花、水泥塗料、嵌入式燈帶——這些原本屬於建築尺度的手法，被縮放到住宅的尺度裡。結果是一個不像「裝修」的家——它看起來像是被建造出來的，而不是被裝飾出來的。</p>
+    <p class="tb-en">The design attitude here is bringing architectural language indoors. Curved ceilings, cement coating, recessed light strips — gestures that belong to architectural scale, rescaled to residential dimensions. The result is a home that does not look decorated — it looks constructed.</p>
+  </div>
+
+  <p class="thumb-label">All Photos</p>
+  <div class="thumb-strip">
+    <div class="thumb"><img loading="lazy" src="../../images/residence-c/01.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/residence-c/02.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/residence-c/03.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/residence-c/04.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/residence-c/05.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/residence-c/06.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/residence-c/07.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/residence-c/08.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/residence-c/09.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/residence-c/10.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/residence-c/11.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/residence-c/12.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/residence-c/13.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/residence-c/14.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/residence-c/15.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/residence-c/16.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/residence-c/17.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/residence-c/18.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/residence-c/19.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/residence-c/20.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/residence-c/21.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/residence-c/22.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/residence-c/23.jpg" alt=""></div>
+  </div>
+
+  <div class="proj-nav">
+    <a href="/residential/residence-r/index.html">&larr; Residence R</a>
+    <a href="/residential/index.html" class="back">Residential</a>
+    <a href="/residential/residence-l/index.html">Residence L &rarr;</a>
+  </div>
+
+</div>
+
+<div id="lb">
+  <button id="lb-close">&#10005;</button>
+  <button id="lb-prev">&#8249;</button>
+  <img id="lb-img" src="" alt="">
+  <button id="lb-next">&#8250;</button>
+  <span id="lb-counter"></span>
 </div>
 <script>
 (function(){
-  const imgs=[...document.querySelectorAll('img[src]:not([src=""])')]
-    .filter(i=>!i.closest('#lb')&&!i.closest('.thumb-strip'));
-  const srcs=imgs.map(i=>i.src);
-  const lb=document.getElementById('lb');
-  const lbImg=document.getElementById('lb-img');
-  const lbC=document.getElementById('lb-counter');
-  let cur=0;
-  function show(i){cur=i;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;lb.style.display='flex';}
-  function close(){lb.style.display='none';lbImg.src='';}
-  imgs.forEach((img,i)=>{img.style.cursor='zoom-in';img.addEventListener('click',()=>show(i));});
-  document.querySelectorAll('.thumb-strip .thumb').forEach(t=>{
-    t.style.cursor='zoom-in';
-    t.addEventListener('click',()=>{
-      const s=t.querySelector('img').src;
-      const i=srcs.findIndex(x=>x===s);
-      if(i>=0)show(i);
+  var imgs=[].slice.call(document.querySelectorAll('.mag-cell img, .plan-section:not(.hidden) img'));
+  var srcs=imgs.map(function(i){return i.src});
+  var lb=document.getElementById('lb');
+  var lbImg=document.getElementById('lb-img');
+  var lbC=document.getElementById('lb-counter');
+  var cur=0;
+  function show(i){cur=i;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;lb.classList.add('open')}
+  function close(){lb.classList.remove('open');lbImg.src=''}
+  imgs.forEach(function(img,i){img.addEventListener('click',function(){show(i)})});
+  [].slice.call(document.querySelectorAll('.thumb-strip .thumb')).forEach(function(t){
+    t.addEventListener('click',function(){
+      var s=t.querySelector('img').src;
+      var i=srcs.findIndex(function(x){return x===s});
+      if(i>=0)show(i);else{srcs.push(s);show(srcs.length-1)}
     });
   });
   document.getElementById('lb-close').onclick=close;
-  document.getElementById('lb-prev').onclick=()=>{cur=(cur-1+srcs.length)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;};
-  document.getElementById('lb-next').onclick=()=>{cur=(cur+1)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;};
-  lb.addEventListener('click',e=>{if(e.target===lb)close();});
-  document.addEventListener('keydown',e=>{
-    if(lb.style.display==='none')return;
+  document.getElementById('lb-prev').onclick=function(){cur=(cur-1+srcs.length)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length};
+  document.getElementById('lb-next').onclick=function(){cur=(cur+1)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length};
+  lb.addEventListener('click',function(e){if(e.target===lb)close()});
+  document.addEventListener('keydown',function(e){
+    if(!lb.classList.contains('open'))return;
     if(e.key==='ArrowLeft')document.getElementById('lb-prev').click();
     if(e.key==='ArrowRight')document.getElementById('lb-next').click();
     if(e.key==='Escape')close();
   });
 })();
 </script>
+
 </body>
 </html>

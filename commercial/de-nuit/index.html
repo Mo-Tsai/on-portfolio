@@ -1,174 +1,224 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>de nuit — ON Design Lab</title>
-<link rel="stylesheet" href="../../assets/commercial.css">
-<meta name="description" content="de nuit | ON Design Lab 設計作品">
-<meta property="og:title" content="de nuit — ON Design Lab">
-<meta property="og:description" content="de nuit | ON Design Lab — 台北品牌空間設計事務所">
-<meta property="og:image" content="https://ondesignlabltd.com/images/de-nuit/00.jpg">
-<meta property="og:url" content="https://ondesignlabltd.com/commercial/de-nuit/">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>de nuit &mdash; ON Design Lab</title>
+<meta name="description" content="de nuit 餐飲空間 | ON Design Lab">
+<meta property="og:title" content="de nuit &mdash; ON Design Lab">
+<meta property="og:image" content="https://ondesignlabltd.com/images/de-nuit/08.jpg">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--black:#0a0a0a;--white:#fafaf8;--dim:rgba(255,255,255,.07)}
+html,body{background:var(--black);color:var(--white);font-family:'Helvetica Neue',Helvetica,Arial,sans-serif}
+a{color:inherit;text-decoration:none}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.5rem 2.5rem;background:rgba(10,10,10,.88);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
+nav .logo{font-size:12px;letter-spacing:.18em}
+nav ul{list-style:none;display:flex;gap:2.5rem}
+nav ul li a{font-size:11px;letter-spacing:.12em;opacity:.4;transition:opacity .2s}
+nav ul li a:hover{opacity:1}
+
+.hero{position:relative;width:100%;height:100vh;overflow:hidden;display:flex;align-items:flex-end}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.55)}
+.hero-caption{position:relative;z-index:2;padding:3rem 2.5rem;width:100%;border-top:1px solid rgba(255,255,255,.1)}
+.hero-title{font-size:clamp(2.5rem,7vw,6rem);font-weight:200;letter-spacing:-.02em;line-height:.95;margin-bottom:.6rem}
+.hero-tags{font-size:11px;letter-spacing:.12em;opacity:.35}
+
+.content{max-width:1100px;margin:0 auto}
+.intro{max-width:720px;padding:5rem 2.5rem;border-bottom:1px solid var(--dim)}
+.intro-zh{font-size:16px;line-height:2.05;opacity:.75;margin-bottom:2.5rem}
+.intro-en{font-size:13px;line-height:1.95;opacity:.28;font-style:italic}
+
+.plan-section{padding:4rem 2.5rem;border-bottom:1px solid var(--dim)}
+.plan-section.hidden{display:none}
+.plan-eyebrow{font-size:9px;letter-spacing:.22em;opacity:.22;text-transform:uppercase;margin-bottom:2rem}
+.plan-section img{width:100%;display:block;filter:brightness(.85);cursor:zoom-in}
+.plan-section img:hover{filter:brightness(1)}
+
+.mag-row{display:grid;gap:1px;background:var(--dim);border-bottom:1px solid var(--dim)}
+.mag-row.r-full{grid-template-columns:1fr}
+.mag-row.r-6040{grid-template-columns:6fr 4fr}
+.mag-row.r-half{grid-template-columns:1fr 1fr}
+.mag-row.r-third{grid-template-columns:1fr 1fr 1fr}
+@media(max-width:600px){.mag-row.r-6040,.mag-row.r-half,.mag-row.r-third{grid-template-columns:1fr}}
+.mag-cell{background:var(--black);overflow:hidden}
+.mag-cell img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.82);transition:filter .4s,transform .55s;cursor:zoom-in}
+.mag-cell:hover img{filter:brightness(1);transform:scale(1.03)}
+.mag-cell.tall{aspect-ratio:3/4}
+.mag-cell.wide{aspect-ratio:16/9}
+.mag-cell.sq{aspect-ratio:1}
+
+.text-break{max-width:720px;padding:4rem 2.5rem;border-bottom:1px solid var(--dim)}
+.tb-num{font-size:9px;letter-spacing:.2em;opacity:.2;text-transform:uppercase;margin-bottom:1.5rem}
+.tb-zh{font-size:14px;line-height:2.05;opacity:.68;margin-bottom:1.8rem}
+.tb-en{font-size:12px;line-height:1.95;opacity:.27;font-style:italic}
+
+.proj-nav{display:flex;justify-content:space-between;align-items:center;padding:2.5rem;border-top:1px solid var(--dim)}
+.proj-nav a{font-size:11px;letter-spacing:.1em;opacity:.3;transition:opacity .2s}
+.proj-nav a:hover{opacity:.9}
+.proj-nav .back{font-size:10px;letter-spacing:.15em;opacity:.2}
+
+#lb{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.95);align-items:center;justify-content:center}
+#lb.open{display:flex}
+#lb img{max-width:92vw;max-height:90vh;object-fit:contain}
+#lb-close{position:absolute;top:1.5rem;right:2rem;font-size:22px;opacity:.4;cursor:pointer;background:none;border:none;color:var(--white)}
+#lb-close:hover{opacity:1}
+#lb-prev,#lb-next{position:absolute;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--white);font-size:2rem;opacity:.25;cursor:pointer;padding:1rem;transition:opacity .2s}
+#lb-prev:hover,#lb-next:hover{opacity:.9}
+#lb-prev{left:.5rem}
+#lb-next{right:.5rem}
+#lb-counter{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);font-size:10px;opacity:.3;letter-spacing:.1em}
+
+.thumb-label{font-size:9px;letter-spacing:.22em;opacity:.22;text-transform:uppercase;padding:2.5rem 2.5rem 1rem;max-width:1100px;margin:0 auto}
+.thumb-strip{display:flex;gap:2px;overflow-x:auto;padding:0 2.5rem 2rem;max-width:1100px;margin:0 auto;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.15) transparent}
+.thumb-strip::-webkit-scrollbar{height:4px}
+.thumb-strip::-webkit-scrollbar-track{background:transparent}
+.thumb-strip::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:2px}
+.thumb{flex:0 0 auto;width:100px;height:68px;overflow:hidden;cursor:zoom-in;opacity:.5;transition:opacity .3s}
+.thumb:hover{opacity:1}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+</style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="nav">
-  <a class="nav-logo" href="../../index.html">ON Design Lab</a>
-  <div class="nav-links">
-    <a class="nav-link active" href="../index.html">Commercial</a>
-    <a class="nav-link" href="../../residential/index.html">Residential</a>
-    <a class="nav-link" href="../../info/index.html">Info</a>
-  </div>
+<nav>
+  <a href="/index.html" class="logo">ON DESIGN LAB</a>
+  <ul>
+    <li><a href="/commercial/index.html">Commercial</a></li>
+    <li><a href="/residential/index.html">Residential</a></li>
+    <li><a href="/info/index.html">Info</a></li>
+  </ul>
 </nav>
 
-<a class="back" href="../index.html">← Commercial</a>
-
-<!-- ═══ HERO ═══ -->
-<div class="hero-img">
-  <img src="../../images/de-nuit/00.jpg" fetchpriority="high" loading="eager" decoding="async" alt="de nuit">
-  <div class="hero-overlay">
-    <div class="hero-title">de nuit</div>
-    <div class="hero-meta">
-      <span class="hero-type">F&amp;B</span>
-      <div class="hero-dot"></div>
-      <span class="hero-type">餐飲空間</span>
-      <div class="hero-dot"></div>
-      <span class="hero-type">Taipei</span>
-    </div>
+<div class="hero">
+  <img src="../../images/de-nuit/08.jpg" fetchpriority="high" loading="eager" decoding="async" alt="de nuit">
+  <div class="hero-caption">
+    <h1 class="hero-title">de nuit</h1>
+    <p class="hero-tags">餐飲空間 &middot; Taipei</p>
   </div>
 </div>
 
-<!-- ═══ TEXT AREA ═══ -->
-<div class="intro">
-  <p class="desc-zh">侍酒師的工作動線和客人的感受動線，可以同時成立嗎？de nuit 的設計從這個問題出發，而不是從氛圍。</p>
-  <p class="desc-en">The design of de nuit begins not with atmosphere, but with a question: can the sommelier's working logic and the guest's experiential logic coexist?</p>
-</div>
+<div class="content">
 
-<!-- Floor Plan（無圖自動隱藏）-->
-<div class="plan">
-  <p class="plan-label">Floor Plan</p>
-  <img src="../../images/de-nuit/plan.jpg" onerror="this.parentElement.style.display='none'" loading="lazy" decoding="async" alt="Floor Plan">
-</div>
-
-<!-- ═══ PHOTO AREA ═══ -->
-<div class="photos">
-
-  <div class="p-full"><img loading="lazy" decoding="async" src="../../images/de-nuit/02.jpg" alt="02"></div>
-  <div class="gap-row"></div>
-
-  <div class="p-2col">
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/de-nuit/03.jpg" alt="03"></div>
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/de-nuit/05.jpg" alt="05"></div>
+  <div class="intro">
+    <p class="intro-zh">侍酒師的工作動線和客人的感受動線，可以同時成立嗎？</p>
+    <p class="intro-en">Can the sommelier's working logic and the guest's experiential logic coexist?</p>
   </div>
-  <div class="gap-row"></div>
 
-  <div class="p-asymm">
-    <div class="p-asymm-left p-cell"><img loading="lazy" decoding="async" src="../../images/de-nuit/06.jpg" alt="06"></div>
-    <div class="p-asymm-right">
-      <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/de-nuit/07.jpg" alt="07"></div>
-      <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/de-nuit/08.jpg" alt="08"></div>
-    </div>
+
+
+  <div class="mag-row r-half">
+    <div class="mag-cell sq"><img src="../../images/de-nuit/02.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell sq"><img src="../../images/de-nuit/03.jpg" loading="lazy" alt=""></div>
   </div>
-  <div class="editorial">
-  <p class="ed-zh">入口處的弧形吧台，是整個空間的第一個問答。它既是侍酒師的工作站，也是客人進入用餐狀態的過渡地帶。材質選用深色石材與拉絲銅件，在光線的映照下，讓邊界變得模糊而有層次。</p>
-  <p class="ed-en">The curved bar at the entrance is the first question and answer of the space — both the sommelier's workstation and the threshold through which guests transition into the dining experience. Dark stone and brushed brass dissolve the boundary in light.</p>
-</div>
-  <div class="gap-row"></div>
-
-  <div class="p-full"><img loading="lazy" decoding="async" src="../../images/de-nuit/09.jpg" alt="09"></div>
-  <div class="gap-row"></div>
-
-  <div class="p-2col">
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/de-nuit/14.jpg" alt="14"></div>
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/de-nuit/23.jpg" alt="23"></div>
+  <div class="text-break">
+    <p class="tb-num">01</p>
+    <p class="tb-zh">入口處的弧形吧台，是整個空間的第一個問答。它既是侍酒師的工作站，也是客人進入用餐狀態的過渡地帶。材質選用深色石材與拉絲銅件，在光線的映照下，讓邊界變得模糊而有層次。</p>
+    <p class="tb-en">The curved bar at the entrance is the space's first question and answer — both the sommelier's workstation and the threshold through which guests transition into the dining state. Dark stone and brushed brass blur boundaries under light, creating depth.</p>
   </div>
-  <div class="editorial">
-  <p class="ed-zh">主 dining 區採用訂製半圓形卡座，將私密性與開放感並置。天花板以手工折件的金屬波浪板收尾，呼應酒窖的意象，同時創造出獨特的聲學環境，讓對話在喧囂中保有隱私。</p>
-  <p class="ed-en">The custom semi-circular banquettes place intimacy and openness side by side. The ceiling — hand-folded metal wave panels — echoes the wine cellar while creating an acoustic environment where conversation holds privacy within noise.</p>
-</div>
-  <div class="gap-row"></div>
-
-  <div class="p-2col">
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/de-nuit/24.jpg" alt="24"></div>
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/de-nuit/25.jpg" alt="25"></div>
+  <div class="mag-row r-6040">
+    <div class="mag-cell tall"><img src="../../images/de-nuit/05.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell tall"><img src="../../images/de-nuit/06.jpg" loading="lazy" alt=""></div>
   </div>
-  <div class="editorial">
-  <p class="ed-zh">燈光設計是整個空間最重要的敘事工具。暖白光源以不同角度和強度分層佈置，讓每一張桌子都擁有屬於自己的光環境，而整體氛圍仍保持一致的深沉與專注。</p>
-  <p class="ed-en">Lighting is the primary narrative instrument. Warm-white sources layered at different angles and intensities give each table its own light environment, while the overall atmosphere holds its depth and focus.</p>
-</div>
-  <div class="gap-row"></div>
+  <div class="text-break">
+    <p class="tb-num">02</p>
+    <p class="tb-zh">主用餐區採用訂製半圓形卡座，將私密性與開放感並置。座位的弧度讓每一組客人都有屬於自己的角落，卻不被完全隔離。</p>
+    <p class="tb-en">Custom semi-circular banquettes in the main dining area place intimacy and openness side by side. The curvature gives each group its own corner without full enclosure.</p>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/de-nuit/07.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/de-nuit/09.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">03</p>
+    <p class="tb-zh">天花板以手工折件的金屬波浪板收尾，呼應酒窖的意象，同時創造出獨特的聲學環境，讓對話在喧囂中保有隱私。</p>
+    <p class="tb-en">Hand-folded metal wave panels on the ceiling echo the wine cellar while creating an acoustic environment where conversation holds its privacy within the surrounding noise.</p>
+  </div>
+  <div class="mag-row r-half">
+    <div class="mag-cell sq"><img src="../../images/de-nuit/14.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell sq"><img src="../../images/de-nuit/23.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">04</p>
+    <p class="tb-zh">燈光設計是整個空間最重要的敘事工具。暖白光源以不同角度和強度分層佈置，讓每一張桌子都擁有屬於自己的光環境，而整體氛圍仍保持一致的深沉與專注。</p>
+    <p class="tb-en">Lighting is the primary narrative instrument. Warm-white sources layered at varying angles and intensities give each table its own light environment, while the overall atmosphere holds its depth and focus.</p>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/de-nuit/24.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/de-nuit/25.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">05</p>
+    <p class="tb-zh">酒與空間的關係，最終是時間的關係。侍酒師的手在吧台上移動，客人的對話在座位間流動，燈光隨著時間推移慢慢改變色溫。de nuit 不是一個靜態的場景，是一個會隨著夜晚深入而逐漸改變的空間。</p>
+    <p class="tb-en">The relationship between wine and space is ultimately one of time. The sommelier's hands move across the bar, conversation flows between seats, and color temperature shifts as the evening deepens. de nuit is not a static scene — it is a space that evolves as the night goes on.</p>
+  </div>
+
+  <p class="thumb-label">All Photos</p>
+  <div class="thumb-strip">
+    <div class="thumb"><img loading="lazy" src="../../images/de-nuit/02.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/de-nuit/03.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/de-nuit/05.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/de-nuit/06.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/de-nuit/07.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/de-nuit/09.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/de-nuit/14.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/de-nuit/23.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/de-nuit/24.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/de-nuit/25.jpg" alt=""></div>
+  </div>
+
+  <div class="proj-nav">
+    <a href="/commercial/lezun/index.html">&larr; 樂樽爐端燒</a>
+    <a href="/commercial/index.html" class="back">Commercial</a>
+    <a href="/commercial/r-sanderson/index.html">R. Sanderson &rarr;</a>
+  </div>
 
 </div>
 
-
-<!-- ═══ BOTTOM NAV ═══ -->
-
-<p class="thumb-label">All Photos</p>
-<div class="thumb-strip">
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/de-nuit/02.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/de-nuit/03.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/de-nuit/05.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/de-nuit/06.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/de-nuit/07.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/de-nuit/08.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/de-nuit/09.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/de-nuit/14.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/de-nuit/23.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/de-nuit/24.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/de-nuit/25.jpg" alt=""></div>
-</div>
-<div class="bottom">
-  <a class="bottom-nav" href="../lezun/index.html">← 樂樽爐端燒</a>
-  <a class="bowerbird" href="#">View on BowerBird →</a>
-  <a class="bottom-nav" href="../r-sanderson/index.html">R. Sanderson →</a>
-</div>
-
-
-
-
-<!-- Lightbox -->
-<div id="lb" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.93);align-items:center;justify-content:center;">
-  <button id="lb-close" style="position:absolute;top:1.5rem;right:2rem;font-size:24px;opacity:.5;cursor:pointer;background:none;border:none;color:#fafaf8;transition:opacity .2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.5">&#10005;</button>
-  <button id="lb-prev" style="position:absolute;top:50%;transform:translateY(-50%);left:1rem;background:none;border:none;color:#fafaf8;font-size:2rem;opacity:.3;cursor:pointer;padding:1rem;transition:opacity .2s;" onmouseover="this.style.opacity=.9" onmouseout="this.style.opacity=.3">&#8249;</button>
-  <img id="lb-img" src="" alt="" style="max-width:90vw;max-height:88vh;object-fit:contain;display:block;">
-  <button id="lb-next" style="position:absolute;top:50%;transform:translateY(-50%);right:1rem;background:none;border:none;color:#fafaf8;font-size:2rem;opacity:.3;cursor:pointer;padding:1rem;transition:opacity .2s;" onmouseover="this.style.opacity=.9" onmouseout="this.style.opacity=.3">&#8250;</button>
-  <span id="lb-counter" style="position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);font-size:11px;opacity:.35;letter-spacing:.1em;color:#fafaf8;"></span>
+<div id="lb">
+  <button id="lb-close">&#10005;</button>
+  <button id="lb-prev">&#8249;</button>
+  <img id="lb-img" src="" alt="">
+  <button id="lb-next">&#8250;</button>
+  <span id="lb-counter"></span>
 </div>
 <script>
 (function(){
-  const imgs=[...document.querySelectorAll('img[src]:not([src=""])')]
-    .filter(i=>!i.closest('#lb')&&!i.closest('.thumb-strip'));
-  const srcs=imgs.map(i=>i.src);
-  const lb=document.getElementById('lb');
-  const lbImg=document.getElementById('lb-img');
-  const lbC=document.getElementById('lb-counter');
-  let cur=0;
-  function show(i){cur=i;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;lb.style.display='flex';}
-  function close(){lb.style.display='none';lbImg.src='';}
-  imgs.forEach((img,i)=>{img.style.cursor='zoom-in';img.addEventListener('click',()=>show(i));});
-  document.querySelectorAll('.thumb-strip .thumb').forEach(t=>{
-    t.style.cursor='zoom-in';
-    t.addEventListener('click',()=>{
-      const s=t.querySelector('img').src;
-      const i=srcs.findIndex(x=>x===s);
-      if(i>=0)show(i);
+  var imgs=[].slice.call(document.querySelectorAll('.mag-cell img, .plan-section:not(.hidden) img'));
+  var srcs=imgs.map(function(i){return i.src});
+  var lb=document.getElementById('lb');
+  var lbImg=document.getElementById('lb-img');
+  var lbC=document.getElementById('lb-counter');
+  var cur=0;
+  function show(i){cur=i;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;lb.classList.add('open')}
+  function close(){lb.classList.remove('open');lbImg.src=''}
+  imgs.forEach(function(img,i){img.addEventListener('click',function(){show(i)})});
+  [].slice.call(document.querySelectorAll('.thumb-strip .thumb')).forEach(function(t){
+    t.addEventListener('click',function(){
+      var s=t.querySelector('img').src;
+      var i=srcs.findIndex(function(x){return x===s});
+      if(i>=0)show(i);else{srcs.push(s);show(srcs.length-1)}
     });
   });
   document.getElementById('lb-close').onclick=close;
-  document.getElementById('lb-prev').onclick=()=>{cur=(cur-1+srcs.length)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;};
-  document.getElementById('lb-next').onclick=()=>{cur=(cur+1)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;};
-  lb.addEventListener('click',e=>{if(e.target===lb)close();});
-  document.addEventListener('keydown',e=>{
-    if(lb.style.display==='none')return;
+  document.getElementById('lb-prev').onclick=function(){cur=(cur-1+srcs.length)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length};
+  document.getElementById('lb-next').onclick=function(){cur=(cur+1)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length};
+  lb.addEventListener('click',function(e){if(e.target===lb)close()});
+  document.addEventListener('keydown',function(e){
+    if(!lb.classList.contains('open'))return;
     if(e.key==='ArrowLeft')document.getElementById('lb-prev').click();
     if(e.key==='ArrowRight')document.getElementById('lb-next').click();
     if(e.key==='Escape')close();
   });
 })();
 </script>
+
 </body>
 </html>

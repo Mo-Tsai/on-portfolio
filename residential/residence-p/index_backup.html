@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Residence P — ON Design Lab</title>
+<style>
+  :root {
+    --bg: #f0efe8; --bg2: #e8e7df;
+    --line: rgba(14,14,12,0.1); --text: #0e0e0c;
+    --muted: #8a8a7e; --dim: rgba(14,14,12,0.22); --accent: #3a3a36;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; background:var(--bg); color:var(--text); }
+  .nav { display:flex; align-items:center; justify-content:space-between; padding:20px 40px; border-bottom:0.5px solid var(--line); position:sticky; top:0; background:var(--bg); z-index:200; }
+  .nav-logo { font-size:10px; font-weight:300; letter-spacing:0.26em; text-transform:uppercase; color:var(--text); text-decoration:none; }
+  .nav-links { display:flex; gap:28px; }
+  .nav-link { font-size:9px; font-weight:300; letter-spacing:0.22em; text-transform:uppercase; color:var(--muted); text-decoration:none; padding-bottom:2px; border-bottom:0.5px solid transparent; transition:all 0.2s; }
+  .nav-link:hover, .nav-link.active { color:var(--text); border-color:var(--text); }
+  .back { display:inline-block; padding:20px 40px 0; font-size:9px; font-weight:300; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color 0.2s; }
+  .back:hover { color:var(--text); }
+  .hero-img { width:100%; height:85vh; overflow:hidden; position:relative; margin-top:18px; }
+  .hero-img img { width:100%; height:100%; object-fit:cover; object-position:center 50%; display:block; }
+  .hero-overlay { position:absolute; bottom:0; left:0; right:0; padding:40px 48px; background:linear-gradient(transparent, rgba(240,239,232,0.92)); pointer-events:none; }
+  .hero-title { font-size:36px; font-weight:300; color:var(--text); letter-spacing:0.04em; margin-bottom:10px; }
+  .hero-meta { display:flex; gap:12px; align-items:center; }
+  .hero-type { font-size:9px; color:var(--muted); letter-spacing:0.22em; text-transform:uppercase; }
+  .hero-dot { width:2px; height:2px; background:var(--muted); border-radius:50%; }
+  .intro { max-width:640px; padding:80px 60px; margin:0; }
+  .desc-zh { font-size:15px; line-height:2.1; color:var(--accent); margin-bottom:28px; }
+  .desc-en { font-size:13px; line-height:1.9; color:var(--muted); font-style:italic; }
+  .plan { padding:40px 60px; max-width:640px; }
+  .plan-label { font-size:8px; letter-spacing:0.28em; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
+  .plan img { width:100%; height:auto; display:block; }
+  .photos { width:100%; padding: 0 50px; }
+  .p-full, .p-2col, .p-asymm { padding:0; }
+  .p-full img { width:100%; height:auto; display:block; }
+  .p-2col { display:grid; grid-template-columns:1fr 1fr; gap:3px; }
+  .p-cell { position:relative; cursor:pointer; }
+  .p-cell img { width:100%; height:auto; display:block; }
+  .p-asymm { display:grid; grid-template-columns:1fr 1fr; gap:3px; align-items:stretch; }
+  .p-asymm-left img { width:100%; height:100%; object-fit:cover; display:block; }
+  .p-asymm-right { display:flex; flex-direction:column; gap:3px; }
+  .p-asymm-right .p-cell { flex:1; }
+  .p-asymm-right .p-cell img { width:100%; height:100%; object-fit:cover; display:block; }
+  .editorial { max-width:640px; padding:64px 60px; }
+  .editorial p { font-size:13px; font-weight:300; color:var(--muted); line-height:2.1; }
+  .editorial p + p { margin-top:20px; }
+  .gap-row { height:3px; background:var(--bg); }
+  .thumb-label { font-size:8px; font-weight:300; letter-spacing:0.28em; text-transform:uppercase; color:var(--muted); padding:32px 40px 12px; }
+  .thumb-strip { display:flex; overflow-x:auto; gap:4px; padding:0 40px 32px; scrollbar-width:none; }
+  .thumb-strip::-webkit-scrollbar { display:none; }
+  .thumb { flex-shrink:0; width:120px; height:80px; overflow:hidden; cursor:pointer; opacity:0.5; transition:opacity 0.2s; }
+  .thumb:hover { opacity:1; }
+  .thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+  .lightbox { position:fixed; inset:0; background:rgba(240,239,232,0.97); z-index:1000; display:flex; align-items:center; justify-content:center; }
+  #lb-img { max-width:90vw; max-height:90vh; object-fit:contain; }
+  .lb-close { position:absolute; top:24px; right:32px; font-size:32px; color:var(--text); cursor:pointer; font-weight:300; line-height:1; user-select:none; opacity:0.5; transition:opacity 0.2s; }
+  .lb-close:hover { opacity:1; }
+  .lb-prev, .lb-next { position:absolute; top:50%; transform:translateY(-50%); font-size:48px; color:var(--text); cursor:pointer; font-weight:300; padding:0 24px; opacity:0.3; transition:opacity 0.2s; user-select:none; line-height:1; }
+  .lb-prev { left:0; } .lb-next { right:0; }
+  .lb-prev:hover, .lb-next:hover { opacity:0.8; }
+  .bottom { padding:28px 40px; border-top:0.5px solid var(--line); display:flex; justify-content:space-between; align-items:center; margin-top:16px; }
+  .bottom-nav { font-size:9px; font-weight:300; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color 0.2s; }
+  .bottom-nav:hover { color:var(--text); }
+  .bowerbird { font-size:9px; font-weight:300; letter-spacing:0.22em; text-transform:uppercase; color:var(--muted); text-decoration:none; border:0.5px solid var(--line); padding:10px 20px; transition:all 0.2s; }
+  .bowerbird:hover { color:var(--text); border-color:var(--accent); }
+  @media (max-width: 768px) {
+    .intro { padding:48px 24px; max-width:100%; }
+    .plan { padding:24px 24px 40px; max-width:100%; }
+    .p-2col { grid-template-columns:1fr; }
+    .p-asymm { grid-template-columns:1fr; }
+    .p-asymm-left { display:none; }
+    .p-full, .p-2col, .p-asymm { padding:0; }
+    .editorial { padding:40px 24px; max-width:100%; }
+    .thumb { width:90px; height:60px; }
+    .thumb-strip { padding:0 20px 24px; }
+    .thumb-label { padding:24px 20px 10px; }
+    .hero-img { height:60vh; }
+    .nav { padding:16px 20px; }
+    .back { padding:16px 20px 0; }
+    .bottom { padding:20px 20px; }
+  }
+</style>
+<meta name="description" content="Residence P | ON Design Lab 設計作品">
+<meta property="og:title" content="Residence P — ON Design Lab">
+<meta property="og:description" content="Residence P | ON Design Lab — 台北品牌空間設計事務所">
+<meta property="og:image" content="https://ondesignlabltd.com/images/residence-p/00.jpg">
+<meta property="og:url" content="https://ondesignlabltd.com/residential/residence-p/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<nav class="nav">
+  <a class="nav-logo" href="../../index.html">ON Design Lab</a>
+  <div class="nav-links">
+    <a class="nav-link" href="../../commercial/index.html">Commercial</a>
+    <a class="nav-link active" href="../index.html">Residential</a>
+    <a class="nav-link" href="../../info/index.html">Info</a>
+  </div>
+</nav>
+<a class="back" href="../index.html">← Residential</a>
+<div class="hero-img">
+  <img fetchpriority="high" loading="eager" decoding="async" src="../../images/residence-p/00.jpg" alt="Residence P">
+  <div class="hero-overlay">
+    <div class="hero-title">Residence P</div>
+    <div class="hero-meta">
+      <span class="hero-type">Residential</span>
+      <div class="hero-dot"></div>
+      <span class="hero-type">住家空間</span>
+      <div class="hero-dot"></div>
+      <span class="hero-type">Taipei</span>
+    </div>
+  </div>
+</div>
+<div class="intro">
+  <p class="desc-zh" style="display:none">[待補文案]</p>
+  <p class="desc-en" style="display:none">[Design statement — to be provided]</p>
+</div>
+<div class="plan">
+  <p class="plan-label">Floor Plan</p>
+  <img loading="lazy" decoding="async" src="../../images/residence-p/plan.jpg" onerror="this.parentElement.style.display='none'" alt="Floor Plan">
+</div>
+<div class="photos">
+<div class="gap-row"></div>
+<div class="p-full"><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-p/01.jpg" alt=""></div></div>
+<div class="gap-row"></div>
+<div class="p-2col"><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-p/02.jpg" alt=""></div><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-p/03.jpg" alt=""></div></div>
+<div class="gap-row"></div>
+<div class="p-asymm"><div class="p-asymm-left p-cell"><img loading="lazy" decoding="async" src="../../images/residence-p/04.jpg" alt=""></div><div class="p-asymm-right"><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-p/05.jpg" alt=""></div><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-p/06.jpg" alt=""></div></div></div>
+<div class="gap-row"></div>
+<div class="p-2col"><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-p/07.jpg" alt=""></div><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-p/08.jpg" alt=""></div></div>
+<div class="gap-row"></div>
+</div>
+<p class="thumb-label">All Photos</p>
+<div class="thumb-strip">
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-p/01.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-p/02.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-p/03.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-p/04.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-p/05.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-p/06.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-p/07.jpg" alt=""></div>
+<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-p/08.jpg" alt=""></div>
+</div>
+<div class="bottom">
+  <a class="bottom-nav" href="../residence-m/index.html">← Residence M</a>
+  <a class="bowerbird" href="#">View on BowerBird →</a>
+  <a class="bottom-nav" href="../residence-h/index.html">Residence H →</a>
+</div>
+
+
+<!-- Lightbox -->
+<div id="lb" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.93);align-items:center;justify-content:center;">
+  <button id="lb-close" style="position:absolute;top:1.5rem;right:2rem;font-size:24px;opacity:.5;cursor:pointer;background:none;border:none;color:#fafaf8;transition:opacity .2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.5">&#10005;</button>
+  <button id="lb-prev" style="position:absolute;top:50%;transform:translateY(-50%);left:1rem;background:none;border:none;color:#fafaf8;font-size:2rem;opacity:.3;cursor:pointer;padding:1rem;transition:opacity .2s;" onmouseover="this.style.opacity=.9" onmouseout="this.style.opacity=.3">&#8249;</button>
+  <img id="lb-img" src="" alt="" style="max-width:90vw;max-height:88vh;object-fit:contain;display:block;">
+  <button id="lb-next" style="position:absolute;top:50%;transform:translateY(-50%);right:1rem;background:none;border:none;color:#fafaf8;font-size:2rem;opacity:.3;cursor:pointer;padding:1rem;transition:opacity .2s;" onmouseover="this.style.opacity=.9" onmouseout="this.style.opacity=.3">&#8250;</button>
+  <span id="lb-counter" style="position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);font-size:11px;opacity:.35;letter-spacing:.1em;color:#fafaf8;"></span>
+</div>
+<script>
+(function(){
+  const imgs=[...document.querySelectorAll('img[src]:not([src=""])')]
+    .filter(i=>!i.closest('#lb')&&!i.closest('.thumb-strip'));
+  const srcs=imgs.map(i=>i.src);
+  const lb=document.getElementById('lb');
+  const lbImg=document.getElementById('lb-img');
+  const lbC=document.getElementById('lb-counter');
+  let cur=0;
+  function show(i){cur=i;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;lb.style.display='flex';}
+  function close(){lb.style.display='none';lbImg.src='';}
+  imgs.forEach((img,i)=>{img.style.cursor='zoom-in';img.addEventListener('click',()=>show(i));});
+  document.querySelectorAll('.thumb-strip .thumb').forEach(t=>{
+    t.style.cursor='zoom-in';
+    t.addEventListener('click',()=>{
+      const s=t.querySelector('img').src;
+      const i=srcs.findIndex(x=>x===s);
+      if(i>=0)show(i);
+    });
+  });
+  document.getElementById('lb-close').onclick=close;
+  document.getElementById('lb-prev').onclick=()=>{cur=(cur-1+srcs.length)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;};
+  document.getElementById('lb-next').onclick=()=>{cur=(cur+1)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;};
+  lb.addEventListener('click',e=>{if(e.target===lb)close();});
+  document.addEventListener('keydown',e=>{
+    if(lb.style.display==='none')return;
+    if(e.key==='ArrowLeft')document.getElementById('lb-prev').click();
+    if(e.key==='ArrowRight')document.getElementById('lb-next').click();
+    if(e.key==='Escape')close();
+  });
+})();
+</script>
+</body>
+</html>

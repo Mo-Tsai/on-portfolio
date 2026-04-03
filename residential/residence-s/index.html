@@ -1,217 +1,236 @@
-﻿<!DOCTYPE html>
-<html lang="zh-TW">
+<!DOCTYPE html>
+<html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Residence S — ON Design Lab</title>
-<style>
-  :root {
-    --bg: #f0efe8; --bg2: #e8e7df;
-    --line: rgba(14,14,12,0.1); --text: #0e0e0c;
-    --muted: #8a8a7e; --dim: rgba(14,14,12,0.22); --accent: #3a3a36;
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; background:var(--bg); color:var(--text); }
-  .nav { display:flex; align-items:center; justify-content:space-between; padding:20px 40px; border-bottom:0.5px solid var(--line); position:sticky; top:0; background:var(--bg); z-index:200; }
-  .nav-logo { font-size:10px; font-weight:300; letter-spacing:0.26em; text-transform:uppercase; color:var(--text); text-decoration:none; }
-  .nav-links { display:flex; gap:28px; }
-  .nav-link { font-size:9px; font-weight:300; letter-spacing:0.22em; text-transform:uppercase; color:var(--muted); text-decoration:none; padding-bottom:2px; border-bottom:0.5px solid transparent; transition:all 0.2s; }
-  .nav-link:hover, .nav-link.active { color:var(--text); border-color:var(--text); }
-  .back { display:inline-block; padding:20px 40px 0; font-size:9px; font-weight:300; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color 0.2s; }
-  .back:hover { color:var(--text); }
-  .hero-img { width:100%; height:85vh; overflow:hidden; position:relative; margin-top:18px; }
-  .hero-img img { width:100%; height:100%; object-fit:cover; object-position:center 50%; display:block; }
-  .hero-overlay { position:absolute; bottom:0; left:0; right:0; padding:40px 48px; background:linear-gradient(transparent, rgba(240,239,232,0.92)); pointer-events:none; }
-  .hero-title { font-size:36px; font-weight:300; color:var(--text); letter-spacing:0.04em; margin-bottom:10px; }
-  .hero-meta { display:flex; gap:12px; align-items:center; }
-  .hero-type { font-size:9px; color:var(--muted); letter-spacing:0.22em; text-transform:uppercase; }
-  .hero-dot { width:2px; height:2px; background:var(--muted); border-radius:50%; }
-  .intro { max-width:640px; padding:80px 60px; margin:0; }
-  .desc-zh { font-size:15px; line-height:2.1; color:var(--accent); margin-bottom:28px; }
-  .desc-en { font-size:13px; line-height:1.9; color:var(--muted); font-style:italic; }
-  .plan { padding:40px 60px; max-width:640px; }
-  .plan-label { font-size:8px; letter-spacing:0.28em; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
-  .plan img { width:100%; height:auto; display:block; }
-  .photos { width:100%; padding: 0 50px; }
-  .p-full, .p-2col, .p-asymm { padding:0; }
-  .p-full img { width:100%; height:auto; display:block; }
-  .p-2col { display:grid; grid-template-columns:1fr 1fr; gap:3px; }
-  .p-cell { position:relative; cursor:pointer; }
-  .p-cell img { width:100%; height:auto; display:block; }
-  .p-asymm { display:grid; grid-template-columns:1fr 1fr; gap:3px; align-items:stretch; }
-  .p-asymm-left img { width:100%; height:100%; object-fit:cover; display:block; }
-  .p-asymm-right { display:flex; flex-direction:column; gap:3px; }
-  .p-asymm-right .p-cell { flex:1; }
-  .p-asymm-right .p-cell img { width:100%; height:100%; object-fit:cover; display:block; }
-  .editorial { max-width:640px; padding:64px 60px; }
-  .editorial p { font-size:13px; font-weight:300; color:var(--muted); line-height:2.1; }
-  .editorial p + p { margin-top:20px; }
-  .gap-row { height:3px; background:var(--bg); }
-  .thumb-label { font-size:8px; font-weight:300; letter-spacing:0.28em; text-transform:uppercase; color:var(--muted); padding:32px 40px 12px; }
-  .thumb-strip { display:flex; overflow-x:auto; gap:4px; padding:0 40px 32px; scrollbar-width:none; }
-  .thumb-strip::-webkit-scrollbar { display:none; }
-  .thumb { flex-shrink:0; width:120px; height:80px; overflow:hidden; cursor:pointer; opacity:0.5; transition:opacity 0.2s; }
-  .thumb:hover { opacity:1; }
-  .thumb img { width:100%; height:100%; object-fit:cover; display:block; }
-  .lightbox { position:fixed; inset:0; background:rgba(240,239,232,0.97); z-index:1000; display:flex; align-items:center; justify-content:center; }
-  #lb-img { max-width:90vw; max-height:90vh; object-fit:contain; }
-  .lb-close { position:absolute; top:24px; right:32px; font-size:32px; color:var(--text); cursor:pointer; font-weight:300; line-height:1; user-select:none; opacity:0.5; transition:opacity 0.2s; }
-  .lb-close:hover { opacity:1; }
-  .lb-prev, .lb-next { position:absolute; top:50%; transform:translateY(-50%); font-size:48px; color:var(--text); cursor:pointer; font-weight:300; padding:0 24px; opacity:0.3; transition:opacity 0.2s; user-select:none; line-height:1; }
-  .lb-prev { left:0; } .lb-next { right:0; }
-  .lb-prev:hover, .lb-next:hover { opacity:0.8; }
-  .bottom { padding:28px 40px; border-top:0.5px solid var(--line); display:flex; justify-content:space-between; align-items:center; margin-top:16px; }
-  .bottom-nav { font-size:9px; font-weight:300; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color 0.2s; }
-  .bottom-nav:hover { color:var(--text); }
-  .bowerbird { font-size:9px; font-weight:300; letter-spacing:0.22em; text-transform:uppercase; color:var(--muted); text-decoration:none; border:0.5px solid var(--line); padding:10px 20px; transition:all 0.2s; }
-  .bowerbird:hover { color:var(--text); border-color:var(--accent); }
-  @media (max-width: 768px) {
-    .intro { padding:48px 24px; max-width:100%; }
-    .plan { padding:24px 24px 40px; max-width:100%; }
-    .p-2col { grid-template-columns:1fr; }
-    .p-asymm { grid-template-columns:1fr; }
-    .p-asymm-left { display:none; }
-    .p-full, .p-2col, .p-asymm { padding:0; }
-    .editorial { padding:40px 24px; max-width:100%; }
-    .thumb { width:90px; height:60px; }
-    .thumb-strip { padding:0 20px 24px; }
-    .thumb-label { padding:24px 20px 10px; }
-    .hero-img { height:60vh; }
-    .nav { padding:16px 20px; }
-    .back { padding:16px 20px 0; }
-    .bottom { padding:20px 20px; }
-  }
-</style>
-<meta name="description" content="Residence S | ON Design Lab 設計作品">
-<meta property="og:title" content="Residence S — ON Design Lab">
-<meta property="og:description" content="Residence S | ON Design Lab — 台北品牌空間設計事務所">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Residence S &mdash; ON Design Lab</title>
+<meta name="description" content="Residence S 住家空間 | ON Design Lab">
+<meta property="og:title" content="Residence S &mdash; ON Design Lab">
 <meta property="og:image" content="https://ondesignlabltd.com/images/residence-s/00.jpg">
-<meta property="og:url" content="https://ondesignlabltd.com/residential/residence-s/">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--black:#0a0a0a;--white:#fafaf8;--dim:rgba(255,255,255,.07)}
+html,body{background:var(--black);color:var(--white);font-family:'Helvetica Neue',Helvetica,Arial,sans-serif}
+a{color:inherit;text-decoration:none}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.5rem 2.5rem;background:rgba(10,10,10,.88);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
+nav .logo{font-size:12px;letter-spacing:.18em}
+nav ul{list-style:none;display:flex;gap:2.5rem}
+nav ul li a{font-size:11px;letter-spacing:.12em;opacity:.4;transition:opacity .2s}
+nav ul li a:hover{opacity:1}
+
+.hero{position:relative;width:100%;height:100vh;overflow:hidden;display:flex;align-items:flex-end}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.55)}
+.hero-caption{position:relative;z-index:2;padding:3rem 2.5rem;width:100%;border-top:1px solid rgba(255,255,255,.1)}
+.hero-title{font-size:clamp(2.5rem,7vw,6rem);font-weight:200;letter-spacing:-.02em;line-height:.95;margin-bottom:.6rem}
+.hero-tags{font-size:11px;letter-spacing:.12em;opacity:.35}
+
+.content{max-width:1100px;margin:0 auto}
+.intro{max-width:720px;padding:5rem 2.5rem;border-bottom:1px solid var(--dim)}
+.intro-zh{font-size:16px;line-height:2.05;opacity:.75;margin-bottom:2.5rem}
+.intro-en{font-size:13px;line-height:1.95;opacity:.28;font-style:italic}
+
+.plan-section{padding:4rem 2.5rem;border-bottom:1px solid var(--dim)}
+.plan-section.hidden{display:none}
+.plan-eyebrow{font-size:9px;letter-spacing:.22em;opacity:.22;text-transform:uppercase;margin-bottom:2rem}
+.plan-section img{width:100%;display:block;filter:brightness(.85);cursor:zoom-in}
+.plan-section img:hover{filter:brightness(1)}
+
+.mag-row{display:grid;gap:1px;background:var(--dim);border-bottom:1px solid var(--dim)}
+.mag-row.r-full{grid-template-columns:1fr}
+.mag-row.r-6040{grid-template-columns:6fr 4fr}
+.mag-row.r-half{grid-template-columns:1fr 1fr}
+.mag-row.r-third{grid-template-columns:1fr 1fr 1fr}
+@media(max-width:600px){.mag-row.r-6040,.mag-row.r-half,.mag-row.r-third{grid-template-columns:1fr}}
+.mag-cell{background:var(--black);overflow:hidden}
+.mag-cell img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.82);transition:filter .4s,transform .55s;cursor:zoom-in}
+.mag-cell:hover img{filter:brightness(1);transform:scale(1.03)}
+.mag-cell.tall{aspect-ratio:3/4}
+.mag-cell.wide{aspect-ratio:16/9}
+.mag-cell.sq{aspect-ratio:1}
+
+.text-break{max-width:720px;padding:4rem 2.5rem;border-bottom:1px solid var(--dim)}
+.tb-num{font-size:9px;letter-spacing:.2em;opacity:.2;text-transform:uppercase;margin-bottom:1.5rem}
+.tb-zh{font-size:14px;line-height:2.05;opacity:.68;margin-bottom:1.8rem}
+.tb-en{font-size:12px;line-height:1.95;opacity:.27;font-style:italic}
+
+.proj-nav{display:flex;justify-content:space-between;align-items:center;padding:2.5rem;border-top:1px solid var(--dim)}
+.proj-nav a{font-size:11px;letter-spacing:.1em;opacity:.3;transition:opacity .2s}
+.proj-nav a:hover{opacity:.9}
+.proj-nav .back{font-size:10px;letter-spacing:.15em;opacity:.2}
+
+#lb{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.95);align-items:center;justify-content:center}
+#lb.open{display:flex}
+#lb img{max-width:92vw;max-height:90vh;object-fit:contain}
+#lb-close{position:absolute;top:1.5rem;right:2rem;font-size:22px;opacity:.4;cursor:pointer;background:none;border:none;color:var(--white)}
+#lb-close:hover{opacity:1}
+#lb-prev,#lb-next{position:absolute;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--white);font-size:2rem;opacity:.25;cursor:pointer;padding:1rem;transition:opacity .2s}
+#lb-prev:hover,#lb-next:hover{opacity:.9}
+#lb-prev{left:.5rem}
+#lb-next{right:.5rem}
+#lb-counter{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);font-size:10px;opacity:.3;letter-spacing:.1em}
+
+.thumb-label{font-size:9px;letter-spacing:.22em;opacity:.22;text-transform:uppercase;padding:2.5rem 2.5rem 1rem;max-width:1100px;margin:0 auto}
+.thumb-strip{display:flex;gap:2px;overflow-x:auto;padding:0 2.5rem 2rem;max-width:1100px;margin:0 auto;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.15) transparent}
+.thumb-strip::-webkit-scrollbar{height:4px}
+.thumb-strip::-webkit-scrollbar-track{background:transparent}
+.thumb-strip::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:2px}
+.thumb{flex:0 0 auto;width:100px;height:68px;overflow:hidden;cursor:zoom-in;opacity:.5;transition:opacity .3s}
+.thumb:hover{opacity:1}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+</style>
 </head>
 <body>
-<nav class="nav">
-  <a class="nav-logo" href="../../index.html">ON Design Lab</a>
-  <div class="nav-links">
-    <a class="nav-link" href="../../commercial/index.html">Commercial</a>
-    <a class="nav-link active" href="../index.html">Residential</a>
-    <a class="nav-link" href="../../info/index.html">Info</a>
-  </div>
+
+<nav>
+  <a href="/index.html" class="logo">ON DESIGN LAB</a>
+  <ul>
+    <li><a href="/commercial/index.html">Commercial</a></li>
+    <li><a href="/residential/index.html">Residential</a></li>
+    <li><a href="/info/index.html">Info</a></li>
+  </ul>
 </nav>
-<a class="back" href="../index.html">← Residential</a>
-<div class="hero-img">
-  <img fetchpriority="high" loading="eager" decoding="async" src="../../images/residence-s/00.jpg" alt="Residence S">
-  <div class="hero-overlay">
-    <div class="hero-title">Residence S</div>
-    <div class="hero-meta">
-      <span class="hero-type">Residential</span>
-      <div class="hero-dot"></div>
-      <span class="hero-type">住家空間</span>
-      <div class="hero-dot"></div>
-      <span class="hero-type">Taipei</span>
-    </div>
+
+<div class="hero">
+  <img src="../../images/residence-s/00.jpg" fetchpriority="high" loading="eager" decoding="async" alt="Residence S">
+  <div class="hero-caption">
+    <h1 class="hero-title">Residence S</h1>
+    <p class="hero-tags">住家空間 &middot; Taipei</p>
   </div>
 </div>
-<div class="intro">
-  <p class="desc-zh">這個案子用一條線統一所有材質的關係。從走道到臥室到浴室，半高切線把每一個材質交界壓在同一基準上——節奏不因轉折而斷。公共區域的大面積手工壁紙密度高，敘事感強；下半段換成低彩度礦物塗料，牆面因此有了上下的呼吸。這個對比不是衝突，是兩種東西互相定義對方的邊界。不用單一主材塑造風格，用光澤、觸感與施作方式的對比，讓材料之間自然找到秩序。</p>
-  <p class="desc-en">One line unifies everything. From corridor to bedroom to bathroom, a half-height datum holds every material boundary at the same level — the rhythm doesn't break at transitions. Large-format handcrafted wallpaper fills the common areas with density and narrative; below the line, low-chroma mineral paint gives the wall room to breathe. Not conflict — two things defining each other's boundary. No single dominant material sets the style. Contrasts in sheen, texture, and application let the materials find their own order.</p>
-</div>
-<div class="plan">
-  <p class="plan-label">Floor Plan</p>
-  <img loading="lazy" decoding="async" src="../../images/residence-s/plan.jpg" onerror="this.parentElement.style.display='none'" alt="Floor Plan">
-</div>
-<div class="photos">
-<div class="gap-row"></div>
-<div class="p-full"><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-s/01.jpg" alt=""></div></div>
-<div class="gap-row"></div>
-<div class="p-2col"><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-s/02.jpg" alt=""></div><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-s/03.jpg" alt=""></div></div>
-<div class="gap-row"></div>
-<div class="editorial">
-<p>壁紙的熱帶森林圖像密度高，本身有敘事。礦物塗料在下半段接住它——牆面因此有了上下的呼吸。進入臥室，壁紙繼續，密度也繼續，但半高特殊漆拉住同一條水平基準，視覺重量不外溢。喧囂和安靜同時在場，也同時被整理好。</p>
-</div>
-<div class="p-asymm"><div class="p-asymm-left p-cell"><img loading="lazy" decoding="async" src="../../images/residence-s/04.jpg" alt=""></div><div class="p-asymm-right"><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-s/05.jpg" alt=""></div><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-s/06.jpg" alt=""></div></div></div>
-<div class="gap-row"></div>
-<div class="editorial">
-<p>浴室用深綠手工磚包牆，釉面不規則，光在上面形成波動。礦物塗料在下半段延續亮度，浴缸因此成為焦點。光在這裡不戲劇化——磚面是細緻反射，塗料是霧面漫散，金屬框線和銅件留下極薄的高光。低彩度的底，細節卻很豐富。</p>
-</div>
-<div class="p-2col"><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-s/07.jpg" alt=""></div><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-s/08.jpg" alt=""></div></div>
-<div class="gap-row"></div>
-<div class="p-full"><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-s/09.jpg" alt=""></div></div>
-<div class="gap-row"></div>
-<div class="p-full"><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-s/10.jpg" alt=""></div></div>
-<div class="gap-row"></div>
-<div class="p-2col"><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-s/11.jpg" alt=""></div><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-s/12.jpg" alt=""></div></div>
-<div class="gap-row"></div>
-<div class="p-2col"><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-s/13.jpg" alt=""></div><div class="p-cell"><img loading="lazy" decoding="async" src="../../images/residence-s/14.jpg" alt=""></div></div>
-<div class="gap-row"></div>
-<div class="editorial">
-<p>水平界線是這個案子最安靜的決定，也是控制力最強的。它不製造焦點，它讓所有材質在同一個基準上共存。每一道轉折都回到同一條線，節奏就不被打斷。進入和停留，都變得更自然。</p>
-</div>
-</div>
-<p class="thumb-label">All Photos</p>
-<div class="thumb-strip">
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-s/01.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-s/02.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-s/03.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-s/04.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-s/05.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-s/06.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-s/07.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-s/08.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-s/09.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-s/10.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-s/11.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-s/12.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-s/13.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/residence-s/14.jpg" alt=""></div>
-</div>
-<div class="bottom">
-  <a class="bottom-nav" href="../residence-g/index.html">← Residence G</a>
-  <a class="bowerbird" href="#">View on BowerBird →</a>
-  <a class="bottom-nav" href="../residence-o/index.html">Residence O →</a>
-</div>
+
+<div class="content">
+
+  <div class="intro">
+    <p class="intro-zh">一條線，統一所有材質的關係。</p>
+    <p class="intro-en">One line unifies everything.</p>
+  </div>
 
 
-<!-- Lightbox -->
-<div id="lb" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.93);align-items:center;justify-content:center;">
-  <button id="lb-close" style="position:absolute;top:1.5rem;right:2rem;font-size:24px;opacity:.5;cursor:pointer;background:none;border:none;color:#fafaf8;transition:opacity .2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.5">&#10005;</button>
-  <button id="lb-prev" style="position:absolute;top:50%;transform:translateY(-50%);left:1rem;background:none;border:none;color:#fafaf8;font-size:2rem;opacity:.3;cursor:pointer;padding:1rem;transition:opacity .2s;" onmouseover="this.style.opacity=.9" onmouseout="this.style.opacity=.3">&#8249;</button>
-  <img id="lb-img" src="" alt="" style="max-width:90vw;max-height:88vh;object-fit:contain;display:block;">
-  <button id="lb-next" style="position:absolute;top:50%;transform:translateY(-50%);right:1rem;background:none;border:none;color:#fafaf8;font-size:2rem;opacity:.3;cursor:pointer;padding:1rem;transition:opacity .2s;" onmouseover="this.style.opacity=.9" onmouseout="this.style.opacity=.3">&#8250;</button>
-  <span id="lb-counter" style="position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);font-size:11px;opacity:.35;letter-spacing:.1em;color:#fafaf8;"></span>
+
+  <div class="mag-row r-half">
+    <div class="mag-cell sq"><img src="../../images/residence-s/01.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell sq"><img src="../../images/residence-s/02.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/residence-s/03.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">01</p>
+    <p class="tb-zh">這個案子用一條線統一所有材質的關係。從走道到臥室到浴室，半高切線把每一個材質交界壓在同一基準上——節奏不因轉折而斷。不用單一主材塑造風格，用光澤、觸感與施作方式的對比，讓材料之間自然找到秩序。</p>
+    <p class="tb-en">One line unifies every material relationship. From corridor to bedroom to bathroom, a half-height datum holds every boundary at the same level — rhythm doesn't break at transitions. No single dominant material sets the style; contrasts in sheen, texture, and application let materials find their own order.</p>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/residence-s/04.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="mag-row r-half">
+    <div class="mag-cell sq"><img src="../../images/residence-s/05.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell sq"><img src="../../images/residence-s/06.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">02</p>
+    <p class="tb-zh">壁紙的熱帶森林圖像密度高，本身有敘事。礦物塗料在下半段接住它——牆面因此有了上下的呼吸。喧囂和安靜同時在場，也同時被整理好。</p>
+    <p class="tb-en">The wallpaper's tropical-forest imagery is dense, carrying its own narrative. Mineral paint in the lower half catches it — the wall breathes vertically. Exuberance and quiet coexist, both organized.</p>
+  </div>
+  <div class="mag-row r-half">
+    <div class="mag-cell sq"><img src="../../images/residence-s/07.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell sq"><img src="../../images/residence-s/08.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/residence-s/09.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">03</p>
+    <p class="tb-zh">浴室用深綠手工磚包牆，釉面不規則，光在上面形成波動。礦物塗料在下半段延續亮度，浴缸因此成為焦點。低彩度的底，細節卻很豐富。</p>
+    <p class="tb-en">The bathroom is wrapped in deep-green handmade tile — uneven glaze, light rippling across it. Mineral paint below continues the luminosity; the bathtub becomes the focal point. Low chroma at the base, yet rich in detail.</p>
+  </div>
+  <div class="mag-row r-6040">
+    <div class="mag-cell tall"><img src="../../images/residence-s/10.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell tall"><img src="../../images/residence-s/11.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/residence-s/12.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">04</p>
+    <p class="tb-zh">水平界線是這個案子最安靜的決定，也是控制力最強的。它不製造焦點，它讓所有材質在同一個基準上共存。每一道轉折都回到同一條線，節奏就不被打斷。</p>
+    <p class="tb-en">The horizontal datum is the quietest decision and the most controlling. It creates no focal point — it lets every material coexist on the same baseline. Each transition returns to the same line; rhythm never breaks.</p>
+  </div>
+  <div class="mag-row r-6040">
+    <div class="mag-cell tall"><img src="../../images/residence-s/13.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell tall"><img src="../../images/residence-s/14.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">05</p>
+    <p class="tb-zh">這個案子最後的完成度，不在於某一個空間的亮點，而在於整體的連貫性。從走道走到臥室、從臥室走到浴室，你不會感覺到「換了一個房間」——你感覺到的是同一首歌的不同樂章，節奏在變，但旋律從未斷過。</p>
+    <p class="tb-en">The final measure of this project is not any single room's highlight but the coherence of the whole. Walking from corridor to bedroom to bathroom, you never feel you have entered a different room — you feel different movements of the same song. The rhythm changes, but the melody never breaks.</p>
+  </div>
+
+  <p class="thumb-label">All Photos</p>
+  <div class="thumb-strip">
+    <div class="thumb"><img loading="lazy" src="../../images/residence-s/01.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/residence-s/02.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/residence-s/03.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/residence-s/04.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/residence-s/05.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/residence-s/06.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/residence-s/07.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/residence-s/08.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/residence-s/09.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/residence-s/10.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/residence-s/11.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/residence-s/12.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/residence-s/13.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/residence-s/14.jpg" alt=""></div>
+  </div>
+
+  <div class="proj-nav">
+    <a href="/residential/residence-g/index.html">&larr; Residence G</a>
+    <a href="/residential/index.html" class="back">Residential</a>
+    <a href="/residential/residence-o/index.html">Residence O &rarr;</a>
+  </div>
+
+</div>
+
+<div id="lb">
+  <button id="lb-close">&#10005;</button>
+  <button id="lb-prev">&#8249;</button>
+  <img id="lb-img" src="" alt="">
+  <button id="lb-next">&#8250;</button>
+  <span id="lb-counter"></span>
 </div>
 <script>
 (function(){
-  const imgs=[...document.querySelectorAll('img[src]:not([src=""])')]
-    .filter(i=>!i.closest('#lb')&&!i.closest('.thumb-strip'));
-  const srcs=imgs.map(i=>i.src);
-  const lb=document.getElementById('lb');
-  const lbImg=document.getElementById('lb-img');
-  const lbC=document.getElementById('lb-counter');
-  let cur=0;
-  function show(i){cur=i;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;lb.style.display='flex';}
-  function close(){lb.style.display='none';lbImg.src='';}
-  imgs.forEach((img,i)=>{img.style.cursor='zoom-in';img.addEventListener('click',()=>show(i));});
-  document.querySelectorAll('.thumb-strip .thumb').forEach(t=>{
-    t.style.cursor='zoom-in';
-    t.addEventListener('click',()=>{
-      const s=t.querySelector('img').src;
-      const i=srcs.findIndex(x=>x===s);
-      if(i>=0)show(i);
+  var imgs=[].slice.call(document.querySelectorAll('.mag-cell img, .plan-section:not(.hidden) img'));
+  var srcs=imgs.map(function(i){return i.src});
+  var lb=document.getElementById('lb');
+  var lbImg=document.getElementById('lb-img');
+  var lbC=document.getElementById('lb-counter');
+  var cur=0;
+  function show(i){cur=i;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;lb.classList.add('open')}
+  function close(){lb.classList.remove('open');lbImg.src=''}
+  imgs.forEach(function(img,i){img.addEventListener('click',function(){show(i)})});
+  [].slice.call(document.querySelectorAll('.thumb-strip .thumb')).forEach(function(t){
+    t.addEventListener('click',function(){
+      var s=t.querySelector('img').src;
+      var i=srcs.findIndex(function(x){return x===s});
+      if(i>=0)show(i);else{srcs.push(s);show(srcs.length-1)}
     });
   });
   document.getElementById('lb-close').onclick=close;
-  document.getElementById('lb-prev').onclick=()=>{cur=(cur-1+srcs.length)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;};
-  document.getElementById('lb-next').onclick=()=>{cur=(cur+1)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;};
-  lb.addEventListener('click',e=>{if(e.target===lb)close();});
-  document.addEventListener('keydown',e=>{
-    if(lb.style.display==='none')return;
+  document.getElementById('lb-prev').onclick=function(){cur=(cur-1+srcs.length)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length};
+  document.getElementById('lb-next').onclick=function(){cur=(cur+1)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length};
+  lb.addEventListener('click',function(e){if(e.target===lb)close()});
+  document.addEventListener('keydown',function(e){
+    if(!lb.classList.contains('open'))return;
     if(e.key==='ArrowLeft')document.getElementById('lb-prev').click();
     if(e.key==='ArrowRight')document.getElementById('lb-next').click();
     if(e.key==='Escape')close();
   });
 })();
 </script>
+
 </body>
 </html>

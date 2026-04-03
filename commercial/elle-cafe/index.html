@@ -1,173 +1,228 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ELLE Café — ON Design Lab</title>
-<link rel="stylesheet" href="../../assets/commercial.css">
-<meta name="description" content="ELLE Café | ON Design Lab 設計作品">
-<meta property="og:title" content="ELLE Café — ON Design Lab">
-<meta property="og:description" content="ELLE Café | ON Design Lab — 台北品牌空間設計事務所">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ELLE Café &mdash; ON Design Lab</title>
+<meta name="description" content="ELLE Café 餐飲空間 | ON Design Lab">
+<meta property="og:title" content="ELLE Café &mdash; ON Design Lab">
 <meta property="og:image" content="https://ondesignlabltd.com/images/elle-cafe/00.jpg">
-<meta property="og:url" content="https://ondesignlabltd.com/commercial/elle-cafe/">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--black:#0a0a0a;--white:#fafaf8;--dim:rgba(255,255,255,.07)}
+html,body{background:var(--black);color:var(--white);font-family:'Helvetica Neue',Helvetica,Arial,sans-serif}
+a{color:inherit;text-decoration:none}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.5rem 2.5rem;background:rgba(10,10,10,.88);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
+nav .logo{font-size:12px;letter-spacing:.18em}
+nav ul{list-style:none;display:flex;gap:2.5rem}
+nav ul li a{font-size:11px;letter-spacing:.12em;opacity:.4;transition:opacity .2s}
+nav ul li a:hover{opacity:1}
+
+.hero{position:relative;width:100%;height:100vh;overflow:hidden;display:flex;align-items:flex-end}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.55)}
+.hero-caption{position:relative;z-index:2;padding:3rem 2.5rem;width:100%;border-top:1px solid rgba(255,255,255,.1)}
+.hero-title{font-size:clamp(2.5rem,7vw,6rem);font-weight:200;letter-spacing:-.02em;line-height:.95;margin-bottom:.6rem}
+.hero-tags{font-size:11px;letter-spacing:.12em;opacity:.35}
+
+.content{max-width:1100px;margin:0 auto}
+.intro{max-width:720px;padding:5rem 2.5rem;border-bottom:1px solid var(--dim)}
+.intro-zh{font-size:16px;line-height:2.05;opacity:.75;margin-bottom:2.5rem}
+.intro-en{font-size:13px;line-height:1.95;opacity:.28;font-style:italic}
+
+.plan-section{padding:4rem 2.5rem;border-bottom:1px solid var(--dim)}
+.plan-section.hidden{display:none}
+.plan-eyebrow{font-size:9px;letter-spacing:.22em;opacity:.22;text-transform:uppercase;margin-bottom:2rem}
+.plan-section img{width:100%;display:block;filter:brightness(.85);cursor:zoom-in}
+.plan-section img:hover{filter:brightness(1)}
+
+.mag-row{display:grid;gap:1px;background:var(--dim);border-bottom:1px solid var(--dim)}
+.mag-row.r-full{grid-template-columns:1fr}
+.mag-row.r-6040{grid-template-columns:6fr 4fr}
+.mag-row.r-half{grid-template-columns:1fr 1fr}
+.mag-row.r-third{grid-template-columns:1fr 1fr 1fr}
+@media(max-width:600px){.mag-row.r-6040,.mag-row.r-half,.mag-row.r-third{grid-template-columns:1fr}}
+.mag-cell{background:var(--black);overflow:hidden}
+.mag-cell img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.82);transition:filter .4s,transform .55s;cursor:zoom-in}
+.mag-cell:hover img{filter:brightness(1);transform:scale(1.03)}
+.mag-cell.tall{aspect-ratio:3/4}
+.mag-cell.wide{aspect-ratio:16/9}
+.mag-cell.sq{aspect-ratio:1}
+
+.text-break{max-width:720px;padding:4rem 2.5rem;border-bottom:1px solid var(--dim)}
+.tb-num{font-size:9px;letter-spacing:.2em;opacity:.2;text-transform:uppercase;margin-bottom:1.5rem}
+.tb-zh{font-size:14px;line-height:2.05;opacity:.68;margin-bottom:1.8rem}
+.tb-en{font-size:12px;line-height:1.95;opacity:.27;font-style:italic}
+
+.proj-nav{display:flex;justify-content:space-between;align-items:center;padding:2.5rem;border-top:1px solid var(--dim)}
+.proj-nav a{font-size:11px;letter-spacing:.1em;opacity:.3;transition:opacity .2s}
+.proj-nav a:hover{opacity:.9}
+.proj-nav .back{font-size:10px;letter-spacing:.15em;opacity:.2}
+
+#lb{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.95);align-items:center;justify-content:center}
+#lb.open{display:flex}
+#lb img{max-width:92vw;max-height:90vh;object-fit:contain}
+#lb-close{position:absolute;top:1.5rem;right:2rem;font-size:22px;opacity:.4;cursor:pointer;background:none;border:none;color:var(--white)}
+#lb-close:hover{opacity:1}
+#lb-prev,#lb-next{position:absolute;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--white);font-size:2rem;opacity:.25;cursor:pointer;padding:1rem;transition:opacity .2s}
+#lb-prev:hover,#lb-next:hover{opacity:.9}
+#lb-prev{left:.5rem}
+#lb-next{right:.5rem}
+#lb-counter{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);font-size:10px;opacity:.3;letter-spacing:.1em}
+
+.thumb-label{font-size:9px;letter-spacing:.22em;opacity:.22;text-transform:uppercase;padding:2.5rem 2.5rem 1rem;max-width:1100px;margin:0 auto}
+.thumb-strip{display:flex;gap:2px;overflow-x:auto;padding:0 2.5rem 2rem;max-width:1100px;margin:0 auto;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.15) transparent}
+.thumb-strip::-webkit-scrollbar{height:4px}
+.thumb-strip::-webkit-scrollbar-track{background:transparent}
+.thumb-strip::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:2px}
+.thumb{flex:0 0 auto;width:100px;height:68px;overflow:hidden;cursor:zoom-in;opacity:.5;transition:opacity .3s}
+.thumb:hover{opacity:1}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+</style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="nav">
-  <a class="nav-logo" href="../../index.html">ON Design Lab</a>
-  <div class="nav-links">
-    <a class="nav-link active" href="../index.html">Commercial</a>
-    <a class="nav-link" href="../../residential/index.html">Residential</a>
-    <a class="nav-link" href="../../info/index.html">Info</a>
-  </div>
+<nav>
+  <a href="/index.html" class="logo">ON DESIGN LAB</a>
+  <ul>
+    <li><a href="/commercial/index.html">Commercial</a></li>
+    <li><a href="/residential/index.html">Residential</a></li>
+    <li><a href="/info/index.html">Info</a></li>
+  </ul>
 </nav>
 
-<a class="back" href="../index.html">← Commercial</a>
-
-<!-- ═══ HERO ═══ -->
-<div class="hero-img">
+<div class="hero">
   <img src="../../images/elle-cafe/00.jpg" fetchpriority="high" loading="eager" decoding="async" alt="ELLE Café">
-  <div class="hero-overlay">
-    <div class="hero-title">ELLE Café</div>
-    <div class="hero-meta">
-      <span class="hero-type">F&amp;B</span>
-      <div class="hero-dot"></div>
-      <span class="hero-type">餐飲空間</span>
-      <div class="hero-dot"></div>
-      <span class="hero-type">Taipei</span>
-    </div>
+  <div class="hero-caption">
+    <h1 class="hero-title">ELLE Café</h1>
+    <p class="hero-tags">餐飲空間 &middot; Taipei</p>
   </div>
 </div>
 
-<!-- ═══ TEXT AREA ═══ -->
-<div class="intro">
-  <p class="desc-zh">ELLE 是一本雜誌。當它變成一個空間，它選擇用光說話，而不是用圖像。黑、灰、桃紅，水泥牆與金屬結構建立理性的底，入口的層層框景讓街景、立面與內部動線在同一條軸線上展開。設計的軸心是可變色的中島吧台——白天白光滲入灰階結構，空間輕盈透明；夜晚燈光轉暗，吧台成為唯一的發光體，桃紅光自內部滲出，形成新的視覺重心。同一個空間，在不同時段說兩種語言。品牌的個性不只存在於它說了什麼，而在於它選擇用什麼說話。</p>
-  <p class="desc-en">ELLE is a magazine. When it becomes a space, it chooses to speak in light, not image. Black, grey, blush pink — concrete walls and metal structure establish a rational base; layered frames at the entrance open the street, facade, and interior circulation along a single axis. The design pivots on a color-shifting central bar: by day, white light enters the grey structure, keeping the space light and transparent; by night, the ambient dims and the bar becomes the only light source, glowing blush from within. One space, two languages at different hours. A brand's identity lives not in what it says, but in what it chooses to say it with.</p>
+<div class="content">
+
+  <div class="intro">
+    <p class="intro-zh">品牌的個性不只存在於它說了什麼，而在於它選擇用什麼說話。</p>
+    <p class="intro-en">A brand's identity lives not in what it says, but in what it chooses to say it with.</p>
+  </div>
+
+
+
+  <div class="mag-row r-half">
+    <div class="mag-cell sq"><img src="../../images/elle-cafe/01.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell sq"><img src="../../images/elle-cafe/02.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/elle-cafe/04.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">01</p>
+    <p class="tb-zh">黑、灰、桃紅，水泥牆與金屬結構建立理性的底，入口的層層框景讓街景、立面與內部動線在同一條軸線上展開。設計的軸心是可變色的中島吧台——白天白光滲入灰階結構，空間輕盈透明；夜晚燈光轉暗，吧台成為唯一的發光體，桃紅光自內部滲出。同一個空間，在不同時段說兩種語言。</p>
+    <p class="tb-en">Black, grey, blush pink — concrete walls and metal structure establish a rational base. Layered frames at the entrance align street, facade, and interior along a single axis. The design pivots on a color-shifting central bar: by day, white light enters the grey structure; by night, the bar becomes the only source, glowing blush from within. One space, two languages at different hours.</p>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/elle-cafe/05.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/elle-cafe/07.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">02</p>
+    <p class="tb-zh">入口的層層框景是整個空間最安靜的設計手法，也是最有力的。街景、立面、內部動線被放在同一條軸線上，讓進入成為一個有景深的過程。在你踏進來之前，空間已經開始說話了。</p>
+    <p class="tb-en">The layered frames at the entrance are the quietest design gesture in the space, and the most powerful. Street, facade, and interior circulation placed on a single axis — entry becomes a process with depth of field. Before you step inside, the space has already begun to speak.</p>
+  </div>
+  <div class="mag-row r-half">
+    <div class="mag-cell sq"><img src="../../images/elle-cafe/08.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell sq"><img src="../../images/elle-cafe/09.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">03</p>
+    <p class="tb-zh">白天，光從外部滲入，在水泥牆與金屬結構上形成柔和的漫反射，勾勒出材質的層次與紋理。空間保持輕盈，像是一本在自然光下被翻閱的雜誌。夜晚，環境暗下來，中島吧台的桃紅光從內部滲出，整個空間的重心轉移。同一個地方，白天是一種人，夜晚是另一種人。</p>
+    <p class="tb-en">By day, light seeps in from outside, forming soft diffuse reflections on concrete and metal. The space stays light — a magazine browsed under natural light. At night the ambient dims, blush-pink light bleeds from within the central bar, and the space's center of gravity shifts. Same place, different people by day and night.</p>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/elle-cafe/18.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/elle-cafe/20.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">04</p>
+    <p class="tb-zh">空間中的所有表面都服從於結構。天花的橫樑延伸出節奏感，牆面以塗抹紋理取代裝飾，材質之間保持距離，又在邊界處對話。在秩序中流動的，是品牌的性格，也是生活的節奏。</p>
+    <p class="tb-en">Every surface defers to structure. Ceiling beams extend into rhythm; walls trade decoration for applied texture; materials keep distance yet converse at the edges. What flows through the order is the brand's character and the rhythm of daily life.</p>
+  </div>
+  <div class="mag-row r-half">
+    <div class="mag-cell sq"><img src="../../images/elle-cafe/27.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell sq"><img src="../../images/elle-cafe/31.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">05</p>
+    <p class="tb-zh">ELLE Café 最後做到的事情是：讓一個品牌的空間不只是品牌的容器，而是品牌本身的延伸。走進來的人不需要看到任何 logo，就已經知道這是 ELLE——因為空間的態度、光線的選擇、材質的比例，都在說同一句話。</p>
+    <p class="tb-en">What ELLE Café ultimately achieves is making a brand's space not merely a container for the brand, but an extension of the brand itself. No one needs to see a logo to know this is ELLE — the space's attitude, lighting choices, and material proportions all speak the same sentence.</p>
+  </div>
+
+  <p class="thumb-label">All Photos</p>
+  <div class="thumb-strip">
+    <div class="thumb"><img loading="lazy" src="../../images/elle-cafe/01.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/elle-cafe/02.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/elle-cafe/04.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/elle-cafe/05.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/elle-cafe/07.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/elle-cafe/08.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/elle-cafe/09.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/elle-cafe/18.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/elle-cafe/20.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/elle-cafe/27.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/elle-cafe/31.jpg" alt=""></div>
+  </div>
+
+  <div class="proj-nav">
+    <a href="/commercial/lalaport/index.html">&larr; 恆隆行 南港LaLaport</a>
+    <a href="/commercial/index.html" class="back">Commercial</a>
+    <a href="/commercial/dunhua-32f/index.html">敦化摩天辦公室 32F &rarr;</a>
+  </div>
+
 </div>
 
-<!-- Floor Plan（無圖自動隱藏）-->
-<div class="plan">
-  <p class="plan-label">Floor Plan</p>
-  <img src="../../images/elle-cafe/plan.jpg" onerror="this.parentElement.style.display='none'" loading="lazy" decoding="async" alt="Floor Plan">
-</div>
-
-<!-- ═══ PHOTO AREA ═══ -->
-<div class="photos">
-
-  <div class="p-full"><img loading="lazy" decoding="async" src="../../images/elle-cafe/01.jpg" alt="01"></div>
-  <div class="gap-row"></div>
-
-  <div class="p-2col">
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/elle-cafe/02.jpg" alt="02"></div>
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/elle-cafe/04.jpg" alt="04"></div>
-  </div>
-  <div class="editorial">
-    <p>入口的層層框景是整個空間最安靜的設計手法，也是最有力的。街景、立面、內部動線被放在同一條軸線上，讓進入成為一個有景深的過程。在你踏進來之前，空間已經開始說話了。</p>
-  </div>
-  <div class="gap-row"></div>
-
-  <div class="p-asymm">
-    <div class="p-asymm-left p-cell"><img loading="lazy" decoding="async" src="../../images/elle-cafe/05.jpg" alt="05"></div>
-    <div class="p-asymm-right">
-      <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/elle-cafe/07.jpg" alt="07"></div>
-      <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/elle-cafe/08.jpg" alt="08"></div>
-    </div>
-  </div>
-  <div class="gap-row"></div>
-
-  <div class="editorial">
-    <p>白天，光從外部滲入，在水泥牆與金屬結構上形成柔和的漫反射，勾勒出材質的層次與紋理。空間保持輕盈，像是一本在自然光下被翻閱的雜誌。夜晚，環境暗下來，中島吧台的桃紅光從內部滲出，整個空間的重心轉移。同一個地方，白天是一種人，夜晚是另一種人。</p>
-  </div>
-
-  <div class="p-2col">
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/elle-cafe/09.jpg" alt="09"></div>
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/elle-cafe/18.jpg" alt="18"></div>
-  </div>
-  <div class="gap-row"></div>
-
-  <div class="p-full"><img loading="lazy" decoding="async" src="../../images/elle-cafe/20.jpg" alt="20"></div>
-  <div class="gap-row"></div>
-
-  <div class="editorial">
-    <p>空間中的所有表面都服從於結構。天花的橫樑延伸出節奏感，牆面以塗抹紋理取代裝飾，材質之間保持距離，又在邊界處對話。在秩序中流動的，是品牌的性格，也是生活的節奏。光線成為主角，時間成為場景。</p>
-  </div>
-
-  <div class="p-2col">
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/elle-cafe/27.jpg" alt="27"></div>
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/elle-cafe/31.jpg" alt="31"></div>
-  </div>
-  <div class="gap-row"></div>
-
-</div>
-
-
-<!-- ═══ BOTTOM NAV ═══ -->
-
-<p class="thumb-label">All Photos</p>
-<div class="thumb-strip">
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/elle-cafe/01.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/elle-cafe/02.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/elle-cafe/04.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/elle-cafe/05.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/elle-cafe/07.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/elle-cafe/08.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/elle-cafe/09.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/elle-cafe/18.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/elle-cafe/20.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/elle-cafe/27.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/elle-cafe/31.jpg" alt=""></div>
-</div>
-<div class="bottom">
-  <a class="bottom-nav" href="../lalaport/index.html">← 恆隆行_南港LaLaport</a>
-  <a class="bowerbird" href="#">View on BowerBird →</a>
-  <a class="bottom-nav" href="../dunhua-32f/index.html">敦化摩天辦公室 32F →</a>
-</div>
-
-
-
-
-<!-- Lightbox -->
-<div id="lb" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.93);align-items:center;justify-content:center;">
-  <button id="lb-close" style="position:absolute;top:1.5rem;right:2rem;font-size:24px;opacity:.5;cursor:pointer;background:none;border:none;color:#fafaf8;transition:opacity .2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.5">&#10005;</button>
-  <button id="lb-prev" style="position:absolute;top:50%;transform:translateY(-50%);left:1rem;background:none;border:none;color:#fafaf8;font-size:2rem;opacity:.3;cursor:pointer;padding:1rem;transition:opacity .2s;" onmouseover="this.style.opacity=.9" onmouseout="this.style.opacity=.3">&#8249;</button>
-  <img id="lb-img" src="" alt="" style="max-width:90vw;max-height:88vh;object-fit:contain;display:block;">
-  <button id="lb-next" style="position:absolute;top:50%;transform:translateY(-50%);right:1rem;background:none;border:none;color:#fafaf8;font-size:2rem;opacity:.3;cursor:pointer;padding:1rem;transition:opacity .2s;" onmouseover="this.style.opacity=.9" onmouseout="this.style.opacity=.3">&#8250;</button>
-  <span id="lb-counter" style="position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);font-size:11px;opacity:.35;letter-spacing:.1em;color:#fafaf8;"></span>
+<div id="lb">
+  <button id="lb-close">&#10005;</button>
+  <button id="lb-prev">&#8249;</button>
+  <img id="lb-img" src="" alt="">
+  <button id="lb-next">&#8250;</button>
+  <span id="lb-counter"></span>
 </div>
 <script>
 (function(){
-  const imgs=[...document.querySelectorAll('img[src]:not([src=""])')]
-    .filter(i=>!i.closest('#lb')&&!i.closest('.thumb-strip'));
-  const srcs=imgs.map(i=>i.src);
-  const lb=document.getElementById('lb');
-  const lbImg=document.getElementById('lb-img');
-  const lbC=document.getElementById('lb-counter');
-  let cur=0;
-  function show(i){cur=i;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;lb.style.display='flex';}
-  function close(){lb.style.display='none';lbImg.src='';}
-  imgs.forEach((img,i)=>{img.style.cursor='zoom-in';img.addEventListener('click',()=>show(i));});
-  document.querySelectorAll('.thumb-strip .thumb').forEach(t=>{
-    t.style.cursor='zoom-in';
-    t.addEventListener('click',()=>{
-      const s=t.querySelector('img').src;
-      const i=srcs.findIndex(x=>x===s);
-      if(i>=0)show(i);
+  var imgs=[].slice.call(document.querySelectorAll('.mag-cell img, .plan-section:not(.hidden) img'));
+  var srcs=imgs.map(function(i){return i.src});
+  var lb=document.getElementById('lb');
+  var lbImg=document.getElementById('lb-img');
+  var lbC=document.getElementById('lb-counter');
+  var cur=0;
+  function show(i){cur=i;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;lb.classList.add('open')}
+  function close(){lb.classList.remove('open');lbImg.src=''}
+  imgs.forEach(function(img,i){img.addEventListener('click',function(){show(i)})});
+  [].slice.call(document.querySelectorAll('.thumb-strip .thumb')).forEach(function(t){
+    t.addEventListener('click',function(){
+      var s=t.querySelector('img').src;
+      var i=srcs.findIndex(function(x){return x===s});
+      if(i>=0)show(i);else{srcs.push(s);show(srcs.length-1)}
     });
   });
   document.getElementById('lb-close').onclick=close;
-  document.getElementById('lb-prev').onclick=()=>{cur=(cur-1+srcs.length)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;};
-  document.getElementById('lb-next').onclick=()=>{cur=(cur+1)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;};
-  lb.addEventListener('click',e=>{if(e.target===lb)close();});
-  document.addEventListener('keydown',e=>{
-    if(lb.style.display==='none')return;
+  document.getElementById('lb-prev').onclick=function(){cur=(cur-1+srcs.length)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length};
+  document.getElementById('lb-next').onclick=function(){cur=(cur+1)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length};
+  lb.addEventListener('click',function(e){if(e.target===lb)close()});
+  document.addEventListener('keydown',function(e){
+    if(!lb.classList.contains('open'))return;
     if(e.key==='ArrowLeft')document.getElementById('lb-prev').click();
     if(e.key==='ArrowRight')document.getElementById('lb-next').click();
     if(e.key==='Escape')close();
   });
 })();
 </script>
+
 </body>
 </html>

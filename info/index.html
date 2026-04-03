@@ -71,6 +71,17 @@ nav ul li a:hover,nav ul li a.active{opacity:1}
 .award-title{font-size:13px;line-height:1.5;margin-bottom:.35rem}
 .award-year{font-size:11px;opacity:.25}
 
+/* Team */
+.team-grid{display:flex;flex-direction:column;gap:3.5rem}
+.founder{display:grid;grid-template-columns:140px 1fr;gap:2.5rem;align-items:start}
+@media(max-width:640px){.founder{grid-template-columns:1fr;gap:1.2rem}}
+.founder-photo img{width:140px;height:175px;object-fit:cover;object-position:top;display:block;filter:grayscale(.2) brightness(.85)}
+.founder-name{font-size:15px;font-weight:300;letter-spacing:.03em;margin-bottom:.2rem}
+.founder-name-zh{font-size:12px;opacity:.4;margin-left:.6rem;letter-spacing:.08em}
+.founder-title{font-size:9px;letter-spacing:.22em;text-transform:uppercase;opacity:.28;margin-bottom:1.2rem;padding-bottom:.8rem;border-bottom:1px solid rgba(255,255,255,.06)}
+.founder-bio-zh{font-size:13px;line-height:2;opacity:.55;margin-bottom:.8rem}
+.founder-bio-en{font-size:12px;line-height:1.9;opacity:.25;font-style:italic}
+
 /* Contact */
 .contact-list{display:flex;flex-direction:column;gap:.1rem}
 .contact-link{
@@ -152,6 +163,49 @@ footer a:hover{opacity:.8}
         <p class="award-title">de nuit</p>
         <p class="award-year">Taipei</p>
       </div>
+    </div>
+  </div>
+
+  <div class="info-row">
+    <p class="row-label">Team</p>
+    <div class="team-grid">
+
+      <div class="founder">
+        <div class="founder-photo">
+          <img src="/人物/蔡曜牟.jpg" alt="Mo Tsai" loading="lazy">
+        </div>
+        <div class="founder-info">
+          <p class="founder-name">Mo Tsai<span class="founder-name-zh">蔡曜牟</span></p>
+          <p class="founder-title">Founder &amp; Creative Director</p>
+          <p class="founder-bio-zh">Mo 同時做三件事：設計空間、經營品牌、以投資人的角度站在業主的位置思考。2019 年起深度參與 de nuit 的品牌經營並持有股份，這段經歷讓他確信：設計不是服務，是品牌的一部分。</p>
+          <p class="founder-bio-en">Mo operates at the intersection of design, brand strategy, and business investment — bringing all three perspectives to every project.</p>
+        </div>
+      </div>
+
+      <div class="founder">
+        <div class="founder-photo">
+          <img src="/人物/陳紀中.jpg" alt="David C. Chen" loading="lazy">
+        </div>
+        <div class="founder-info">
+          <p class="founder-name">David C. Chen<span class="founder-name-zh">陳紀中</span></p>
+          <p class="founder-title">Co-Founder &amp; Design Director</p>
+          <p class="founder-bio-zh">David 的背景橫跨建築、零售品牌與視覺陳列。曾任職於扎哈哈迪德建築師事務所、CHANEL 亞太區設計經理、URBAN REVIVO 品牌形象中心總經理，現兼任美國 SCAD 薩凡納藝術大學客座教授。</p>
+          <p class="founder-bio-en">With experience at Zaha Hadid Architects, CHANEL Asia Pacific, and URBAN REVIVO, David brings a methodology that bridges brand scale and design precision.</p>
+        </div>
+      </div>
+
+      <div class="founder">
+        <div class="founder-photo">
+          <img src="/人物/謝景年.jpg" alt="Dean Hsieh" loading="lazy">
+        </div>
+        <div class="founder-info">
+          <p class="founder-name">Dean Hsieh<span class="founder-name-zh">謝景年</span></p>
+          <p class="founder-title">Co-Founder &amp; Director of Operations</p>
+          <p class="founder-bio-zh">Dean 負責商業與醫療空間的全流程工程管理。他的背景同時涵蓋財務規劃與品牌創業，確保每個設計決定都能被商業邏輯支撐。</p>
+          <p class="founder-bio-en">Dean bridges design execution and business logic — managing full-cycle project delivery while bringing firsthand experience as a brand founder.</p>
+        </div>
+      </div>
+
     </div>
   </div>
 

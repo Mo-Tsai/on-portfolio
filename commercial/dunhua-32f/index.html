@@ -1,170 +1,228 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>敦化摩天辦公室 32F — ON Design Lab</title>
-<link rel="stylesheet" href="../../assets/commercial.css">
-<meta name="description" content="敦化摩天辦公室 32F | ON Design Lab 設計作品">
-<meta property="og:title" content="敦化摩天辦公室 32F — ON Design Lab">
-<meta property="og:description" content="敦化摩天辦公室 32F | ON Design Lab — 台北品牌空間設計事務所">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>敦化摩天辦公室 32F &mdash; ON Design Lab</title>
+<meta name="description" content="敦化摩天辦公室 32F 辦公空間 | ON Design Lab">
+<meta property="og:title" content="敦化摩天辦公室 32F &mdash; ON Design Lab">
 <meta property="og:image" content="https://ondesignlabltd.com/images/dunhua-32f/00.jpg">
-<meta property="og:url" content="https://ondesignlabltd.com/commercial/dunhua-32f/">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--black:#0a0a0a;--white:#fafaf8;--dim:rgba(255,255,255,.07)}
+html,body{background:var(--black);color:var(--white);font-family:'Helvetica Neue',Helvetica,Arial,sans-serif}
+a{color:inherit;text-decoration:none}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.5rem 2.5rem;background:rgba(10,10,10,.88);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
+nav .logo{font-size:12px;letter-spacing:.18em}
+nav ul{list-style:none;display:flex;gap:2.5rem}
+nav ul li a{font-size:11px;letter-spacing:.12em;opacity:.4;transition:opacity .2s}
+nav ul li a:hover{opacity:1}
+
+.hero{position:relative;width:100%;height:100vh;overflow:hidden;display:flex;align-items:flex-end}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.55)}
+.hero-caption{position:relative;z-index:2;padding:3rem 2.5rem;width:100%;border-top:1px solid rgba(255,255,255,.1)}
+.hero-title{font-size:clamp(2.5rem,7vw,6rem);font-weight:200;letter-spacing:-.02em;line-height:.95;margin-bottom:.6rem}
+.hero-tags{font-size:11px;letter-spacing:.12em;opacity:.35}
+
+.content{max-width:1100px;margin:0 auto}
+.intro{max-width:720px;padding:5rem 2.5rem;border-bottom:1px solid var(--dim)}
+.intro-zh{font-size:16px;line-height:2.05;opacity:.75;margin-bottom:2.5rem}
+.intro-en{font-size:13px;line-height:1.95;opacity:.28;font-style:italic}
+
+.plan-section{padding:4rem 2.5rem;border-bottom:1px solid var(--dim)}
+.plan-section.hidden{display:none}
+.plan-eyebrow{font-size:9px;letter-spacing:.22em;opacity:.22;text-transform:uppercase;margin-bottom:2rem}
+.plan-section img{width:100%;display:block;filter:brightness(.85);cursor:zoom-in}
+.plan-section img:hover{filter:brightness(1)}
+
+.mag-row{display:grid;gap:1px;background:var(--dim);border-bottom:1px solid var(--dim)}
+.mag-row.r-full{grid-template-columns:1fr}
+.mag-row.r-6040{grid-template-columns:6fr 4fr}
+.mag-row.r-half{grid-template-columns:1fr 1fr}
+.mag-row.r-third{grid-template-columns:1fr 1fr 1fr}
+@media(max-width:600px){.mag-row.r-6040,.mag-row.r-half,.mag-row.r-third{grid-template-columns:1fr}}
+.mag-cell{background:var(--black);overflow:hidden}
+.mag-cell img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.82);transition:filter .4s,transform .55s;cursor:zoom-in}
+.mag-cell:hover img{filter:brightness(1);transform:scale(1.03)}
+.mag-cell.tall{aspect-ratio:3/4}
+.mag-cell.wide{aspect-ratio:16/9}
+.mag-cell.sq{aspect-ratio:1}
+
+.text-break{max-width:720px;padding:4rem 2.5rem;border-bottom:1px solid var(--dim)}
+.tb-num{font-size:9px;letter-spacing:.2em;opacity:.2;text-transform:uppercase;margin-bottom:1.5rem}
+.tb-zh{font-size:14px;line-height:2.05;opacity:.68;margin-bottom:1.8rem}
+.tb-en{font-size:12px;line-height:1.95;opacity:.27;font-style:italic}
+
+.proj-nav{display:flex;justify-content:space-between;align-items:center;padding:2.5rem;border-top:1px solid var(--dim)}
+.proj-nav a{font-size:11px;letter-spacing:.1em;opacity:.3;transition:opacity .2s}
+.proj-nav a:hover{opacity:.9}
+.proj-nav .back{font-size:10px;letter-spacing:.15em;opacity:.2}
+
+#lb{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.95);align-items:center;justify-content:center}
+#lb.open{display:flex}
+#lb img{max-width:92vw;max-height:90vh;object-fit:contain}
+#lb-close{position:absolute;top:1.5rem;right:2rem;font-size:22px;opacity:.4;cursor:pointer;background:none;border:none;color:var(--white)}
+#lb-close:hover{opacity:1}
+#lb-prev,#lb-next{position:absolute;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--white);font-size:2rem;opacity:.25;cursor:pointer;padding:1rem;transition:opacity .2s}
+#lb-prev:hover,#lb-next:hover{opacity:.9}
+#lb-prev{left:.5rem}
+#lb-next{right:.5rem}
+#lb-counter{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);font-size:10px;opacity:.3;letter-spacing:.1em}
+
+.thumb-label{font-size:9px;letter-spacing:.22em;opacity:.22;text-transform:uppercase;padding:2.5rem 2.5rem 1rem;max-width:1100px;margin:0 auto}
+.thumb-strip{display:flex;gap:2px;overflow-x:auto;padding:0 2.5rem 2rem;max-width:1100px;margin:0 auto;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.15) transparent}
+.thumb-strip::-webkit-scrollbar{height:4px}
+.thumb-strip::-webkit-scrollbar-track{background:transparent}
+.thumb-strip::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:2px}
+.thumb{flex:0 0 auto;width:100px;height:68px;overflow:hidden;cursor:zoom-in;opacity:.5;transition:opacity .3s}
+.thumb:hover{opacity:1}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+</style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="nav">
-  <a class="nav-logo" href="../../index.html">ON Design Lab</a>
-  <div class="nav-links">
-    <a class="nav-link active" href="../index.html">Commercial</a>
-    <a class="nav-link" href="../../residential/index.html">Residential</a>
-    <a class="nav-link" href="../../info/index.html">Info</a>
-  </div>
+<nav>
+  <a href="/index.html" class="logo">ON DESIGN LAB</a>
+  <ul>
+    <li><a href="/commercial/index.html">Commercial</a></li>
+    <li><a href="/residential/index.html">Residential</a></li>
+    <li><a href="/info/index.html">Info</a></li>
+  </ul>
 </nav>
 
-<a class="back" href="../index.html">← Commercial</a>
-
-<!-- ═══ HERO ═══ -->
-<div class="hero-img">
+<div class="hero">
   <img src="../../images/dunhua-32f/00.jpg" fetchpriority="high" loading="eager" decoding="async" alt="敦化摩天辦公室 32F">
-  <div class="hero-overlay">
-    <div class="hero-title">敦化摩天辦公室 32F</div>
-    <div class="hero-meta">
-      <span class="hero-type">Office</span>
-      <div class="hero-dot"></div>
-      <span class="hero-type">辦公空間</span>
-      <div class="hero-dot"></div>
-      <span class="hero-type">Taipei</span>
-    </div>
+  <div class="hero-caption">
+    <h1 class="hero-title">敦化摩天辦公室 32F</h1>
+    <p class="hero-tags">辦公空間 &middot; Taipei</p>
   </div>
 </div>
 
-<!-- ═══ TEXT AREA ═══ -->
-<div class="intro">
-  <p class="desc-zh">臨時接手，一個月完工。這是一個從一開始就沒有「試試看」空間的案子。在有限時間裡，決策的順序完全改變——你沒辦法先做出來再改，只能先想清楚，讓工廠做完，到現場組裝。</p>
-  <p class="desc-en">Handed over mid-process, one month to completion. No room to try and revise — only to think clearly, then execute.</p>
-</div>
+<div class="content">
 
-<!-- Floor Plan（無圖自動隱藏）-->
-<div class="plan">
-  <p class="plan-label">Floor Plan</p>
-  <img src="../../images/dunhua-32f/plan.jpg" onerror="this.parentElement.style.display='none'" loading="lazy" decoding="async" alt="Floor Plan">
-</div>
-
-<!-- ═══ PHOTO AREA ═══ -->
-<div class="photos">
-
-  <div class="p-full"><img loading="lazy" decoding="async" src="../../images/dunhua-32f/01.jpg" alt="01"></div>
-  <div class="gap-row"></div>
-
-  <div class="p-2col">
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/dunhua-32f/02.jpg" alt="02"></div>
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/dunhua-32f/04.jpg" alt="04"></div>
+  <div class="intro">
+    <p class="intro-zh">時間壓力讓設計變純粹了——保留的東西，都是真正需要的。</p>
+    <p class="intro-en">Time pressure made the design pure — what remained was what was truly needed.</p>
   </div>
-  <div class="editorial">
-  <p class="ed-zh">所有隔屏、鐵件、櫃體全部場外預製，每一段牆體、每一處孔位，在工廠裡就確定尺寸。現場只有一件工作：精準定位，接上配件。</p>
-  <p class="ed-en">Every partition, every steel element, every cabinet was fabricated off-site. Every wall segment, every junction, every socket position confirmed in the factory before anything reached the site. On-site, one task only: precise positioning, connect the pieces.</p>
-</div>
-  <div class="gap-row"></div>
 
-  <div class="p-asymm">
-    <div class="p-asymm-left p-cell"><img loading="lazy" decoding="async" src="../../images/dunhua-32f/05.jpg" alt="05"></div>
-    <div class="p-asymm-right">
-      <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/dunhua-32f/07.jpg" alt="07"></div>
-      <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/dunhua-32f/08.jpg" alt="08"></div>
-    </div>
+
+
+  <div class="mag-row r-half">
+    <div class="mag-cell sq"><img src="../../images/dunhua-32f/01.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell sq"><img src="../../images/dunhua-32f/02.jpg" loading="lazy" alt=""></div>
   </div>
-  <div class="gap-row"></div>
-
-  <div class="p-2col">
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/dunhua-32f/09.jpg" alt="09"></div>
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/dunhua-32f/11.jpg" alt="11"></div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/dunhua-32f/04.jpg" loading="lazy" alt=""></div>
   </div>
-  <div class="editorial">
-  <p class="ed-zh">時間壓力讓設計變純粹了——保留的東西，都是真正需要的；切掉的東西，都是原本可能只是「感覺不錯」的決定。</p>
-  <p class="ed-en">Time pressure made the design pure. What remained was what was truly needed. What was cut was what only ever felt like a good idea.</p>
-</div>
-  <div class="gap-row"></div>
-
-  <div class="p-full"><img loading="lazy" decoding="async" src="../../images/dunhua-32f/12.jpg" alt="12"></div>
-  <div class="gap-row"></div>
-
-  <div class="p-2col">
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/dunhua-32f/14.jpg" alt="14"></div>
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/dunhua-32f/15.jpg" alt="15"></div>
+  <div class="text-break">
+    <p class="tb-num">01</p>
+    <p class="tb-zh">臨時接手，一個月完工。這是一個從一開始就沒有「試試看」空間的案子。在有限時間裡，決策的順序完全改變——你沒辦法先做出來再改，只能先想清楚，讓工廠做完，到現場組裝。</p>
+    <p class="tb-en">Handed over mid-process, one month to completion. No room to try and revise — only to think clearly, then execute. The decision sequence was inverted: everything resolved in the factory before anything reached the site.</p>
   </div>
-  <div class="gap-row"></div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/dunhua-32f/05.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/dunhua-32f/07.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">02</p>
+    <p class="tb-zh">所有隔屏、鐵件、櫃體全部場外預製，每一段牆體、每一處孔位，在工廠裡就確定尺寸。現場只有一件工作：精準定位，接上配件。</p>
+    <p class="tb-en">Every partition, steel element, and cabinet was fabricated off-site. Every wall segment, every socket position confirmed in the factory. On-site, one task only: precise positioning, connect the pieces.</p>
+  </div>
+  <div class="mag-row r-half">
+    <div class="mag-cell sq"><img src="../../images/dunhua-32f/08.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell sq"><img src="../../images/dunhua-32f/09.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">03</p>
+    <p class="tb-zh">32 樓的視野是這個空間最大的資產。設計的工作不是在室內創造風景，而是把窗外的風景拉進來。傢俱配置、隔屏高度、材質反射率——每一個決定都在確保視線可以不被打斷地抵達窗邊。</p>
+    <p class="tb-en">The 32nd-floor view is the space's greatest asset. The design task is not to create scenery indoors, but to pull the view in. Furniture layout, partition height, material reflectivity — every decision ensures the eye reaches the window uninterrupted.</p>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/dunhua-32f/11.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/dunhua-32f/12.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">04</p>
+    <p class="tb-zh">切掉的東西，都是原本可能只是「感覺不錯」的決定。保留的東西，都是真正需要的。時間壓力反而讓這個空間比大部分案子更誠實。</p>
+    <p class="tb-en">What was cut was what only ever felt like a good idea. What remained was what was truly needed. Time pressure made this space more honest than most.</p>
+  </div>
+  <div class="mag-row r-half">
+    <div class="mag-cell sq"><img src="../../images/dunhua-32f/14.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell sq"><img src="../../images/dunhua-32f/15.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">05</p>
+    <p class="tb-zh">完工後回頭看，一個月的時間反而讓團隊學到一件事：設計最花時間的部分，往往是猶豫。當猶豫被拿掉，每一個決定都更果斷，空間也因此更乾淨。這不是速度的勝利，是專注力的勝利。</p>
+    <p class="tb-en">Looking back, the one-month timeline taught the team something: the most time-consuming part of design is often hesitation. When hesitation is removed, every decision becomes more decisive and the space cleaner. This is not a victory of speed — it is a victory of focus.</p>
+  </div>
+
+  <p class="thumb-label">All Photos</p>
+  <div class="thumb-strip">
+    <div class="thumb"><img loading="lazy" src="../../images/dunhua-32f/01.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/dunhua-32f/02.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/dunhua-32f/04.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/dunhua-32f/05.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/dunhua-32f/07.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/dunhua-32f/08.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/dunhua-32f/09.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/dunhua-32f/11.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/dunhua-32f/12.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/dunhua-32f/14.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/dunhua-32f/15.jpg" alt=""></div>
+  </div>
+
+  <div class="proj-nav">
+    <a href="/commercial/elle-cafe/index.html">&larr; ELLE Café</a>
+    <a href="/commercial/index.html" class="back">Commercial</a>
+    <a href="/commercial/fire-play/index.html">Fire Play &rarr;</a>
+  </div>
 
 </div>
 
-
-<!-- ═══ BOTTOM NAV ═══ -->
-
-<p class="thumb-label">All Photos</p>
-<div class="thumb-strip">
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/dunhua-32f/01.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/dunhua-32f/02.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/dunhua-32f/04.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/dunhua-32f/05.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/dunhua-32f/07.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/dunhua-32f/08.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/dunhua-32f/09.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/dunhua-32f/11.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/dunhua-32f/12.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/dunhua-32f/14.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/dunhua-32f/15.jpg" alt=""></div>
-</div>
-<div class="bottom">
-  <a class="bottom-nav" href="../elle-cafe/index.html">← ELLE Café</a>
-  <a class="bowerbird" href="#">View on BowerBird →</a>
-  <a class="bottom-nav" href="../fire-play/index.html">Fire Play →</a>
-</div>
-
-
-
-
-<!-- Lightbox -->
-<div id="lb" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.93);align-items:center;justify-content:center;">
-  <button id="lb-close" style="position:absolute;top:1.5rem;right:2rem;font-size:24px;opacity:.5;cursor:pointer;background:none;border:none;color:#fafaf8;transition:opacity .2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.5">&#10005;</button>
-  <button id="lb-prev" style="position:absolute;top:50%;transform:translateY(-50%);left:1rem;background:none;border:none;color:#fafaf8;font-size:2rem;opacity:.3;cursor:pointer;padding:1rem;transition:opacity .2s;" onmouseover="this.style.opacity=.9" onmouseout="this.style.opacity=.3">&#8249;</button>
-  <img id="lb-img" src="" alt="" style="max-width:90vw;max-height:88vh;object-fit:contain;display:block;">
-  <button id="lb-next" style="position:absolute;top:50%;transform:translateY(-50%);right:1rem;background:none;border:none;color:#fafaf8;font-size:2rem;opacity:.3;cursor:pointer;padding:1rem;transition:opacity .2s;" onmouseover="this.style.opacity=.9" onmouseout="this.style.opacity=.3">&#8250;</button>
-  <span id="lb-counter" style="position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);font-size:11px;opacity:.35;letter-spacing:.1em;color:#fafaf8;"></span>
+<div id="lb">
+  <button id="lb-close">&#10005;</button>
+  <button id="lb-prev">&#8249;</button>
+  <img id="lb-img" src="" alt="">
+  <button id="lb-next">&#8250;</button>
+  <span id="lb-counter"></span>
 </div>
 <script>
 (function(){
-  const imgs=[...document.querySelectorAll('img[src]:not([src=""])')]
-    .filter(i=>!i.closest('#lb')&&!i.closest('.thumb-strip'));
-  const srcs=imgs.map(i=>i.src);
-  const lb=document.getElementById('lb');
-  const lbImg=document.getElementById('lb-img');
-  const lbC=document.getElementById('lb-counter');
-  let cur=0;
-  function show(i){cur=i;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;lb.style.display='flex';}
-  function close(){lb.style.display='none';lbImg.src='';}
-  imgs.forEach((img,i)=>{img.style.cursor='zoom-in';img.addEventListener('click',()=>show(i));});
-  document.querySelectorAll('.thumb-strip .thumb').forEach(t=>{
-    t.style.cursor='zoom-in';
-    t.addEventListener('click',()=>{
-      const s=t.querySelector('img').src;
-      const i=srcs.findIndex(x=>x===s);
-      if(i>=0)show(i);
+  var imgs=[].slice.call(document.querySelectorAll('.mag-cell img, .plan-section:not(.hidden) img'));
+  var srcs=imgs.map(function(i){return i.src});
+  var lb=document.getElementById('lb');
+  var lbImg=document.getElementById('lb-img');
+  var lbC=document.getElementById('lb-counter');
+  var cur=0;
+  function show(i){cur=i;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;lb.classList.add('open')}
+  function close(){lb.classList.remove('open');lbImg.src=''}
+  imgs.forEach(function(img,i){img.addEventListener('click',function(){show(i)})});
+  [].slice.call(document.querySelectorAll('.thumb-strip .thumb')).forEach(function(t){
+    t.addEventListener('click',function(){
+      var s=t.querySelector('img').src;
+      var i=srcs.findIndex(function(x){return x===s});
+      if(i>=0)show(i);else{srcs.push(s);show(srcs.length-1)}
     });
   });
   document.getElementById('lb-close').onclick=close;
-  document.getElementById('lb-prev').onclick=()=>{cur=(cur-1+srcs.length)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;};
-  document.getElementById('lb-next').onclick=()=>{cur=(cur+1)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;};
-  lb.addEventListener('click',e=>{if(e.target===lb)close();});
-  document.addEventListener('keydown',e=>{
-    if(lb.style.display==='none')return;
+  document.getElementById('lb-prev').onclick=function(){cur=(cur-1+srcs.length)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length};
+  document.getElementById('lb-next').onclick=function(){cur=(cur+1)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length};
+  lb.addEventListener('click',function(e){if(e.target===lb)close()});
+  document.addEventListener('keydown',function(e){
+    if(!lb.classList.contains('open'))return;
     if(e.key==='ArrowLeft')document.getElementById('lb-prev').click();
     if(e.key==='ArrowRight')document.getElementById('lb-next').click();
     if(e.key==='Escape')close();
   });
 })();
 </script>
+
 </body>
 </html>

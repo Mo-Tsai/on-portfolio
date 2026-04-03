@@ -1,170 +1,224 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>新創視眼鏡 New Vision — ON Design Lab</title>
-<link rel="stylesheet" href="../../assets/commercial.css">
-<meta name="description" content="新創視眼鏡 New Vision | ON Design Lab 設計作品">
-<meta property="og:title" content="新創視眼鏡 New Vision — ON Design Lab">
-<meta property="og:description" content="新創視眼鏡 New Vision | ON Design Lab — 台北品牌空間設計事務所">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>新創視眼鏡 &mdash; ON Design Lab</title>
+<meta name="description" content="新創視眼鏡 零售空間 | ON Design Lab">
+<meta property="og:title" content="新創視眼鏡 &mdash; ON Design Lab">
 <meta property="og:image" content="https://ondesignlabltd.com/images/new-vision/00.jpg">
-<meta property="og:url" content="https://ondesignlabltd.com/commercial/new-vision/">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--black:#0a0a0a;--white:#fafaf8;--dim:rgba(255,255,255,.07)}
+html,body{background:var(--black);color:var(--white);font-family:'Helvetica Neue',Helvetica,Arial,sans-serif}
+a{color:inherit;text-decoration:none}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.5rem 2.5rem;background:rgba(10,10,10,.88);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
+nav .logo{font-size:12px;letter-spacing:.18em}
+nav ul{list-style:none;display:flex;gap:2.5rem}
+nav ul li a{font-size:11px;letter-spacing:.12em;opacity:.4;transition:opacity .2s}
+nav ul li a:hover{opacity:1}
+
+.hero{position:relative;width:100%;height:100vh;overflow:hidden;display:flex;align-items:flex-end}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.55)}
+.hero-caption{position:relative;z-index:2;padding:3rem 2.5rem;width:100%;border-top:1px solid rgba(255,255,255,.1)}
+.hero-title{font-size:clamp(2.5rem,7vw,6rem);font-weight:200;letter-spacing:-.02em;line-height:.95;margin-bottom:.6rem}
+.hero-tags{font-size:11px;letter-spacing:.12em;opacity:.35}
+
+.content{max-width:1100px;margin:0 auto}
+.intro{max-width:720px;padding:5rem 2.5rem;border-bottom:1px solid var(--dim)}
+.intro-zh{font-size:16px;line-height:2.05;opacity:.75;margin-bottom:2.5rem}
+.intro-en{font-size:13px;line-height:1.95;opacity:.28;font-style:italic}
+
+.plan-section{padding:4rem 2.5rem;border-bottom:1px solid var(--dim)}
+.plan-section.hidden{display:none}
+.plan-eyebrow{font-size:9px;letter-spacing:.22em;opacity:.22;text-transform:uppercase;margin-bottom:2rem}
+.plan-section img{width:100%;display:block;filter:brightness(.85);cursor:zoom-in}
+.plan-section img:hover{filter:brightness(1)}
+
+.mag-row{display:grid;gap:1px;background:var(--dim);border-bottom:1px solid var(--dim)}
+.mag-row.r-full{grid-template-columns:1fr}
+.mag-row.r-6040{grid-template-columns:6fr 4fr}
+.mag-row.r-half{grid-template-columns:1fr 1fr}
+.mag-row.r-third{grid-template-columns:1fr 1fr 1fr}
+@media(max-width:600px){.mag-row.r-6040,.mag-row.r-half,.mag-row.r-third{grid-template-columns:1fr}}
+.mag-cell{background:var(--black);overflow:hidden}
+.mag-cell img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.82);transition:filter .4s,transform .55s;cursor:zoom-in}
+.mag-cell:hover img{filter:brightness(1);transform:scale(1.03)}
+.mag-cell.tall{aspect-ratio:3/4}
+.mag-cell.wide{aspect-ratio:16/9}
+.mag-cell.sq{aspect-ratio:1}
+
+.text-break{max-width:720px;padding:4rem 2.5rem;border-bottom:1px solid var(--dim)}
+.tb-num{font-size:9px;letter-spacing:.2em;opacity:.2;text-transform:uppercase;margin-bottom:1.5rem}
+.tb-zh{font-size:14px;line-height:2.05;opacity:.68;margin-bottom:1.8rem}
+.tb-en{font-size:12px;line-height:1.95;opacity:.27;font-style:italic}
+
+.proj-nav{display:flex;justify-content:space-between;align-items:center;padding:2.5rem;border-top:1px solid var(--dim)}
+.proj-nav a{font-size:11px;letter-spacing:.1em;opacity:.3;transition:opacity .2s}
+.proj-nav a:hover{opacity:.9}
+.proj-nav .back{font-size:10px;letter-spacing:.15em;opacity:.2}
+
+#lb{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.95);align-items:center;justify-content:center}
+#lb.open{display:flex}
+#lb img{max-width:92vw;max-height:90vh;object-fit:contain}
+#lb-close{position:absolute;top:1.5rem;right:2rem;font-size:22px;opacity:.4;cursor:pointer;background:none;border:none;color:var(--white)}
+#lb-close:hover{opacity:1}
+#lb-prev,#lb-next{position:absolute;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--white);font-size:2rem;opacity:.25;cursor:pointer;padding:1rem;transition:opacity .2s}
+#lb-prev:hover,#lb-next:hover{opacity:.9}
+#lb-prev{left:.5rem}
+#lb-next{right:.5rem}
+#lb-counter{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);font-size:10px;opacity:.3;letter-spacing:.1em}
+
+.thumb-label{font-size:9px;letter-spacing:.22em;opacity:.22;text-transform:uppercase;padding:2.5rem 2.5rem 1rem;max-width:1100px;margin:0 auto}
+.thumb-strip{display:flex;gap:2px;overflow-x:auto;padding:0 2.5rem 2rem;max-width:1100px;margin:0 auto;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.15) transparent}
+.thumb-strip::-webkit-scrollbar{height:4px}
+.thumb-strip::-webkit-scrollbar-track{background:transparent}
+.thumb-strip::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:2px}
+.thumb{flex:0 0 auto;width:100px;height:68px;overflow:hidden;cursor:zoom-in;opacity:.5;transition:opacity .3s}
+.thumb:hover{opacity:1}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+</style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="nav">
-  <a class="nav-logo" href="../../index.html">ON Design Lab</a>
-  <div class="nav-links">
-    <a class="nav-link active" href="../index.html">Commercial</a>
-    <a class="nav-link" href="../../residential/index.html">Residential</a>
-    <a class="nav-link" href="../../info/index.html">Info</a>
-  </div>
+<nav>
+  <a href="/index.html" class="logo">ON DESIGN LAB</a>
+  <ul>
+    <li><a href="/commercial/index.html">Commercial</a></li>
+    <li><a href="/residential/index.html">Residential</a></li>
+    <li><a href="/info/index.html">Info</a></li>
+  </ul>
 </nav>
 
-<a class="back" href="../index.html">← Commercial</a>
-
-<!-- ═══ HERO ═══ -->
-<div class="hero-img">
-  <img src="../../images/new-vision/00.jpg" fetchpriority="high" loading="eager" decoding="async" alt="新創視眼鏡 New Vision">
-  <div class="hero-overlay">
-    <div class="hero-title">新創視眼鏡 New Vision</div>
-    <div class="hero-meta">
-      <span class="hero-type">Retail</span>
-      <div class="hero-dot"></div>
-      <span class="hero-type">零售空間</span>
-      <div class="hero-dot"></div>
-      <span class="hero-type">Taipei</span>
-    </div>
+<div class="hero">
+  <img src="../../images/new-vision/00.jpg" fetchpriority="high" loading="eager" decoding="async" alt="新創視眼鏡">
+  <div class="hero-caption">
+    <h1 class="hero-title">新創視眼鏡</h1>
+    <p class="hero-tags">零售空間 &middot; Taipei</p>
   </div>
 </div>
 
-<!-- ═══ TEXT AREA ═══ -->
-<div class="intro">
-  <p class="desc-zh">眼鏡的展示，最常見的錯誤是把商品放進一個太有自己主張的空間。新創視的選材從這個問題出發：水泥粉光、台灣製水磨石、原色橡木皮，三種材質有質感，但沒有聲音，讓眼鏡成為唯一的主角。展示邏輯從傳統櫃檯轉向開放式中島，銷售變成一件可以移動、可以靠近的事。燈光採三種系統同時運作——線性照度打底，重點投射刻劃商品細節，預埋地面的線性光源沿空間輪廓勾勒線條，讓陳列從平面走向立體。</p>
-  <p class="desc-en">The most common mistake in eyewear retail design is placing the product in a space with too strong a voice of its own. New Vision's material choices begin from this problem: cement-finish surfaces, Taiwanese terrazzo, natural oak veneer — materials with texture but without personality, so the eyewear becomes the only subject. Display logic shifts from traditional counters to open island units, making the sales interaction something that can move and approach. Three lighting systems work in concert: linear ambient for base illumination, accent projection to carve product detail, and in-floor linear strips tracing the spatial outline — lifting the display from flat to three-dimensional.</p>
+<div class="content">
+
+  <div class="intro">
+    <p class="intro-zh">讓眼鏡成為唯一的主角。</p>
+    <p class="intro-en">Making the eyewear the only subject.</p>
+  </div>
+
+
+
+  <div class="mag-row r-half">
+    <div class="mag-cell sq"><img src="../../images/new-vision/01.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell sq"><img src="../../images/new-vision/02.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">01</p>
+    <p class="tb-zh">眼鏡的展示，最常見的錯誤是把商品放進一個太有自己主張的空間。新創視的選材從這個問題出發：水泥粉光、台灣製水磨石、原色橡木皮，三種材質有質感，但沒有聲音。展示邏輯從傳統櫃檯轉向開放式中島，銷售變成一件可以移動、可以靠近的事。</p>
+    <p class="tb-en">The most common mistake in eyewear retail is placing the product in a space with too strong a voice. New Vision's materials begin from this problem: cement finish, Taiwanese terrazzo, natural oak veneer — texture without personality. Display logic shifts from traditional counters to open islands, making sales something that can move and approach.</p>
+  </div>
+  <div class="mag-row r-6040">
+    <div class="mag-cell tall"><img src="../../images/new-vision/05.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell tall"><img src="../../images/new-vision/06.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">02</p>
+    <p class="tb-zh">地面預埋的線性光源，沿著空間的輪廓走。這條光不是裝飾，是建築線條的強調——讓空間的邊界在視線高度之外也能被感知。光源藏起來，效果才能站出來。</p>
+    <p class="tb-en">In-floor linear light traces the spatial outline. This line is not decoration — it emphasizes architectural edges, making boundaries perceptible beyond eye level. The source hides so the effect can stand.</p>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/new-vision/07.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/new-vision/08.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">03</p>
+    <p class="tb-zh">開放式中島取代傳統玻璃櫃台，改變的不只是陳列方式，而是銷售關係。當商品可以被拿起、被直接觸碰，店員與客人之間的距離從「隔著玻璃」變成「站在同一側」。</p>
+    <p class="tb-en">Open island units replace glass counters, changing not just display but the sales relationship. When products can be picked up and touched directly, the distance between staff and customer shifts from across the glass to standing on the same side.</p>
+  </div>
+  <div class="mag-row r-half">
+    <div class="mag-cell sq"><img src="../../images/new-vision/09.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell sq"><img src="../../images/new-vision/10.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">04</p>
+    <p class="tb-zh">水泥粉光、水磨石、橡木皮——三種選材的共同邏輯是「有性格但不搶話」。它們各自有肌理，但放在一起不互相競爭，讓視線回到商品。選材不是風格決定，是展示策略的延伸。</p>
+    <p class="tb-en">Cement finish, terrazzo, oak veneer — three materials sharing one logic: character without volume. Each has texture, but together they don't compete, returning the eye to the product. Material selection is not style; it is display strategy.</p>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/new-vision/12.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/new-vision/13.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">05</p>
+    <p class="tb-zh">眼鏡的試戴是一個需要鏡子和光線同時配合的行為。中島旁的立鏡角度經過計算，確保試戴時臉部的光線均勻、無陰影。這個細節不會被客人注意到，但他們會覺得「在這裡試戴的時候，鏡子裡的自己看起來比較好看」——這就夠了。</p>
+    <p class="tb-en">Trying on eyewear requires mirror and light to work together. The standing mirror beside the island is angled so facial lighting is even and shadowless during try-on. Customers will not notice this detail, but they will feel that the person in the mirror looks better here — that is enough.</p>
+  </div>
+
+  <p class="thumb-label">All Photos</p>
+  <div class="thumb-strip">
+    <div class="thumb"><img loading="lazy" src="../../images/new-vision/01.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/new-vision/02.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/new-vision/05.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/new-vision/06.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/new-vision/07.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/new-vision/08.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/new-vision/09.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/new-vision/10.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/new-vision/12.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/new-vision/13.jpg" alt=""></div>
+  </div>
+
+  <div class="proj-nav">
+    <a href="/commercial/iron-chef/index.html">&larr; IRON CHEF</a>
+    <a href="/commercial/index.html" class="back">Commercial</a>
+    <a href="/commercial/retrodandy/index.html">Retrodandy &rarr;</a>
+  </div>
+
 </div>
 
-<!-- Floor Plan（無圖自動隱藏）-->
-<div class="plan">
-  <p class="plan-label">Floor Plan</p>
-  <img src="../../images/new-vision/plan.jpg" onerror="this.parentElement.style.display='none'" loading="lazy" decoding="async" alt="Floor Plan">
-</div>
-
-<!-- ═══ PHOTO AREA ═══ -->
-<div class="photos">
-
-  <div class="p-full"><img loading="lazy" decoding="async" src="../../images/new-vision/01.jpg" alt="01"></div>
-  <div class="gap-row"></div>
-
-  <div class="p-2col">
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/new-vision/02.jpg" alt="02"></div>
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/new-vision/05.jpg" alt="05"></div>
-  </div>
-  <div class="gap-row"></div>
-
-  <div class="editorial">
-    <p>地面預埋的線性光源，沿著空間的輪廓走。這條光不是裝飾，是建築線條的強調——讓空間的邊界在視線高度之外也能被感知，讓人在移動中持續意識到自己在哪裡、商品在哪裡。光源藏起來，效果才能站出來。</p>
-  </div>
-
-  <div class="p-asymm">
-    <div class="p-asymm-left p-cell"><img loading="lazy" decoding="async" src="../../images/new-vision/06.jpg" alt="06"></div>
-    <div class="p-asymm-right">
-      <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/new-vision/07.jpg" alt="07"></div>
-      <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/new-vision/08.jpg" alt="08"></div>
-    </div>
-  </div>
-  <div class="gap-row"></div>
-
-  <div class="editorial">
-    <p>開放式中島取代傳統玻璃櫃台，改變的不只是陳列方式，而是銷售關係。當商品可以被拿起、被直接觸碰，店員與客人之間的距離從「隔著玻璃」變成「站在同一側」。每個展架都作為獨立的敘事單位，各款眼鏡有自己的位置，讓選擇成為一種有節奏的移動，而不是一次看完的瀏覽。</p>
-  </div>
-
-  <div class="p-2col">
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/new-vision/09.jpg" alt="09"></div>
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/new-vision/10.jpg" alt="10"></div>
-  </div>
-  <div class="gap-row"></div>
-
-  <div class="p-2col">
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/new-vision/12.jpg" alt="12"></div>
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/new-vision/13.jpg" alt="13"></div>
-  </div>
-  <div class="gap-row"></div>
-
-  <div class="editorial">
-    <p>水泥粉光、水磨石、橡木皮——三種選材的共同邏輯是「有性格但不搶話」。它們各自有肌理，但放在一起不互相競爭，讓視線回到商品。選材不是風格決定，是展示策略的延伸。</p>
-  </div>
-
-</div>
-
-
-<!-- ═══ BOTTOM NAV ═══ -->
-
-<p class="thumb-label">All Photos</p>
-<div class="thumb-strip">
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/new-vision/01.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/new-vision/02.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/new-vision/05.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/new-vision/06.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/new-vision/07.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/new-vision/08.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/new-vision/09.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/new-vision/10.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/new-vision/12.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/new-vision/13.jpg" alt=""></div>
-</div>
-<div class="bottom">
-  <a class="bottom-nav" href="../iron-chef/index.html">← IRON CHEF</a>
-  <a class="bowerbird" href="#">View on BowerBird →</a>
-  <a class="bottom-nav" href="../retrodandy/index.html">Retrodandy →</a>
-</div>
-
-
-
-
-<!-- Lightbox -->
-<div id="lb" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.93);align-items:center;justify-content:center;">
-  <button id="lb-close" style="position:absolute;top:1.5rem;right:2rem;font-size:24px;opacity:.5;cursor:pointer;background:none;border:none;color:#fafaf8;transition:opacity .2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.5">&#10005;</button>
-  <button id="lb-prev" style="position:absolute;top:50%;transform:translateY(-50%);left:1rem;background:none;border:none;color:#fafaf8;font-size:2rem;opacity:.3;cursor:pointer;padding:1rem;transition:opacity .2s;" onmouseover="this.style.opacity=.9" onmouseout="this.style.opacity=.3">&#8249;</button>
-  <img id="lb-img" src="" alt="" style="max-width:90vw;max-height:88vh;object-fit:contain;display:block;">
-  <button id="lb-next" style="position:absolute;top:50%;transform:translateY(-50%);right:1rem;background:none;border:none;color:#fafaf8;font-size:2rem;opacity:.3;cursor:pointer;padding:1rem;transition:opacity .2s;" onmouseover="this.style.opacity=.9" onmouseout="this.style.opacity=.3">&#8250;</button>
-  <span id="lb-counter" style="position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);font-size:11px;opacity:.35;letter-spacing:.1em;color:#fafaf8;"></span>
+<div id="lb">
+  <button id="lb-close">&#10005;</button>
+  <button id="lb-prev">&#8249;</button>
+  <img id="lb-img" src="" alt="">
+  <button id="lb-next">&#8250;</button>
+  <span id="lb-counter"></span>
 </div>
 <script>
 (function(){
-  const imgs=[...document.querySelectorAll('img[src]:not([src=""])')]
-    .filter(i=>!i.closest('#lb')&&!i.closest('.thumb-strip'));
-  const srcs=imgs.map(i=>i.src);
-  const lb=document.getElementById('lb');
-  const lbImg=document.getElementById('lb-img');
-  const lbC=document.getElementById('lb-counter');
-  let cur=0;
-  function show(i){cur=i;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;lb.style.display='flex';}
-  function close(){lb.style.display='none';lbImg.src='';}
-  imgs.forEach((img,i)=>{img.style.cursor='zoom-in';img.addEventListener('click',()=>show(i));});
-  document.querySelectorAll('.thumb-strip .thumb').forEach(t=>{
-    t.style.cursor='zoom-in';
-    t.addEventListener('click',()=>{
-      const s=t.querySelector('img').src;
-      const i=srcs.findIndex(x=>x===s);
-      if(i>=0)show(i);
+  var imgs=[].slice.call(document.querySelectorAll('.mag-cell img, .plan-section:not(.hidden) img'));
+  var srcs=imgs.map(function(i){return i.src});
+  var lb=document.getElementById('lb');
+  var lbImg=document.getElementById('lb-img');
+  var lbC=document.getElementById('lb-counter');
+  var cur=0;
+  function show(i){cur=i;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;lb.classList.add('open')}
+  function close(){lb.classList.remove('open');lbImg.src=''}
+  imgs.forEach(function(img,i){img.addEventListener('click',function(){show(i)})});
+  [].slice.call(document.querySelectorAll('.thumb-strip .thumb')).forEach(function(t){
+    t.addEventListener('click',function(){
+      var s=t.querySelector('img').src;
+      var i=srcs.findIndex(function(x){return x===s});
+      if(i>=0)show(i);else{srcs.push(s);show(srcs.length-1)}
     });
   });
   document.getElementById('lb-close').onclick=close;
-  document.getElementById('lb-prev').onclick=()=>{cur=(cur-1+srcs.length)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;};
-  document.getElementById('lb-next').onclick=()=>{cur=(cur+1)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;};
-  lb.addEventListener('click',e=>{if(e.target===lb)close();});
-  document.addEventListener('keydown',e=>{
-    if(lb.style.display==='none')return;
+  document.getElementById('lb-prev').onclick=function(){cur=(cur-1+srcs.length)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length};
+  document.getElementById('lb-next').onclick=function(){cur=(cur+1)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length};
+  lb.addEventListener('click',function(e){if(e.target===lb)close()});
+  document.addEventListener('keydown',function(e){
+    if(!lb.classList.contains('open'))return;
     if(e.key==='ArrowLeft')document.getElementById('lb-prev').click();
     if(e.key==='ArrowRight')document.getElementById('lb-next').click();
     if(e.key==='Escape')close();
   });
 })();
 </script>
+
 </body>
 </html>

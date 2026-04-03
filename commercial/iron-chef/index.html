@@ -1,174 +1,236 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IRON CHEF — ON Design Lab</title>
-<link rel="stylesheet" href="../../assets/commercial.css">
-<meta name="description" content="IRON CHEF | ON Design Lab 設計作品">
-<meta property="og:title" content="IRON CHEF — ON Design Lab">
-<meta property="og:description" content="IRON CHEF | ON Design Lab — 台北品牌空間設計事務所">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IRON CHEF &mdash; ON Design Lab</title>
+<meta name="description" content="IRON CHEF 餐飲空間 | ON Design Lab">
+<meta property="og:title" content="IRON CHEF &mdash; ON Design Lab">
 <meta property="og:image" content="https://ondesignlabltd.com/images/iron-chef/00.jpg">
-<meta property="og:url" content="https://ondesignlabltd.com/commercial/iron-chef/">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--black:#0a0a0a;--white:#fafaf8;--dim:rgba(255,255,255,.07)}
+html,body{background:var(--black);color:var(--white);font-family:'Helvetica Neue',Helvetica,Arial,sans-serif}
+a{color:inherit;text-decoration:none}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.5rem 2.5rem;background:rgba(10,10,10,.88);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
+nav .logo{font-size:12px;letter-spacing:.18em}
+nav ul{list-style:none;display:flex;gap:2.5rem}
+nav ul li a{font-size:11px;letter-spacing:.12em;opacity:.4;transition:opacity .2s}
+nav ul li a:hover{opacity:1}
+
+.hero{position:relative;width:100%;height:100vh;overflow:hidden;display:flex;align-items:flex-end}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.55)}
+.hero-caption{position:relative;z-index:2;padding:3rem 2.5rem;width:100%;border-top:1px solid rgba(255,255,255,.1)}
+.hero-title{font-size:clamp(2.5rem,7vw,6rem);font-weight:200;letter-spacing:-.02em;line-height:.95;margin-bottom:.6rem}
+.hero-tags{font-size:11px;letter-spacing:.12em;opacity:.35}
+
+.content{max-width:1100px;margin:0 auto}
+.intro{max-width:720px;padding:5rem 2.5rem;border-bottom:1px solid var(--dim)}
+.intro-zh{font-size:16px;line-height:2.05;opacity:.75;margin-bottom:2.5rem}
+.intro-en{font-size:13px;line-height:1.95;opacity:.28;font-style:italic}
+
+.plan-section{padding:4rem 2.5rem;border-bottom:1px solid var(--dim)}
+.plan-section.hidden{display:none}
+.plan-eyebrow{font-size:9px;letter-spacing:.22em;opacity:.22;text-transform:uppercase;margin-bottom:2rem}
+.plan-section img{width:100%;display:block;filter:brightness(.85);cursor:zoom-in}
+.plan-section img:hover{filter:brightness(1)}
+
+.mag-row{display:grid;gap:1px;background:var(--dim);border-bottom:1px solid var(--dim)}
+.mag-row.r-full{grid-template-columns:1fr}
+.mag-row.r-6040{grid-template-columns:6fr 4fr}
+.mag-row.r-half{grid-template-columns:1fr 1fr}
+.mag-row.r-third{grid-template-columns:1fr 1fr 1fr}
+@media(max-width:600px){.mag-row.r-6040,.mag-row.r-half,.mag-row.r-third{grid-template-columns:1fr}}
+.mag-cell{background:var(--black);overflow:hidden}
+.mag-cell img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.82);transition:filter .4s,transform .55s;cursor:zoom-in}
+.mag-cell:hover img{filter:brightness(1);transform:scale(1.03)}
+.mag-cell.tall{aspect-ratio:3/4}
+.mag-cell.wide{aspect-ratio:16/9}
+.mag-cell.sq{aspect-ratio:1}
+
+.text-break{max-width:720px;padding:4rem 2.5rem;border-bottom:1px solid var(--dim)}
+.tb-num{font-size:9px;letter-spacing:.2em;opacity:.2;text-transform:uppercase;margin-bottom:1.5rem}
+.tb-zh{font-size:14px;line-height:2.05;opacity:.68;margin-bottom:1.8rem}
+.tb-en{font-size:12px;line-height:1.95;opacity:.27;font-style:italic}
+
+.proj-nav{display:flex;justify-content:space-between;align-items:center;padding:2.5rem;border-top:1px solid var(--dim)}
+.proj-nav a{font-size:11px;letter-spacing:.1em;opacity:.3;transition:opacity .2s}
+.proj-nav a:hover{opacity:.9}
+.proj-nav .back{font-size:10px;letter-spacing:.15em;opacity:.2}
+
+#lb{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.95);align-items:center;justify-content:center}
+#lb.open{display:flex}
+#lb img{max-width:92vw;max-height:90vh;object-fit:contain}
+#lb-close{position:absolute;top:1.5rem;right:2rem;font-size:22px;opacity:.4;cursor:pointer;background:none;border:none;color:var(--white)}
+#lb-close:hover{opacity:1}
+#lb-prev,#lb-next{position:absolute;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--white);font-size:2rem;opacity:.25;cursor:pointer;padding:1rem;transition:opacity .2s}
+#lb-prev:hover,#lb-next:hover{opacity:.9}
+#lb-prev{left:.5rem}
+#lb-next{right:.5rem}
+#lb-counter{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);font-size:10px;opacity:.3;letter-spacing:.1em}
+
+.thumb-label{font-size:9px;letter-spacing:.22em;opacity:.22;text-transform:uppercase;padding:2.5rem 2.5rem 1rem;max-width:1100px;margin:0 auto}
+.thumb-strip{display:flex;gap:2px;overflow-x:auto;padding:0 2.5rem 2rem;max-width:1100px;margin:0 auto;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.15) transparent}
+.thumb-strip::-webkit-scrollbar{height:4px}
+.thumb-strip::-webkit-scrollbar-track{background:transparent}
+.thumb-strip::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:2px}
+.thumb{flex:0 0 auto;width:100px;height:68px;overflow:hidden;cursor:zoom-in;opacity:.5;transition:opacity .3s}
+.thumb:hover{opacity:1}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+</style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="nav">
-  <a class="nav-logo" href="../../index.html">ON Design Lab</a>
-  <div class="nav-links">
-    <a class="nav-link active" href="../index.html">Commercial</a>
-    <a class="nav-link" href="../../residential/index.html">Residential</a>
-    <a class="nav-link" href="../../info/index.html">Info</a>
-  </div>
+<nav>
+  <a href="/index.html" class="logo">ON DESIGN LAB</a>
+  <ul>
+    <li><a href="/commercial/index.html">Commercial</a></li>
+    <li><a href="/residential/index.html">Residential</a></li>
+    <li><a href="/info/index.html">Info</a></li>
+  </ul>
 </nav>
 
-<a class="back" href="../index.html">← Commercial</a>
-
-<!-- ═══ HERO ═══ -->
-<div class="hero-img">
+<div class="hero">
   <img src="../../images/iron-chef/00.jpg" fetchpriority="high" loading="eager" decoding="async" alt="IRON CHEF">
-  <div class="hero-overlay">
-    <div class="hero-title">IRON CHEF</div>
-    <div class="hero-meta">
-      <span class="hero-type">F&amp;B</span>
-      <div class="hero-dot"></div>
-      <span class="hero-type">餐飲空間</span>
-      <div class="hero-dot"></div>
-      <span class="hero-type">Taipei</span>
-    </div>
+  <div class="hero-caption">
+    <h1 class="hero-title">IRON CHEF</h1>
+    <p class="hero-tags">餐飲空間 &middot; Taipei</p>
   </div>
 </div>
 
-<!-- ═══ TEXT AREA ═══ -->
-<div class="intro">
-  <p class="desc-zh"></p>
-  <p class="desc-en"></p>
+<div class="content">
+
+  <div class="intro">
+    <p class="intro-zh">玻璃隔出層次，石材壓住重心，威士忌牆是整個空間的錨點。</p>
+    <p class="intro-en">Glass creates layers, stone holds the center of gravity, and the whisky wall anchors the entire space.</p>
+  </div>
+
+
+
+  <div class="mag-row r-half">
+    <div class="mag-cell sq"><img src="../../images/iron-chef/0.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell sq"><img src="../../images/iron-chef/01.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/iron-chef/03.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">01</p>
+    <p class="tb-zh">入口的紅橘色玻璃隔屏，不是裝飾，是情緒的轉場。從街道走進來，視線先被一層暖色過濾，身體的節奏在這裡被放慢。透過玻璃看見的室內，帶著一層琥珀色的濾鏡——還沒坐下，氣氛已經開始了。</p>
+    <p class="tb-en">The red-orange glass partition at the entrance is not decoration — it is an emotional transition. Walking in from the street, the eye is filtered through warm color, the body's pace slows. The interior seen through the glass carries an amber cast — the atmosphere begins before you sit.</p>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/iron-chef/04.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="mag-row r-half">
+    <div class="mag-cell sq"><img src="../../images/iron-chef/05.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell sq"><img src="../../images/iron-chef/06.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">02</p>
+    <p class="tb-zh">威士忌展示牆以黑色鐵件格柵構成，背光均勻打亮每一支酒瓶。展示不是炫耀收藏量，而是讓每一支酒在架上有自己的位置和光線。格柵的節奏感讓牆面從陳列變成空間的立面語言。</p>
+    <p class="tb-en">The whisky display wall is structured in black steel grille, backlit to illuminate each bottle evenly. Display is not about showing volume — it is about giving every bottle its own position and light. The grille's rhythm turns the wall from a shelf into the space's facade language.</p>
+  </div>
+  <div class="mag-row r-half">
+    <div class="mag-cell sq"><img src="../../images/iron-chef/09.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell sq"><img src="../../images/iron-chef/14.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/iron-chef/23.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">03</p>
+    <p class="tb-zh">大理石與深色皮革定義了休息區的重量感。石材選用帶紋路的天然石，不拋光處理，讓表面保留觸覺的溫度。座椅的間距經過計算——足夠私密，但不封閉，讓對話可以發生，也可以不發生。</p>
+    <p class="tb-en">Marble and dark leather define the lounge's sense of weight. Natural veined stone, unpolished, retains warmth to the touch. Seat spacing is calculated — private enough, but not enclosed, allowing conversation to happen or not.</p>
+  </div>
+  <div class="mag-row r-6040">
+    <div class="mag-cell tall"><img src="../../images/iron-chef/27.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell tall"><img src="../../images/iron-chef/29.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/iron-chef/31.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">04</p>
+    <p class="tb-zh">山水意象的藝術作品被嵌入玻璃隔間的視線軸上，成為空間的視覺終點。它不是附加的裝飾，而是動線的句點——當你走完這個空間，最後看見的是一幅安靜的風景，讓整個體驗的情緒在這裡收束。</p>
+    <p class="tb-en">The landscape artwork is embedded along the glass partition's sight axis, becoming the visual terminus. It is not added decoration but the period at the end of circulation — when you finish the space, the last thing you see is a quiet landscape, gathering the experience's emotion to a close.</p>
+  </div>
+  <div class="mag-row r-6040">
+    <div class="mag-cell tall"><img src="../../images/iron-chef/34.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell tall"><img src="../../images/iron-chef/7.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">05</p>
+    <p class="tb-zh">這個空間要做到的，是讓商務與放鬆同時成立。玻璃隔間讓視線穿透，但聲音被控制在各自的區域裡。你可以在吧台獨飲，也可以在沙發區談事情——兩種狀態在同一個空間裡不互相干擾。這不是複合空間，是同一個空間的兩種閱讀方式。</p>
+    <p class="tb-en">The space achieves business and relaxation simultaneously. Glass partitions let sight pass through while sound is contained in each zone. You can drink alone at the bar or discuss business in the lounge — two states coexisting without interference. Not a hybrid space, but one space with two ways of reading.</p>
+  </div>
+
+  <p class="thumb-label">All Photos</p>
+  <div class="thumb-strip">
+    <div class="thumb"><img loading="lazy" src="../../images/iron-chef/0.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/iron-chef/01.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/iron-chef/03.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/iron-chef/04.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/iron-chef/05.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/iron-chef/06.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/iron-chef/09.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/iron-chef/14.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/iron-chef/23.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/iron-chef/27.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/iron-chef/29.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/iron-chef/31.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/iron-chef/34.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/iron-chef/7.jpg" alt=""></div>
+  </div>
+
+  <div class="proj-nav">
+    <a href="/commercial/yun-jiao/index.html">&larr; 耘角</a>
+    <a href="/commercial/index.html" class="back">Commercial</a>
+    <a href="/commercial/new-vision/index.html">新創視眼鏡 &rarr;</a>
+  </div>
+
 </div>
 
-<!-- Floor Plan（無圖自動隱藏）-->
-<div class="plan">
-  <p class="plan-label">Floor Plan</p>
-  <img src="../../images/iron-chef/plan.jpg" onerror="this.parentElement.style.display='none'" loading="lazy" decoding="async" alt="Floor Plan">
-</div>
-
-<!-- ═══ PHOTO AREA ═══ -->
-<div class="photos">
-
-  <div class="p-full"><img loading="lazy" decoding="async" src="../../images/iron-chef/0.jpg" alt="0"></div>
-  <div class="gap-row"></div>
-
-  <div class="p-2col">
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/iron-chef/01.jpg" alt="01"></div>
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/iron-chef/03.jpg" alt="03"></div>
-  </div>
-  <div class="gap-row"></div>
-
-  <div class="p-asymm">
-    <div class="p-asymm-left p-cell"><img loading="lazy" decoding="async" src="../../images/iron-chef/04.jpg" alt="04"></div>
-    <div class="p-asymm-right">
-      <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/iron-chef/05.jpg" alt="05"></div>
-      <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/iron-chef/06.jpg" alt="06"></div>
-    </div>
-  </div>
-  <div class="gap-row"></div>
-
-  <div class="p-2col">
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/iron-chef/7.jpg" alt="7"></div>
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/iron-chef/09.jpg" alt="09"></div>
-  </div>
-  <div class="gap-row"></div>
-
-  <div class="p-full"><img loading="lazy" decoding="async" src="../../images/iron-chef/14.jpg" alt="14"></div>
-  <div class="gap-row"></div>
-
-  <div class="p-2col">
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/iron-chef/23.jpg" alt="23"></div>
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/iron-chef/27.jpg" alt="27"></div>
-  </div>
-  <div class="gap-row"></div>
-
-  <div class="p-2col">
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/iron-chef/29.jpg" alt="29"></div>
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/iron-chef/31.jpg" alt="31"></div>
-  </div>
-  <div class="gap-row"></div>
-
-  <div class="p-full"><img loading="lazy" decoding="async" src="../../images/iron-chef/34.jpg" alt="34"></div>
-  <div class="gap-row"></div>
-
-</div>
-
-
-<!-- ═══ BOTTOM NAV ═══ -->
-
-<p class="thumb-label">All Photos</p>
-<div class="thumb-strip">
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/iron-chef/0.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/iron-chef/01.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/iron-chef/03.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/iron-chef/04.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/iron-chef/05.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/iron-chef/06.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/iron-chef/7.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/iron-chef/09.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/iron-chef/14.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/iron-chef/23.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/iron-chef/27.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/iron-chef/29.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/iron-chef/31.jpg" alt=""></div>
-<div class="thumb"><img loading="lazy" decoding="async" src="../../images/iron-chef/34.jpg" alt=""></div>
-</div>
-<div class="bottom">
-  <a class="bottom-nav" href="../yun-jiao/index.html">← 耘角 Yun Jiao</a>
-  <a class="bowerbird" href="#">View on BowerBird →</a>
-  <a class="bottom-nav" href="../new-vision/index.html">新創視眼鏡 New Vision →</a>
-</div>
-
-
-
-
-<!-- Lightbox -->
-<div id="lb" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.93);align-items:center;justify-content:center;">
-  <button id="lb-close" style="position:absolute;top:1.5rem;right:2rem;font-size:24px;opacity:.5;cursor:pointer;background:none;border:none;color:#fafaf8;transition:opacity .2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.5">&#10005;</button>
-  <button id="lb-prev" style="position:absolute;top:50%;transform:translateY(-50%);left:1rem;background:none;border:none;color:#fafaf8;font-size:2rem;opacity:.3;cursor:pointer;padding:1rem;transition:opacity .2s;" onmouseover="this.style.opacity=.9" onmouseout="this.style.opacity=.3">&#8249;</button>
-  <img id="lb-img" src="" alt="" style="max-width:90vw;max-height:88vh;object-fit:contain;display:block;">
-  <button id="lb-next" style="position:absolute;top:50%;transform:translateY(-50%);right:1rem;background:none;border:none;color:#fafaf8;font-size:2rem;opacity:.3;cursor:pointer;padding:1rem;transition:opacity .2s;" onmouseover="this.style.opacity=.9" onmouseout="this.style.opacity=.3">&#8250;</button>
-  <span id="lb-counter" style="position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);font-size:11px;opacity:.35;letter-spacing:.1em;color:#fafaf8;"></span>
+<div id="lb">
+  <button id="lb-close">&#10005;</button>
+  <button id="lb-prev">&#8249;</button>
+  <img id="lb-img" src="" alt="">
+  <button id="lb-next">&#8250;</button>
+  <span id="lb-counter"></span>
 </div>
 <script>
 (function(){
-  const imgs=[...document.querySelectorAll('img[src]:not([src=""])')]
-    .filter(i=>!i.closest('#lb')&&!i.closest('.thumb-strip'));
-  const srcs=imgs.map(i=>i.src);
-  const lb=document.getElementById('lb');
-  const lbImg=document.getElementById('lb-img');
-  const lbC=document.getElementById('lb-counter');
-  let cur=0;
-  function show(i){cur=i;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;lb.style.display='flex';}
-  function close(){lb.style.display='none';lbImg.src='';}
-  imgs.forEach((img,i)=>{img.style.cursor='zoom-in';img.addEventListener('click',()=>show(i));});
-  document.querySelectorAll('.thumb-strip .thumb').forEach(t=>{
-    t.style.cursor='zoom-in';
-    t.addEventListener('click',()=>{
-      const s=t.querySelector('img').src;
-      const i=srcs.findIndex(x=>x===s);
-      if(i>=0)show(i);
+  var imgs=[].slice.call(document.querySelectorAll('.mag-cell img, .plan-section:not(.hidden) img'));
+  var srcs=imgs.map(function(i){return i.src});
+  var lb=document.getElementById('lb');
+  var lbImg=document.getElementById('lb-img');
+  var lbC=document.getElementById('lb-counter');
+  var cur=0;
+  function show(i){cur=i;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;lb.classList.add('open')}
+  function close(){lb.classList.remove('open');lbImg.src=''}
+  imgs.forEach(function(img,i){img.addEventListener('click',function(){show(i)})});
+  [].slice.call(document.querySelectorAll('.thumb-strip .thumb')).forEach(function(t){
+    t.addEventListener('click',function(){
+      var s=t.querySelector('img').src;
+      var i=srcs.findIndex(function(x){return x===s});
+      if(i>=0)show(i);else{srcs.push(s);show(srcs.length-1)}
     });
   });
   document.getElementById('lb-close').onclick=close;
-  document.getElementById('lb-prev').onclick=()=>{cur=(cur-1+srcs.length)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;};
-  document.getElementById('lb-next').onclick=()=>{cur=(cur+1)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;};
-  lb.addEventListener('click',e=>{if(e.target===lb)close();});
-  document.addEventListener('keydown',e=>{
-    if(lb.style.display==='none')return;
+  document.getElementById('lb-prev').onclick=function(){cur=(cur-1+srcs.length)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length};
+  document.getElementById('lb-next').onclick=function(){cur=(cur+1)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length};
+  lb.addEventListener('click',function(e){if(e.target===lb)close()});
+  document.addEventListener('keydown',function(e){
+    if(!lb.classList.contains('open'))return;
     if(e.key==='ArrowLeft')document.getElementById('lb-prev').click();
     if(e.key==='ArrowRight')document.getElementById('lb-next').click();
     if(e.key==='Escape')close();
   });
 })();
 </script>
+
 </body>
 </html>
