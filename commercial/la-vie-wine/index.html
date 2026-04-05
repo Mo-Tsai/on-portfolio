@@ -1,187 +1,235 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>La Vie Wine 樂活酒窖 — ON Design Lab</title>
-<link rel="stylesheet" href="../../assets/commercial.css">
-<meta name="description" content="La Vie Wine 樂活酒窖 | ON Design Lab 設計作品">
-<meta property="og:title" content="La Vie Wine 樂活酒窖 — ON Design Lab">
-<meta property="og:description" content="La Vie Wine 樂活酒窖 | ON Design Lab — 台北品牌空間設計事務所">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>La Vie Wine 樂活酒窖 &mdash; ON Design Lab</title>
+<meta name="description" content="La Vie Wine 樂活酒窖 | ON Design Lab">
+<meta property="og:title" content="La Vie Wine 樂活酒窖 &mdash; ON Design Lab">
 <meta property="og:image" content="https://ondesignlabltd.com/images/la-vie-wine/00.jpg">
 <meta property="og:url" content="https://ondesignlabltd.com/commercial/la-vie-wine/">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--black:#0a0a0a;--white:#fafaf8;--dim:rgba(255,255,255,.07)}
+html,body{background:var(--black);color:var(--white);font-family:'Helvetica Neue',Helvetica,Arial,sans-serif}
+a{color:inherit;text-decoration:none}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.5rem 2.5rem;background:rgba(10,10,10,.88);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
+nav .logo{font-size:12px;letter-spacing:.18em}
+nav ul{list-style:none;display:flex;gap:2.5rem}
+nav ul li a{font-size:11px;letter-spacing:.12em;opacity:.4;transition:opacity .2s}
+nav ul li a:hover{opacity:1}
+
+.hero{position:relative;width:100%;height:100vh;overflow:hidden;display:flex;align-items:flex-end}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.55)}
+.hero-caption{position:relative;z-index:2;padding:3rem 2.5rem;width:100%;border-top:1px solid rgba(255,255,255,.1)}
+.hero-title{font-size:clamp(2.5rem,7vw,6rem);font-weight:200;letter-spacing:-.02em;line-height:.95;margin-bottom:.6rem}
+.hero-tags{font-size:11px;letter-spacing:.12em;opacity:.35}
+
+.content{max-width:1100px;margin:0 auto}
+.intro{max-width:720px;padding:5rem 2.5rem;border-bottom:1px solid var(--dim)}
+.intro-zh{font-size:16px;line-height:2.05;opacity:.75;margin-bottom:2.5rem}
+.intro-en{font-size:13px;line-height:1.95;opacity:.28;font-style:italic}
+
+.plan-section{padding:4rem 2.5rem;border-bottom:1px solid var(--dim)}
+.plan-section.hidden{display:none}
+.plan-eyebrow{font-size:9px;letter-spacing:.22em;opacity:.22;text-transform:uppercase;margin-bottom:2rem}
+.plan-section img{width:100%;display:block;filter:brightness(.85);cursor:zoom-in}
+.plan-section img:hover{filter:brightness(1)}
+
+.mag-row{display:grid;gap:1px;background:var(--dim);border-bottom:1px solid var(--dim)}
+.mag-row.r-full{grid-template-columns:1fr}
+.mag-row.r-6040{grid-template-columns:6fr 4fr}
+.mag-row.r-half{grid-template-columns:1fr 1fr}
+.mag-row.r-third{grid-template-columns:1fr 1fr 1fr}
+@media(max-width:600px){.mag-row.r-6040,.mag-row.r-half,.mag-row.r-third{grid-template-columns:1fr}}
+.mag-cell{background:var(--black);overflow:hidden}
+.mag-cell img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.82);transition:filter .4s,transform .55s;cursor:zoom-in}
+.mag-cell:hover img{filter:brightness(1);transform:scale(1.03)}
+.mag-cell.tall{aspect-ratio:3/4}
+.mag-cell.wide{aspect-ratio:16/9}
+.mag-cell.sq{aspect-ratio:1}
+
+.text-break{max-width:720px;padding:4rem 2.5rem;border-bottom:1px solid var(--dim)}
+.tb-num{font-size:9px;letter-spacing:.2em;opacity:.2;text-transform:uppercase;margin-bottom:1.5rem}
+.tb-zh{font-size:14px;line-height:2.05;opacity:.68;margin-bottom:1.8rem}
+.tb-en{font-size:12px;line-height:1.95;opacity:.27;font-style:italic}
+
+.proj-nav{display:flex;justify-content:space-between;align-items:center;padding:2.5rem;border-top:1px solid var(--dim)}
+.proj-nav a{font-size:11px;letter-spacing:.1em;opacity:.3;transition:opacity .2s}
+.proj-nav a:hover{opacity:.9}
+.proj-nav .back{font-size:10px;letter-spacing:.15em;opacity:.2}
+
+#lb{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.95);align-items:center;justify-content:center}
+#lb.open{display:flex}
+#lb img{max-width:92vw;max-height:90vh;object-fit:contain}
+#lb-close{position:absolute;top:1.5rem;right:2rem;font-size:22px;opacity:.4;cursor:pointer;background:none;border:none;color:var(--white)}
+#lb-close:hover{opacity:1}
+#lb-prev,#lb-next{position:absolute;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--white);font-size:2rem;opacity:.25;cursor:pointer;padding:1rem;transition:opacity .2s}
+#lb-prev:hover,#lb-next:hover{opacity:.9}
+#lb-prev{left:.5rem}
+#lb-next{right:.5rem}
+#lb-counter{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);font-size:10px;opacity:.3;letter-spacing:.1em}
+
+.thumb-label{font-size:9px;letter-spacing:.22em;opacity:.22;text-transform:uppercase;padding:2.5rem 2.5rem 1rem;max-width:1100px;margin:0 auto}
+.thumb-strip{display:flex;gap:2px;overflow-x:auto;padding:0 2.5rem 2rem;max-width:1100px;margin:0 auto;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.15) transparent}
+.thumb-strip::-webkit-scrollbar{height:4px}
+.thumb-strip::-webkit-scrollbar-track{background:transparent}
+.thumb-strip::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:2px}
+.thumb{flex:0 0 auto;width:100px;height:68px;overflow:hidden;cursor:zoom-in;opacity:.5;transition:opacity .3s}
+.thumb:hover{opacity:1}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+</style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="nav">
-  <a class="nav-logo" href="../../index.html">ON Design Lab</a>
-  <div class="nav-links">
-    <a class="nav-link active" href="../index.html">Commercial</a>
-    <a class="nav-link" href="../../residential/index.html">Residential</a>
-    <a class="nav-link" href="../../info/index.html">Info</a>
-  </div>
+<nav>
+  <a href="/index.html" class="logo">ON DESIGN LAB</a>
+  <ul>
+    <li><a href="/commercial/index.html">Commercial</a></li>
+    <li><a href="/residential/index.html">Residential</a></li>
+    <li><a href="/info/index.html">Info</a></li>
+  </ul>
 </nav>
 
-<a class="back" href="../index.html">← Commercial</a>
-
-<!-- ═══ HERO ═══ -->
-<div class="hero-img">
+<div class="hero">
   <img src="../../images/la-vie-wine/00.jpg" fetchpriority="high" loading="eager" decoding="async" alt="La Vie Wine 樂活酒窖">
-  <div class="hero-overlay">
-    <div class="hero-title">La Vie Wine 樂活酒窖</div>
-    <div class="hero-meta">
-      <span class="hero-type">F&amp;B</span>
-      <div class="hero-dot"></div>
-      <span class="hero-type">餐飲空間</span>
-      <div class="hero-dot"></div>
-      <span class="hero-type">Taipei</span>
-    </div>
+  <div class="hero-caption">
+    <h1 class="hero-title">La Vie Wine 樂活酒窖</h1>
+    <p class="hero-tags">餐飲空間 &middot; F&amp;B &middot; Taipei</p>
   </div>
 </div>
 
-<!-- ═══ TEXT AREA ═══ -->
-<div class="intro">
-  <p class="desc-zh">樂活想把歐洲的酒窖帶回來。不是作為風格，而是作為一種感受——磚牆、拱頂、微光，那種只有真正走進去才能理解的沉默與重量。我們沒有去找現成的風格參考，從業主帶回來的感受出發，還原那個感受背後的空間語言。</p>
-  <p class="desc-en">La Vie wanted to bring back a European cellar — not as a style, but as a feeling: brick walls, vaulted ceilings, dim light, the kind of silence and weight that can only be understood by walking in. We didn't look for references. We started from what the client brought back and reconstructed the spatial language behind that feeling.</p>
-</div>
+<div class="content">
 
-<!-- Floor Plan（無圖自動隱藏）-->
-<div class="plan">
-  <p class="plan-label">Floor Plan</p>
-  <img src="../../images/la-vie-wine/plan.jpg" onerror="this.parentElement.style.display='none'" loading="lazy" decoding="async" alt="Floor Plan">
-</div>
-
-<!-- ═══ PHOTO AREA ═══ -->
-<div class="photos">
-
-  <div class="p-full"><img loading="lazy" decoding="async" src="../../images/la-vie-wine/01.jpg" alt="01"></div>
-  <div class="gap-row"></div>
-
-  <div class="p-2col">
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/la-vie-wine/02.jpg" alt="02"></div>
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/la-vie-wine/03.jpg" alt="03"></div>
+  <div class="intro">
+    <p class="intro-zh">品牌如何長出一個空間？</p>
+    <p class="intro-en">What does a brand need to believe in before it builds a world?</p>
   </div>
-  <div class="gap-row"></div>
 
-  <div class="p-asymm">
-    <div class="p-asymm-left p-cell"><img loading="lazy" decoding="async" src="../../images/la-vie-wine/04.jpg" alt="04"></div>
-    <div class="p-asymm-right">
-      <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/la-vie-wine/05.jpg" alt="05"></div>
-      <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/la-vie-wine/06.jpg" alt="06"></div>
-    </div>
+  <div class="plan-section hidden">
+    <p class="plan-eyebrow">Floor Plan</p>
+    <img src="../../images/la-vie-wine/plan.jpg" onerror="this.parentElement.classList.add('hidden')" loading="lazy" decoding="async" alt="Floor Plan">
   </div>
-  <div class="editorial">
-  <p class="ed-zh">兩根不必要的柱子被放了回去——現代建築根本不需要它們，但沒有它們，空間就會說謊。牆上的壁畫借《最後的晚餐》的構圖骨架，勃根地之神坐在正中央，桌上不是麵包，是一排勃根地。</p>
-  <p class="ed-en">Two structurally unnecessary columns were put back — modern construction doesn't need them, but without them, the space would lie. The mural borrows the compositional frame of The Last Supper: the god of Burgundy sits at the center, and on the table, instead of bread, a row of Burgundy.</p>
-</div>
-  <div class="gap-row"></div>
 
-  <div class="p-2col">
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/la-vie-wine/07.jpg" alt="07"></div>
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/la-vie-wine/09.jpg" alt="09"></div>
+  <div class="mag-row r-half">
+    <div class="mag-cell sq"><img src="../../images/la-vie-wine/01.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell sq"><img src="../../images/la-vie-wine/02.jpg" loading="lazy" alt=""></div>
   </div>
-  <div class="gap-row"></div>
-
-  <div class="p-full"><img loading="lazy" decoding="async" src="../../images/la-vie-wine/10.jpg" alt="10"></div>
-  <div class="editorial">
-  <p class="ed-zh">當空間說的語言和品牌想說的是同一件事，那個地方就會開始有自己的引力。</p>
-  <p class="ed-en">When the space speaks the same language as the brand, the place develops its own gravity.</p>
-</div>
-  <div class="gap-row"></div>
-
-  <div class="p-2col">
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/la-vie-wine/11.jpg" alt="11"></div>
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/la-vie-wine/12.jpg" alt="12"></div>
+  <div class="text-break">
+    <p class="tb-num">01</p>
+    <p class="tb-zh">樂活想把歐洲的酒窖帶回來。不是作為風格，而是作為一種感受。磚牆、拱頂、微光，那種只有真正走進去才能理解的沉默與重量。我們的工作，是把這件事變成真的。</p>
+    <p class="tb-en">La Vie wanted to bring back a European wine cellar — not as a style, but as a feeling. Brick walls, vaulted ceilings, dim light: the kind of silence and weight that can only be understood by walking in. Our job was to make it real.</p>
   </div>
-  <div class="gap-row"></div>
-
-  <div class="p-2col">
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/la-vie-wine/13.jpg" alt="13"></div>
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/la-vie-wine/14.jpg" alt="14"></div>
+  <div class="mag-row r-6040">
+    <div class="mag-cell tall"><img src="../../images/la-vie-wine/03.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell tall"><img src="../../images/la-vie-wine/04.jpg" loading="lazy" alt=""></div>
   </div>
-  <div class="gap-row"></div>
+  <div class="text-break">
+    <p class="tb-num">02</p>
+    <p class="tb-zh">我們沒有去找現成的風格參考。從業主帶回來的感受出發，去還原那個感受背後的空間語言——中世紀歐洲酒窖的磚牆邏輯、拱頂下光線的行為方式、地下空間應有的沉默感。我們要建造的不是一個「看起來像那個時代」的地方，而是一個「本來就屬於那個時代」的地方。</p>
+    <p class="tb-en">We didn't look for existing style references. We started from what the client brought back and reconstructed the spatial language behind that feeling — the brick logic of medieval European cellars, how light behaves under vaulted ceilings, and the silence that underground spaces demand. What we wanted to build was not a place that "looks like that era," but one that "belongs to it."</p>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/la-vie-wine/05.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="mag-row r-half">
+    <div class="mag-cell sq"><img src="../../images/la-vie-wine/06.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell sq"><img src="../../images/la-vie-wine/07.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">03</p>
+    <p class="tb-zh">這兩件事的差距，就是那兩根柱子。現代建築的跨距早已解決了承重問題，中間不需要柱子。但中古世紀的地下室不會有這種跨距。沒有柱子，空間就會說謊。所以我們把它們放回去，不是為了裝飾，而是為了讓整件事保持誠實。牆上那幅壁畫借的是《最後的晚餐》的構圖骨架。坐在正中央的是勃根地之神，祂的信徒圍繞左右，桌上不是麵包，是一排勃根地。壁畫師用那個時代的筆觸作畫，透視點技法讓地下空間在視覺上向後無限延伸。品牌的信仰體系，被畫進了牆裡。</p>
+    <p class="tb-en">The gap between those two things is exactly those two columns. Modern construction solved the load-bearing problem long ago — no columns needed. But a medieval basement wouldn't have that kind of span. Without columns, the space would lie. So we put them back — not for decoration, but to keep the whole thing honest. The mural on the wall borrows the compositional framework of The Last Supper. At the center sits the god of Burgundy, followers on either side, and on the table — not bread, but a row of Burgundy. The muralist painted with period brushwork, using perspective techniques that visually extend the underground space into infinity. The brand's belief system was painted into the walls.</p>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/la-vie-wine/09.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/la-vie-wine/10.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">04</p>
+    <p class="tb-zh">門沒有鎖頭。不是因為不需要安全，而是因為鎖頭會破壞整件事的氛圍。在你走進藏酒廊道之前，你會在紅磚牆上的獅頭石雕前停下來，打開手機裡的 APP，把 QR Code 對著它。木門開啟。你踏進去，廊道的燈跟著你的位置亮起，照亮你腳下那一格，其他地方保持暗。取完酒，離開，燈滅，門關。進入一個認真的地方，應該有一個認真的動作。儀式感不是表演，是品牌氛圍的入口。門關上之後，是另一個時間維度。斑剝的牆面、紅磚拱頂、粗礪的地面，在微光裡呈現的不是殘破，而是時間的密度。木作酒架、鑄鐵壁燈、錘紋金屬吧台面——每一個材質都在說同一件事：這裡對待事物的方式，和外面不一樣。</p>
+    <p class="tb-en">The door has no lock — not because security isn't needed, but because a lock would break the atmosphere. Before entering the wine corridor, you stop at the lion-head stone carving on the red brick wall, open the app on your phone, and hold up the QR code. The wooden door opens. You step in, and the corridor lights follow your position, illuminating only the square beneath your feet while everything else stays dark. Take the wine, leave, lights off, door closed. Entering a serious place should require a serious gesture. Ritual is not performance — it's the entrance to the brand's atmosphere. Beyond the door is another dimension of time. Weathered walls, red brick vaults, rough floors — in the dim light, what you see is not decay, but the density of time. Wooden wine racks, cast-iron wall sconces, hammered metal bar tops — every material says the same thing: the way things are treated here is different from the outside.</p>
+  </div>
+  <div class="mag-row r-half">
+    <div class="mag-cell sq"><img src="../../images/la-vie-wine/11.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell sq"><img src="../../images/la-vie-wine/12.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="mag-row r-6040">
+    <div class="mag-cell tall"><img src="../../images/la-vie-wine/13.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell tall"><img src="../../images/la-vie-wine/14.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">05</p>
+    <p class="tb-zh">酒窖提供會員個人酒格，溫度、濕度、光照全部受控。APP 可以遠端管理，燈光只在你需要的時候亮起。這不是噱頭，是對一瓶認真的酒應有的對待方式。這裡發生的事，圍繞著「藏」與「分享」——品酒、選酒、與懂酒的人坐下來聊。但在這一切之外，還有一些我們一起做的：Logo 的重新設計、品牌色的重新定義、以及一件專門為酒窖訂製的披風，因為走進恆溫空間會冷，而那件披風的設計語言，必須跟這個空間說的是同一句話。沒有一個細節，是我們覺得「那不是我們的事」。</p>
+    <p class="tb-en">The cellar offers members private wine lockers — temperature, humidity, and lighting all controlled. The app manages everything remotely; lights turn on only when you need them. This isn't a gimmick — it's the proper way to treat a serious bottle of wine. What happens here revolves around "keeping" and "sharing" — tasting, selecting, sitting down with people who understand wine. But beyond all of that, there are things we did together: the logo redesign, the redefinition of brand colors, and a cape custom-made for the cellar — because walking into a temperature-controlled space gets cold, and the design language of that cape had to speak the same sentence as this space. Not a single detail was something we thought "wasn't our job."</p>
+  </div>
+
+  <p class="thumb-label">All Photos</p>
+  <div class="thumb-strip">
+    <div class="thumb"><img loading="lazy" src="../../images/la-vie-wine/01.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/la-vie-wine/02.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/la-vie-wine/03.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/la-vie-wine/04.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/la-vie-wine/05.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/la-vie-wine/06.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/la-vie-wine/07.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/la-vie-wine/09.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/la-vie-wine/10.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/la-vie-wine/11.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/la-vie-wine/12.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/la-vie-wine/13.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/la-vie-wine/14.jpg" alt=""></div>
+  </div>
 
 </div>
 
-<!-- ═══ THUMBNAILS ═══ -->
-<p class="thumb-label">All Photos</p>
-<div class="thumb-strip">
-  <div class="thumb" onclick="openLightbox(0)"><img loading="lazy" decoding="async" src="../../images/la-vie-wine/01.jpg" width="120" height="80" alt="01"></div>
-  <div class="thumb" onclick="openLightbox(1)"><img loading="lazy" decoding="async" src="../../images/la-vie-wine/02.jpg" width="120" height="80" alt="02"></div>
-  <div class="thumb" onclick="openLightbox(2)"><img loading="lazy" decoding="async" src="../../images/la-vie-wine/03.jpg" width="120" height="80" alt="03"></div>
-  <div class="thumb" onclick="openLightbox(3)"><img loading="lazy" decoding="async" src="../../images/la-vie-wine/04.jpg" width="120" height="80" alt="04"></div>
-  <div class="thumb" onclick="openLightbox(4)"><img loading="lazy" decoding="async" src="../../images/la-vie-wine/05.jpg" width="120" height="80" alt="05"></div>
-  <div class="thumb" onclick="openLightbox(5)"><img loading="lazy" decoding="async" src="../../images/la-vie-wine/06.jpg" width="120" height="80" alt="06"></div>
-  <div class="thumb" onclick="openLightbox(6)"><img loading="lazy" decoding="async" src="../../images/la-vie-wine/07.jpg" width="120" height="80" alt="07"></div>
-  <div class="thumb" onclick="openLightbox(7)"><img loading="lazy" decoding="async" src="../../images/la-vie-wine/09.jpg" width="120" height="80" alt="09"></div>
-  <div class="thumb" onclick="openLightbox(8)"><img loading="lazy" decoding="async" src="../../images/la-vie-wine/10.jpg" width="120" height="80" alt="10"></div>
-  <div class="thumb" onclick="openLightbox(9)"><img loading="lazy" decoding="async" src="../../images/la-vie-wine/11.jpg" width="120" height="80" alt="11"></div>
-  <div class="thumb" onclick="openLightbox(10)"><img loading="lazy" decoding="async" src="../../images/la-vie-wine/12.jpg" width="120" height="80" alt="12"></div>
-  <div class="thumb" onclick="openLightbox(11)"><img loading="lazy" decoding="async" src="../../images/la-vie-wine/13.jpg" width="120" height="80" alt="13"></div>
-  <div class="thumb" onclick="openLightbox(12)"><img loading="lazy" decoding="async" src="../../images/la-vie-wine/14.jpg" width="120" height="80" alt="14"></div>
-</div>
-
-<!-- ═══ LIGHTBOX ═══ -->
-<div id="lightbox" class="lightbox" style="display:none">
-  <div class="lb-close" onclick="closeLightbox()">×</div>
-  <div class="lb-prev" onclick="lbPrev()">‹</div>
+<!-- LIGHTBOX -->
+<div id="lb">
+  <button id="lb-close" onclick="closeLb()">&times;</button>
+  <button id="lb-prev" onclick="lbPrev()">&lsaquo;</button>
   <img id="lb-img" src="" alt="">
-  <div class="lb-next" onclick="lbNext()">›</div>
+  <button id="lb-next" onclick="lbNext()">&rsaquo;</button>
+  <div id="lb-counter"></div>
 </div>
 
-<!-- ═══ BOTTOM NAV ═══ -->
-<div class="bottom">
-  <a class="bottom-nav" href="../de-nuit/index.html">← de nuit</a>
-  <a class="bowerbird" href="#">View on BowerBird →</a>
-  <a class="bottom-nav" href="../wave-flower/index.html">浪花花藝 Wave Flower →</a>
+<!-- BOTTOM NAV -->
+<div class="proj-nav">
+  <a href="../de-nuit/index.html">&larr; de nuit</a>
+  <a class="back" href="../index.html">All Projects</a>
+  <a href="../wave-flower/index.html">浪花花藝 Wave Flower &rarr;</a>
 </div>
 
 <script>
-  const lbPhotos = [
-    '../../images/la-vie-wine/01.jpg',
-    '../../images/la-vie-wine/02.jpg',
-    '../../images/la-vie-wine/03.jpg',
-    '../../images/la-vie-wine/04.jpg',
-    '../../images/la-vie-wine/05.jpg',
-    '../../images/la-vie-wine/06.jpg',
-    '../../images/la-vie-wine/07.jpg',
-    '../../images/la-vie-wine/09.jpg',
-    '../../images/la-vie-wine/10.jpg',
-    '../../images/la-vie-wine/11.jpg',
-    '../../images/la-vie-wine/12.jpg',
-    '../../images/la-vie-wine/13.jpg',
-    '../../images/la-vie-wine/14.jpg',
-  ];
-  let lbIndex = 0;
-
-  function openLightbox(i) {
-    lbIndex = i;
-    document.getElementById('lb-img').src = lbPhotos[i];
-    document.getElementById('lightbox').style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-  }
-  function closeLightbox() {
-    document.getElementById('lightbox').style.display = 'none';
-    document.body.style.overflow = '';
-  }
-  function lbNext() {
-    lbIndex = (lbIndex + 1) % lbPhotos.length;
-    document.getElementById('lb-img').src = lbPhotos[lbIndex];
-  }
-  function lbPrev() {
-    lbIndex = (lbIndex - 1 + lbPhotos.length) % lbPhotos.length;
-    document.getElementById('lb-img').src = lbPhotos[lbIndex];
-  }
-  document.addEventListener('keydown', e => {
-    if (document.getElementById('lightbox').style.display === 'flex') {
-      if (e.key === 'ArrowRight') lbNext();
-      if (e.key === 'ArrowLeft') lbPrev();
-      if (e.key === 'Escape') closeLightbox();
-    }
-  });
+const imgs=[
+  '../../images/la-vie-wine/01.jpg',
+  '../../images/la-vie-wine/02.jpg',
+  '../../images/la-vie-wine/03.jpg',
+  '../../images/la-vie-wine/04.jpg',
+  '../../images/la-vie-wine/05.jpg',
+  '../../images/la-vie-wine/06.jpg',
+  '../../images/la-vie-wine/07.jpg',
+  '../../images/la-vie-wine/09.jpg',
+  '../../images/la-vie-wine/10.jpg',
+  '../../images/la-vie-wine/11.jpg',
+  '../../images/la-vie-wine/12.jpg',
+  '../../images/la-vie-wine/13.jpg',
+  '../../images/la-vie-wine/14.jpg',
+];
+let ci=0;
+document.querySelectorAll('.mag-cell img, .thumb img').forEach((el,i)=>{
+  el.addEventListener('click',()=>{ci=imgs.indexOf(el.src.replace(location.origin,''))||i;openLb()})
+});
+function openLb(){const l=document.getElementById('lb');l.classList.add('open');updLb()}
+function closeLb(){document.getElementById('lb').classList.remove('open')}
+function lbNext(){ci=(ci+1)%imgs.length;updLb()}
+function lbPrev(){ci=(ci-1+imgs.length)%imgs.length;updLb()}
+function updLb(){document.getElementById('lb-img').src=imgs[ci];document.getElementById('lb-counter').textContent=(ci+1)+' / '+imgs.length}
+document.addEventListener('keydown',e=>{if(!document.getElementById('lb').classList.contains('open'))return;if(e.key==='ArrowRight')lbNext();if(e.key==='ArrowLeft')lbPrev();if(e.key==='Escape')closeLb()});
 </script>
 
 </body>
