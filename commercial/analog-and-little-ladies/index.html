@@ -1,166 +1,214 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Analog and Little Ladies — ON Design Lab</title>
-<link rel="stylesheet" href="../../assets/commercial.css">
-<meta name="description" content="Analog and Little Ladies | ON Design Lab 設計作品">
-<meta property="og:title" content="Analog and Little Ladies — ON Design Lab">
-<meta property="og:description" content="Analog and Little Ladies | ON Design Lab — 台北品牌空間設計事務所">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Analog and Little Ladies &mdash; ON Design Lab</title>
+<meta name="description" content="Analog and Little Ladies | ON Design Lab">
+<meta property="og:title" content="Analog and Little Ladies &mdash; ON Design Lab">
 <meta property="og:image" content="https://ondesignlabltd.com/images/analog-and-little-ladies/00.jpg">
 <meta property="og:url" content="https://ondesignlabltd.com/commercial/analog-and-little-ladies/">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--black:#0a0a0a;--white:#fafaf8;--dim:rgba(255,255,255,.07)}
+html,body{background:var(--black);color:var(--white);font-family:'Helvetica Neue',Helvetica,Arial,sans-serif}
+a{color:inherit;text-decoration:none}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.5rem 2.5rem;background:rgba(10,10,10,.88);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
+nav .logo{font-size:12px;letter-spacing:.18em}
+nav ul{list-style:none;display:flex;gap:2.5rem}
+nav ul li a{font-size:11px;letter-spacing:.12em;opacity:.4;transition:opacity .2s}
+nav ul li a:hover{opacity:1}
+
+.hero{position:relative;width:100%;height:100vh;overflow:hidden;display:flex;align-items:flex-end}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.55)}
+.hero-caption{position:relative;z-index:2;padding:3rem 2.5rem;width:100%;border-top:1px solid rgba(255,255,255,.1)}
+.hero-title{font-size:clamp(2.5rem,7vw,6rem);font-weight:200;letter-spacing:-.02em;line-height:.95;margin-bottom:.6rem}
+.hero-tags{font-size:11px;letter-spacing:.12em;opacity:.35}
+
+.content{max-width:1100px;margin:0 auto}
+.intro{max-width:720px;padding:5rem 2.5rem;border-bottom:1px solid var(--dim)}
+.intro-zh{font-size:16px;line-height:2.05;opacity:.75;margin-bottom:2.5rem}
+.intro-en{font-size:13px;line-height:1.95;opacity:.28;font-style:italic}
+
+.plan-section{padding:4rem 2.5rem;border-bottom:1px solid var(--dim)}
+.plan-section.hidden{display:none}
+.plan-eyebrow{font-size:9px;letter-spacing:.22em;opacity:.22;text-transform:uppercase;margin-bottom:2rem}
+.plan-section img{width:100%;display:block;filter:brightness(.85);cursor:zoom-in}
+.plan-section img:hover{filter:brightness(1)}
+
+.mag-row{display:grid;gap:1px;background:var(--dim);border-bottom:1px solid var(--dim)}
+.mag-row.r-full{grid-template-columns:1fr}
+.mag-row.r-6040{grid-template-columns:6fr 4fr}
+.mag-row.r-half{grid-template-columns:1fr 1fr}
+.mag-row.r-third{grid-template-columns:1fr 1fr 1fr}
+@media(max-width:600px){.mag-row.r-6040,.mag-row.r-half,.mag-row.r-third{grid-template-columns:1fr}}
+.mag-cell{background:var(--black);overflow:hidden}
+.mag-cell img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.82);transition:filter .4s,transform .55s;cursor:zoom-in}
+.mag-cell:hover img{filter:brightness(1);transform:scale(1.03)}
+.mag-cell.tall{aspect-ratio:3/4}
+.mag-cell.wide{aspect-ratio:16/9}
+.mag-cell.sq{aspect-ratio:1}
+
+.text-break{max-width:720px;padding:4rem 2.5rem;border-bottom:1px solid var(--dim)}
+.tb-num{font-size:9px;letter-spacing:.2em;opacity:.2;text-transform:uppercase;margin-bottom:1.5rem}
+.tb-zh{font-size:14px;line-height:2.05;opacity:.68;margin-bottom:1.8rem}
+.tb-en{font-size:12px;line-height:1.95;opacity:.27;font-style:italic}
+
+.proj-nav{display:flex;justify-content:space-between;align-items:center;padding:2.5rem;border-top:1px solid var(--dim)}
+.proj-nav a{font-size:11px;letter-spacing:.1em;opacity:.3;transition:opacity .2s}
+.proj-nav a:hover{opacity:.9}
+.proj-nav .back{font-size:10px;letter-spacing:.15em;opacity:.2}
+
+#lb{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.95);align-items:center;justify-content:center}
+#lb.open{display:flex}
+#lb img{max-width:92vw;max-height:90vh;object-fit:contain}
+#lb-close{position:absolute;top:1.5rem;right:2rem;font-size:22px;opacity:.4;cursor:pointer;background:none;border:none;color:var(--white)}
+#lb-close:hover{opacity:1}
+#lb-prev,#lb-next{position:absolute;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--white);font-size:2rem;opacity:.25;cursor:pointer;padding:1rem;transition:opacity .2s}
+#lb-prev:hover,#lb-next:hover{opacity:.9}
+#lb-prev{left:.5rem}
+#lb-next{right:.5rem}
+#lb-counter{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);font-size:10px;opacity:.3;letter-spacing:.1em}
+
+.thumb-label{font-size:9px;letter-spacing:.22em;opacity:.22;text-transform:uppercase;padding:2.5rem 2.5rem 1rem;max-width:1100px;margin:0 auto}
+.thumb-strip{display:flex;gap:2px;overflow-x:auto;padding:0 2.5rem 2rem;max-width:1100px;margin:0 auto;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.15) transparent}
+.thumb-strip::-webkit-scrollbar{height:4px}
+.thumb-strip::-webkit-scrollbar-track{background:transparent}
+.thumb-strip::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:2px}
+.thumb{flex:0 0 auto;width:100px;height:68px;overflow:hidden;cursor:zoom-in;opacity:.5;transition:opacity .3s}
+.thumb:hover{opacity:1}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+</style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="nav">
-  <a class="nav-logo" href="../../index.html">ON Design Lab</a>
-  <div class="nav-links">
-    <a class="nav-link active" href="../index.html">Commercial</a>
-    <a class="nav-link" href="../../residential/index.html">Residential</a>
-    <a class="nav-link" href="../../info/index.html">Info</a>
-  </div>
+<nav>
+  <a href="/index.html" class="logo">ON DESIGN LAB</a>
+  <ul>
+    <li><a href="/commercial/index.html">Commercial</a></li>
+    <li><a href="/residential/index.html">Residential</a></li>
+    <li><a href="/info/index.html">Info</a></li>
+  </ul>
 </nav>
 
-<a class="back" href="../index.html">← Commercial</a>
-
-<!-- ═══ HERO ═══ -->
-<div class="hero-img">
+<div class="hero">
   <img src="../../images/analog-and-little-ladies/00.jpg" fetchpriority="high" loading="eager" decoding="async" alt="Analog and Little Ladies">
-  <div class="hero-overlay">
-    <div class="hero-title">Analog and Little Ladies</div>
-    <div class="hero-meta">
-      <span class="hero-type">Retail</span>
-      <div class="hero-dot"></div>
-      <span class="hero-type">零售空間</span>
-      <div class="hero-dot"></div>
-      <span class="hero-type">Taipei</span>
-    </div>
+  <div class="hero-caption">
+    <h1 class="hero-title">Analog and Little Ladies</h1>
+    <p class="hero-tags">零售空間 &middot; Retail &middot; Taipei</p>
   </div>
 </div>
 
-<!-- ═══ TEXT AREA ═══ -->
-<div class="intro">
-  <p class="desc-zh">Tattoo Studio 與 Barber Shop，兩種職人的工作，被置於同一條軸線上。右側是現代的：金屬結構、醫療等級工作椅、乾淨配光，精準是這裡的語言。左側是復古的：棋盤地坪、Hollywood 燈框、木作吧台、老件圖像，溫度是這裡的語言。兩種語言在同一個空間裡共存，不是妥協，是設計命題本身。</p>
-  <p class="desc-en">Tattoo Studio and Barber Shop — two kinds of craft — placed on a single axis. The right side speaks precision: metal structure, medical-grade work chairs, clean task lighting. The left side speaks warmth: checkerboard floors, Hollywood mirror frames, wood bar, vintage imagery. Two languages in one space, not as compromise, but as the design proposition itself.</p>
+<div class="content">
+
+  <div class="intro">
+    <p class="intro-zh">刺青和理髮，表面上是兩件事。但如果你認真想，它們的結構是一樣的——你坐下來，把自己交給另一個人，讓他在你身上做決定。</p>
+    <p class="intro-en">What does it mean to trust someone with your body?</p>
+  </div>
+
+  <div class="plan-section hidden">
+    <p class="plan-eyebrow">Floor Plan</p>
+    <img src="../../images/analog-and-little-ladies/plan.jpg" onerror="this.parentElement.classList.add('hidden')" loading="lazy" decoding="async" alt="Floor Plan">
+  </div>
+
+  <div class="mag-row r-half">
+    <div class="mag-cell sq"><img src="../../images/analog-and-little-ladies/01.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell sq"><img src="../../images/analog-and-little-ladies/02.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">01</p>
+    <p class="tb-zh">這種信任，不是每個空間都能承接的。把兩件事放在同一條軸線上，不是因為「混搭很有趣」。是因為它們本來就有共同的邏輯。</p>
+    <p class="tb-en">Not every space can hold that kind of trust. Placing these two things on the same axis isn't about "mixing things up for fun." It's because they already share the same logic.</p>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/analog-and-little-ladies/03.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">02</p>
+    <p class="tb-zh">刺青側，乾淨。白色水平鐵件像一筆線條落在粗糙的牆面上，光源連續、照度穩定——這裡需要清楚，需要專注，需要讓人知道你清楚自己在做什麼。</p>
+    <p class="tb-en">The tattoo side is clean. White horizontal steel lines fall across rough walls like a single brushstroke — continuous light, stable illumination. This side needs clarity, focus, and the assurance that you know exactly what you're doing.</p>
+  </div>
+  <div class="mag-row r-6040">
+    <div class="mag-cell tall"><img src="../../images/analog-and-little-ladies/04.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell tall"><img src="../../images/analog-and-little-ladies/05.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">03</p>
+    <p class="tb-zh">理髮側，有溫度。棋盤地坪、Hollywood 燈框、老件圖像，復古語彙構成一個讓人放鬆的等候場景——這裡需要的不是精準，是讓人願意坐下來。兩種信任，需要兩種不同的空間語言。當它們在同一面鏡子裡共存，你才會明白，設計從來不是風格的問題。</p>
+    <p class="tb-en">The barber side has warmth. Checkerboard floors, Hollywood mirror frames, vintage objects — retro vocabulary that forms a space where people can relax and wait. What's needed here isn't precision, but the willingness to sit down. Two kinds of trust require two different spatial languages. When they coexist in the same mirror, you begin to understand: design was never about style.</p>
+  </div>
+  <div class="mag-row r-half">
+    <div class="mag-cell sq"><img src="../../images/analog-and-little-ladies/06.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell sq"><img src="../../images/analog-and-little-ladies/07.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">04</p>
+    <p class="tb-zh">重新縫合兩個空間，我們只做了一個決定——用一條線，而不是一道牆。白色水平鐵件從刺青側延伸，橫過粗糙的保留牆面，層板帶著光帶貫穿整個立面。它是收納的基準，是視覺的延伸，也是讓兩種語言共存卻不互相干擾的結構。沒有這條線，空間只是兩個隔壁的房間。有了這條線，它變成一個有骨架的場景。這是設計裡最難的部分：不是讓東西變得一致，是讓差異可以並存。</p>
+    <p class="tb-en">To stitch two spaces back together, we made only one decision — a line, not a wall. White horizontal steel extends from the tattoo side, crossing the rough preserved walls, with shelving and light strips running through the entire facade. It's the baseline for storage, the extension of sight, and the structure that lets two languages coexist without interfering. Without this line, the space would just be two rooms next to each other. With it, it becomes a scene with a skeleton. This is the hardest part of design: not making things uniform, but letting differences coexist.</p>
+  </div>
+  <div class="mag-row r-full">
+    <div class="mag-cell wide"><img src="../../images/analog-and-little-ladies/08.jpg" loading="lazy" alt=""></div>
+  </div>
+  <div class="text-break">
+    <p class="tb-num">05</p>
+    <p class="tb-zh">刺青師和理髮師，都在用技術建立信任。ON Design Lab 做的事，其實也是一樣的——把品牌的邏輯，翻譯成空間的語言。你身邊有沒有哪個空間，讓你一走進去就覺得「這裡的人懂自己在做什麼」？</p>
+    <p class="tb-en">Tattoo artists and barbers both build trust through craft. What ON Design Lab does is really the same thing — translating a brand's logic into the language of space. Is there a place around you that, the moment you walk in, makes you feel "the people here know what they're doing"?</p>
+  </div>
+
+  <p class="thumb-label">All Photos</p>
+  <div class="thumb-strip">
+    <div class="thumb"><img loading="lazy" src="../../images/analog-and-little-ladies/01.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/analog-and-little-ladies/02.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/analog-and-little-ladies/03.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/analog-and-little-ladies/04.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/analog-and-little-ladies/05.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/analog-and-little-ladies/06.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/analog-and-little-ladies/07.jpg" alt=""></div>
+    <div class="thumb"><img loading="lazy" src="../../images/analog-and-little-ladies/08.jpg" alt=""></div>
+  </div>
+
 </div>
 
-<!-- Floor Plan（無圖自動隱藏）-->
-<div class="plan">
-  <p class="plan-label">Floor Plan</p>
-  <img src="../../images/analog-and-little-ladies/plan.jpg" onerror="this.parentElement.style.display='none'" loading="lazy" decoding="async" alt="Floor Plan">
-</div>
-
-<!-- ═══ PHOTO AREA ═══ -->
-<div class="photos">
-
-  <div class="p-full"><img loading="lazy" decoding="async" src="../../images/analog-and-little-ladies/01.jpg" alt="01"></div>
-  <div class="gap-row"></div>
-
-  <div class="p-2col">
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/analog-and-little-ladies/02.jpg" alt="02"></div>
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/analog-and-little-ladies/03.jpg" alt="03"></div>
-  </div>
-  <div class="gap-row"></div>
-
-  <div class="editorial">
-    <p>刺青工作室保留了基地牆體的時間痕跡，只以乾淨的白色水平鐵件層板帶著光帶貫穿粗糙牆面。這條線既是收納與展示的基準，也成為視覺的延伸——像在「建築的身體」上落下一筆，不覆蓋歷史，而是與它對話。</p>
-  </div>
-
-  <div class="p-asymm">
-    <div class="p-asymm-left p-cell"><img loading="lazy" decoding="async" src="../../images/analog-and-little-ladies/04.jpg" alt="04"></div>
-    <div class="p-asymm-right">
-      <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/analog-and-little-ladies/05.jpg" alt="05"></div>
-      <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/analog-and-little-ladies/06.jpg" alt="06"></div>
-    </div>
-  </div>
-  <div class="gap-row"></div>
-
-  <div class="editorial">
-    <p>光源採雙制式。理髮側以點狀暖色溫塑造親近感，讓等候與交談有溫度；刺青側以連續洗牆與工作照度確保專注感，讓工作者和客人都能安靜進入狀態。兩種光不是風格選擇，是兩種工作方式對空間的不同要求。</p>
-  </div>
-
-  <div class="p-2col">
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/analog-and-little-ladies/07.jpg" alt="07"></div>
-    <div class="p-cell"><img loading="lazy" decoding="async" src="../../images/analog-and-little-ladies/08.jpg" alt="08"></div>
-  </div>
-  <div class="gap-row"></div>
-
-  <div class="editorial">
-    <p>兩側在鏡面反射與白線的牽引下被重新縫合。線是起點，面是展開，場景是結果。這個空間最終說的是同一件事：無論是刺在皮膚上的圖案，還是剪過之後的輪廓，職人的工作都是讓一個人更像自己。</p>
-  </div>
-
-</div>
-
-<!-- ═══ THUMBNAILS ═══ -->
-<p class="thumb-label">All Photos</p>
-<div class="thumb-strip">
-  <div class="thumb" onclick="openLightbox(0)"><img loading="lazy" decoding="async" src="../../images/analog-and-little-ladies/01.jpg" width="120" height="80" alt="01"></div>
-  <div class="thumb" onclick="openLightbox(1)"><img loading="lazy" decoding="async" src="../../images/analog-and-little-ladies/02.jpg" width="120" height="80" alt="02"></div>
-  <div class="thumb" onclick="openLightbox(2)"><img loading="lazy" decoding="async" src="../../images/analog-and-little-ladies/03.jpg" width="120" height="80" alt="03"></div>
-  <div class="thumb" onclick="openLightbox(3)"><img loading="lazy" decoding="async" src="../../images/analog-and-little-ladies/04.jpg" width="120" height="80" alt="04"></div>
-  <div class="thumb" onclick="openLightbox(4)"><img loading="lazy" decoding="async" src="../../images/analog-and-little-ladies/05.jpg" width="120" height="80" alt="05"></div>
-  <div class="thumb" onclick="openLightbox(5)"><img loading="lazy" decoding="async" src="../../images/analog-and-little-ladies/06.jpg" width="120" height="80" alt="06"></div>
-  <div class="thumb" onclick="openLightbox(6)"><img loading="lazy" decoding="async" src="../../images/analog-and-little-ladies/07.jpg" width="120" height="80" alt="07"></div>
-  <div class="thumb" onclick="openLightbox(7)"><img loading="lazy" decoding="async" src="../../images/analog-and-little-ladies/08.jpg" width="120" height="80" alt="08"></div>
-</div>
-
-<!-- ═══ LIGHTBOX ═══ -->
-<div id="lightbox" class="lightbox" style="display:none">
-  <div class="lb-close" onclick="closeLightbox()">×</div>
-  <div class="lb-prev" onclick="lbPrev()">‹</div>
+<!-- LIGHTBOX -->
+<div id="lb">
+  <button id="lb-close" onclick="closeLb()">&times;</button>
+  <button id="lb-prev" onclick="lbPrev()">&lsaquo;</button>
   <img id="lb-img" src="" alt="">
-  <div class="lb-next" onclick="lbNext()">›</div>
+  <button id="lb-next" onclick="lbNext()">&rsaquo;</button>
+  <div id="lb-counter"></div>
 </div>
 
-<!-- ═══ BOTTOM NAV ═══ -->
-<div class="bottom">
-  <a class="bottom-nav" href="../retrodandy/index.html">← Retrodandy</a>
-  <a class="bowerbird" href="#">View on BowerBird →</a>
-  <a class="bottom-nav" href="../de-nuit/index.html">de nuit →</a>
+<!-- BOTTOM NAV -->
+<div class="proj-nav">
+  <a href="../retrodandy/index.html">&larr; Retrodandy</a>
+  <a class="back" href="../index.html">All Projects</a>
+  <a href="../de-nuit/index.html">de nuit &rarr;</a>
 </div>
 
 <script>
-  const lbPhotos = [
-    '../../images/analog-and-little-ladies/01.jpg',
-    '../../images/analog-and-little-ladies/02.jpg',
-    '../../images/analog-and-little-ladies/03.jpg',
-    '../../images/analog-and-little-ladies/04.jpg',
-    '../../images/analog-and-little-ladies/05.jpg',
-    '../../images/analog-and-little-ladies/06.jpg',
-    '../../images/analog-and-little-ladies/07.jpg',
-    '../../images/analog-and-little-ladies/08.jpg',
-  ];
-  let lbIndex = 0;
-
-  function openLightbox(i) {
-    lbIndex = i;
-    document.getElementById('lb-img').src = lbPhotos[i];
-    document.getElementById('lightbox').style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-  }
-  function closeLightbox() {
-    document.getElementById('lightbox').style.display = 'none';
-    document.body.style.overflow = '';
-  }
-  function lbNext() {
-    lbIndex = (lbIndex + 1) % lbPhotos.length;
-    document.getElementById('lb-img').src = lbPhotos[lbIndex];
-  }
-  function lbPrev() {
-    lbIndex = (lbIndex - 1 + lbPhotos.length) % lbPhotos.length;
-    document.getElementById('lb-img').src = lbPhotos[lbIndex];
-  }
-  document.addEventListener('keydown', e => {
-    if (document.getElementById('lightbox').style.display === 'flex') {
-      if (e.key === 'ArrowRight') lbNext();
-      if (e.key === 'ArrowLeft') lbPrev();
-      if (e.key === 'Escape') closeLightbox();
-    }
-  });
+const imgs=[
+  '../../images/analog-and-little-ladies/01.jpg',
+  '../../images/analog-and-little-ladies/02.jpg',
+  '../../images/analog-and-little-ladies/03.jpg',
+  '../../images/analog-and-little-ladies/04.jpg',
+  '../../images/analog-and-little-ladies/05.jpg',
+  '../../images/analog-and-little-ladies/06.jpg',
+  '../../images/analog-and-little-ladies/07.jpg',
+  '../../images/analog-and-little-ladies/08.jpg',
+];
+let ci=0;
+document.querySelectorAll('.mag-cell img, .thumb img').forEach((el,i)=>{
+  el.addEventListener('click',()=>{ci=imgs.indexOf(el.src.replace(location.origin,''))||i;openLb()})
+});
+function openLb(){const l=document.getElementById('lb');l.classList.add('open');updLb()}
+function closeLb(){document.getElementById('lb').classList.remove('open')}
+function lbNext(){ci=(ci+1)%imgs.length;updLb()}
+function lbPrev(){ci=(ci-1+imgs.length)%imgs.length;updLb()}
+function updLb(){document.getElementById('lb-img').src=imgs[ci];document.getElementById('lb-counter').textContent=(ci+1)+' / '+imgs.length}
+document.addEventListener('keydown',e=>{if(!document.getElementById('lb').classList.contains('open'))return;if(e.key==='ArrowRight')lbNext();if(e.key==='ArrowLeft')lbPrev();if(e.key==='Escape')closeLb()});
 </script>
 
 </body>
