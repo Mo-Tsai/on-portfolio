@@ -99,6 +99,19 @@ a{color:#fafaf8;text-decoration:none}
 }
 .page.visible .logo{opacity:1}
 
+/* ── Tagline ── */
+.tagline{
+  position:fixed;top:50%;left:50%;
+  transform:translate(-50%,60px);
+  z-index:20;pointer-events:none;
+  text-align:center;
+  opacity:0;transition:opacity .8s ease .8s;
+}
+.page.visible .tagline{opacity:1}
+.tagline-zh{font-size:clamp(1rem,2vw,1.4rem);font-weight:300;letter-spacing:.1em;color:rgba(255,255,255,.7);margin-bottom:.4rem}
+.tagline-en{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:.8rem}
+.tagline-desc{font-size:11px;line-height:1.8;color:rgba(255,255,255,.28);max-width:320px;margin:0 auto}
+
 /* ── Split line ── */
 .split{
   position:fixed;top:0;bottom:0;left:50%;
@@ -133,6 +146,13 @@ a{color:#fafaf8;text-decoration:none}
   }
   .logo img{width:144px} /* 手機 Logo 略小 */
 
+  .tagline{
+    top:auto;bottom:50%;left:50%;
+    transform:translate(-50%,50%);
+    transition-delay:.6s;
+  }
+  .tagline-desc{font-size:10px;max-width:260px}
+
   .split{display:none}
   .half-content{padding:1.5rem}
 }
@@ -156,7 +176,7 @@ a{color:#fafaf8;text-decoration:none}
       <div>
         <p class="label-en">Commercial</p>
         <p class="label-zh">商業空間</p>
-        <p class="label-count">18 projects</p>
+        <p class="label-count">18 projects →</p>
       </div>
       <span class="label-arrow">→</span>
     </div>
@@ -168,7 +188,7 @@ a{color:#fafaf8;text-decoration:none}
       <div>
         <p class="label-en">Residential</p>
         <p class="label-zh">住家空間</p>
-        <p class="label-count">11 projects</p>
+        <p class="label-count">11 projects →</p>
       </div>
       <span class="label-arrow">→</span>
     </div>
@@ -179,6 +199,13 @@ a{color:#fafaf8;text-decoration:none}
 <!-- 中央 Logo -->
 <div class="logo">
   <img src="/assets/ON_White_logo.png" alt="ON Design Lab">
+</div>
+
+<!-- Tagline -->
+<div class="tagline">
+  <p class="tagline-zh">品牌翻譯成空間</p>
+  <p class="tagline-en">Brand Logic Translated into Space</p>
+  <p class="tagline-desc">我們不從風格出發。從品牌的核心信念出發，找到空間應該說的話。</p>
 </div>
 
 <!-- 分割線 -->

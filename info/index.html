@@ -64,6 +64,7 @@ nav ul li a:hover,nav ul li a.active{opacity:1}
   padding:.9rem 0;border-bottom:1px solid rgba(255,255,255,.06);
 }
 .service-item:last-child{border-bottom:none}
+a.service-item:hover{opacity:.75!important}
 .service-name{font-size:15px;font-weight:300}
 .service-sub{font-size:11px;opacity:.28;letter-spacing:.08em}
 
@@ -119,6 +120,7 @@ footer a:hover{opacity:.8}
     <li><a href="/commercial/index.html">Commercial</a></li>
     <li><a href="/residential/index.html">Residential</a></li>
     <li><a href="/info/index.html" class="active">Info</a></li>
+    <li><a href="/contact/index.html">Contact</a></li>
   </ul>
 </nav>
 
@@ -139,18 +141,18 @@ footer a:hover{opacity:.8}
   <div class="info-row">
     <p class="row-label">Services</p>
     <div class="services">
-      <div class="service-item">
+      <a href="/commercial/index.html" class="service-item" style="transition:opacity .2s;opacity:1">
         <span class="service-name">商業空間設計</span>
-        <span class="service-sub">餐飲 · 零售 · 辦公</span>
-      </div>
-      <div class="service-item">
+        <span class="service-sub">餐飲 · 零售 · 辦公 <span style="margin-left:.6rem;opacity:.6">看案例 →</span></span>
+      </a>
+      <a href="/residential/index.html" class="service-item" style="transition:opacity .2s;opacity:1">
         <span class="service-name">住家空間設計</span>
-        <span class="service-sub">住宅 · 樣品屋</span>
-      </div>
-      <div class="service-item">
+        <span class="service-sub">住宅 · 樣品屋 <span style="margin-left:.6rem;opacity:.6">看案例 →</span></span>
+      </a>
+      <a href="/contact/index.html" class="service-item" style="transition:opacity .2s;opacity:1">
         <span class="service-name">品牌空間策略諮詢</span>
-        <span class="service-sub"></span>
-      </div>
+        <span class="service-sub"><span style="opacity:.6">聯絡洽談 →</span></span>
+      </a>
     </div>
   </div>
 
