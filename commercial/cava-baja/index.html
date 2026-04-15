@@ -11,6 +11,8 @@
 </script>
 
 <meta charset="UTF-8">
+<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+<link rel="dns-prefetch" href="https://www.googletagmanager.com">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Cava Baja &mdash; ON Design Lab</title>
 <meta name="description" content="Cava Baja 餐飲空間 | ON Design Lab">
@@ -18,78 +20,7 @@
 <meta property="og:image" content="https://ondesignlabltd.com/images/cava-baja/00.jpg">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{--black:#0a0a0a;--white:#fafaf8;--dim:rgba(255,255,255,.07)}
-html,body{background:var(--black);color:var(--white);font-family:'Helvetica Neue',Helvetica,Arial,sans-serif}
-a{color:inherit;text-decoration:none}
-
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.5rem 2.5rem;background:rgba(10,10,10,.88);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
-nav .logo{font-size:12px;letter-spacing:.18em}
-nav ul{list-style:none;display:flex;gap:2.5rem}
-nav ul li a{font-size:11px;letter-spacing:.12em;opacity:.4;transition:opacity .2s}
-nav ul li a:hover{opacity:1}
-
-.hero{position:relative;width:100%;height:100vh;overflow:hidden;display:flex;align-items:flex-end}
-.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.55)}
-.hero-caption{position:relative;z-index:2;padding:3rem 2.5rem;width:100%;border-top:1px solid rgba(255,255,255,.1)}
-.hero-title{font-size:clamp(2.5rem,7vw,6rem);font-weight:200;letter-spacing:-.02em;line-height:.95;margin-bottom:.6rem}
-.hero-tags{font-size:11px;letter-spacing:.12em;opacity:.35}
-
-.content{max-width:1100px;margin:0 auto}
-.intro{max-width:720px;padding:5rem 2.5rem;border-bottom:1px solid var(--dim)}
-.intro-zh{font-size:16px;line-height:2.05;opacity:.75;margin-bottom:2.5rem}
-.intro-en{font-size:13px;line-height:1.95;opacity:.28;font-style:italic}
-
-.plan-section{padding:4rem 2.5rem;border-bottom:1px solid var(--dim)}
-.plan-section.hidden{display:none}
-.plan-eyebrow{font-size:9px;letter-spacing:.22em;opacity:.22;text-transform:uppercase;margin-bottom:2rem}
-.plan-section img{width:100%;display:block;filter:brightness(.85);cursor:zoom-in}
-.plan-section img:hover{filter:brightness(1)}
-
-.mag-row{display:grid;gap:1px;background:var(--dim);border-bottom:1px solid var(--dim)}
-.mag-row.r-full{grid-template-columns:1fr}
-.mag-row.r-6040{grid-template-columns:6fr 4fr}
-.mag-row.r-half{grid-template-columns:1fr 1fr}
-.mag-row.r-third{grid-template-columns:1fr 1fr 1fr}
-@media(max-width:600px){.mag-row.r-6040,.mag-row.r-half,.mag-row.r-third{grid-template-columns:1fr}}
-.mag-cell{background:var(--black);overflow:hidden}
-.mag-cell img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.82);transition:filter .4s,transform .55s;cursor:zoom-in}
-.mag-cell:hover img{filter:brightness(1);transform:scale(1.03)}
-.mag-cell.tall{aspect-ratio:3/4}
-.mag-cell.wide{aspect-ratio:16/9}
-.mag-cell.sq{aspect-ratio:1}
-
-.text-break{max-width:720px;padding:4rem 2.5rem;border-bottom:1px solid var(--dim)}
-.tb-num{font-size:9px;letter-spacing:.2em;opacity:.2;text-transform:uppercase;margin-bottom:1.5rem}
-.tb-zh{font-size:14px;line-height:2.05;opacity:.68;margin-bottom:1.8rem}
-.tb-en{font-size:12px;line-height:1.95;opacity:.27;font-style:italic}
-
-.proj-nav{display:flex;justify-content:space-between;align-items:center;padding:2.5rem;border-top:1px solid var(--dim)}
-.proj-nav a{font-size:11px;letter-spacing:.1em;opacity:.3;transition:opacity .2s}
-.proj-nav a:hover{opacity:.9}
-.proj-nav .back{font-size:10px;letter-spacing:.15em;opacity:.2}
-
-#lb{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.95);align-items:center;justify-content:center}
-#lb.open{display:flex}
-#lb img{max-width:92vw;max-height:90vh;object-fit:contain}
-#lb-close{position:absolute;top:1.5rem;right:2rem;font-size:22px;opacity:.4;cursor:pointer;background:none;border:none;color:var(--white)}
-#lb-close:hover{opacity:1}
-#lb-prev,#lb-next{position:absolute;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--white);font-size:2rem;opacity:.25;cursor:pointer;padding:1rem;transition:opacity .2s}
-#lb-prev:hover,#lb-next:hover{opacity:.9}
-#lb-prev{left:.5rem}
-#lb-next{right:.5rem}
-#lb-counter{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);font-size:10px;opacity:.3;letter-spacing:.1em}
-
-.thumb-label{font-size:9px;letter-spacing:.22em;opacity:.22;text-transform:uppercase;padding:2.5rem 2.5rem 1rem;max-width:1100px;margin:0 auto}
-.thumb-strip{display:flex;gap:2px;overflow-x:auto;padding:0 2.5rem 2rem;max-width:1100px;margin:0 auto;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.15) transparent}
-.thumb-strip::-webkit-scrollbar{height:4px}
-.thumb-strip::-webkit-scrollbar-track{background:transparent}
-.thumb-strip::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:2px}
-.thumb{flex:0 0 auto;width:100px;height:68px;overflow:hidden;cursor:zoom-in;opacity:.5;transition:opacity .3s}
-.thumb:hover{opacity:1}
-.thumb img{width:100%;height:100%;object-fit:cover;display:block}
-</style>
+<link rel="stylesheet" href="/assets/css/project.css">
 </head>
 <body>
 
@@ -104,7 +35,7 @@ nav ul li a:hover{opacity:1}
 </nav>
 
 <div class="hero">
-  <img src="../../images/cava-baja/00.jpg" fetchpriority="high" loading="eager" decoding="async" alt="Cava Baja">
+  <picture><source srcset="../../images/cava-baja/00.webp" type="image/webp"><img src="../../images/cava-baja/00.jpg" fetchpriority="high" loading="eager" decoding="async" alt="Cava Baja"></picture>
   <div class="hero-caption">
     <h1 class="hero-title">Cava Baja</h1>
     <p class="hero-tags">餐飲空間 &middot; Taipei</p>
@@ -121,11 +52,11 @@ nav ul li a:hover{opacity:1}
 
 
   <div class="mag-row r-half">
-    <div class="mag-cell sq"><img src="../../images/cava-baja/01.jpg" loading="lazy" alt=""></div>
-    <div class="mag-cell sq"><img src="../../images/cava-baja/02.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell sq"><picture><source srcset="../../images/cava-baja/01.webp" type="image/webp"><img src="../../images/cava-baja/01.jpg" loading="lazy" alt=""></picture></div>
+    <div class="mag-cell sq"><picture><source srcset="../../images/cava-baja/02.webp" type="image/webp"><img src="../../images/cava-baja/02.jpg" loading="lazy" alt=""></picture></div>
   </div>
   <div class="mag-row r-full">
-    <div class="mag-cell wide"><img src="../../images/cava-baja/03.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell wide"><picture><source srcset="../../images/cava-baja/03.webp" type="image/webp"><img src="../../images/cava-baja/03.jpg" loading="lazy" alt=""></picture></div>
   </div>
   <div class="text-break">
     <p class="tb-num">01</p>
@@ -133,10 +64,10 @@ nav ul li a:hover{opacity:1}
     <p class="tb-en">Cava Baja is not about Spanish style — it is about the feeling of walking into an old bar and having your body relax without being asked. Brick walls, wooden doors, mosaic bar top, cast-iron grilles — every material serves the same purpose. The courtyard acts as a buffer, giving entrance a rhythm rather than an abrupt arrival.</p>
   </div>
   <div class="mag-row r-full">
-    <div class="mag-cell wide"><img src="../../images/cava-baja/06.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell wide"><picture><source srcset="../../images/cava-baja/06.webp" type="image/webp"><img src="../../images/cava-baja/06.jpg" loading="lazy" alt=""></picture></div>
   </div>
   <div class="mag-row r-full">
-    <div class="mag-cell wide"><img src="../../images/cava-baja/12.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell wide"><picture><source srcset="../../images/cava-baja/12.webp" type="image/webp"><img src="../../images/cava-baja/12.jpg" loading="lazy" alt=""></picture></div>
   </div>
   <div class="text-break">
     <p class="tb-num">02</p>
@@ -144,8 +75,8 @@ nav ul li a:hover{opacity:1}
     <p class="tb-en">Brick walls and cast-iron grilles are not a style choice — they are the construction of a sense of time. Making a space feel like it has always been here requires not imitation of age, but the inherent weight of the materials themselves.</p>
   </div>
   <div class="mag-row r-half">
-    <div class="mag-cell sq"><img src="../../images/cava-baja/13.jpg" loading="lazy" alt=""></div>
-    <div class="mag-cell sq"><img src="../../images/cava-baja/17.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell sq"><picture><source srcset="../../images/cava-baja/13.webp" type="image/webp"><img src="../../images/cava-baja/13.jpg" loading="lazy" alt=""></picture></div>
+    <div class="mag-cell sq"><picture><source srcset="../../images/cava-baja/17.webp" type="image/webp"><img src="../../images/cava-baja/17.jpg" loading="lazy" alt=""></picture></div>
   </div>
   <div class="text-break">
     <p class="tb-num">03</p>
@@ -153,10 +84,10 @@ nav ul li a:hover{opacity:1}
     <p class="tb-en">The mosaic bar top is the space's most operative element. Mosaic is not a visual material — it is read by touch, by fingertips. The bar is widened and lowered so when you sit, your hands naturally rest on the surface. This is not a design detail; it is a sequence of relaxation.</p>
   </div>
   <div class="mag-row r-full">
-    <div class="mag-cell wide"><img src="../../images/cava-baja/18.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell wide"><picture><source srcset="../../images/cava-baja/18.webp" type="image/webp"><img src="../../images/cava-baja/18.jpg" loading="lazy" alt=""></picture></div>
   </div>
   <div class="mag-row r-full">
-    <div class="mag-cell wide"><img src="../../images/cava-baja/19.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell wide"><picture><source srcset="../../images/cava-baja/19.webp" type="image/webp"><img src="../../images/cava-baja/19.jpg" loading="lazy" alt=""></picture></div>
   </div>
   <div class="text-break">
     <p class="tb-num">04</p>
@@ -164,8 +95,8 @@ nav ul li a:hover{opacity:1}
     <p class="tb-en">The courtyard gives entrance its layers. One step becomes two: enter, pause, then go in. That pause lets anticipation accumulate rather than being spent at once.</p>
   </div>
   <div class="mag-row r-half">
-    <div class="mag-cell sq"><img src="../../images/cava-baja/20.jpg" loading="lazy" alt=""></div>
-    <div class="mag-cell sq"><img src="../../images/cava-baja/22.jpg" loading="lazy" alt=""></div>
+    <div class="mag-cell sq"><picture><source srcset="../../images/cava-baja/20.webp" type="image/webp"><img src="../../images/cava-baja/20.jpg" loading="lazy" alt=""></picture></div>
+    <div class="mag-cell sq"><picture><source srcset="../../images/cava-baja/22.webp" type="image/webp"><img src="../../images/cava-baja/22.jpg" loading="lazy" alt=""></picture></div>
   </div>
   <div class="text-break">
     <p class="tb-num">05</p>
@@ -175,17 +106,17 @@ nav ul li a:hover{opacity:1}
 
   <p class="thumb-label">All Photos</p>
   <div class="thumb-strip">
-    <div class="thumb"><img loading="lazy" src="../../images/cava-baja/01.jpg" alt=""></div>
-    <div class="thumb"><img loading="lazy" src="../../images/cava-baja/02.jpg" alt=""></div>
-    <div class="thumb"><img loading="lazy" src="../../images/cava-baja/03.jpg" alt=""></div>
-    <div class="thumb"><img loading="lazy" src="../../images/cava-baja/06.jpg" alt=""></div>
-    <div class="thumb"><img loading="lazy" src="../../images/cava-baja/12.jpg" alt=""></div>
-    <div class="thumb"><img loading="lazy" src="../../images/cava-baja/13.jpg" alt=""></div>
-    <div class="thumb"><img loading="lazy" src="../../images/cava-baja/17.jpg" alt=""></div>
-    <div class="thumb"><img loading="lazy" src="../../images/cava-baja/18.jpg" alt=""></div>
-    <div class="thumb"><img loading="lazy" src="../../images/cava-baja/19.jpg" alt=""></div>
-    <div class="thumb"><img loading="lazy" src="../../images/cava-baja/20.jpg" alt=""></div>
-    <div class="thumb"><img loading="lazy" src="../../images/cava-baja/22.jpg" alt=""></div>
+    <div class="thumb"><picture><source srcset="../../images/cava-baja/01.webp" type="image/webp"><img loading="lazy" src="../../images/cava-baja/01.jpg" alt=""></picture></div>
+    <div class="thumb"><picture><source srcset="../../images/cava-baja/02.webp" type="image/webp"><img loading="lazy" src="../../images/cava-baja/02.jpg" alt=""></picture></div>
+    <div class="thumb"><picture><source srcset="../../images/cava-baja/03.webp" type="image/webp"><img loading="lazy" src="../../images/cava-baja/03.jpg" alt=""></picture></div>
+    <div class="thumb"><picture><source srcset="../../images/cava-baja/06.webp" type="image/webp"><img loading="lazy" src="../../images/cava-baja/06.jpg" alt=""></picture></div>
+    <div class="thumb"><picture><source srcset="../../images/cava-baja/12.webp" type="image/webp"><img loading="lazy" src="../../images/cava-baja/12.jpg" alt=""></picture></div>
+    <div class="thumb"><picture><source srcset="../../images/cava-baja/13.webp" type="image/webp"><img loading="lazy" src="../../images/cava-baja/13.jpg" alt=""></picture></div>
+    <div class="thumb"><picture><source srcset="../../images/cava-baja/17.webp" type="image/webp"><img loading="lazy" src="../../images/cava-baja/17.jpg" alt=""></picture></div>
+    <div class="thumb"><picture><source srcset="../../images/cava-baja/18.webp" type="image/webp"><img loading="lazy" src="../../images/cava-baja/18.jpg" alt=""></picture></div>
+    <div class="thumb"><picture><source srcset="../../images/cava-baja/19.webp" type="image/webp"><img loading="lazy" src="../../images/cava-baja/19.jpg" alt=""></picture></div>
+    <div class="thumb"><picture><source srcset="../../images/cava-baja/20.webp" type="image/webp"><img loading="lazy" src="../../images/cava-baja/20.jpg" alt=""></picture></div>
+    <div class="thumb"><picture><source srcset="../../images/cava-baja/22.webp" type="image/webp"><img loading="lazy" src="../../images/cava-baja/22.jpg" alt=""></picture></div>
   </div>
 
   <div style="padding:3rem 2.5rem;text-align:center;border-top:1px solid var(--dim)">
@@ -209,36 +140,7 @@ nav ul li a:hover{opacity:1}
   <button id="lb-next">&#8250;</button>
   <span id="lb-counter"></span>
 </div>
-<script>
-(function(){
-  var imgs=[].slice.call(document.querySelectorAll('.mag-cell img, .plan-section:not(.hidden) img'));
-  var srcs=imgs.map(function(i){return i.src});
-  var lb=document.getElementById('lb');
-  var lbImg=document.getElementById('lb-img');
-  var lbC=document.getElementById('lb-counter');
-  var cur=0;
-  function show(i){cur=i;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length;lb.classList.add('open')}
-  function close(){lb.classList.remove('open');lbImg.src=''}
-  imgs.forEach(function(img,i){img.addEventListener('click',function(){show(i)})});
-  [].slice.call(document.querySelectorAll('.thumb-strip .thumb')).forEach(function(t){
-    t.addEventListener('click',function(){
-      var s=t.querySelector('img').src;
-      var i=srcs.findIndex(function(x){return x===s});
-      if(i>=0)show(i);else{srcs.push(s);show(srcs.length-1)}
-    });
-  });
-  document.getElementById('lb-close').onclick=close;
-  document.getElementById('lb-prev').onclick=function(){cur=(cur-1+srcs.length)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length};
-  document.getElementById('lb-next').onclick=function(){cur=(cur+1)%srcs.length;lbImg.src=srcs[cur];lbC.textContent=(cur+1)+' / '+srcs.length};
-  lb.addEventListener('click',function(e){if(e.target===lb)close()});
-  document.addEventListener('keydown',function(e){
-    if(!lb.classList.contains('open'))return;
-    if(e.key==='ArrowLeft')document.getElementById('lb-prev').click();
-    if(e.key==='ArrowRight')document.getElementById('lb-next').click();
-    if(e.key==='Escape')close();
-  });
-})();
-</script>
+<script src="/assets/js/lightbox.js" defer></script>
 
 </body>
 </html>
