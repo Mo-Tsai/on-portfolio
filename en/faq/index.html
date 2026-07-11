@@ -140,6 +140,12 @@
   .bottom a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
   .bottom a:hover { color: var(--white); }
   @media (max-width: 768px) { .opening { padding: 48px 24px 36px; } .faq-list, .list { padding: 16px 24px 48px; } .faq-item { padding: 24px 0; } }
+
+/* mobile nav */
+@media (max-width: 640px) {
+  .nav { flex-direction: column; align-items: flex-start; gap: 12px; padding: 14px 24px; }
+  .nav-links { gap: 16px; flex-wrap: wrap; row-gap: 8px; }
+}
 </style>
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
