@@ -6,3 +6,10 @@ node_modules/
 package.json
 package-lock.json
 封存/
+
+# 建站鷹架（2026-03/04 一次性產生器）— 保留本機，不部署
+# 這些腳本停在四個月前：不輸出 canonical、內嵌 CSS、nav 只有 3 項、
+# 且 reformat_projects.py 會產生 index_backup.html 重複頁。
+# 重跑會讓 29 個案例頁倒退。需要時從 git 歷史 385011c^ 取回。
+*.py
+project_content_template/

@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /*.py$
 
 # AI crawlers explicitly welcome
 User-agent: GPTBot
