@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6VJY51HQTQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-6VJY51HQTQ');
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What does design cost per ping? We publish the number, and the logic behind it — ON Design Lab Journal</title>
+<meta name="description" content="ON Design Lab publishes its residential design fee range and site supervision rate, and explains the structure behind them: design fee, construction cost and supervision fee are three different things.">
+<link rel="canonical" href="https://ondesignlabltd.com/en/journal/design-fee/">
+<link rel="alternate" hreflang="zh-Hant" href="https://ondesignlabltd.com/journal/design-fee/">
+<link rel="alternate" hreflang="en" href="https://ondesignlabltd.com/en/journal/design-fee/">
+<link rel="alternate" hreflang="x-default" href="https://ondesignlabltd.com/journal/design-fee/">
+<meta property="og:title" content="What does design cost per ping? We publish the number, and the logic behind it">
+<meta property="og:description" content="A price without its logic is just a number. This is the structure behind ours.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ondesignlabltd.com/en/journal/design-fee/">
+<meta property="og:image" content="https://ondesignlabltd.com/assets/og-cover.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "What does design cost per ping? We publish the number, and the logic behind it",
+  "description": "The structure behind an interior design fee: design fee, construction cost and site supervision fee are three different things. Why residential can be quoted per unit area and commercial cannot, and why follow-up stores are charged only for drawing adaptation.",
+  "author": { "@type": "Organization", "name": "ON Design Lab", "url": "https://ondesignlabltd.com/" },
+  "publisher": { "@type": "Organization", "name": "ON Design Lab", "logo": { "@type": "ImageObject", "url": "https://ondesignlabltd.com/assets/logo-square.png" } },
+  "datePublished": "2026-07-28",
+  "dateModified": "2026-07-28",
+  "inLanguage": "en",
+  "image": "https://ondesignlabltd.com/assets/og-cover.jpg",
+  "mainEntityOfPage": "https://ondesignlabltd.com/en/journal/design-fee/",
+  "about": ["Interior design fees", "Design pricing", "Site supervision", "Brand rollout"]
+}
+</script>
+<style>
+  :root {
+    --bg: #0e0e0c; --bg2: #141412; --bg3: #1a1a17;
+    --line: #252520; --white: #f0efe8;
+    --muted: #4a4a44; --dim: #2a2a26; --accent: #666660;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background: var(--bg); color: var(--white); }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 20px 40px; border-bottom: 0.5px solid var(--line); position: sticky; top: 0; background: var(--bg); z-index: 100; }
+  .nav-logo { font-size: 10px; font-weight: 300; letter-spacing: 0.26em; text-transform: uppercase; color: var(--white); text-decoration: none; }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-link { font-size: 9px; font-weight: 300; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding-bottom: 2px; border-bottom: 0.5px solid transparent; transition: all 0.2s; }
+  .nav-link:hover { color: var(--white); border-color: var(--white); }
+  .nav-link.active { color: var(--white); border-color: var(--white); }
+
+  .article { max-width: 680px; padding: 64px 40px 80px; }
+  .article-meta { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+  .article-title { font-size: clamp(22px, 3.6vw, 34px); font-weight: 300; line-height: 1.45; letter-spacing: 0.02em; color: var(--white); margin-bottom: 16px; }
+  .article-hook { font-size: 14px; font-style: italic; color: var(--accent); letter-spacing: 0.03em; margin-bottom: 48px; padding-bottom: 32px; border-bottom: 0.5px solid var(--line); }
+  .article h2 { font-size: 16px; font-weight: 400; color: #c8c7c0; letter-spacing: 0.04em; margin: 44px 0 16px; line-height: 1.6; }
+  .article p { font-size: 13.5px; font-weight: 300; line-height: 2.05; color: #9a9a92; letter-spacing: 0.02em; margin-bottom: 20px; }
+  .article p.quote { font-size: 15px; color: #c8c7c0; font-style: italic; border-left: 1px solid var(--accent); padding-left: 20px; margin: 36px 0; }
+  .article p.en { font-style: italic; color: #6a6a62; font-size: 12px; line-height: 1.9; }
+  .article-footer { margin-top: 56px; padding-top: 28px; border-top: 0.5px solid var(--line); font-size: 11px; color: var(--muted); line-height: 2; }
+  .article-footer a { color: var(--accent); text-decoration: none; border-bottom: 0.5px solid var(--dim); }
+  .article-footer a:hover { color: var(--white); }
+
+  .bottom { padding: 24px 40px; display: flex; gap: 32px; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; border-top: 0.5px solid var(--line); }
+  .bottom a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .bottom a:hover { color: var(--white); }
+  @media (max-width: 768px) { .article { padding: 44px 24px 56px; } }
+
+/* mobile nav */
+@media (max-width: 640px) {
+  .nav { flex-direction: column; align-items: flex-start; gap: 12px; padding: 14px 24px; }
+  .nav-links { gap: 16px; flex-wrap: wrap; row-gap: 8px; }
+}
+</style>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo" href="/en/">ON Design Lab</a>
+  <div class="nav-links">
+    <a class="nav-link" href="/en/commercial/">Commercial</a>
+    <a class="nav-link" href="/en/residential/">Residential</a>
+    <a class="nav-link" href="/en/info/">Info</a>
+    <a class="nav-link active" href="/en/journal/">Journal</a>
+    <a class="nav-link" href="/en/faq/">FAQ</a>
+    <a class="nav-link" href="/en/contact/">Contact</a>
+    <a class="nav-link" href="/journal/design-fee/">中文</a>
+  </div>
+</nav>
+
+<article class="article">
+  <p class="article-meta">Journal · How We Work · Pricing Logic</p>
+  <h1 class="article-title">What does design cost per ping? We publish the number, and the logic behind it</h1>
+  <p class="article-hook">A price without its logic is just a number.</p>
+
+  <p>This is the question we are asked most often, and the one the industry most often avoids.</p>
+  <p>There is a reason for the avoidance. Every project differs, and a published unit price invites comparison on the wrong terms. But the cost of avoiding it is that clients making one of the largest financial decisions of their lives have nothing to calibrate against.</p>
+  <p>So we put the numbers on the website: <strong style="color:#c8c7c0;font-weight:400">residential design at NT$8,000–12,000 per ping, and site supervision at 12% of construction cost.</strong> One ping is roughly 3.3 square metres, or about 35.6 square feet.</p>
+  <p>The numbers themselves are not the point. What decides whether you are paying well is what the fee actually buys, and how it separates from the other costs. That is what this piece is about.</p>
+
+  <h2>1. Design fee, construction cost and supervision fee are three different things</h2>
+  <p>This is where the confusion usually starts, and where most misunderstandings come from.</p>
+  <p><strong style="color:#c8c7c0;font-weight:400">The design fee buys judgment.</strong> It runs from understanding how you live, or what your brand believes, through spatial strategy, material selection, circulation and proportion, and lands as a complete set of drawings that can actually be built. It is not payment for drafting. If it were only drafting, the price would have collapsed long ago. What makes design expensive is the part before the drawings: deciding what should be done, and what should not.</p>
+  <p><strong style="color:#c8c7c0;font-weight:400">Construction cost</strong> is the actual cost of building, paid to contractors and suppliers, moving with material grade and method. It is a completely separate line from the design fee.</p>
+  <p><strong style="color:#c8c7c0;font-weight:400">The site supervision fee</strong> covers coordination and design oversight during construction. We charge 12% of construction cost. This one is often mistaken for an extension of the design fee, but it buys something else entirely: the guarantee that what gets built is the same thing that was drawn. However complete the drawings are, if nobody is watching the site, the gap accumulates quietly in the details.</p>
+
+  <p class="quote">"The design fee buys judgment. The supervision fee buys delivery. Take away either half and the other half is worth less."</p>
+
+  <h2>2. Why a range, not a single number</h2>
+  <p>There is a 50% spread between 8,000 and 12,000. That range is not vagueness. It is honesty.</p>
+  <p>At the same floor area, an older property that needs its layout reconfigured, its services rerouted and its structural limits worked around demands a very different volume of judgment from a newer unit whose layout already makes sense and only needs precise decisions within existing conditions. In the first case every decision has to solve a constraint first. In the second you can start with the design itself.</p>
+  <p>Complexity of requirements moves the number too. Whether storage is fully bespoke, whether special functions have to be integrated, how many layers the material palette needs — these are not add-on line items. They change how much information the project has to carry.</p>
+  <p>So our approach is: we look at the site, we talk through the requirements, and only then do we give you a specific number within the range — along with the reasoning for that number. <strong style="color:#c8c7c0;font-weight:400">A quote can be negotiated. The reasoning behind a quote should never be a black box.</strong></p>
+
+  <h2>3. Why commercial projects cannot be quoted per unit area</h2>
+  <p>Residential works on floor area because the structure of the requirement is relatively stable. Commercial does not.</p>
+  <p>At the same 30 ping, a flagship store that has to be derived from brand positioning and a follow-up location whose concept is already settled and only needs adapting to its site differ by several times in workload. That difference has nothing to do with area. It has to do with where the brand is in its life.</p>
+  <p>So commercial work is quoted per project. Not because we are being opaque, but because quoting it per unit area would distort the figure past the point of usefulness.</p>
+
+  <h2>4. Why follow-up stores are charged only for drawing adaptation</h2>
+  <p>This is where we differ most from common practice, and it is what brand clients care about most.</p>
+  <p>A large part of the design fee for a flagship store does not buy that store. It buys <strong style="color:#c8c7c0;font-weight:400">a concept asset that can be reused</strong> — the spatial language, the material logic, the way the brand expresses itself in three dimensions. Once that exists, the second store is an exercise in application and adjustment, not derivation.</p>
+  <p>Different work should not be priced the same way. So for follow-up locations we charge only for drawing adaptation, working from the established concept and fitting it to the site.</p>
+  <p>For a brand in rollout, that difference shows up directly in the cost structure of expansion. For us it is simply honest pricing: we would rather not charge twice for judgment we have already made once.</p>
+
+  <h2>5. Three questions worth asking about this money</h2>
+  <p>Whoever you end up working with, these three are worth settling in advance:</p>
+  <p><strong style="color:#c8c7c0;font-weight:400">One: how far do the drawings go?</strong> A layout plan alone and a full set including elevations, ceilings, services and details are entirely different deliverables — and they are routinely quoted under the same name.</p>
+  <p><strong style="color:#c8c7c0;font-weight:400">Two: how are revisions counted?</strong> Our own practice is two rounds each at the concept stage and the 3D stage, with any reversal after sign-off, or anything outside the agreed scope, quoted separately. Whether that boundary exists at all will shape the communication cost of the whole back half of the project.</p>
+  <p><strong style="color:#c8c7c0;font-weight:400">Three: who is responsible during construction?</strong> Handing the drawings to a contractor and supervising through to completion are two different services. The first is cheaper, and the risk of the gap sits with you.</p>
+
+  <p>Transparent pricing is not about being the cheapest. It is about letting you know what you are buying when you decide.</p>
+
+  <p class="en">本文中文版收錄於 ON Design Lab Journal：住宅設計費每坪 NT$8,000–12,000、工務管理費為工程費的 12%。設計費買的是判斷，工務管理費買的是落地；商業案因變數過大採專案報價；品牌展店的續店只收製圖調整費，因為首發店買到的是一套可複製的概念資產。</p>
+
+  <div class="article-footer">
+    <p>ON Design Lab — Brand Logic Translated into Space</p>
+    <p>More on how we work: <a href="/en/faq/">FAQ</a>　·　Talk to us about your project: <a href="/en/contact/">Contact</a>　·　<a href="/journal/design-fee/">中文版</a></p>
+  </div>
+</article>
+
+<div class="bottom">
+  <a href="/en/journal/">← Journal</a>
+  <a href="/en/contact/">Contact →</a>
+</div>
+
+</body>
+</html>
