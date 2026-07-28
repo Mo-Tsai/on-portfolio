@@ -46,6 +46,7 @@
   .nav-logo { font-size: 10px; font-weight: 300; letter-spacing: 0.26em; text-transform: uppercase; color: var(--white); text-decoration: none; }
   .nav-links { display: flex; gap: 28px; }
   .nav-link { font-size: 9px; font-weight: 300; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding-bottom: 2px; border-bottom: 0.5px solid transparent; transition: all 0.2s; }
+  .zh-tag { font-size: 7px; letter-spacing: 0.08em; opacity: 0.5; margin-left: 5px; vertical-align: 2px; }
   .nav-link:hover { color: var(--white); border-color: var(--white); }
   .nav-link.active { color: var(--white); border-color: var(--white); }
   .opening { padding: 64px 40px 48px; border-bottom: 0.5px solid var(--line); max-width: 860px; }
@@ -82,9 +83,9 @@
 <nav class="nav">
   <a class="nav-logo" href="/">ON Design Lab</a>
   <div class="nav-links">
-    <a class="nav-link" href="/commercial/">Commercial</a>
-    <a class="nav-link" href="/residential/">Residential</a>
-    <a class="nav-link" href="/info/">Info</a>
+    <a class="nav-link" href="/commercial/">Commercial<span class="zh-tag">ZH</span></a>
+    <a class="nav-link" href="/residential/">Residential<span class="zh-tag">ZH</span></a>
+    <a class="nav-link" href="/info/">Info<span class="zh-tag">ZH</span></a>
     <a class="nav-link active" href="/en/journal/">Journal</a>
     <a class="nav-link" href="/en/faq/">FAQ</a>
     <a class="nav-link" href="/journal/">中文</a>
@@ -94,6 +95,7 @@
 <div class="opening">
   <p class="question">Notes written after<br>the tuition was paid.</p>
   <p class="question-zh">Design method, recorded — every essay comes from a real project.</p>
+  <p style="margin-top:22px;font-size:11px;line-height:1.9;color:#4a4a44;letter-spacing:0.03em;max-width:520px">English covers the Journal and FAQ. Project pages, studio information and contact details are in Chinese — those links are marked <span class="zh-tag" style="opacity:.75">ZH</span> in the menu above.</p>
 </div>
 
 <main class="list">
