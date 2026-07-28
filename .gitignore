@@ -13,3 +13,4 @@ package-lock.json
 # 重跑會讓 29 個案例頁倒退。需要時從 git 歷史 385011c^ 取回。
 *.py
 project_content_template/
+commercial-copy.md
