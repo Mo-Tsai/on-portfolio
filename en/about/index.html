@@ -43,6 +43,16 @@
   .method p { font-size: 12px; font-weight: 300; color: var(--accent); line-height: 2.05; letter-spacing: 0.02em; margin-bottom: 18px; }
   .method p.en { font-style: italic; color: var(--dim); font-size: 11px; }
 
+  .definition { padding: 48px 40px; border-bottom: 0.5px solid var(--line); max-width: 660px; }
+  .def-lead { font-size: 15px; font-weight: 300; color: #c8c7c0; letter-spacing: 0.08em; line-height: 1.8; margin-bottom: 26px; }
+  .def-term { font-size: 13px; font-weight: 300; line-height: 2.0; color: #8a8a82; margin-bottom: 14px; }
+  .def-term strong { color: #c8c7c0; font-weight: 400; letter-spacing: 0.06em; }
+  .def-close { font-size: 13px; font-weight: 300; line-height: 2.0; color: #8a8a82; margin-top: 24px; }
+  .def-en { margin-top: 30px; padding-top: 26px; border-top: 0.5px solid var(--line); }
+  .def-en p { font-size: 12px; font-weight: 300; line-height: 1.9; color: #6a6a62; font-style: italic; margin-bottom: 12px; }
+  .def-en p:last-child { margin-bottom: 0; }
+  @media (max-width: 768px) { .definition { padding: 36px 24px; } }
+
   .founders { max-width: 720px; padding: 80px 60px; display: flex; flex-direction: column; gap: 64px; border-bottom: 0.5px solid var(--line); }
   .founder { display: grid; grid-template-columns: 160px 1fr; gap: 40px; align-items: start; }
   .founder-photo img { width: 160px; height: 200px; object-fit: cover; object-position: top; display: block; filter: grayscale(20%); }
@@ -98,6 +108,20 @@
   <p>Translating brand into space is the core of what ON Design Lab does. We believe design does not begin with style — it begins with what the brand actually believes. The first thing a space should do is let whoever walks in feel the attitude of the brand: before they see a single product, before a single word appears.</p>
   <p>This process is not decoration. It is translation — turning brand language into light, material, circulation and proportion. Every decision has to carry a logic, and every logic has to lead back to the brand.</p>
   <p class="en">品牌翻譯成空間。每一個材質決定、每一條動線、每一組比例，都是一句話——身體先於頭腦讀懂的那種語言。這是我們唯一需要的設計綱要。</p>
+</div>
+
+<!-- Definition -->
+<div class="definition">
+  <p class="def-lead">ON stands for two words.</p>
+  <p class="def-term"><strong>Operation</strong> — whether a space works. Circulation, service logic, staffing, yield per ping.</p>
+  <p class="def-term"><strong>Narrative</strong> — whether a space is remembered. Material, light, atmosphere, the moment people carry home.</p>
+  <p class="def-close">Most practices only deliver the second. We deliver both, because we run businesses ourselves.</p>
+  <div class="def-en">
+    <p>ON 是兩個字。</p>
+    <p>Operation —— 空間能不能被使用。動線、備餐邏輯、人力配置、坪效。</p>
+    <p>Narrative —— 空間值不值得被記住。材質、光線、氣味、記憶點。</p>
+    <p>多數設計只處理後者。我們兩件都做，因為我們自己也是經營者。</p>
+  </div>
 </div>
 
 <!-- Founders -->

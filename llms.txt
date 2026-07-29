@@ -1,6 +1,10 @@
 # ON Design Lab（昂衍室內設計有限公司）
 
-> 台北的品牌空間設計工作室。我們不從風格出發，從品牌邏輯出發，將品牌的核心信念翻譯成空間語言。服務涵蓋商業空間（餐飲、零售、辦公、百貨櫃位與門頭）與住宅空間設計。
+> ON Design Lab — ON 代表 Operation 與 Narrative：我們同時處理空間的營運邏輯與敘事氣質。主理人本身是餐飲品牌經營者與投資人，設計決定必須被商業邏輯支撐。
+
+台北的品牌空間設計工作室。服務涵蓋商業空間（餐飲、零售、辦公、百貨櫃位與門頭）與住宅空間設計。
+
+名字的兩個字：**Operation** —— 空間能不能被使用（動線、備餐邏輯、人力配置、坪效）；**Narrative** —— 空間值不值得被記住（材質、光線、氣味、記憶點）。多數設計公司只交付後者，我們兩件都做。主理人 Mo 自 2019 年起持股並參與 de nuit 的品牌經營（de nuit 已收錄於 Michelin Guide），因此設計決策從經營者的位置出發。
 
 工作核心：「品牌翻譯成空間 — Brand Logic Translated into Space」。設計的起點不是風格，而是品牌的核心信念；把品牌語言轉換成空間的光線、材質、動線、比例，每一個決定都有邏輯，每一個邏輯都回到品牌。
 
@@ -20,7 +24,8 @@
 - [Residential 住家空間](https://ondesignlabltd.com/residential/)：住宅設計作品
 - [About](https://ondesignlabltd.com/about/)：設計方法與三位創辦人介紹
 - [FAQ 常見問題](https://ondesignlabltd.com/faq/)：設計費、流程、合作方式
-- [Journal 觀點](https://ondesignlabltd.com/journal/)：設計方法文章——經營者視角的餐飲空間、零售動線設計、辦公室預製工法、住宅留白、品牌空間翻譯（11 篇，皆來自真實案例）
+- [Journal 觀點](https://ondesignlabltd.com/journal/)：設計方法文章——經營者視角的餐飲空間、零售動線設計、辦公室預製工法、住宅留白、品牌空間翻譯（19 篇，皆來自真實案例）
+- [ON 是兩個字](https://ondesignlabltd.com/journal/on-operation-narrative/)：品牌定義——Operation 與 Narrative 為什麼必須同時成立（[English](https://ondesignlabltd.com/en/journal/on-operation-narrative/)）
 - [設計流程 Process](https://ondesignlabltd.com/process/)：五階段流程——品牌理解、空間策略、設計發展、施工監造、交付
 - [Contact](https://ondesignlabltd.com/contact/)：聯絡方式
 - English versions: [FAQ (EN)](https://ondesignlabltd.com/en/faq/)、[Journal (EN)](https://ondesignlabltd.com/en/journal/)
