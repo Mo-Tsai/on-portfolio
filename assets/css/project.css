@@ -62,8 +62,8 @@ nav ul li a:hover{opacity:1}
 
 /* bottom CTA */
 .page-cta{padding:3rem 2.5rem;text-align:center;border-top:1px solid var(--dim)}
-.page-cta .cta-zh{font-size:12px;font-weight:300;opacity:.33;letter-spacing:.04em;margin-bottom:.35rem}
-.page-cta .cta-en{font-size:10px;opacity:.19;letter-spacing:.08em;margin-bottom:1.2rem}
+.page-cta .cta-zh{font-size:14px;font-weight:300;opacity:.4;letter-spacing:.04em;margin-bottom:.35rem}
+.page-cta .cta-en{font-size:12px;opacity:.23;letter-spacing:.08em;margin-bottom:1.2rem}
 .cta-links{display:flex;justify-content:center;align-items:baseline;flex-wrap:nowrap;gap:1.6rem}
 .cta-link{font-size:11px;letter-spacing:.12em;opacity:.35;transition:opacity .2s;border-bottom:0.5px solid rgba(255,255,255,.2);padding-bottom:2px;white-space:nowrap}
 .cta-link:hover{opacity:.7}
