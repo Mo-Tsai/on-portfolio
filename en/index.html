@@ -146,16 +146,48 @@ a{color:#fafaf8;text-decoration:none}
   position:relative;overflow:hidden;cursor:pointer;
   display:flex;align-items:flex-end;
 }
-.half-bg{
+/* ── 進站蒙太奇 ──
+   大畫面停一下，再以自己的中心點原地收成整面牆的其中一格。
+   數值都在頁尾 <script> 的 MONTAGE 設定裡，只有那一處要改。
+   關掉 JS、或系統設定了「減少動態效果」時，畫面就停在原本的大圖，跟以前一樣。 */
+.wall{
   position:absolute;inset:0;
-  background-size:cover;background-position:center;
-  /* ★ 桌機背景圖路徑 — 請告知後填入 */
-  /* Commercial: background-image:url('...'); */
-  /* Residential: background-image:url('...'); */
-  filter:brightness(.45);
-  transition:filter .7s ease,transform .9s ease;
+  transform:scale(1.06);              /* 放大一點，讓模糊的邊緣落在畫面外，不會有暈邊 */
+  transition:filter var(--dur) ease,opacity var(--dur) ease,transform .9s ease;
 }
-.half:hover .half-bg{filter:brightness(.65);transform:scale(1.04)}
+.wall.hazed{
+  filter:grayscale(var(--gray)) blur(var(--haze)) brightness(var(--bright));
+  opacity:var(--dens);
+}
+.grid{
+  position:absolute;inset:0;display:grid;
+  grid-template-columns:repeat(var(--n),1fr);
+  grid-template-rows:repeat(var(--n),1fr);
+}
+.tile{background-size:cover;background-position:center;opacity:0;transition:opacity var(--fade) ease}
+.tile.on{opacity:1}
+
+.hero{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  background-size:cover;background-position:center;
+  transform-origin:center center;     /* 以自己的中心點收縮，不需要任何位移 */
+  filter:brightness(.45);             /* 靜止時跟原本的首頁一樣暗，下方文字才讀得到 */
+  transition:transform var(--dur) var(--ease),filter var(--dur) ease;
+  will-change:transform;
+}
+.wall.hazed .hero{filter:brightness(1)}   /* 收進去之後，亮度統一交給整面牆控制 */
+.half:first-child .hero{background-image:url('/網頁首頁兩張/商空.jpg')}
+.half:last-child .hero{background-image:url('/網頁首頁兩張/住家.jpg')}
+
+/* 還沒收縮前：維持原本的 hover 行為 */
+.half:hover .wall:not(.hazed){transform:scale(1.10)}
+.half:hover .wall:not(.hazed) .hero{filter:brightness(.65)}
+/* 收縮之後：滑過去整面牆濃一點、清楚一點 */
+.half:hover .wall.hazed{
+  opacity:calc(var(--dens) + .22);
+  filter:grayscale(calc(var(--gray) * .65)) blur(calc(var(--haze) * .35)) brightness(var(--bright));
+  transition:filter .7s ease,opacity .7s ease;
+}
 
 .half-content{
   position:relative;z-index:2;width:100%;
@@ -175,30 +207,37 @@ a{color:#fafaf8;text-decoration:none}
 .half:hover .label-arrow{color:rgba(255,255,255,.75);transform:translateX(5px)}
 
 /* ── Centre logo (桌機) ── */
+/* ★ 容器本身永遠不透明。
+   淡入改套在「圖」和「霧化底」各自身上 ——
+   祖先只要 opacity < 1，backdrop-filter 就整個失效，
+   會變成 logo 先到位、後面才突然開始糊。 */
 .logo{
   position:fixed;top:50%;left:50%;
   transform:translate(-50%,-50%);
   z-index:20;pointer-events:none;
-  opacity:0;transition:opacity .6s ease .5s;
 }
 .logo img{
   /* 桌機中央 Logo 大小 — 原始 × 300% */
-  width:216px;height:auto;display:block;
+  position:relative;width:216px;height:auto;display:block;
+  opacity:0;transition:opacity .6s ease .5s;
 }
-.page.visible .logo{opacity:1}
+/* logo 在 .page 外面，用「相鄰兄弟」才選得到。
+   原本寫成 .page.visible .logo（.page 裡面的 logo），永遠對不上，
+   所以中央 logo 從以前到現在都是隱形的 —— 這裡一併修掉。
+   （沒有 JS 或減少動態效果時，就靠這兩條直接顯示） */
+.page.visible ~ .logo img{opacity:1}
+.page.visible ~ .logo .logo-veil{opacity:1}
 
-/* ── Tagline ── */
-.tagline{
-  position:fixed;top:50%;left:50%;
-  transform:translate(-50%,60px);
-  z-index:20;pointer-events:none;
-  text-align:center;
-  opacity:0;transition:opacity .8s ease .8s;
+/* logo 背後的霧化底。放在 .logo 裡面，位置才會自動跟著手機版一起移到頂端。 */
+.logo-veil{
+  position:absolute;left:50%;top:50%;
+  width:460px;height:300px;transform:translate(-50%,-50%);
+  backdrop-filter:blur(var(--veil)) brightness(.5);
+  -webkit-backdrop-filter:blur(var(--veil)) brightness(.5);
+  -webkit-mask-image:radial-gradient(ellipse at center,#000 30%,rgba(0,0,0,.55) 55%,transparent 75%);
+          mask-image:radial-gradient(ellipse at center,#000 30%,rgba(0,0,0,.55) 55%,transparent 75%);
+  opacity:0;transition:opacity .6s ease .5s;
 }
-.page.visible .tagline{opacity:1}
-.tagline-zh{font-size:clamp(1rem,2vw,1.4rem);font-weight:300;letter-spacing:.1em;color:rgba(255,255,255,.7);margin-bottom:.4rem}
-.tagline-en{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:.8rem}
-.tagline-desc{font-size:11px;line-height:1.8;color:rgba(255,255,255,.28);max-width:320px;margin:0 auto}
 
 /* ── Split line ── */
 .split{
@@ -219,27 +258,11 @@ a{color:#fafaf8;text-decoration:none}
   }
   .half{height:50dvh}          /* 每個 half 絕對 50% */
 
-  .half:first-child .half-bg{
-    background-image:url('/手機首頁兩張/商空.jpg') !important;
-  }
-  .half:last-child .half-bg{
-    background-image:url('/手機首頁兩張/住家.jpg') !important;
-  }
+  .half:first-child .hero{background-image:url('/手機首頁兩張/商空.jpg')}
+  .half:last-child .hero{background-image:url('/手機首頁兩張/住家.jpg')}
 
-  /* 手機 Logo — 置中頂部 */
-  .logo{
-    top:2rem;
-    left:50%;
-    transform:translateX(-50%);
-  }
-  .logo img{width:144px} /* 手機 Logo 略小 */
-
-  .tagline{
-    top:auto;bottom:50%;left:50%;
-    transform:translate(-50%,50%);
-    transition-delay:.6s;
-  }
-  .tagline-desc{font-size:10px;max-width:260px}
+  /* 手機不出現中央 logo（Mo 指定）—— 開場 curtain 的 logo 不受影響 */
+  .logo{display:none}
 
   .split{display:none}
   .half-content{padding:1.5rem}
@@ -262,7 +285,7 @@ a{color:#fafaf8;text-decoration:none}
 <div class="page" id="page">
 
   <a href="/en/commercial/" class="half">
-    <div class="half-bg" style="background-image:url('/網頁首頁兩張/商空.jpg')"></div>
+    <div class="wall"><div class="grid"></div><div class="hero"></div></div>
     <div class="half-content">
       <div>
         <p class="label-en">Commercial</p>
@@ -274,7 +297,7 @@ a{color:#fafaf8;text-decoration:none}
   </a>
 
   <a href="/en/residential/" class="half">
-    <div class="half-bg" style="background-image:url('/網頁首頁兩張/住家.jpg')"></div>
+    <div class="wall"><div class="grid"></div><div class="hero"></div></div>
     <div class="half-content">
       <div>
         <p class="label-en">Residential</p>
@@ -288,16 +311,9 @@ a{color:#fafaf8;text-decoration:none}
 </div>
 
 <!-- 中央 Logo -->
-<div class="logo">
-  <img src="/assets/ON_White_logo.png" alt="ON Design Lab">
-</div>
-
-<!-- Tagline -->
-<div class="tagline">
-  <p class="tagline-zh">Brand Logic Translated into Space</p>
-  <p class="tagline-en">品牌翻譯成空間</p>
-  <p class="tagline-desc">We do not start from style. We start from the brand's core belief — and find what the space should say.</p>
-  <p style="font-size:10px;line-height:1.8;color:rgba(255,255,255,.16);max-width:320px;margin:.4rem auto 0;font-style:italic">我們不從風格出發。從品牌的核心信念出發，找到空間應該說的話。</p>
+<div class="logo" id="logo">
+  <div class="logo-veil" id="logoVeil"></div>
+  <img src="/assets/ON_White_logo.png" alt="ON Design Lab" id="logoImg">
 </div>
 
 <!-- 分割線 -->
@@ -307,7 +323,7 @@ a{color:#fafaf8;text-decoration:none}
 <a href="/" style="position:fixed;top:1.6rem;right:1.8rem;z-index:40;font-size:10px;letter-spacing:.18em;color:rgba(255,255,255,.4);text-decoration:none;border-bottom:0.5px solid rgba(255,255,255,.18);padding-bottom:2px;transition:color .2s">中文</a>
 
 <!-- 版本標記 -->
-<div style="position:fixed;bottom:10px;right:12px;z-index:30;font-size:9px;letter-spacing:.1em;color:rgba(255,255,255,.18);pointer-events:none">v2.23</div>
+<div style="position:fixed;bottom:10px;right:12px;z-index:30;font-size:9px;letter-spacing:.1em;color:rgba(255,255,255,.18);pointer-events:none">v2.24</div>
 
 <script>
 setTimeout(()=>{
@@ -317,6 +333,256 @@ setTimeout(()=>{
     document.getElementById('split').style.transform='scaleY(1)';
   },500);
 },1800);
+
+/* ════════ 進站蒙太奇 ════════
+   大畫面停一下 → 左右同時以自己的中心點收成整面牆的其中一格 →
+   收縮進行到一半時，ON logo 就開始從後面慢慢浮出來（跟收縮交會，不是接力）。
+   只跑一次，不循環。
+
+   ★ 要調整只改下面這一組數字。
+   ★ 想在畫面上即時調：網址加 ?tune=1，右上角會出現面板（一般訪客看不到）。 */
+(function(){
+  var MONTAGE = {
+    n:        7,      /* 桌機格數（只能是奇數，中心格才會等於畫面中心） */
+    nMobile:  5,      /* 手機格數 */
+    start:    2400,   /* 開場 curtain 收掉之後，等多久才開始計時（ms） */
+    hold:     1400,   /* 大畫面停留（ms） */
+    dur:      3700,   /* 收縮時間（ms） */
+    fade:      600,   /* 格子浮現（ms） */
+    stagger:   70,    /* 格子一圈一圈往外浮現的間隔（ms） */
+    logoAt:    45,    /* 收縮進行到幾 % 時，logo 開始浮出來（100 以上＝收完才開始） */
+    logoFade: 1500,   /* logo 浮出來的時間（ms） */
+    ease:     'cubic-bezier(.22,.61,.36,1)',
+    dens:     17,     /* 牆的濃度 % */
+    haze:     2,      /* 照片霧化模糊 px */
+    gray:     100,    /* 黑白程度 % */
+    bright:   100,    /* 亮度 % */
+    veil:     6,      /* logo 背後霧化 px，0 = 關掉 */
+    tiles:    81      /* /images/montage/ 每邊的素材張數 */
+  };
+
+  /* 系統設定了「減少動態效果」就整段不跑，畫面維持原本的大圖，logo 由 CSS 直接顯示 */
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+
+  var M = MONTAGE, root = document.documentElement;
+  var mark   = document.getElementById('logoImg');    /* logo 的圖 */
+  var veil   = document.getElementById('logoVeil');  /* logo 背後的霧化底 */
+  var halves = [].slice.call(document.querySelectorAll('.page > .half'));
+  var sides  = ['c', 'r'];
+  var runId  = 0, timers = [];
+
+  function gridN(){ return matchMedia('(max-width:680px)').matches ? M.nMobile : M.n; }
+
+  function applyVars(){
+    root.style.setProperty('--n', gridN());
+    root.style.setProperty('--dur', M.dur + 'ms');
+    root.style.setProperty('--fade', M.fade + 'ms');
+    root.style.setProperty('--ease', M.ease);
+    root.style.setProperty('--dens', M.dens / 100);
+    root.style.setProperty('--haze', M.haze + 'px');
+    root.style.setProperty('--gray', M.gray / 100);
+    root.style.setProperty('--bright', M.bright / 100);
+    root.style.setProperty('--veil', M.veil + 'px');
+  }
+
+  function at(ms, fn, my){ timers.push(setTimeout(function(){ if (my === runId) fn(); }, ms)); }
+
+  function play(firstRun){
+    runId++;
+    var my = runId, n = gridN(), total = n * n;
+    timers.forEach(clearTimeout); timers = [];
+    applyVars();
+
+    /* logo 與背後的霧化底都先壓住（inline 蓋過 CSS 的預設顯示） */
+    mark.style.transition = 'none'; mark.style.opacity = '0';
+    veil.style.transition = 'none'; veil.style.opacity = '0';
+
+    var parts = halves.map(function(half, si){
+      var wall = half.querySelector('.wall');
+      var grid = half.querySelector('.grid');
+      var hero = half.querySelector('.hero');
+
+      wall.style.transition = 'none';
+      hero.style.transition = 'none';
+      wall.className = 'wall';
+      hero.style.transform = 'none';
+
+      grid.innerHTML = '';
+      var tiles = [];
+      for (var i = 0; i < total; i++){
+        var d = document.createElement('div');
+        d.className = 'tile';
+        /* 先不掛圖 — 等大畫面停留那幾秒才載，不跟它搶頻寬 */
+        d.dataset.src = "url('/images/montage/" + sides[si] + "-"
+                      + ('0' + ((i % M.tiles) + 1)).slice(-2) + ".webp')";
+        grid.appendChild(d);
+        tiles.push(d);
+      }
+      return { wall: wall, hero: hero, tiles: tiles };
+    });
+
+    void document.body.offsetWidth;              /* 讓上面的重置立刻生效，不要留殘影 */
+    mark.style.transition = 'opacity ' + M.logoFade + 'ms ease';
+    veil.style.transition = 'opacity ' + M.logoFade + 'ms ease';   /* 同一條曲線，一起浮 */
+    parts.forEach(function(p){ p.wall.style.transition = ''; p.hero.style.transition = ''; });
+
+    var t0 = firstRun ? M.start : 0;
+
+    /* 大畫面停留期間，背景默默把整面格子的圖載進來 */
+    at(t0, function(){
+      parts.forEach(function(p){
+        p.tiles.forEach(function(t){
+          if (t.dataset.src){ t.style.backgroundImage = t.dataset.src; delete t.dataset.src; }
+        });
+      });
+    }, my);
+
+    /* 左右「同時」收縮 —— 不錯開 */
+    at(t0 + M.hold, function(){
+      var mid = (n - 1) / 2, cell = mid * n + mid;
+      parts.forEach(function(p){
+        p.tiles.forEach(function(t, i){
+          if (i === cell) return;                /* 這格由大畫面自己佔著 */
+          var d = Math.max(Math.abs(i % n - mid), Math.abs(Math.floor(i / n) - mid));
+          t.style.transitionDelay = (d * M.stagger) + 'ms';
+          t.className = 'tile on';
+        });
+        p.hero.style.transform = 'scale(' + (1 / n) + ')';
+        p.wall.className = 'wall hazed';
+      });
+    }, my);
+
+    at(t0 + M.hold + M.dur, function(){
+      parts.forEach(function(p){
+        p.tiles.forEach(function(t){ t.style.transitionDelay = '0ms'; });
+      });
+    }, my);
+
+    /* logo 在收縮進行到 logoAt% 時就開始浮出來 —— 兩件事交會，不是接力 */
+    at(t0 + M.hold + M.dur * M.logoAt / 100, function(){
+      mark.style.opacity = '1';
+      veil.style.opacity = M.veil ? '1' : '0';      /* 跟 logo 同時、同速 */
+    }, my);
+  }
+
+  play(true);
+
+  var wasMobile = matchMedia('(max-width:680px)').matches;
+  addEventListener('resize', function(){
+    var m = matchMedia('(max-width:680px)').matches;
+    if (m !== wasMobile){ wasMobile = m; play(false); }
+  });
+
+  /* ── 調整面板：網址加 ?tune=1 才出現，一般訪客不會載到 ── */
+  if (!/[?&]tune=1/.test(location.search)) return;
+
+  var ROWS = [
+    ['格數',         'n',        'select', [[5,'5×5（25 格）'],[7,'7×7（49 格）'],[9,'9×9（81 格）']]],
+    ['大畫面停留',   'hold',     'range',  [500, 6000, 100, 'ms']],
+    ['收縮時間',     'dur',      'range',  [600, 8000, 100, 'ms']],
+    ['格子浮現',     'fade',     'range',  [200, 3500, 50,  'ms']],
+    ['格子間隔',     'stagger',  'range',  [0,   250,  5,   'ms']],
+    ['logo 何時開始', 'logoAt',  'range',  [0,   140,  5,   '%收縮']],
+    ['logo 浮現',    'logoFade', 'range',  [200, 6000, 100, 'ms']],
+    ['緩動',         'ease',     'select', [['cubic-bezier(.22,.61,.36,1)','沉穩'],
+                                            ['cubic-bezier(.16,1,.3,1)','慢收尾'],
+                                            ['cubic-bezier(.4,0,.2,1)','俐落'],
+                                            ['cubic-bezier(.65,0,.35,1)','兩頭慢'],
+                                            ['linear','線性']]],
+    ['牆的濃度',     'dens',     'range',  [5,   100,  1,   '%']],
+    ['照片霧化',     'haze',     'range',  [0,   20,   1,   'px']],
+    ['黑白程度',     'gray',     'range',  [0,   100,  5,   '%']],
+    ['亮度',         'bright',   'range',  [30,  150,  5,   '%']],
+    ['logo 背後霧化','veil',     'range',  [0,   40,   2,   'px']]
+  ];
+
+  var css = document.createElement('style');
+  css.textContent =
+    '#tune{position:fixed;top:12px;right:12px;z-index:300;width:244px;max-height:92vh;overflow:auto;' +
+    'background:rgba(8,8,8,.93);border:1px solid rgba(255,255,255,.16);border-radius:4px;padding:12px;' +
+    'color:rgba(255,255,255,.82);font:11px/1.5 "Helvetica Neue",Helvetica,Arial,sans-serif}' +
+    '#tune.hide{display:none}' +
+    '#tune h4{font-size:10px;letter-spacing:.18em;color:rgba(255,255,255,.45);margin:0 0 9px;font-weight:400}' +
+    '#tune .r{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:6px 0}' +
+    '#tune input[type=range]{width:96px;accent-color:#fff}' +
+    '#tune select{background:#111;color:#eee;border:1px solid rgba(255,255,255,.2);border-radius:3px;font-size:11px;padding:2px 4px}' +
+    '#tune b{color:#fff;font-weight:400;min-width:46px;text-align:right}' +
+    '#tune hr{border:0;border-top:1px solid rgba(255,255,255,.12);margin:9px 0}' +
+    '#tune .btn{cursor:pointer;user-select:none;padding:4px 8px;border:1px solid rgba(255,255,255,.25);' +
+    'border-radius:3px;text-align:center;flex:1}' +
+    '#tune textarea{width:100%;height:58px;background:#000;color:#9fe;border:1px solid rgba(255,255,255,.2);' +
+    'border-radius:3px;font:10px/1.4 Consolas,monospace;padding:5px;resize:vertical}' +
+    '#tune .k{color:rgba(255,255,255,.4);font-size:10px}';
+  document.head.appendChild(css);
+
+  var box = document.createElement('div');
+  box.id = 'tune';
+  var html = '<h4>蒙太奇調整</h4>';
+  ROWS.forEach(function(row){
+    var label = row[0], key = row[1], kind = row[2], cfg = row[3];
+    if (kind === 'select'){
+      html += '<div class="r"><span>' + label + '</span><select data-k="' + key + '">' +
+        cfg.map(function(o){ return '<option value="' + o[0] + '">' + o[1] + '</option>'; }).join('') +
+        '</select></div>';
+    } else {
+      html += '<div class="r"><span>' + label + '</span>' +
+        '<input type="range" data-k="' + key + '" min="' + cfg[0] + '" max="' + cfg[1] +
+        '" step="' + cfg[2] + '"><b data-v="' + key + '"></b></div>';
+    }
+  });
+  html += '<hr><div class="r"><span class="btn" id="tReplay">重播（R）</span>' +
+          '<span class="btn" id="tHide">收合（H）</span></div>' +
+          '<hr><p class="k" style="margin-bottom:5px">定稿設定碼</p>' +
+          '<textarea id="tDump" readonly></textarea>' +
+          '<div class="r"><span class="btn" id="tCopy">複製設定碼</span></div>';
+  box.innerHTML = html;
+  document.body.appendChild(box);
+
+  var UNITS = {};
+  ROWS.forEach(function(r){ if (r[2] === 'range') UNITS[r[1]] = r[3][3]; });
+
+  function refresh(){
+    [].forEach.call(box.querySelectorAll('[data-k]'), function(el){ el.value = M[el.dataset.k]; });
+    [].forEach.call(box.querySelectorAll('[data-v]'), function(el){
+      var k = el.dataset.v, u = UNITS[k];
+      el.textContent = (u === 'ms') ? (M[k] / 1000).toFixed(2) + 's' : M[k] + u;
+    });
+    var out = {};
+    ROWS.forEach(function(r){ out[r[1]] = M[r[1]]; });
+    box.querySelector('#tDump').value = JSON.stringify(out);
+    try { localStorage.setItem('montageTune2', JSON.stringify(out)); } catch(e){}
+  }
+
+  try {
+    var saved = JSON.parse(localStorage.getItem('montageTune2') || '{}');
+    Object.keys(saved).forEach(function(k){ if (k in M) M[k] = saved[k]; });
+  } catch(e){}
+
+  box.addEventListener('input', function(e){
+    var k = e.target.dataset && e.target.dataset.k;
+    if (!k) return;
+    M[k] = (k === 'ease') ? e.target.value : +e.target.value;
+    refresh(); play(false);
+  });
+  box.querySelector('#tReplay').onclick = function(){ play(false); };
+  box.querySelector('#tHide').onclick   = function(){ box.classList.add('hide'); };
+  box.querySelector('#tCopy').onclick   = function(){
+    var d = box.querySelector('#tDump');
+    d.select(); d.setSelectionRange(0, 9999);
+    try { navigator.clipboard.writeText(d.value); } catch(e){ document.execCommand('copy'); }
+    var self = this;
+    self.textContent = '已複製 ✓';
+    setTimeout(function(){ self.textContent = '複製設定碼'; }, 1500);
+  };
+  addEventListener('keydown', function(e){
+    var k = e.key.toLowerCase();
+    if (k === 'r') play(false);
+    if (k === 'h') box.classList.toggle('hide');
+  });
+
+  refresh();
+  play(false);
+})();
 </script>
 </body>
 </html>
