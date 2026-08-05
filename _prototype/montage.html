@@ -12,20 +12,20 @@ a{color:#fafaf8;text-decoration:none}
 
 :root{
   --n:6;              /* 格數 n×n */
+  --b:3;              /* 主畫面最後縮到 b×b 格（b 越小縮越多） */
   --hold:2600ms;      /* 主畫面停留 */
   --dur:1400ms;       /* 縮放時間 */
   --ease:cubic-bezier(.22,.61,.36,1);
-  --gray:1;           /* 黑白程度 0–1 */
+  --gray:1;           /* 後面那面牆的黑白程度 0–1 */
   --bright:.45;       /* 亮度，跟現行首頁一致 */
   --fade:900ms;       /* 格子浮現 */
 }
 
-/* ── 版面：完全比照現行首頁 ── */
 .page{height:100vh;display:grid;grid-template-columns:1fr 1fr;opacity:0;transition:opacity .8s ease}
 .page.visible{opacity:1}
 .half{position:relative;overflow:hidden;cursor:pointer;display:flex;align-items:flex-end}
 
-/* ── 格子牆 ── */
+/* ── 後面的格子牆：黑白 ── */
 .grid{
   position:absolute;inset:0;display:grid;
   grid-template-columns:repeat(var(--n),1fr);
@@ -39,22 +39,23 @@ a{color:#fafaf8;text-decoration:none}
 }
 .tile.on{opacity:1}
 
-/* ── 主角 ── */
+/* ── 主畫面：就是現行首頁那兩張，不換 ── */
 .hero{
   position:absolute;top:0;left:0;width:100%;height:100%;
   background-size:cover;background-position:center;
   transform-origin:0 0;
-  filter:grayscale(0) brightness(var(--bright));
-  transition:transform var(--dur) var(--ease),opacity .35s ease;
+  filter:grayscale(var(--herogray,0)) brightness(var(--bright));
+  transition:transform var(--dur) var(--ease),filter .7s ease;
   will-change:transform;
 }
-.hero.hidden{opacity:0}
+.half[data-side=c] .hero{background-image:url('/網頁首頁兩張/商空.webp')}
+.half[data-side=r] .hero{background-image:url('/網頁首頁兩張/住家.webp')}
 
-/* 滑到那半邊：整面回一點顏色和亮度（沒人看的時候完全靜止） */
-body.hoverlive .half:hover .tile{filter:grayscale(calc(var(--gray) * .55)) brightness(calc(var(--bright) + .2))}
-body.hoverlive .half:hover .hero{filter:grayscale(0) brightness(calc(var(--bright) + .2))}
+/* 滑到那半邊：整面回一點亮度（沒人看的時候完全靜止） */
+body.hoverlive .half:hover .tile{filter:grayscale(calc(var(--gray) * .6)) brightness(calc(var(--bright) + .2))}
+body.hoverlive .half:hover .hero{filter:grayscale(var(--herogray,0)) brightness(calc(var(--bright) + .2))}
 
-/* ── 前景文字（照抄現行首頁） ── */
+/* ── 前景文字（照抄現行首頁，中間那段 tagline 已拿掉） ── */
 .half-content{
   position:relative;z-index:3;width:100%;padding:2.5rem;
   border-top:1px solid rgba(255,255,255,.12);
@@ -66,23 +67,11 @@ body.hoverlive .half:hover .hero{filter:grayscale(0) brightness(calc(var(--brigh
 .label-arrow{font-size:1.4rem;color:rgba(255,255,255,.2)}
 .logo{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:20;pointer-events:none}
 .logo img{width:216px;height:auto;display:block}
-.tagline{position:fixed;top:50%;left:50%;transform:translate(-50%,60px);z-index:20;pointer-events:none;text-align:center}
-.tagline-zh{font-size:clamp(1rem,2vw,1.4rem);font-weight:300;letter-spacing:.1em;color:rgba(255,255,255,.7);margin-bottom:.4rem}
-.tagline-en{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:.8rem}
-.tagline-desc{font-size:11px;line-height:1.8;color:rgba(255,255,255,.28);max-width:320px;margin:0 auto}
 .split{position:fixed;top:0;bottom:0;left:50%;width:1px;background:rgba(255,255,255,.1);z-index:10;pointer-events:none}
-
-/* ── 案名（除錯用，可關） ── */
-.caption{
-  position:absolute;left:2.5rem;top:2.5rem;z-index:4;
-  font-size:11px;letter-spacing:.14em;color:rgba(255,255,255,.55);
-  opacity:0;transition:opacity .4s ease;pointer-events:none;
-}
-body.showname .caption{opacity:1}
 
 /* ── 控制面板 ── */
 #panel{
-  position:fixed;top:14px;left:14px;z-index:100;width:236px;
+  position:fixed;top:14px;left:14px;z-index:100;width:238px;
   background:rgba(8,8,8,.9);border:1px solid rgba(255,255,255,.14);border-radius:4px;
   padding:12px 13px;color:rgba(255,255,255,.8);font-size:11px;line-height:1.5;
   backdrop-filter:blur(6px);
@@ -92,7 +81,7 @@ body.showname .caption{opacity:1}
   margin:0 0 9px;font-weight:400}
 #panel .row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:7px 0}
 #panel .row span{white-space:nowrap}
-#panel input[type=range]{width:104px;accent-color:#fff}
+#panel input[type=range]{width:100px;accent-color:#fff}
 #panel select{background:#111;color:#eee;border:1px solid rgba(255,255,255,.2);
   border-radius:3px;font-size:11px;padding:2px 4px}
 #panel b{color:#fff;font-weight:400;min-width:44px;text-align:right;display:inline-block}
@@ -104,19 +93,17 @@ body.showname .caption{opacity:1}
 #tip{position:fixed;bottom:12px;left:14px;z-index:100;font-size:10px;letter-spacing:.1em;
   color:rgba(255,255,255,.3)}
 
-/* ── 手機 ── */
 @media(max-width:680px){
-  :root{--n:4}                        /* 手機格子降到 4×4，一樣是 n×n 所以縮放邏輯不變 */
+  :root{--n:4;--b:2}
   .page{grid-template-columns:1fr;grid-template-rows:1fr 1fr;height:100dvh}
   .half{height:50dvh}
+  .half[data-side=c] .hero{background-image:url('/手機首頁兩張/商空.jpg')}
+  .half[data-side=r] .hero{background-image:url('/手機首頁兩張/住家.jpg')}
   .logo{top:2rem;left:50%;transform:translateX(-50%)}
   .logo img{width:144px}
-  .tagline{top:auto;bottom:50%;left:50%;transform:translate(-50%,50%)}
-  .tagline-desc{font-size:10px;max-width:260px}
   .split{display:none}
   .half-content{padding:1.5rem}
-  .caption{left:1.5rem;top:1.5rem}
-  #panel{width:calc(100vw - 28px);max-height:52vh;overflow:auto}
+  #panel{width:calc(100vw - 28px);max-height:56vh;overflow:auto}
 }
 </style>
 </head>
@@ -125,8 +112,7 @@ body.showname .caption{opacity:1}
 <div class="page" id="page">
   <a href="#" class="half" data-side="c" onclick="return false">
     <div class="grid"></div>
-    <div class="hero hidden"></div>
-    <p class="caption"></p>
+    <div class="hero"></div>
     <div class="half-content">
       <div>
         <p class="label-en">Commercial</p>
@@ -139,8 +125,7 @@ body.showname .caption{opacity:1}
 
   <a href="#" class="half" data-side="r" onclick="return false">
     <div class="grid"></div>
-    <div class="hero hidden"></div>
-    <p class="caption"></p>
+    <div class="hero"></div>
     <div class="half-content">
       <div>
         <p class="label-en">Residential</p>
@@ -153,19 +138,20 @@ body.showname .caption{opacity:1}
 </div>
 
 <div class="logo"><img src="/assets/ON_White_logo.png" alt="ON Design Lab"></div>
-<div class="tagline">
-  <p class="tagline-zh">品牌翻譯成空間</p>
-  <p class="tagline-en">Brand Logic Translated into Space</p>
-  <p class="tagline-desc">我們不從風格出發。從品牌的核心信念出發，找到空間應該說的話。</p>
-</div>
 <div class="split"></div>
 
 <div id="panel">
   <h4>蒙太奇原型</h4>
   <div class="row"><span>格數</span>
-    <select id="k-n"><option value="4">4×4（16）</option><option value="5">5×5（25）</option>
-    <option value="6" selected>6×6（36）</option></select></div>
-  <div class="row"><span>主畫面停留</span><input type="range" id="k-hold" min="800" max="6000" step="100" value="2600"><b id="v-hold"></b></div>
+    <select id="k-n"><option value="4">4×4（16 格）</option><option value="5">5×5（25 格）</option>
+    <option value="6" selected>6×6（36 格）</option></select></div>
+  <div class="row"><span>主畫面縮到</span>
+    <select id="k-b">
+      <option value="1">1 格 — 剩 3% 面積（縮最多）</option>
+      <option value="2">2×2 格 — 剩 11%</option>
+      <option value="3" selected>3×3 格 — 剩 25%（縮最少）</option>
+    </select></div>
+  <div class="row"><span>停留</span><input type="range" id="k-hold" min="800" max="6000" step="100" value="2600"><b id="v-hold"></b></div>
   <div class="row"><span>縮放時間</span><input type="range" id="k-dur" min="400" max="3000" step="50" value="1400"><b id="v-dur"></b></div>
   <div class="row"><span>格子浮現</span><input type="range" id="k-fade" min="200" max="2500" step="50" value="900"><b id="v-fade"></b></div>
   <div class="row"><span>緩動</span>
@@ -177,16 +163,12 @@ body.showname .caption{opacity:1}
       <option value="linear">線性</option>
     </select></div>
   <hr>
-  <div class="row"><span>黑白程度</span><input type="range" id="k-gray" min="0" max="100" step="5" value="100"><b id="v-gray"></b></div>
+  <div class="row"><span>後面黑白程度</span><input type="range" id="k-gray" min="0" max="100" step="5" value="100"><b id="v-gray"></b></div>
   <div class="row"><span>亮度</span><input type="range" id="k-bright" min="20" max="100" step="5" value="45"><b id="v-bright"></b></div>
-  <div class="row"><span>主角保持彩色</span><span class="sw on" id="k-herocolor">開</span></div>
-  <div class="row"><span>滑過才回色</span><span class="sw on" id="k-hover">開</span></div>
+  <div class="row"><span>主畫面也黑白</span><span class="sw" id="k-herogray">關</span></div>
+  <div class="row"><span>滑過才回亮</span><span class="sw on" id="k-hover">開</span></div>
   <hr>
-  <div class="row"><span>循環播放</span><span class="sw" id="k-loop">關</span></div>
-  <div class="row"><span>循環間隔</span><input type="range" id="k-gap" min="0" max="8000" step="250" value="2500"><b id="v-gap"></b></div>
-  <div class="row"><span>顯示案名</span><span class="sw" id="k-name">關</span></div>
-  <hr>
-  <p class="hint">H 收合面板　R 重播　L 切換循環<br>設定會自動記住</p>
+  <p class="hint">H 收合面板　R 重播<br>設定會自動記住</p>
 </div>
 <div id="tip">按 H 收合面板</div>
 
@@ -195,41 +177,38 @@ const $ = s => document.querySelector(s);
 const root = document.documentElement;
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-/* ── 設定 ── */
-const DEF = {n:6, hold:2600, dur:1400, fade:900, ease:'cubic-bezier(.22,.61,.36,1)',
-             gray:100, bright:45, herocolor:1, hover:1, loop:0, gap:2500, name:0};
+const DEF = {n:6, b:3, hold:2600, dur:1400, fade:900,
+             ease:'cubic-bezier(.22,.61,.36,1)', gray:100, bright:45, herogray:0, hover:1};
 let CFG = Object.assign({}, DEF);
-try { Object.assign(CFG, JSON.parse(localStorage.getItem('montage') || '{}')); } catch(e) {}
+try { Object.assign(CFG, JSON.parse(localStorage.getItem('montage2') || '{}')); } catch(e) {}
+
+const isMobile = () => matchMedia('(max-width:680px)').matches;
+const gridN = () => isMobile() ? 4 : CFG.n;          /* 手機格子太小，降到 4×4 */
+const blockB = () => Math.min(CFG.b, gridN() - 1);   /* 主畫面不能大於整面牆 */
 
 function applyCfg(){
-  root.style.setProperty('--n', CFG.n);
+  root.style.setProperty('--n', gridN());
   root.style.setProperty('--hold', CFG.hold + 'ms');
   root.style.setProperty('--dur', CFG.dur + 'ms');
   root.style.setProperty('--fade', CFG.fade + 'ms');
   root.style.setProperty('--ease', CFG.ease);
   root.style.setProperty('--gray', CFG.gray / 100);
   root.style.setProperty('--bright', CFG.bright / 100);
+  root.style.setProperty('--herogray', CFG.herogray ? 1 : 0);
   document.body.classList.toggle('hoverlive', !!CFG.hover);
-  document.body.classList.toggle('showname', !!CFG.name);
   $('#v-hold').textContent   = (CFG.hold/1000).toFixed(1) + 's';
   $('#v-dur').textContent    = (CFG.dur/1000).toFixed(2) + 's';
   $('#v-fade').textContent   = (CFG.fade/1000).toFixed(2) + 's';
-  $('#v-gap').textContent    = (CFG.gap/1000).toFixed(2) + 's';
   $('#v-gray').textContent   = CFG.gray + '%';
   $('#v-bright').textContent = CFG.bright + '%';
-  ['herocolor','hover','loop','name'].forEach(k => {
+  ['herogray','hover'].forEach(k => {
     const el = $('#k-' + k);
     el.classList.toggle('on', !!CFG[k]);
     el.textContent = CFG[k] ? '開' : '關';
   });
-  try { localStorage.setItem('montage', JSON.stringify(CFG)); } catch(e) {}
+  try { localStorage.setItem('montage2', JSON.stringify(CFG)); } catch(e) {}
 }
 
-/* 手機強制 4×4（格子太小放不下 36 張） */
-const isMobile = () => matchMedia('(max-width:680px)').matches;
-const gridN = () => isMobile() ? 4 : CFG.n;
-
-/* ── 資料 ── */
 let M = null, gen = 0;
 
 async function boot(){
@@ -243,49 +222,13 @@ async function boot(){
 function restart(){
   gen++;
   const my = gen;
-  ['c','r'].forEach((side, i) => build(side, my, i * 900));   // 左右錯開 0.9s
+  ['c','r'].forEach((side, i) => build(side, my, i * 900));   /* 左右錯開 0.9s */
 }
 
-function build(side, my, delay){
-  const half = document.querySelector('.half[data-side="' + side + '"]');
-  const grid = half.querySelector('.grid');
-  const hero = half.querySelector('.hero');
-  const cap  = half.querySelector('.caption');
-  const n = gridN(), total = n * n;
-  const list = M[side];
-
-  /* 備有彩色大圖的格子要平均散佈在整面牆上，
-     否則主角永遠只會出現在前兩排 */
-  const withHero = list.filter(r => r.h), plain = list.filter(r => !r.h);
-  const arr = new Array(total);
-  const step = total / withHero.length;
-  withHero.forEach((r, j) => {
-    let p = Math.min(total - 1, Math.round(j * step));
-    while (arr[p]) p = (p + 1) % total;
-    arr[p] = r;
-  });
-  for (let i = 0, p = 0; i < total; i++) if (!arr[i]) arr[i] = plain[p++ % plain.length];
-
-  grid.style.setProperty('--n', n);
-  grid.innerHTML = '';
-  arr.forEach(rec => {
-    const d = document.createElement('div');
-    d.className = 'tile';
-    /* 先不掛圖 — 等主畫面停留那幾秒才載，不跟主角搶頻寬 */
-    d.dataset.src = "url('tiles/" + rec.t + "')";
-    grid.appendChild(d);
-  });
-  const tiles = [...grid.children];
-  const heroIdx = [];
-  arr.forEach((r, i) => { if (r.h) heroIdx.push(i); });
-
-  run(my, {half, grid, hero, cap, tiles, n, list: arr, heroIdx, delay});
-}
-
-/* 把主角變形到第 i 格：先縮到 1/n，再平移到該格 */
-function cellTransform(i, n){
-  const col = i % n, row = Math.floor(i / n);
-  return 'translate(' + (col * 100 / n) + '%,' + (row * 100 / n) + '%) scale(' + (1 / n) + ')';
+/* 主畫面最後停的位置：b×b 格大小，貼齊格線、盡量置中 */
+function heroTransform(n, b){
+  const off = Math.round((n - b) / 2);                        /* 以「格」為單位的位移 */
+  return 'translate(' + (off * 100 / n) + '%,' + (off * 100 / n) + '%) scale(' + (b / n) + ')';
 }
 function instant(el, fn){
   const t = el.style.transition;
@@ -295,105 +238,86 @@ function instant(el, fn){
   el.style.transition = t;
 }
 
-async function run(my, C){
-  const alive = () => my === gen;
-  let k = 0;                                  // heroIdx 的指標
-  let idx = C.heroIdx[0];
+function build(side, my, delay){
+  const half = document.querySelector('.half[data-side="' + side + '"]');
+  const grid = half.querySelector('.grid');
+  const hero = half.querySelector('.hero');
+  const n = gridN(), b = blockB(), total = n * n;
+  const list = M[side];
 
-  const setSrc = i => {
-    const rec = C.list[i];
-    C.hero.style.backgroundImage = "url('tiles/" + rec.h + "')";
-    C.cap.textContent = rec.name;
-  };
-  /* 主畫面在停留時，背景把整面格子的圖載進來 */
-  const loadTiles = () => C.tiles.forEach(t => {
-    if (t.dataset.src){ t.style.backgroundImage = t.dataset.src; delete t.dataset.src; }
-  });
-  const rippleIn = from => {                  // 從主角那格往外一圈圈浮現
-    const fc = from % C.n, fr = Math.floor(from / C.n);
-    C.tiles.forEach((t, i) => {
-      if (i === from) return;
-      const d = Math.max(Math.abs(i % C.n - fc), Math.abs(Math.floor(i / C.n) - fr));
-      t.style.transitionDelay = (d * 55) + 'ms';
-      t.classList.add('on');
-    });
-  };
-
-  await sleep(C.delay); if (!alive()) return;
-
-  /* 首輪：主畫面滿版 → 停 → 縮回它自己那格 */
-  setSrc(idx);
-  instant(C.hero, () => { C.hero.style.transform = 'none'; });
-  C.hero.classList.remove('hidden');
-  await sleep(60); if (!alive()) return;
-
-  loadTiles();                                /* 停留期間才去載格子的圖 */
-  await sleep(CFG.hold); if (!alive()) return;
-  rippleIn(idx);
-  C.hero.style.transform = cellTransform(idx, C.n);
-  await sleep(CFG.dur); if (!alive()) return;
-  C.tiles.forEach(t => t.style.transitionDelay = '0ms');
-  if (!CFG.herocolor){ C.hero.classList.add('hidden'); C.tiles[idx].classList.add('on'); }
-
-  /* 之後：循環開著才繼續 */
-  while (alive()){
-    await sleep(200); if (!alive()) return;
-    if (!CFG.loop) continue;
-
-    await sleep(CFG.gap); if (!alive() || !CFG.loop) continue;
-
-    /* 目前這格退回灰階群像 */
-    C.tiles[idx].classList.add('on');
-    C.hero.classList.add('hidden');
-    await sleep(350); if (!alive()) return;
-
-    /* 換下一格：瞬間移過去、換圖，再淡入變彩色 */
-    k = (k + 1) % C.heroIdx.length;
-    idx = C.heroIdx[k];
-    setSrc(idx);
-    instant(C.hero, () => { C.hero.style.transform = cellTransform(idx, C.n); });
-    C.hero.classList.remove('hidden');
-    await sleep(350); if (!alive()) return;
-
-    /* 長大成主畫面 → 停 → 縮回去 */
-    C.hero.style.transform = 'none';
-    await sleep(CFG.dur + CFG.hold); if (!alive()) return;
-    C.hero.style.transform = cellTransform(idx, C.n);
-    await sleep(CFG.dur); if (!alive()) return;
-    if (!CFG.herocolor){ C.hero.classList.add('hidden'); C.tiles[idx].classList.add('on'); }
+  grid.style.setProperty('--n', n);
+  grid.innerHTML = '';
+  for (let i = 0; i < total; i++){
+    const d = document.createElement('div');
+    d.className = 'tile';
+    /* 先不掛圖 — 等主畫面停留那幾秒才載，不跟主畫面搶頻寬 */
+    d.dataset.src = "url('tiles/" + list[i % list.length].t + "')";
+    grid.appendChild(d);
   }
+
+  run(my, {grid, hero, tiles: [...grid.children], n, b, delay});
 }
 
-/* ── 面板 ── */
+async function run(my, C){
+  const alive = () => my === gen;
+
+  /* 主畫面滿版 */
+  instant(C.hero, () => { C.hero.style.transform = 'none'; });
+  await sleep(C.delay); if (!alive()) return;
+
+  /* 停留期間，背景默默把整面格子的圖載進來 */
+  C.tiles.forEach(t => {
+    if (t.dataset.src){ t.style.backgroundImage = t.dataset.src; delete t.dataset.src; }
+  });
+  await sleep(CFG.hold); if (!alive()) return;
+
+  /* 縮小 → 整面牆從主畫面往外一圈圈浮現 */
+  const off = Math.round((C.n - C.b) / 2);
+  C.tiles.forEach((t, i) => {
+    const col = i % C.n, row = Math.floor(i / C.n);
+    const inside = col >= off && col < off + C.b && row >= off && row < off + C.b;
+    if (inside) return;                                   /* 被主畫面蓋住的格子不用亮 */
+    const d = Math.max(0, Math.max(off - col, col - (off + C.b - 1)),
+                          Math.max(off - row, row - (off + C.b - 1)));
+    t.style.transitionDelay = (d * 60) + 'ms';
+    t.classList.add('on');
+  });
+  C.hero.style.transform = heroTransform(C.n, C.b);
+  await sleep(CFG.dur); if (!alive()) return;
+  C.tiles.forEach(t => t.style.transitionDelay = '0ms');
+  /* 到這裡就停住 — 不循環、不再動 */
+}
+
 function bindPanel(){
-  const num = (id, key, rebuild) => {
+  const bind = (id, key, rebuild) => {
     const el = $('#k-' + id);
     el.value = CFG[key];
     el.addEventListener('input', () => {
-      CFG[key] = (id === 'ease') ? el.value : +el.value;
+      CFG[key] = (typeof DEF[key] === 'number') ? +el.value : el.value;
       applyCfg();
       if (rebuild) restart();
     });
   };
-  num('n','n',true); num('hold','hold'); num('dur','dur'); num('fade','fade');
-  num('gap','gap'); num('gray','gray'); num('bright','bright');
-  const ez = $('#k-ease'); ez.value = CFG.ease;
-  ez.addEventListener('change', () => { CFG.ease = ez.value; applyCfg(); });
+  bind('n','n',true); bind('b','b',true);
+  bind('hold','hold'); bind('dur','dur'); bind('fade','fade');
+  bind('gray','gray'); bind('bright','bright'); bind('ease','ease');
 
-  ['herocolor','hover','loop','name'].forEach(key => {
+  ['herogray','hover'].forEach(key => {
     $('#k-' + key).addEventListener('click', () => { CFG[key] = CFG[key] ? 0 : 1; applyCfg(); });
   });
 
   addEventListener('keydown', e => {
     const k = e.key.toLowerCase();
-    if (k === 'h'){ $('#panel').classList.toggle('hide'); $('#tip').style.display = $('#panel').classList.contains('hide') ? '' : 'none'; }
+    if (k === 'h'){
+      $('#panel').classList.toggle('hide');
+      $('#tip').style.display = $('#panel').classList.contains('hide') ? '' : 'none';
+    }
     if (k === 'r') restart();
-    if (k === 'l'){ CFG.loop = CFG.loop ? 0 : 1; applyCfg(); }
   });
   $('#tip').style.display = 'none';
 
   let last = isMobile();
-  addEventListener('resize', () => { if (isMobile() !== last){ last = isMobile(); restart(); } });
+  addEventListener('resize', () => { if (isMobile() !== last){ last = isMobile(); applyCfg(); restart(); } });
 }
 
 boot();
