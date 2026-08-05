@@ -12,20 +12,20 @@ a{color:#fafaf8;text-decoration:none}
 
 :root{
   --n:6;              /* 格數 n×n */
-  --b:3;              /* 主畫面最後縮到 b×b 格（b 越小縮越多） */
-  --hold:2600ms;      /* 主畫面停留 */
+  --hold:2600ms;      /* 大畫面停留 */
   --dur:1400ms;       /* 縮放時間 */
   --ease:cubic-bezier(.22,.61,.36,1);
-  --gray:1;           /* 後面那面牆的黑白程度 0–1 */
+  --gray:1;           /* 黑白程度 0–1 */
   --bright:.45;       /* 亮度，跟現行首頁一致 */
   --fade:900ms;       /* 格子浮現 */
+  --veil:16px;        /* logo 背後霧化 */
 }
 
 .page{height:100vh;display:grid;grid-template-columns:1fr 1fr;opacity:0;transition:opacity .8s ease}
 .page.visible{opacity:1}
 .half{position:relative;overflow:hidden;cursor:pointer;display:flex;align-items:flex-end}
 
-/* ── 後面的格子牆：黑白 ── */
+/* ── 蒙太奇牆 ── */
 .grid{
   position:absolute;inset:0;display:grid;
   grid-template-columns:repeat(var(--n),1fr);
@@ -39,23 +39,26 @@ a{color:#fafaf8;text-decoration:none}
 }
 .tile.on{opacity:1}
 
-/* ── 主畫面：就是現行首頁那兩張，不換 ── */
+/* ── 大畫面：現行首頁那兩張。縮完就收進牆裡，變成其中一格 ── */
 .hero{
   position:absolute;top:0;left:0;width:100%;height:100%;
   background-size:cover;background-position:center;
   transform-origin:0 0;
-  filter:grayscale(var(--herogray,0)) brightness(var(--bright));
-  transition:transform var(--dur) var(--ease),filter .7s ease;
+  filter:grayscale(0) brightness(var(--bright));
+  transition:transform var(--dur) var(--ease),filter var(--dur) ease;
   will-change:transform;
 }
+.hero.merged{filter:grayscale(var(--gray)) brightness(var(--bright))}
 .half[data-side=c] .hero{background-image:url('/網頁首頁兩張/商空.webp')}
 .half[data-side=r] .hero{background-image:url('/網頁首頁兩張/住家.webp')}
 
 /* 滑到那半邊：整面回一點亮度（沒人看的時候完全靜止） */
-body.hoverlive .half:hover .tile{filter:grayscale(calc(var(--gray) * .6)) brightness(calc(var(--bright) + .2))}
-body.hoverlive .half:hover .hero{filter:grayscale(var(--herogray,0)) brightness(calc(var(--bright) + .2))}
+body.hoverlive .half:hover .tile,
+body.hoverlive .half:hover .hero.merged{
+  filter:grayscale(calc(var(--gray) * .6)) brightness(calc(var(--bright) + .2));
+}
 
-/* ── 前景文字（照抄現行首頁，中間那段 tagline 已拿掉） ── */
+/* ── 前景文字 ── */
 .half-content{
   position:relative;z-index:3;width:100%;padding:2.5rem;
   border-top:1px solid rgba(255,255,255,.12);
@@ -65,9 +68,26 @@ body.hoverlive .half:hover .hero{filter:grayscale(var(--herogray,0)) brightness(
 .label-zh{font-size:clamp(1.2rem,2.4vw,1.8rem);font-weight:300;letter-spacing:.04em;color:#fafaf8}
 .label-count{font-size:10px;letter-spacing:.1em;color:rgba(255,255,255,.22);margin-top:.4rem}
 .label-arrow{font-size:1.4rem;color:rgba(255,255,255,.2)}
-.logo{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:20;pointer-events:none}
-.logo img{width:216px;height:auto;display:block}
 .split{position:fixed;top:0;bottom:0;left:50%;width:1px;background:rgba(255,255,255,.1);z-index:10;pointer-events:none}
+
+/* ── ON logo ＋ 背後的霧化底 ── */
+.logo{
+  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+  z-index:20;pointer-events:none;
+}
+.logo.off{display:none}
+.logo-veil{
+  position:absolute;left:50%;top:50%;
+  width:460px;height:300px;transform:translate(-50%,-50%);
+  backdrop-filter:blur(var(--veil)) brightness(.5);
+  -webkit-backdrop-filter:blur(var(--veil)) brightness(.5);
+  /* 用放射狀遮罩讓它化開，不要是一塊硬邊的方形 */
+  -webkit-mask-image:radial-gradient(ellipse at center,#000 30%,rgba(0,0,0,.55) 55%,transparent 75%);
+          mask-image:radial-gradient(ellipse at center,#000 30%,rgba(0,0,0,.55) 55%,transparent 75%);
+  opacity:0;transition:opacity 1.1s ease;
+}
+.logo.veiled .logo-veil{opacity:1}
+.logo img{position:relative;width:216px;height:auto;display:block}
 
 /* ── 控制面板 ── */
 #panel{
@@ -94,13 +114,14 @@ body.hoverlive .half:hover .hero{filter:grayscale(var(--herogray,0)) brightness(
   color:rgba(255,255,255,.3)}
 
 @media(max-width:680px){
-  :root{--n:4;--b:2}
+  :root{--n:4}
   .page{grid-template-columns:1fr;grid-template-rows:1fr 1fr;height:100dvh}
   .half{height:50dvh}
   .half[data-side=c] .hero{background-image:url('/手機首頁兩張/商空.jpg')}
   .half[data-side=r] .hero{background-image:url('/手機首頁兩張/住家.jpg')}
   .logo{top:2rem;left:50%;transform:translateX(-50%)}
   .logo img{width:144px}
+  .logo-veil{width:300px;height:180px}
   .split{display:none}
   .half-content{padding:1.5rem}
   #panel{width:calc(100vw - 28px);max-height:56vh;overflow:auto}
@@ -137,21 +158,18 @@ body.hoverlive .half:hover .hero{filter:grayscale(var(--herogray,0)) brightness(
   </a>
 </div>
 
-<div class="logo"><img src="/assets/ON_White_logo.png" alt="ON Design Lab"></div>
+<div class="logo" id="logo">
+  <div class="logo-veil"></div>
+  <img src="/assets/ON_White_logo.png" alt="ON Design Lab">
+</div>
 <div class="split"></div>
 
 <div id="panel">
   <h4>蒙太奇原型</h4>
   <div class="row"><span>格數</span>
     <select id="k-n"><option value="4">4×4（16 格）</option><option value="5">5×5（25 格）</option>
-    <option value="6" selected>6×6（36 格）</option></select></div>
-  <div class="row"><span>主畫面縮到</span>
-    <select id="k-b">
-      <option value="1">1 格 — 剩 3% 面積（縮最多）</option>
-      <option value="2">2×2 格 — 剩 11%</option>
-      <option value="3" selected>3×3 格 — 剩 25%（縮最少）</option>
-    </select></div>
-  <div class="row"><span>停留</span><input type="range" id="k-hold" min="800" max="6000" step="100" value="2600"><b id="v-hold"></b></div>
+    <option value="6" selected>6×6（36 格）</option><option value="8">8×8（64 格）</option></select></div>
+  <div class="row"><span>大畫面停留</span><input type="range" id="k-hold" min="800" max="6000" step="100" value="2600"><b id="v-hold"></b></div>
   <div class="row"><span>縮放時間</span><input type="range" id="k-dur" min="400" max="3000" step="50" value="1400"><b id="v-dur"></b></div>
   <div class="row"><span>格子浮現</span><input type="range" id="k-fade" min="200" max="2500" step="50" value="900"><b id="v-fade"></b></div>
   <div class="row"><span>緩動</span>
@@ -163,10 +181,12 @@ body.hoverlive .half:hover .hero{filter:grayscale(var(--herogray,0)) brightness(
       <option value="linear">線性</option>
     </select></div>
   <hr>
-  <div class="row"><span>後面黑白程度</span><input type="range" id="k-gray" min="0" max="100" step="5" value="100"><b id="v-gray"></b></div>
+  <div class="row"><span>黑白程度</span><input type="range" id="k-gray" min="0" max="100" step="5" value="100"><b id="v-gray"></b></div>
   <div class="row"><span>亮度</span><input type="range" id="k-bright" min="20" max="100" step="5" value="45"><b id="v-bright"></b></div>
-  <div class="row"><span>主畫面也黑白</span><span class="sw" id="k-herogray">關</span></div>
   <div class="row"><span>滑過才回亮</span><span class="sw on" id="k-hover">開</span></div>
+  <hr>
+  <div class="row"><span>顯示 ON logo</span><span class="sw on" id="k-logo">開</span></div>
+  <div class="row"><span>logo 背後霧化</span><input type="range" id="k-veil" min="0" max="40" step="2" value="16"><b id="v-veil"></b></div>
   <hr>
   <p class="hint">H 收合面板　R 重播<br>設定會自動記住</p>
 </div>
@@ -177,14 +197,14 @@ const $ = s => document.querySelector(s);
 const root = document.documentElement;
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-const DEF = {n:6, b:3, hold:2600, dur:1400, fade:900,
-             ease:'cubic-bezier(.22,.61,.36,1)', gray:100, bright:45, herogray:0, hover:1};
+const DEF = {n:6, hold:2600, dur:1400, fade:900,
+             ease:'cubic-bezier(.22,.61,.36,1)', gray:100, bright:45,
+             hover:1, logo:1, veil:16};
 let CFG = Object.assign({}, DEF);
-try { Object.assign(CFG, JSON.parse(localStorage.getItem('montage2') || '{}')); } catch(e) {}
+try { Object.assign(CFG, JSON.parse(localStorage.getItem('montage3') || '{}')); } catch(e) {}
 
 const isMobile = () => matchMedia('(max-width:680px)').matches;
-const gridN = () => isMobile() ? 4 : CFG.n;          /* 手機格子太小，降到 4×4 */
-const blockB = () => Math.min(CFG.b, gridN() - 1);   /* 主畫面不能大於整面牆 */
+const gridN = () => isMobile() ? 4 : CFG.n;     /* 手機格子太小，固定 4×4 */
 
 function applyCfg(){
   root.style.setProperty('--n', gridN());
@@ -194,19 +214,21 @@ function applyCfg(){
   root.style.setProperty('--ease', CFG.ease);
   root.style.setProperty('--gray', CFG.gray / 100);
   root.style.setProperty('--bright', CFG.bright / 100);
-  root.style.setProperty('--herogray', CFG.herogray ? 1 : 0);
+  root.style.setProperty('--veil', CFG.veil + 'px');
   document.body.classList.toggle('hoverlive', !!CFG.hover);
+  $('#logo').classList.toggle('off', !CFG.logo);
   $('#v-hold').textContent   = (CFG.hold/1000).toFixed(1) + 's';
   $('#v-dur').textContent    = (CFG.dur/1000).toFixed(2) + 's';
   $('#v-fade').textContent   = (CFG.fade/1000).toFixed(2) + 's';
   $('#v-gray').textContent   = CFG.gray + '%';
   $('#v-bright').textContent = CFG.bright + '%';
-  ['herogray','hover'].forEach(k => {
+  $('#v-veil').textContent   = CFG.veil ? CFG.veil + 'px' : '無';
+  ['hover','logo'].forEach(k => {
     const el = $('#k-' + k);
     el.classList.toggle('on', !!CFG[k]);
     el.textContent = CFG[k] ? '開' : '關';
   });
-  try { localStorage.setItem('montage2', JSON.stringify(CFG)); } catch(e) {}
+  try { localStorage.setItem('montage3', JSON.stringify(CFG)); } catch(e) {}
 }
 
 let M = null, gen = 0;
@@ -222,13 +244,14 @@ async function boot(){
 function restart(){
   gen++;
   const my = gen;
+  $('#logo').classList.remove('veiled');
   ['c','r'].forEach((side, i) => build(side, my, i * 900));   /* 左右錯開 0.9s */
 }
 
-/* 主畫面最後停的位置：b×b 格大小，貼齊格線、盡量置中 */
-function heroTransform(n, b){
-  const off = Math.round((n - b) / 2);                        /* 以「格」為單位的位移 */
-  return 'translate(' + (off * 100 / n) + '%,' + (off * 100 / n) + '%) scale(' + (b / n) + ')';
+/* 大畫面最後收進第 i 格：縮到 1/n，再平移到那一格 */
+function cellTransform(i, n){
+  const col = i % n, row = Math.floor(i / n);
+  return 'translate(' + (col * 100 / n) + '%,' + (row * 100 / n) + '%) scale(' + (1 / n) + ')';
 }
 function instant(el, fn){
   const t = el.style.transition;
@@ -242,27 +265,32 @@ function build(side, my, delay){
   const half = document.querySelector('.half[data-side="' + side + '"]');
   const grid = half.querySelector('.grid');
   const hero = half.querySelector('.hero');
-  const n = gridN(), b = blockB(), total = n * n;
+  const n = gridN(), total = n * n;
   const list = M[side];
+
+  /* 大畫面收進靠中間的那一格（行列取同一個算法，才會對稱） */
+  const mid = Math.floor((n - 1) / 2);
+  const cell = mid * n + mid;
 
   grid.style.setProperty('--n', n);
   grid.innerHTML = '';
   for (let i = 0; i < total; i++){
     const d = document.createElement('div');
     d.className = 'tile';
-    /* 先不掛圖 — 等主畫面停留那幾秒才載，不跟主畫面搶頻寬 */
+    /* 先不掛圖 — 等大畫面停留那幾秒才載，不跟它搶頻寬 */
     d.dataset.src = "url('tiles/" + list[i % list.length].t + "')";
     grid.appendChild(d);
   }
 
-  run(my, {grid, hero, tiles: [...grid.children], n, b, delay});
+  hero.classList.remove('merged');
+  instant(hero, () => { hero.style.transform = 'none'; });
+
+  run(my, {grid, hero, tiles: [...grid.children], n, cell, delay});
 }
 
 async function run(my, C){
   const alive = () => my === gen;
 
-  /* 主畫面滿版 */
-  instant(C.hero, () => { C.hero.style.transform = 'none'; });
   await sleep(C.delay); if (!alive()) return;
 
   /* 停留期間，背景默默把整面格子的圖載進來 */
@@ -271,18 +299,18 @@ async function run(my, C){
   });
   await sleep(CFG.hold); if (!alive()) return;
 
-  /* 縮小 → 整面牆從主畫面往外一圈圈浮現 */
-  const off = Math.round((C.n - C.b) / 2);
+  /* 大畫面 → 小畫面：往中間那格收，整面牆從那格往外一圈圈浮現 */
+  const fc = C.cell % C.n, fr = Math.floor(C.cell / C.n);
   C.tiles.forEach((t, i) => {
-    const col = i % C.n, row = Math.floor(i / C.n);
-    const inside = col >= off && col < off + C.b && row >= off && row < off + C.b;
-    if (inside) return;                                   /* 被主畫面蓋住的格子不用亮 */
-    const d = Math.max(0, Math.max(off - col, col - (off + C.b - 1)),
-                          Math.max(off - row, row - (off + C.b - 1)));
+    if (i === C.cell) return;                       /* 這格由大畫面自己佔著 */
+    const d = Math.max(Math.abs(i % C.n - fc), Math.abs(Math.floor(i / C.n) - fr));
     t.style.transitionDelay = (d * 60) + 'ms';
     t.classList.add('on');
   });
-  C.hero.style.transform = heroTransform(C.n, C.b);
+  C.hero.style.transform = cellTransform(C.cell, C.n);
+  C.hero.classList.add('merged');                   /* 同時褪成黑白，融進牆裡 */
+  $('#logo').classList.add('veiled');               /* logo 背後浮起霧化底 */
+
   await sleep(CFG.dur); if (!alive()) return;
   C.tiles.forEach(t => t.style.transitionDelay = '0ms');
   /* 到這裡就停住 — 不循環、不再動 */
@@ -298,11 +326,11 @@ function bindPanel(){
       if (rebuild) restart();
     });
   };
-  bind('n','n',true); bind('b','b',true);
+  bind('n','n',true);
   bind('hold','hold'); bind('dur','dur'); bind('fade','fade');
-  bind('gray','gray'); bind('bright','bright'); bind('ease','ease');
+  bind('gray','gray'); bind('bright','bright'); bind('ease','ease'); bind('veil','veil');
 
-  ['herogray','hover'].forEach(key => {
+  ['hover','logo'].forEach(key => {
     $('#k-' + key).addEventListener('click', () => { CFG[key] = CFG[key] ? 0 : 1; applyCfg(); });
   });
 
