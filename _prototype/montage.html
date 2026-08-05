@@ -13,13 +13,13 @@ a{color:#fafaf8;text-decoration:none}
 :root{
   --n:7;              /* 格數 n×n，只用奇數 */
   --hold:2600ms;      /* 大畫面停留 */
-  --dur:1800ms;       /* 收縮時間 */
+  --dur:3600ms;       /* 收縮時間 */
   --ease:cubic-bezier(.22,.61,.36,1);
   --gray:1;           /* 黑白程度 0–1 */
   --dens:.28;         /* 牆的濃度（透明度） */
   --haze:5px;         /* 照片霧化模糊 */
   --bright:1;         /* 亮度 */
-  --fade:1100ms;      /* 格子浮現 */
+  --fade:1600ms;      /* 格子浮現 */
   --veil:16px;        /* logo 背後霧化 */
 }
 
@@ -172,8 +172,8 @@ body.hoverlive .half:hover .wall.hazed{
       <option value="9">9×9（81 格）</option>
     </select></div>
   <div class="row"><span>大畫面停留</span><input type="range" id="k-hold" min="800" max="6000" step="100" value="2600"><b id="v-hold"></b></div>
-  <div class="row"><span>收縮時間</span><input type="range" id="k-dur" min="600" max="4000" step="100" value="1800"><b id="v-dur"></b></div>
-  <div class="row"><span>格子浮現</span><input type="range" id="k-fade" min="200" max="2500" step="50" value="1100"><b id="v-fade"></b></div>
+  <div class="row"><span>收縮時間</span><input type="range" id="k-dur" min="600" max="6000" step="100" value="3600"><b id="v-dur"></b></div>
+  <div class="row"><span>格子浮現</span><input type="range" id="k-fade" min="200" max="3500" step="50" value="1600"><b id="v-fade"></b></div>
   <div class="row"><span>緩動</span>
     <select id="k-ease">
       <option value="cubic-bezier(.22,.61,.36,1)">沉穩</option>
@@ -201,7 +201,7 @@ const $ = s => document.querySelector(s);
 const root = document.documentElement;
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-const DEF = {n:7, hold:2600, dur:1800, fade:1100, ease:'cubic-bezier(.22,.61,.36,1)',
+const DEF = {n:7, hold:2600, dur:3600, fade:1600, ease:'cubic-bezier(.22,.61,.36,1)',
              dens:28, haze:5, gray:100, bright:100, hover:1, logo:1, veil:16};
 let CFG = Object.assign({}, DEF);
 try { Object.assign(CFG, JSON.parse(localStorage.getItem('montage4') || '{}')); } catch(e) {}
