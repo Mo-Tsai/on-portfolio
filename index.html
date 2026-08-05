@@ -336,8 +336,9 @@ setTimeout(()=>{
 },1800);
 
 /* ════════ 進站蒙太奇 ════════
-   大畫面停一下 → 左右同時以自己的中心點收成整面牆的其中一格 → 兩邊都收完之後，
-   ON logo 才從後面浮出來。只跑一次，不循環。
+   大畫面停一下 → 左右同時以自己的中心點收成整面牆的其中一格 →
+   收縮進行到一半時，ON logo 就開始從後面慢慢浮出來（跟收縮交會，不是接力）。
+   只跑一次，不循環。
 
    ★ 要調整只改下面這一組數字。
    ★ 想在畫面上即時調：網址加 ?tune=1，右上角會出現面板（一般訪客看不到）。 */
@@ -346,18 +347,18 @@ setTimeout(()=>{
     n:        7,      /* 桌機格數（只能是奇數，中心格才會等於畫面中心） */
     nMobile:  5,      /* 手機格數 */
     start:    2400,   /* 開場 curtain 收掉之後，等多久才開始計時（ms） */
-    hold:     2300,   /* 大畫面停留（ms） */
-    dur:      3600,   /* 收縮時間（ms） */
-    fade:      850,   /* 格子浮現（ms） */
+    hold:     1700,   /* 大畫面停留（ms） */
+    dur:      3700,   /* 收縮時間（ms） */
+    fade:      600,   /* 格子浮現（ms） */
     stagger:   70,    /* 格子一圈一圈往外浮現的間隔（ms） */
-    logoGap:   500,   /* 兩邊都收完之後，隔多久 logo 才開始浮出來（ms） */
-    logoFade: 1400,   /* logo 浮出來的時間（ms） */
+    logoAt:    45,    /* 收縮進行到幾 % 時，logo 開始浮出來（100 以上＝收完才開始） */
+    logoFade: 2200,   /* logo 浮出來的時間（ms） */
     ease:     'cubic-bezier(.22,.61,.36,1)',
-    dens:     76,     /* 牆的濃度 % */
-    haze:     1,      /* 照片霧化模糊 px */
+    dens:     28,     /* 牆的濃度 % */
+    haze:     2,      /* 照片霧化模糊 px */
     gray:     100,    /* 黑白程度 % */
     bright:   100,    /* 亮度 % */
-    veil:     16,     /* logo 背後霧化 px，0 = 關掉 */
+    veil:     6,      /* logo 背後霧化 px，0 = 關掉 */
     tiles:    81      /* /images/montage/ 每邊的素材張數 */
   };
 
@@ -457,8 +458,8 @@ setTimeout(()=>{
       });
     }, my);
 
-    /* 兩邊都收完之後，logo 才從後面浮出來 */
-    at(t0 + M.hold + M.dur + M.logoGap, function(){
+    /* logo 在收縮進行到 logoAt% 時就開始浮出來 —— 兩件事交會，不是接力 */
+    at(t0 + M.hold + M.dur * M.logoAt / 100, function(){
       logo.style.opacity = '1';
       if (M.veil) logo.className = 'logo veiled';
     }, my);
@@ -481,8 +482,8 @@ setTimeout(()=>{
     ['收縮時間',     'dur',      'range',  [600, 8000, 100, 'ms']],
     ['格子浮現',     'fade',     'range',  [200, 3500, 50,  'ms']],
     ['格子間隔',     'stagger',  'range',  [0,   250,  5,   'ms']],
-    ['logo 等待',    'logoGap',  'range',  [0,   4000, 100, 'ms']],
-    ['logo 浮現',    'logoFade', 'range',  [200, 4000, 100, 'ms']],
+    ['logo 何時開始', 'logoAt',  'range',  [0,   140,  5,   '%收縮']],
+    ['logo 浮現',    'logoFade', 'range',  [200, 6000, 100, 'ms']],
     ['緩動',         'ease',     'select', [['cubic-bezier(.22,.61,.36,1)','沉穩'],
                                             ['cubic-bezier(.16,1,.3,1)','慢收尾'],
                                             ['cubic-bezier(.4,0,.2,1)','俐落'],
@@ -549,11 +550,11 @@ setTimeout(()=>{
     var out = {};
     ROWS.forEach(function(r){ out[r[1]] = M[r[1]]; });
     box.querySelector('#tDump').value = JSON.stringify(out);
-    try { localStorage.setItem('montageTune', JSON.stringify(out)); } catch(e){}
+    try { localStorage.setItem('montageTune2', JSON.stringify(out)); } catch(e){}
   }
 
   try {
-    var saved = JSON.parse(localStorage.getItem('montageTune') || '{}');
+    var saved = JSON.parse(localStorage.getItem('montageTune2') || '{}');
     Object.keys(saved).forEach(function(k){ if (k in M) M[k] = saved[k]; });
   } catch(e){}
 
