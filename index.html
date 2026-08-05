@@ -217,7 +217,10 @@ a{color:#fafaf8;text-decoration:none}
   /* 桌機中央 Logo 大小 — 原始 × 300% */
   position:relative;width:216px;height:auto;display:block;
 }
-.page.visible .logo{opacity:1}
+/* logo 在 .page 外面，用「相鄰兄弟」才選得到。
+   原本寫成 .page.visible .logo（.page 裡面的 logo），永遠對不上，
+   所以中央 logo 從以前到現在都是隱形的 —— 這裡一併修掉。 */
+.page.visible ~ .logo{opacity:1}
 
 /* 牆浮現的同時，logo 背後升起一層霧化底，層次才出得來 */
 .logo-veil{
