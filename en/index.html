@@ -207,22 +207,28 @@ a{color:#fafaf8;text-decoration:none}
 .half:hover .label-arrow{color:rgba(255,255,255,.75);transform:translateX(5px)}
 
 /* ── Centre logo (桌機) ── */
+/* ★ 容器本身永遠不透明。
+   淡入改套在「圖」和「霧化底」各自身上 ——
+   祖先只要 opacity < 1，backdrop-filter 就整個失效，
+   會變成 logo 先到位、後面才突然開始糊。 */
 .logo{
   position:fixed;top:50%;left:50%;
   transform:translate(-50%,-50%);
   z-index:20;pointer-events:none;
-  opacity:0;transition:opacity .6s ease .5s;
 }
 .logo img{
   /* 桌機中央 Logo 大小 — 原始 × 300% */
   position:relative;width:216px;height:auto;display:block;
+  opacity:0;transition:opacity .6s ease .5s;
 }
 /* logo 在 .page 外面，用「相鄰兄弟」才選得到。
    原本寫成 .page.visible .logo（.page 裡面的 logo），永遠對不上，
-   所以中央 logo 從以前到現在都是隱形的 —— 這裡一併修掉。 */
-.page.visible ~ .logo{opacity:1}
+   所以中央 logo 從以前到現在都是隱形的 —— 這裡一併修掉。
+   （沒有 JS 或減少動態效果時，就靠這兩條直接顯示） */
+.page.visible ~ .logo img{opacity:1}
+.page.visible ~ .logo .logo-veil{opacity:1}
 
-/* 牆浮現的同時，logo 背後升起一層霧化底，層次才出得來 */
+/* logo 背後的霧化底。放在 .logo 裡面，位置才會自動跟著手機版一起移到頂端。 */
 .logo-veil{
   position:absolute;left:50%;top:50%;
   width:460px;height:300px;transform:translate(-50%,-50%);
@@ -230,9 +236,8 @@ a{color:#fafaf8;text-decoration:none}
   -webkit-backdrop-filter:blur(var(--veil)) brightness(.5);
   -webkit-mask-image:radial-gradient(ellipse at center,#000 30%,rgba(0,0,0,.55) 55%,transparent 75%);
           mask-image:radial-gradient(ellipse at center,#000 30%,rgba(0,0,0,.55) 55%,transparent 75%);
-  opacity:0;transition:opacity 1.1s ease;
+  opacity:0;transition:opacity .6s ease .5s;
 }
-.logo.veiled .logo-veil{opacity:1}
 
 /* ── Split line ── */
 .split{
@@ -256,14 +261,8 @@ a{color:#fafaf8;text-decoration:none}
   .half:first-child .hero{background-image:url('/手機首頁兩張/商空.jpg')}
   .half:last-child .hero{background-image:url('/手機首頁兩張/住家.jpg')}
 
-  /* 手機 Logo — 置中頂部 */
-  .logo{
-    top:2rem;
-    left:50%;
-    transform:translateX(-50%);
-  }
-  .logo img{width:144px} /* 手機 Logo 略小 */
-  .logo-veil{width:300px;height:180px}
+  /* 手機不出現中央 logo（Mo 指定）—— 開場 curtain 的 logo 不受影響 */
+  .logo{display:none}
 
   .split{display:none}
   .half-content{padding:1.5rem}
@@ -313,8 +312,8 @@ a{color:#fafaf8;text-decoration:none}
 
 <!-- 中央 Logo -->
 <div class="logo" id="logo">
-  <div class="logo-veil"></div>
-  <img src="/assets/ON_White_logo.png" alt="ON Design Lab">
+  <div class="logo-veil" id="logoVeil"></div>
+  <img src="/assets/ON_White_logo.png" alt="ON Design Lab" id="logoImg">
 </div>
 
 <!-- 分割線 -->
@@ -366,7 +365,8 @@ setTimeout(()=>{
   if (window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches) return;
 
   var M = MONTAGE, root = document.documentElement;
-  var logo   = document.getElementById('logo');
+  var mark   = document.getElementById('logoImg');    /* logo 的圖 */
+  var veil   = document.getElementById('logoVeil');  /* logo 背後的霧化底 */
   var halves = [].slice.call(document.querySelectorAll('.page > .half'));
   var sides  = ['c', 'r'];
   var runId  = 0, timers = [];
@@ -393,10 +393,9 @@ setTimeout(()=>{
     timers.forEach(clearTimeout); timers = [];
     applyVars();
 
-    /* logo 先壓住 —— 等兩邊都收完才放出來（inline 蓋過 CSS 的預設顯示） */
-    logo.style.transition = 'none';
-    logo.style.opacity = '0';
-    logo.className = 'logo';
+    /* logo 與背後的霧化底都先壓住（inline 蓋過 CSS 的預設顯示） */
+    mark.style.transition = 'none'; mark.style.opacity = '0';
+    veil.style.transition = 'none'; veil.style.opacity = '0';
 
     var parts = halves.map(function(half, si){
       var wall = half.querySelector('.wall');
@@ -423,7 +422,8 @@ setTimeout(()=>{
     });
 
     void document.body.offsetWidth;              /* 讓上面的重置立刻生效，不要留殘影 */
-    logo.style.transition = 'opacity ' + M.logoFade + 'ms ease';
+    mark.style.transition = 'opacity ' + M.logoFade + 'ms ease';
+    veil.style.transition = 'opacity ' + M.logoFade + 'ms ease';   /* 同一條曲線，一起浮 */
     parts.forEach(function(p){ p.wall.style.transition = ''; p.hero.style.transition = ''; });
 
     var t0 = firstRun ? M.start : 0;
@@ -460,8 +460,8 @@ setTimeout(()=>{
 
     /* logo 在收縮進行到 logoAt% 時就開始浮出來 —— 兩件事交會，不是接力 */
     at(t0 + M.hold + M.dur * M.logoAt / 100, function(){
-      logo.style.opacity = '1';
-      if (M.veil) logo.className = 'logo veiled';
+      mark.style.opacity = '1';
+      veil.style.opacity = M.veil ? '1' : '0';      /* 跟 logo 同時、同速 */
     }, my);
   }
 
