@@ -37,6 +37,8 @@ nav ul li a:hover{opacity:1}
 .tb-num{font-size:9px;letter-spacing:.2em;opacity:.2;text-transform:uppercase;margin-bottom:1.5rem}
 .tb-zh{font-size:14px;line-height:2.05;opacity:.68;margin-bottom:1.8rem}
 .tb-en{font-size:12px;line-height:1.95;opacity:.27;font-style:italic}
+.tb-zh+.tb-zh{margin-top:-.9rem}
+.tb-en+.tb-en{margin-top:.8rem}
 .proj-nav{display:flex;justify-content:space-between;align-items:center;padding:2.5rem;border-top:1px solid var(--dim)}
 .proj-nav a{font-size:11px;letter-spacing:.1em;opacity:.3;transition:opacity .2s}
 .proj-nav a:hover{opacity:.9}
