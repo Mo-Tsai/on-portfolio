@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6VJY51HQTQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-6VJY51HQTQ');
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>曲面沒有通解——機器做形，人做面 — ON Design Lab Journal</title>
+<meta name="description" content="石材是機器下料的，形狀機器做得到，面做不到。霧面只能靠人一段一段磨；浴室的圓角是 3D 列印直接成型當基底；樑身的造型側板讓投影機不必露臉。">
+<link rel="canonical" href="https://ondesignlabltd.com/journal/residence-c-curves/">
+<meta property="og:title" content="曲面沒有通解——機器做形，人做面">
+<meta property="og:description" content="Everything that keeps this home simple is hidden inside it.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ondesignlabltd.com/journal/residence-c-curves/">
+<meta property="og:image" content="https://ondesignlabltd.com/assets/og-on.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "曲面沒有通解——機器做形，人做面",
+  "description": "石材是機器下料的，形狀機器做得到，面做不到。霧面只能靠人一段一段磨；浴室的圓角是 3D 列印直接成型當基底；樑身的造型側板讓投影機不必露臉。",
+  "author": {
+    "@type": "Organization",
+    "name": "ON Design Lab",
+    "url": "https://ondesignlabltd.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "ON Design Lab",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ondesignlabltd.com/assets/logo-square.png"
+    }
+  },
+  "datePublished": "2026-08-23",
+  "dateModified": "2026-08-23",
+  "inLanguage": "zh-Hant",
+  "image": "https://ondesignlabltd.com/images/residence-c/23.jpg",
+  "mainEntityOfPage": "https://ondesignlabltd.com/journal/residence-c-curves/",
+  "about": [
+    "住宅設計",
+    "曲面工法",
+    "3D 列印",
+    "工法與製造"
+  ]
+}
+</script>
+<style>
+  :root {
+    --bg: #0e0e0c; --bg2: #141412; --bg3: #1a1a17;
+    --line: #252520; --white: #f0efe8;
+    --muted: #4a4a44; --dim: #2a2a26; --accent: #666660;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background: var(--bg); color: var(--white); }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 20px 40px; border-bottom: 0.5px solid var(--line); position: sticky; top: 0; background: var(--bg); z-index: 100; }
+  .nav-logo { font-size: 10px; font-weight: 300; letter-spacing: 0.26em; text-transform: uppercase; color: var(--white); text-decoration: none; }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-link { font-size: 9px; font-weight: 300; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding-bottom: 2px; border-bottom: 0.5px solid transparent; transition: all 0.2s; }
+  .nav-link:hover { color: var(--white); border-color: var(--white); }
+  .nav-link.active { color: var(--white); border-color: var(--white); }
+
+  .article { max-width: 680px; padding: 64px 40px 80px; }
+  .article-meta { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+  .article-title { font-size: clamp(22px, 3.6vw, 34px); font-weight: 300; line-height: 1.45; letter-spacing: 0.02em; color: var(--white); margin-bottom: 16px; }
+  .article-hook { font-size: 14px; font-style: italic; color: var(--accent); letter-spacing: 0.03em; margin-bottom: 48px; padding-bottom: 32px; border-bottom: 0.5px solid var(--line); }
+  .article h2 { font-size: 16px; font-weight: 400; color: #c8c7c0; letter-spacing: 0.04em; margin: 44px 0 16px; line-height: 1.6; }
+  .article p { font-size: 13.5px; font-weight: 300; line-height: 2.05; color: #9a9a92; letter-spacing: 0.02em; margin-bottom: 20px; }
+  .article p.quote { font-size: 15px; color: #c8c7c0; font-style: italic; border-left: 1px solid var(--accent); padding-left: 20px; margin: 36px 0; }
+  .article p.en { font-style: italic; color: #6a6a62; font-size: 12px; line-height: 1.9; }
+  .article strong { color: #c8c7c0; font-weight: 400; }
+  .article-footer { margin-top: 56px; padding-top: 28px; border-top: 0.5px solid var(--line); font-size: 11px; color: var(--muted); line-height: 2; }
+  .article-footer a { color: var(--accent); text-decoration: none; border-bottom: 0.5px solid var(--dim); }
+  .article-footer a:hover { color: var(--white); }
+
+  .bottom { padding: 24px 40px; display: flex; gap: 32px; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; border-top: 0.5px solid var(--line); }
+  .bottom a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .bottom a:hover { color: var(--white); }
+  @media (max-width: 768px) { .article { padding: 44px 24px 56px; } }
+
+/* mobile nav */
+@media (max-width: 640px) {
+  .nav { flex-direction: column; align-items: flex-start; gap: 12px; padding: 14px 24px; }
+  .nav-links { gap: 16px; flex-wrap: wrap; row-gap: 8px; }
+}
+</style>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo" href="/">ON Design Lab</a>
+  <div class="nav-links">
+    <a class="nav-link" href="/commercial/">Commercial</a>
+    <a class="nav-link" href="/residential/">Residential</a>
+    <a class="nav-link" href="/info/">Info</a>
+    <a class="nav-link active" href="/journal/">Journal</a>
+    <a class="nav-link" href="/faq/">FAQ</a>
+  </div>
+</nav>
+
+<article class="article">
+  <p class="article-meta">Journal · 住宅空間 · 工法與製造</p>
+  <h1 class="article-title">曲面沒有通解</h1>
+  <p class="article-hook">Everything that keeps this home simple is hidden inside it.</p>
+
+<p>弧面能把柱子吃進去，前提是那個面不能有破綻。斷一次，柱子就露出來。所以這個案子的難處不在造型，在每一段曲面的收法。</p>
+
+  <h2>機器做形，人做面</h2>
+  <p>石材是機器下料的，一節一節切好，現場再接起來。形狀機器做得到，面做不到。</p>
+  <p>機器磨過的面會有折光，同一片石上反光率不一樣。曲面一有高光，光就會沿著弧拉出一條假的邊，人看到的是那條高光，不是形。所以霧面只能用手，一段一段磨，磨到反光壓掉才停。</p>
+  <p>這跟石材硬不硬沒有關係。霧面是一種感受，機器給不了，只能靠人慢慢磨出來。</p>
+
+  <h2>兩種碎石，一種原理</h2>
+  <p>主牆和地坪的橢圓是同一塊多尼亞灰。它是角礫岩，碎掉的石塊被重新膠結在一起。地坪大面積的水磨石是同一件事，只是換人做：骨材倒進去，再磨平。一個是地質做的，一個是現場倒的，兩種材料擺在一起不用互相遷就。</p>
+
+  <h2>圓角是清潔的決定</h2>
+  <p>浴室的圓角走另一條路。轉角的圓弧是 3D 列印直接成型，當基底用，上面做面層、粉光，最後才上藝術漆。整間浴室沒有一個 90 度內角。這不是為了視覺統一，是為了清潔。直角的內縫會積水垢，刷子伸不到底，圓角沒有那條縫。</p>
+
+  <h2>樑身的那片側板</h2>
+  <p>客廳上方橫著一支大樑。一般的處理是包起來、降板，把設備往下掛。我們讓弧面從樑下往上斜，空出來的位置留給機具。樑身上做了一片造型側板，平常闔著，跟天花是同一個面。投影幕下降，側板同時翻起，畫面從那道細縫打出去。投影機沒有進到視線裡。</p>
+
+  <h2>判斷全部移到最前面</h2>
+  <p>天花的圓在木作階段做，地坪的圓在泥作階段做，中間隔了幾個月，兩批工班沒有碰過面。兩個圓要在垂直方向對得上，放樣就得在最前面一次定死。之後沒有人可以在現場說再看看。</p>
+  <p>這不是施工順序的問題，是決定權的問題。</p>
+
+  <p class="quote">「曲面沒有通解。每一個弧都要先解形狀，再解做法。」</p>
+
+  <p class="en">A curved surface can only swallow a column if the surface itself has no flaw in it; break it once and the column comes back. The stone is machine-cut, section by section, and assembled on site: a machine will give you the shape, but not the surface. A machine-ground face refracts unevenly, so reflectance varies across a single slab, and on a curve any highlight draws a false edge along it, so that what you read is the highlight rather than the form. The matte had to be ground by hand, section by section, until the sheen was gone. This has nothing to do with the hardness of the stone. Matte is a feeling, and a machine cannot give it to you. That same feature wall and the ellipse in the floor are one grey breccia, broken rock cemented back together, and the terrazzo underfoot is the same idea made by hand. The bathrooms arrive at their curves another way: the rounded corners are 3D-printed directly and used as the substrate, then given a skim coat, a smoothing coat and finally art plaster, leaving not one internal right angle in the room, because a square internal joint collects scale where no brush reaches. Above the living room a deep beam is neither boxed in nor dropped; the curved surface rakes up beneath it and a shaped panel set into the side of the beam sits closed flush with the ceiling, lifting as the screen descends so the image can pass through the slot it opens. And because the ceiling circles were built in joinery months after the floor circles were laid, by two crews who never met on site, the setting out had to be fixed once at the very beginning, with nothing left to be judged later. A curve has no general solution. Each one has to be solved twice: once as a shape, once as a method.</p>
+
+  <div class="article-footer">
+    <p>ON Design Lab｜為一個家找到它的語言</p>
+    <p>看這個案子的空間：<a href="/residential/residence-c/">Residence C — 住宅空間</a>　·　上一篇：<a href="/journal/residence-c/">柱子動不了，那就讓其他東西動</a>　·　合作洽詢：<a href="/contact/">Contact</a></p>
+  </div>
+</article>
+
+<div class="bottom">
+  <a href="/journal/">← Journal</a>
+  <a href="/contact/">Contact →</a>
+</div>
+
+</body>
+</html>

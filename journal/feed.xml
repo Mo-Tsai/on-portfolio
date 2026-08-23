@@ -118,10 +118,10 @@
     <pubDate>Fri, 10 Jul 2026 08:00:00 +0800</pubDate>
   </item>
   <item>
-    <title>被建造，而不是被裝飾——讓建築語言進入住宅</title>
+    <title>柱子動不了，那就讓其他東西動</title>
     <link>https://ondesignlabltd.com/journal/residence-c/</link>
     <guid isPermaLink="true">https://ondesignlabltd.com/journal/residence-c/</guid>
-    <description>弧形天花從玄關延伸到公共區，水泥粉光與石材交接處嵌入燈帶，直角被系統性消除。把建築尺度的手法縮放到住宅尺度：結果是一個看起來像被建造、而不是被裝修出來的家。</description>
+    <description>兩根柱子站在屋子正中間，拆不掉也移不走。我們沒有把柱子包成方的，而是讓整個空間彎起來，把柱子吃進弧面裡。</description>
     <pubDate>Fri, 10 Jul 2026 08:00:00 +0800</pubDate>
   </item>
   <item>
@@ -144,6 +144,13 @@
     <guid isPermaLink="true">https://ondesignlabltd.com/journal/residence-r-island/</guid>
     <description>多面切角的中島，傳統做法是現場打樣。我們把形體回到數位模型裡算，用切割機下料做底，現場只負責組裝與收邊——不是為了省工，是為了決定誤差要在哪裡發生。</description>
     <pubDate>Sun, 16 Aug 2026 09:00:00 +0800</pubDate>
+  </item>
+  <item>
+    <title>曲面沒有通解——機器做形，人做面</title>
+    <link>https://ondesignlabltd.com/journal/residence-c-curves/</link>
+    <guid isPermaLink="true">https://ondesignlabltd.com/journal/residence-c-curves/</guid>
+    <description>石材是機器下料的，形狀機器做得到，面做不到。霧面只能靠人一段一段磨；浴室的圓角是 3D 列印直接成型當基底；樑身的造型側板讓投影機不必露臉。</description>
+    <pubDate>Sat, 23 Aug 2026 09:00:00 +0800</pubDate>
   </item>
 </channel>
 </rss>
