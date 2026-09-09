@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6VJY51HQTQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-6VJY51HQTQ');
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>誤差要在哪裡發生 — ON Design Lab Journal</title>
+<meta name="description" content="Belvoir 河狸餐酒館的門面、吧檯、卡座都是先在別的地方做完再運到現場。這件事成不成立不看工廠，看圖：立面為什麼不畫櫃體、同一張圖上為什麼有兩種數字、哪些東西是設計師不該畫的。">
+<link rel="canonical" href="https://ondesignlabltd.com/journal/belvoir/">
+<meta property="og:title" content="誤差要在哪裡發生">
+<meta property="og:description" content="Every cut is a decision about where the error goes.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ondesignlabltd.com/journal/belvoir/">
+<meta property="og:image" content="https://ondesignlabltd.com/assets/og-on.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "誤差要在哪裡發生",
+  "description": "一套為了離開現場而畫的圖。立面只定位置、道具圖才定物件，尺寸分成寫死與標成彈性兩種，內部結構刻意不畫交給工廠判斷。設計師畫完成面，工廠畫怎麼站得住。",
+  "author": { "@type": "Organization", "name": "ON Design Lab", "url": "https://ondesignlabltd.com/" },
+  "publisher": { "@type": "Organization", "name": "ON Design Lab", "logo": { "@type": "ImageObject", "url": "https://ondesignlabltd.com/assets/logo-square.png" } },
+  "datePublished": "2026-09-09",
+  "dateModified": "2026-09-09",
+  "inLanguage": "zh-Hant",
+  "image": "https://ondesignlabltd.com/assets/og-cover.jpg",
+  "mainEntityOfPage": "https://ondesignlabltd.com/journal/belvoir/",
+  "about": ["餐飲空間設計", "施工圖", "製圖方法", "尺寸標註"]
+}
+</script>
+<style>
+  :root {
+    --bg: #0e0e0c; --bg2: #141412; --bg3: #1a1a17;
+    --line: #252520; --white: #f0efe8;
+    --muted: #4a4a44; --dim: #2a2a26; --accent: #666660;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background: var(--bg); color: var(--white); }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 20px 40px; border-bottom: 0.5px solid var(--line); position: sticky; top: 0; background: var(--bg); z-index: 100; }
+  .nav-logo { font-size: 10px; font-weight: 300; letter-spacing: 0.26em; text-transform: uppercase; color: var(--white); text-decoration: none; }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-link { font-size: 9px; font-weight: 300; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding-bottom: 2px; border-bottom: 0.5px solid transparent; transition: all 0.2s; }
+  .nav-link:hover { color: var(--white); border-color: var(--white); }
+  .nav-link.active { color: var(--white); border-color: var(--white); }
+
+  .article { max-width: 680px; padding: 64px 40px 80px; }
+  .article-meta { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+  .article-title { font-size: clamp(22px, 3.6vw, 34px); font-weight: 300; line-height: 1.45; letter-spacing: 0.02em; color: var(--white); margin-bottom: 16px; }
+  .article-hook { font-size: 14px; font-style: italic; color: var(--accent); letter-spacing: 0.03em; margin-bottom: 48px; padding-bottom: 32px; border-bottom: 0.5px solid var(--line); }
+  .article h2 { font-size: 16px; font-weight: 400; color: #c8c7c0; letter-spacing: 0.04em; margin: 44px 0 16px; line-height: 1.6; }
+  .article p { font-size: 13.5px; font-weight: 300; line-height: 2.05; color: #9a9a92; letter-spacing: 0.02em; margin-bottom: 20px; }
+  .article p.quote { font-size: 15px; color: #c8c7c0; font-style: italic; border-left: 1px solid var(--accent); padding-left: 20px; margin: 36px 0; }
+  .article p.en { font-style: italic; color: #6a6a62; font-size: 12px; line-height: 1.9; }
+  .article-footer { margin-top: 56px; padding-top: 28px; border-top: 0.5px solid var(--line); font-size: 11px; color: var(--muted); line-height: 2; }
+  .article-footer a { color: var(--accent); text-decoration: none; border-bottom: 0.5px solid var(--dim); }
+  .article-footer a:hover { color: var(--white); }
+
+  .bottom { padding: 24px 40px; display: flex; gap: 32px; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; border-top: 0.5px solid var(--line); }
+  .bottom a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .bottom a:hover { color: var(--white); }
+  @media (max-width: 768px) { .article { padding: 44px 24px 56px; } }
+
+/* mobile nav */
+@media (max-width: 640px) {
+  .nav { flex-direction: column; align-items: flex-start; gap: 12px; padding: 14px 24px; }
+  .nav-links { gap: 16px; flex-wrap: wrap; row-gap: 8px; }
+}
+</style>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo" href="/">ON Design Lab</a>
+  <div class="nav-links">
+    <a class="nav-link" href="/commercial/">Commercial</a>
+    <a class="nav-link" href="/residential/">Residential</a>
+    <a class="nav-link" href="/info/">Info</a>
+    <a class="nav-link active" href="/journal/">Journal</a>
+    <a class="nav-link" href="/faq/">FAQ</a>
+  </div>
+</nav>
+
+<article class="article">
+  <p class="article-meta">Journal · 餐飲空間 · 製圖方法</p>
+  <h1 class="article-title">誤差要在哪裡發生</h1>
+  <p class="article-hook">Every cut is a decision about where the error goes.</p>
+
+  <p>Belvoir 河狸餐酒館的門面、吧檯、卡座沙發、吧檯上方的吊杯架、包廂的書牆和拉門，都是先在別的地方做完，再運到台北這棟老房子裡組起來的。留在現場才做的只有包柱、牆板、隔間和天花包樑，也就是會被建築本身影響的那幾樣。</p>
+  <p>這條路要走得通，關鍵不在工廠多強。工廠再強，也只能照著圖做。關鍵在圖畫成什麼樣：它要能被一個沒去過現場、也不會打電話來問的人讀懂，而且讀完不會做錯。</p>
+  <p>回頭看這套圖，真正做決定的是三件事。</p>
+
+  <h2>一、立面圖為什麼不畫櫃體</h2>
+  <p>這個案子的圖分兩套。E 系列是立面，1/30，管的是這面牆長什麼樣、東西擺在哪裡。凡是碰到櫃體、吧檯、卡座，立面上一律只寫四個字：另詳道具圖。</p>
+  <p>F 系列才是道具圖，1/20，一件物件一張圖，每一張再配一張 3D 頁。</p>
+  <p>分開的理由很簡單。立面回答的是「這個東西在哪裡」，道具圖回答的是「這個東西是什麼」。兩件事混在同一張圖上，工廠得自己判斷哪一組尺寸是主控的，判斷錯了整件重做。至於 3D 頁的作用，是讓人先看懂形狀再去看數字。順序反過來，尺寸標得再準也會做錯東西。</p>
+
+  <h2>二、同一張圖上為什麼有兩種數字</h2>
+  <p>一種是寫死的。門面木框的斷面標到 0.4、0.8、1.2；鐵件收邊 TH:3mm；金屬層板 TH:0.3cm；圓管 Ø2、Ø4.5；吊杯架的分割是 58.5、60.1、60.1、60.1；卡座沙發四格各 97.5。這些數字沒有討論空間，因為工廠在自己的廠房裡就能做準。</p>
+  <p>另一種是標成有彈性的，而且直接寫在圖上：門面總高 ±240（依現場尺寸為主）、卡座總長 ±400（現場回覆尺寸）、吊架吊點 ±150.5（現場回覆尺寸）、±58 確認室內階梯完成高度。這些是物件碰到既有建築的地方。</p>
+  <p>分界線只有一條：這個尺寸由誰決定。工廠自己控得住的寫死，控不住的交出去，並且說清楚交給誰。</p>
+  <p>磁磚立面也是同一套邏輯。整面牆的尺寸全部用整磚標，±5（整磚）、±10（整磚）、99（整磚）。切口要落在哪裡，在圖上就決定好了，不是留到現場那天再說。</p>
+
+  <h2>三、哪些東西是設計師不該畫的</h2>
+  <p>內部的木料結構、金屬結構、螺絲數量，圖上直接寫「由工廠判斷」。卡座繃布的厚度和比例，寫「請工廠與業主討論坐感與舒適度」。崁燈的選型寫「取決工廠挑選，建議超薄型」。連拉門軌道的五金由誰採買都寫在圖上：建議工廠買完，把五金寄給施工方。</p>
+  <p>每一張道具圖的頁尾都印同一句話：工廠及施工廠商若有結構疑慮，請與設計師確認，已施工結構為優先考量。</p>
+  <p>設計師畫完成面，工廠畫怎麼站得住。把不該畫的畫了，看起來很負責，實際上是把責任攪成一團。真出事的時候，沒有人知道那顆螺絲是誰決定的。</p>
+
+  <p class="quote">「誤差不會消失。你沒有指定它，它就自己找地方發生。」</p>
+
+  <h2>圖能走多遠，看它先讓好了哪裡</h2>
+  <p><strong style="color:#c8c7c0;font-weight:400">精確不等於全部寫死。</strong>一張每個尺寸都標死的圖，遇到一棟四十年的老房子，第一天就會失效。真正精確的是知道哪些數字必須守住，哪些必須留白。</p>
+  <p><strong style="color:#c8c7c0;font-weight:400">彈性要寫在圖上，不能靠默契。</strong>±400 後面加註「現場回覆尺寸」，跟只寫 400 是兩份完全不同的圖。前者是一個被指定的空白，後者是一個等著被誤讀的數字。</p>
+  <p><strong style="color:#c8c7c0;font-weight:400">不畫，也是一種畫法。</strong>寫「由工廠判斷」不是偷懶，是把決定權交給真正有能力決定的人，並且留下紀錄說明是誰決定的。</p>
+  <p>這套圖畫完之後就離開了辦公室。它能不能在沒有人在旁邊解釋的情況下被讀懂，是圖自己的事。設計能走多遠，看的不是圖畫得多滿，是它先讓好了哪裡。</p>
+
+  <p class="en">The joinery at Belvoir was built off-site and assembled in a forty-year-old Taipei building. Whether that works has little to do with the fabricator and everything to do with the drawing set. Elevations at 1/30 fix position only; every cabinet, bar and banquette is deferred to a 1/20 object sheet, each paired with a 3D view so the maker understands the form before reading the numbers. Those numbers come in two kinds: profiles fixed to the millimetre, and overall dimensions declared elastic and confirmed on site. Internal structure and fixing counts are left undrawn on purpose. The designer draws the finished face; the fabricator draws what holds it up. Tolerance never disappears. If you do not decide where it lands, it decides for itself.</p>
+
+  <div class="article-footer">
+    <p>ON Design Lab｜品牌翻譯成空間</p>
+    <p>看這個案子的空間：<a href="/commercial/belvoir/">Belvoir 河狸 — 餐飲空間</a>　·　合作洽詢：<a href="/contact/">Contact</a></p>
+  </div>
+</article>
+
+<div class="bottom">
+  <a href="/journal/">← Journal</a>
+  <a href="/contact/">Contact →</a>
+</div>
+
+</body>
+</html>
