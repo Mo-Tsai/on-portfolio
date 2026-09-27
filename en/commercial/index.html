@@ -32,7 +32,7 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--black:#0a0a0a;--white:#fafaf8;--dim:rgba(255,255,255,.07)}
-html,body{background:var(--black);color:var(--white);font-family:'Helvetica Neue',Helvetica,Arial,sans-serif}
+html,body{background:var(--black);color:var(--white);font-family:var(--font)}
 a{color:inherit;text-decoration:none}
 
 nav{
@@ -42,9 +42,9 @@ nav{
   background:rgba(10,10,10,.88);backdrop-filter:blur(10px);
   border-bottom:1px solid rgba(255,255,255,.06);
 }
-nav .logo{font-size:12px;letter-spacing:.18em}
+nav .logo{font-size:12.8px;letter-spacing:.18em}
 nav ul{list-style:none;display:flex;gap:2.5rem}
-nav ul li a{font-size:11px;letter-spacing:.12em;opacity:.4;transition:opacity .2s}
+nav ul li a{font-size:12.8px;letter-spacing:.12em;opacity:.4;transition:opacity .2s}
 nav ul li a:hover,nav ul li a.active{opacity:1}
 
 /* Header */
@@ -58,12 +58,12 @@ nav ul li a:hover,nav ul li a.active{opacity:1}
 }
 @media(max-width:680px){.header-inner{grid-template-columns:1fr;gap:1.5rem}}
 .h-left{}
-.h-eyebrow{font-size:10px;letter-spacing:.22em;opacity:.28;text-transform:uppercase;margin-bottom:1.2rem}
-.h-title{font-size:clamp(2rem,5vw,4rem);font-weight:200;line-height:1;letter-spacing:-.02em;margin-bottom:1rem}
-.h-statement{font-size:13px;line-height:1.85;opacity:.5;max-width:340px}
+.h-eyebrow{font-size:12.8px;letter-spacing:.22em;opacity:.28;text-transform:uppercase;margin-bottom:1.2rem}
+.h-title{font-size:clamp(31px, 5vw, 61px);font-weight:300;line-height:1;letter-spacing:-.02em;margin-bottom:1rem}@media(min-width:780px){.h-title{font-weight:200}}@media(min-width:1220px){.h-title{font-weight:100}}
+.h-statement{font-size:16px;line-height:1.6;opacity:.5;max-width:340px}
 .h-right{text-align:right}
-.h-count{font-size:clamp(3rem,7vw,6rem);font-weight:200;opacity:.08;line-height:1;letter-spacing:-.03em}
-.h-count-label{font-size:10px;letter-spacing:.15em;opacity:.25;text-transform:uppercase;margin-top:.4rem}
+.h-count{font-size:clamp(49px, 7vw, 95px);font-weight:200;opacity:.08;line-height:1;letter-spacing:-.03em}@media(min-width:872px){.h-count{font-weight:100}}
+.h-count-label{font-size:12.8px;letter-spacing:.15em;opacity:.25;text-transform:uppercase;margin-top:.4rem}
 
 /* Filter */
 .filter-bar{
@@ -74,7 +74,7 @@ nav ul li a:hover,nav ul li a.active{opacity:1}
   background:rgba(10,10,10,.92);backdrop-filter:blur(8px);
 }
 .filter-btn{
-  padding:.35rem 1rem;font-size:11px;letter-spacing:.1em;
+  padding:.35rem 1rem;font-size:12.8px;letter-spacing:.1em;
   border:1px solid rgba(255,255,255,.15);background:transparent;color:var(--white);
   cursor:pointer;transition:all .15s;font-family:inherit;
 }
@@ -115,18 +115,18 @@ nav ul li a:hover,nav ul li a.active{opacity:1}
   position:absolute;bottom:0;left:0;right:0;padding:1.2rem 1.4rem;
   background:linear-gradient(transparent,rgba(0,0,0,.7));pointer-events:none;
 }
-.project-name{font-size:14px;margin-bottom:.25rem}
-.project-type{font-size:10px;letter-spacing:.1em;opacity:.38}
+.project-name{font-size:16px;margin-bottom:.25rem}
+.project-type{font-size:12.8px;letter-spacing:.1em;opacity:.38}
 
-.count-bar{padding:1.2rem 2.5rem;font-size:11px;opacity:.25;letter-spacing:.08em}
+.count-bar{padding:1.2rem 2.5rem;font-size:12.8px;opacity:.25;letter-spacing:.08em}
 
 footer{
   padding:2.5rem;border-top:1px solid var(--dim);
   display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;
 }
-footer span{font-size:11px;opacity:.18}
+footer span{font-size:12.8px;opacity:.18}
 footer div{display:flex;gap:2rem}
-footer a{font-size:11px;opacity:.28;transition:opacity .2s}
+footer a{font-size:12.8px;opacity:.28;transition:opacity .2s}
 footer a:hover{opacity:.8}
 
 /* mobile nav */
@@ -138,11 +138,14 @@ footer a:hover{opacity:.8}
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/NotoSansTC-ON.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/type.css?v=2.57">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..500&amp;display=swap" media="print" onload="this.media='all'">
 </head>
 <body>
 
 <nav>
-  <a href="/en/" class="logo">ON DESIGN LAB</a>
+  <a href="/en/" class="logo on-logo"><img class="on-mark" src="/assets/ON_mark_white.png" alt="ON" width="44" height="22"><span class="on-word">Design Lab</span></a>
   <ul>
     <li><a href="/en/commercial/" class="active">Commercial</a></li>
     <li><a href="/en/residential/">Residential</a></li>
@@ -159,9 +162,9 @@ footer a:hover{opacity:.8}
     <div class="h-left">
       <p class="h-eyebrow">Commercial Space</p>
       <h1 class="h-title">Brand Logic<br>Translated into Space</h1>
-      <p style="font-size:11px;letter-spacing:.1em;opacity:.22;font-style:italic;margin-bottom:1rem">品牌邏輯翻譯成空間</p>
+      <p style="font-size:12.8px;letter-spacing:.1em;opacity:.22;font-style:italic;margin-bottom:1rem">品牌邏輯翻譯成空間</p>
       <p class="h-statement">A space's first job is to let whoever walks in feel the attitude of the brand — before they see a single product, before a single word appears.</p>
-      <p style="font-size:12px;line-height:1.9;opacity:.25;font-style:italic;margin-top:.6rem;max-width:340px">空間的第一個工作，是讓走進去的人感受到品牌的態度——在他們看到任何產品之前，在任何文字出現之前。</p>
+      <p style="font-size:12.8px;line-height:1.6;opacity:.25;font-style:italic;margin-top:.6rem;max-width:340px">空間的第一個工作，是讓走進去的人感受到品牌的態度——在他們看到任何產品之前，在任何文字出現之前。</p>
     </div>
     <div class="h-right">
       <p class="h-count">19</p>
@@ -260,11 +263,11 @@ footer a:hover{opacity:.8}
 </div>
 
 <div style="padding:4rem 2.5rem;text-align:center;border-top:1px solid var(--dim)">
-  <p style="font-size:15px;font-weight:300;opacity:.55;margin-bottom:.3rem">有空間設計需求？</p>
-  <p style="font-size:11px;opacity:.25;letter-spacing:.08em;margin-bottom:.8rem">Have a space design project?</p>
-  <p style="font-size:12px;opacity:.3;margin-bottom:.3rem">歡迎告訴我們你的品牌故事。</p>
-  <p style="font-size:11px;opacity:.18;font-style:italic;margin-bottom:1.5rem">Tell us your brand story.</p>
-  <a href="/en/contact/" style="font-size:11px;letter-spacing:.12em;opacity:.4;transition:opacity .2s;border-bottom:0.5px solid rgba(255,255,255,.2);padding-bottom:2px">開始聊 Let's Talk →</a>
+  <p style="font-size:16px;font-weight:400;opacity:.55;margin-bottom:.3rem">有空間設計需求？</p>
+  <p style="font-size:12.8px;opacity:.25;letter-spacing:.08em;margin-bottom:.8rem">Have a space design project?</p>
+  <p style="font-size:12.8px;opacity:.3;margin-bottom:.3rem">歡迎告訴我們你的品牌故事。</p>
+  <p style="font-size:12.8px;opacity:.18;font-style:italic;margin-bottom:1.5rem">Tell us your brand story.</p>
+  <a href="/en/contact/" style="font-size:12.8px;letter-spacing:.12em;opacity:.4;transition:opacity .2s;border-bottom:0.5px solid rgba(255,255,255,.2);padding-bottom:2px">開始聊 Let's Talk →</a>
 </div>
 
 <footer>

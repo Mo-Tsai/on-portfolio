@@ -8,18 +8,21 @@
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { height: 100%; }
-  body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background: #0e0e0c; color: #f0efe8; display: flex; align-items: center; justify-content: center; }
+  body { font-family: var(--font); background: #0e0e0c; color: #f0efe8; display: flex; align-items: center; justify-content: center; }
   .center { text-align: center; display: flex; flex-direction: column; align-items: center; }
   .logo-img { width: 96px; margin-bottom: 36px; opacity: 0.92; }
-  .code { font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase; color: #4a4a44; margin-bottom: 14px; }
+  .code { font-size: 12.8px; letter-spacing: 0.32em; text-transform: uppercase; color: #4a4a44; margin-bottom: 14px; }
   .msg { font-size: 20px; font-weight: 300; letter-spacing: 0.08em; color: #f0efe8; margin-bottom: 8px; }
-  .msg-en { font-size: 11px; font-style: italic; letter-spacing: 0.06em; color: #666660; margin-bottom: 40px; }
-  .links { display: flex; gap: 28px; }
-  .links a { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: #4a4a44; text-decoration: none; padding-bottom: 2px; border-bottom: 0.5px solid transparent; transition: all 0.2s; }
+  .msg-en { font-size: 12.8px; font-style: italic; letter-spacing: 0.06em; color: #666660; margin-bottom: 40px; }
+  .links { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px 28px; }
+  .links a { font-size: 12.8px; letter-spacing: 0.22em; text-transform: uppercase; color: #4a4a44; text-decoration: none; padding-bottom: 2px; border-bottom: 0.5px solid transparent; transition: all 0.2s; }
   .links a:hover { color: #f0efe8; border-color: #f0efe8; }
 </style>
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/NotoSansTC-ON.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/type.css?v=2.57">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..500&amp;display=swap" media="print" onload="this.media='all'">
 </head>
 <body>
 <div class="center">

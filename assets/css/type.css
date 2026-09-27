@@ -1,0 +1,83 @@
+/* ============================================================
+   ON Design Lab — 全站字型設定
+   依據：09_媒體與素材\ONdesignlab\_品牌規範\ON_字體規範.md
+   網頁：標題 39px ExtraLight ／ 副標 25px Light ／ 內文 16px Regular
+         中文行高 1.85、英文 1.6、標題 1.25
+
+   字型：Noto Sans TC（中英共用，不另配英文字型）
+     1. 自架子集 /assets/fonts/NotoSansTC-ON.woff2
+        全站用字＋ASCII＋常用標點，可變字重 100–500，約 435 KB
+     2. 子集沒收到的字，瀏覽器自動向 Google Fonts「Noto Sans TC」只補那幾個字
+        （各頁 <head> 以非阻塞方式載入）
+
+   字級只用級數：12.8 16 20 25 31 39 49 61 76 95（px）
+   字重依字級，不依重要性：
+     < 20px   Regular    400
+     20–31px  Light      300
+     39–49px  ExtraLight 200（網頁標題 39px 用 ExtraLight）
+     ≥ 61px   Thin       100
+   隨螢幕縮放的標題（clamp），字重在各自規則旁用 @media 跟著切換。
+
+   「ON」一律用標誌檔，不用字型排：nav 用 .on-logo（見下）。
+   ============================================================ */
+
+@font-face {
+  font-family: 'Noto Sans TC ON';
+  src: url(/assets/fonts/NotoSansTC-ON.woff2) format('woff2-variations'),
+       url(/assets/fonts/NotoSansTC-ON.woff2) format('woff2');
+  font-weight: 100 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font: 'Noto Sans TC ON', 'Noto Sans TC', sans-serif;
+
+  --fs-12: 12.8px;
+  --fs-16: 16px;
+  --fs-20: 20px;
+  --fs-25: 25px;
+  --fs-31: 31px;
+  --fs-39: 39px;
+  --fs-49: 49px;
+  --fs-61: 61px;
+  --fs-76: 76px;
+  --fs-95: 95px;
+
+  --lh-zh: 1.85;
+  --lh-en: 1.6;
+  --lh-title: 1.25;
+}
+
+html, body, button, input, select, textarea { font-family: var(--font); }
+
+/* nav 標誌：ON 用標誌檔，DESIGN LAB 用 Noto Sans TC */
+.on-logo { display: inline-flex; align-items: center; gap: 12px; line-height: 1; text-transform: none; letter-spacing: 0; }
+.on-logo .on-mark { display: block; height: 22px; width: auto; }
+.on-logo .on-word { font-size: 12.8px; font-weight: 400; letter-spacing: .2em; text-transform: uppercase; white-space: nowrap; }
+
+/* ── 字級對齊級數後的排版補丁 ───────────────────────────
+   nav 從 9–11px 放大到 12.8px 後，單排 nav 要約 850px 才放得下。
+   640px 以下沿用各頁原本的手機 nav（logo 一行、選單一行）。 */
+@media (min-width: 641px) and (max-width: 880px) {
+  nav, .nav { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .nav-links { flex-wrap: wrap; gap: 8px 22px; }
+  .nav-link { letter-spacing: .16em; }
+  nav ul { flex-wrap: wrap; justify-content: flex-start; gap: .6rem 1.8rem; }
+}
+@media (min-width: 881px) and (max-width: 1024px) {
+  nav, .nav { gap: 24px; }
+  .nav-links { gap: 20px; }
+  .nav-link { letter-spacing: .14em; }
+  nav ul { gap: 1.6rem; }
+}
+
+/* info 服務列：名稱與說明之間原本沒有間距，字放大後會黏在一起 */
+.service-item { column-gap: 1.2rem; }
+.service-name { word-break: keep-all; }
+.service-sub { text-align: right; text-wrap: balance; word-break: keep-all; }
+.service-sub span { white-space: nowrap; }
+
+/* info 得獎清單：左欄吃剩餘寬度，右欄最多一半；換行時兩行平均，不留單字 */
+.recognition-item > span:first-child { flex: 1 1 0; min-width: 0; }
+.recognition-detail { flex: 0 1 auto; max-width: 50%; text-wrap: balance; }
