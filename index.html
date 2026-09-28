@@ -142,18 +142,6 @@ a{color:#fafaf8;text-decoration:none}
   0%{opacity:0;transform:translateY(6px)}
   100%{opacity:1;transform:translateY(0)}
 }
-/* 「輕觸進入」：同一次瀏覽第一次到首頁才出現。整片黑幕都可以點，這行只是提示，不做成按鈕 */
-#curtain-logo{position:relative}
-#curtain-tap{
-  display:none;position:absolute;left:50%;top:100%;transform:translateX(-50%);
-  margin-top:30px;padding-left:.32em;white-space:nowrap;
-  font-size:12.8px;font-weight:400;letter-spacing:.32em;color:rgba(255,255,255,.34);
-  opacity:0;
-}
-#curtain.tap{cursor:pointer;-webkit-tap-highlight-color:transparent}
-#curtain.tap #curtain-tap{display:block;animation:tapFade 1s ease 1.4s forwards}
-#curtain.tapped #curtain-tap{display:block;opacity:0;animation:none;transition:opacity .3s ease}
-@keyframes tapFade{0%{opacity:0}100%{opacity:1}}
 
 /* ── Page layout ── */
 .page{
@@ -305,7 +293,6 @@ a{color:#fafaf8;text-decoration:none}
 <div id="curtain">
   <div id="curtain-logo">
     <img src="/assets/ON_White_logo.png" alt="ON">
-    <p id="curtain-tap">輕觸進入</p>
   </div>
 </div>
 
@@ -354,18 +341,20 @@ a{color:#fafaf8;text-decoration:none}
 <div style="position:fixed;bottom:10px;right:12px;z-index:30;font-size:12.8px;letter-spacing:.1em;color:rgba(255,255,255,.18);pointer-events:none">v2.58</div>
 
 <script>
-/* ════════ 進場黑幕＋進站聲音（v2.58，Mo 09-28 裁定）════════
-   - 同一次瀏覽第一次到首頁：黑幕 ON 標誌下出現一行「輕觸進入」，整片黑幕可點。
-       點下去＝t 0：黑幕打開＋開場檔起播（淡入），蒙太奇照 90 BPM 拍點（MONTAGE_SOUND）。
-       不點：ENTRY.autoOpen 後照原本時間表自動進站；聲音在訪客第一次互動時由 sound.js 淡入循環檔。
-   - 同一次瀏覽回首頁：不再出現「輕觸進入」，黑幕照原本時間（ENTRY.curtain）自動打開，聲音接著播。
+/* ════════ 進場黑幕＋進站聲音（v2.58）════════
+   Mo 09-29 裁定（取代 09-28 的「輕觸進入」）：
+   - 黑幕照原本時間表自動打開，不等人點。
+   - 同一次瀏覽第一次到首頁：載入就試著出聲。瀏覽器放行 → 開場檔的第一拍（t 0）＝黑幕打開那一刻，
+       蒙太奇照 90 BPM 拍點（MONTAGE_SOUND）；被擋（多數新訪客）→ 原本的靜音版蒙太奇，
+       訪客第一次互動（任何地方）時 sound.js 讓循環檔淡入。
+   - 同一次瀏覽回首頁：不重播開場，黑幕照原本時間打開，聲音接著播。
    - 聲音本身（開關、續播、背景暫停）在 /assets/js/sound.js，全站共用。 */
 var ENTRY = {
-  curtain:   1800,  /* 回首頁：載入後幾 ms 黑幕自動打開（原本的數字） */
-  autoOpen:  4500,  /* 第一次進站、沒點「輕觸進入」：載入後幾 ms 自動進站 */
-  pageDelay:  500,  /* 自動打開：黑幕開始淡出後幾 ms 主畫面出現（原本的數字） */
-  tapPage:      0,  /* 點黑幕：重擊後幾 ms 主畫面出現（0＝同一拍，跟黑幕一起打開） */
-  fadeIn:     0.4   /* 點黑幕：聲音淡入秒數（Mo 09-28 定 0.4） */
+  curtain:   1800,  /* 載入後幾 ms 黑幕打開（原本的數字；有聲版就是開場檔 t 0 的時間） */
+  maxWait:   1200,  /* 瀏覽器放行、但音檔還沒下載好：黑幕最多再等幾 ms，等不到就走靜音版 */
+  pageDelay:  500,  /* 靜音版：黑幕開始淡出後幾 ms 主畫面出現（原本的數字） */
+  beatPage:     0,  /* 有聲版：重擊後幾 ms 主畫面出現（0＝同一拍，跟黑幕一起打開） */
+  fadeIn:     0.4   /* 有聲版：開場檔淡入秒數（Mo 09-28 定 0.4） */
 };
 
 /* 歌曲時鐘上的排程器：每次醒來都重新讀時鐘，算出離下一拍還差多少再睡（時鐘＝AudioContext，不是 setTimeout 累加）。
@@ -541,7 +530,7 @@ function beatLog(ev, target, t){
     }, 'logo');
   }
 
-  /* 黑幕等「輕觸進入」時先把格子圖預載，點下去 2.667 秒就要用 */
+  /* 第一次進站先把格子圖預載：有聲版黑幕打開後 2.667 秒就要用 */
   function preloadTiles(){
     var n = gridN(), total = n * n;
     for (var si = 0; si < 2; si++) for (var i = 0; i < total; i++){ var im = new Image(); im.src = tileUrl(si, i); }
@@ -694,9 +683,9 @@ function perfClock(){ var z = performance.now(); return { t: function(){ return 
   var page    = document.getElementById('page');
   var split   = document.getElementById('split');
   var MT      = window.__montage;
-  var intro;
-  try { intro = sessionStorage.getItem('on.sound.intro') !== 'done'; } catch(e){ intro = true; }
-  var opened = false, autoTimer = null;
+  var first;
+  try { first = sessionStorage.getItem('on.sound.intro') !== 'done'; } catch(e){ first = true; }
+  var opened = false;
 
   function showPage(){ page.classList.add('visible'); split.style.transform = 'scaleY(1)'; }
   function done(){
@@ -704,28 +693,25 @@ function perfClock(){ var z = performance.now(); return { t: function(){ return 
     try { sessionStorage.setItem('on.sound.intro', 'done'); } catch(e){}
   }
 
-  /* 自動打開（沒點，或回首頁）：原本的時間表 */
-  function autoOpen(){
+  /* 靜音版（被擋、聲音關著、回首頁）：原本的時間表 */
+  function openSilent(){
     if (opened) return;
     opened = true; done();
-    curtain.classList.remove('tap');
     curtain.classList.add('out');
     setTimeout(showPage, ENTRY.pageDelay);
     if (MT) MT.play('auto', MT.M.start - ENTRY.curtain);
   }
 
-  /* 點黑幕：t 0 ＝ 重擊，黑幕打開跟聲音同一拍 */
-  function tapOpen(e){
+  /* 有聲版：開場檔 t 0（第一拍重擊）＝黑幕打開 */
+  function openBeat(){
     if (opened) return;
-    opened = true; clearTimeout(autoTimer); done();
-    if (e && e.cancelable && e.type !== 'keydown') e.preventDefault();   /* 不要再補一個 click 點到後面的連結 */
-    curtain.classList.remove('tap'); curtain.classList.add('tapped');
-    var clock = (window.ONSound && ONSound.intro({ fadeIn: ENTRY.fadeIn })) || perfClock();
+    opened = true; done();
+    var clock = ONSound.intro({ fadeIn: ENTRY.fadeIn });
     var r = onBeatRunner(clock);
     r.add(0, function(t){
       beatLog('curtain', 0, t);
       curtain.classList.add('out');
-      if (ENTRY.tapPage) setTimeout(showPage, ENTRY.tapPage); else showPage();
+      if (ENTRY.beatPage) setTimeout(showPage, ENTRY.beatPage); else showPage();
     });
     if (MT) MT.play('beat', clock);
     /* 保險：萬一時鐘一直沒起來（音訊被系統卡住），1.2 秒後黑幕照樣打開，不讓人卡在黑畫面 */
@@ -736,27 +722,24 @@ function perfClock(){ var z = performance.now(); return { t: function(){ return 
     }, 1200);
   }
 
-  if (!intro){
-    window.ON_SOUND_INTRO = 'done';
-    autoTimer = setTimeout(autoOpen, ENTRY.curtain);
-    return;
+  /* 到黑幕該打開的時間：問 sound.js 瀏覽器放不放行、音檔好了沒 */
+  function decide(){
+    var S = window.ONSound;
+    if (!first || !S || !S.isOn()) { openSilent(); return; }
+    var settled = false;
+    var giveUp = setTimeout(function(){ if (!settled){ settled = true; beatLog('silent-timeout', null, null); openSilent(); } }, ENTRY.maxWait);
+    S.autoplay().then(function(ok){
+      if (!ok) { if (!settled){ settled = true; clearTimeout(giveUp); beatLog('silent-blocked', null, null); openSilent(); } return; }
+      return S.ready().then(function(){
+        if (settled) return;
+        settled = true; clearTimeout(giveUp); openBeat();
+      });
+    }).catch(function(){ if (!settled){ settled = true; clearTimeout(giveUp); openSilent(); } });
   }
 
-  window.ON_SOUND_INTRO = 'pending';
-  curtain.classList.add('tap');
-  curtain.setAttribute('role', 'button');
-  curtain.setAttribute('tabindex', '0');
-  autoTimer = setTimeout(autoOpen, ENTRY.autoOpen);
-  if (MT) setTimeout(MT.preload, 1200);
-
-  /* 滑鼠：按下那一刻；觸控：手指離開那一刻（瀏覽器只在這兩種時機准許出聲） */
-  curtain.addEventListener('pointerdown', function(e){ if (e.pointerType === 'mouse' && e.button === 0) tapOpen(e); });
-  curtain.addEventListener('pointerup',   function(e){ if (e.pointerType !== 'mouse') tapOpen(e); });
-  curtain.addEventListener('touchend', tapOpen);
-  curtain.addEventListener('click', tapOpen);
-  addEventListener('keydown', function(e){
-    if (!opened && (e.key === 'Enter' || e.key === ' ')) tapOpen(e);
-  });
+  window.ON_SOUND_INTRO = first ? 'pending' : 'done';
+  if (first && MT) setTimeout(MT.preload, 600);
+  setTimeout(decide, ENTRY.curtain);
 })();
 </script>
 <script src="/assets/js/sound.js" defer></script>

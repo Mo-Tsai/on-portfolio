@@ -1,9 +1,9 @@
 /* ════════ ON Design Lab｜進站聲音（全站共用）════════
    2026-09-28 v2.58。Mo 09-28 裁定：
    - 聲音「預設開」（狀態開；瀏覽器規定訪客碰畫面前不能出聲，所以實際出聲等第一次互動）。
-   - 首頁第一次進站：點黑幕＝t 0，開場檔（4 小節，含聲音 logo）起播＋淡入，蒙太奇踩 90 BPM 拍點；
-     10.667 秒無縫接循環檔（12 小節 32 秒，一直循環）。
-   - 不點：自動進站；第一次互動（任何地方）時循環檔淡入，不播開場檔。
+   - 首頁第一次進站（Mo 09-29 改）：載入就試著出聲。瀏覽器放行 → 黑幕打開＝開場檔 t 0（4 小節，含聲音 logo），
+     蒙太奇踩 90 BPM 拍點；10.667 秒無縫接循環檔（12 小節 32 秒，一直循環）。
+     被擋 → 靜音版蒙太奇；第一次互動（任何地方）時循環檔淡入，不播開場檔。
    - 換頁：記住循環檔播到第幾秒，新頁從那一秒淡入接著播；開場檔同一次瀏覽只播一次。
    - 背景分頁暫停、回來淡入。左下角細字 Sound on／Sound off，狀態記在 sessionStorage。
    - 不設 navigator.audioSession（保留 iOS 靜音鍵會讓網頁無聲）。
@@ -50,7 +50,15 @@
   var loopZero = null;        /* 循環位置 0 對應的 ctx 時間 */
   var songZero = null;        /* 歌曲時間 0（第一拍）對應的 ctx 時間 */
   var hiddenPaused = false, suspendTimer = null;
-  var introInFlight = false;  /* 點了黑幕、音檔還在準備：這段時間的其他互動只負責叫醒 AudioContext */
+  var introInFlight = false;
+  /* 測試用：網址加 ?soundblock=1 → 模擬「瀏覽器擋自動播放」（每頁都要互動才出聲，像 iOS）；?soundblock=0 取消 */
+  var gestureSeen = false;
+  var TEST_BLOCK = (function () {
+    var m = /[?&]soundblock=([01])/.exec(location.search);
+    if (m) sset('on.sound.testblock', m[1]);
+    return sget('on.sound.testblock') === '1';
+  })();
+  function unlocked() { return !TEST_BLOCK || gestureSeen; }  /* 點了黑幕、音檔還在準備：這段時間的其他互動只負責叫醒 AudioContext */
   var log = window.__onSoundLog = [];
   function L(ev, extra) {
     var o = { ev: ev, perf: Math.round(performance.now()), ctx: ctx ? +ctx.currentTime.toFixed(4) : null, state: ctx ? ctx.state : 'none' };
@@ -190,7 +198,10 @@
   /* 換頁／第一次互動：循環檔從記住的秒數淡入 */
   function resumeLoop() {
     if (introInFlight) { if (ctx && ctx.resume) ctx.resume(); return; }
-    if (!on || playing() || introPendingOnPage()) return;
+    /* 首頁黑幕還沒決定走有聲／靜音版：這一下只負責叫醒 AudioContext，讓黑幕打開時能走有聲版 */
+    if (introPendingOnPage()) { if (on && ensureCtx() && ctx.resume && unlocked()) ctx.resume(); return; }
+    if (!on || playing()) return;
+    if (!unlocked()) return;
     if (!ensureCtx()) return;
     var p = ctx.resume ? ctx.resume() : Promise.resolve();
     load('loop').then(function () {
@@ -353,6 +364,7 @@
     btn.appendChild(document.createElement('span'));
     btn.addEventListener('click', function (e) {
       e.stopPropagation();
+      gestureSeen = true;
       /* 狀態是開、但還沒出聲（還沒互動過）：這一下就是「開始播」，不是關掉 */
       if (on && !(playing() && running())) { resumeLoop(); return; }
       setOn(!on, true);
@@ -363,6 +375,7 @@
 
   /* ── 第一次互動：解鎖聲音 ── */
   function onGesture(e) {
+    if (e && e.isTrusted !== false) gestureSeen = true;
     if (btn && e && e.target && btn.contains(e.target)) return;   /* 開關自己處理 */
     if (!on) return;
     if (playing()) {
@@ -404,9 +417,24 @@
   });
   setInterval(function () { if (playing() && running()) savePos(); }, 1000);
 
+  /* 首頁黑幕打開前問：瀏覽器准不准直接出聲（不准的話 resume() 會一直等，這裡最多等 250 ms） */
+  function autoplay() {
+    if (!on || !ensureCtx() || !unlocked()) return Promise.resolve(false);
+    if (running()) return Promise.resolve(true);
+    return new Promise(function (res) {
+      var t = setTimeout(function () { res(false); }, 250);
+      (ctx.resume ? ctx.resume() : Promise.reject()).then(function () { clearTimeout(t); res(running()); }, function () { clearTimeout(t); res(false); });
+    }).then(function (ok) { L('autoplay', { ok: ok, testBlock: TEST_BLOCK }); return ok; });
+  }
+  function ready() {
+    return Promise.all([load('intro'), load('loop')]).then(fixIntroTail);
+  }
+
   /* ── 對外 API（首頁蒙太奇用） ── */
   window.ONSound = {
     intro: intro,
+    autoplay: autoplay,
+    ready: ready,
     isOn: function () { return on; },
     set: function (v) { setOn(v, false); },
     ctx: function () { return ctx; },
@@ -427,6 +455,7 @@
     }
     load('loop');
     /* 同源換頁後，有的瀏覽器允許直接出聲（例如 Chrome 記得剛剛有互動過）：試一下 */
+    if (!unlocked()) return;
     if (ensureCtx() && ctx.state === 'running') resumeLoop();
     else if (ctx && ctx.resume) {
       ctx.resume().then(function () { if (running()) resumeLoop(); }, function () {});
