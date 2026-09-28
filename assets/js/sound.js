@@ -1,8 +1,8 @@
 /* ════════ ON Design Lab｜進站聲音（全站共用）════════
    2026-09-28 v2.58。Mo 09-28 裁定：
    - 聲音「預設開」（狀態開；瀏覽器規定訪客碰畫面前不能出聲，所以實際出聲等第一次互動）。
-   - 首頁第一次進站（Mo 09-29 改）：載入就試著出聲。瀏覽器放行 → 黑幕打開＝開場檔 t 0（4 小節，含聲音 logo），
-     蒙太奇踩 90 BPM 拍點；10.667 秒無縫接循環檔（12 小節 32 秒，一直循環）。
+   - 首頁第一次進站（Mo 09-29 第二輪）：載入就試著出聲。瀏覽器放行 → 音檔一就緒就開播（t 0＝開場檔第一拍，不等黑幕），
+     黑幕在拍點打開，蒙太奇踩 90 BPM；10.667 秒無縫接循環檔（12 小節 32 秒，一直循環）。
      被擋 → 靜音版蒙太奇；第一次互動（任何地方）時循環檔淡入，不播開場檔。
    - 換頁：記住循環檔播到第幾秒，新頁從那一秒淡入接著播；開場檔同一次瀏覽只播一次。
    - 背景分頁暫停、回來淡入。左下角細字 Sound on／Sound off，狀態記在 sessionStorage。
@@ -418,13 +418,14 @@
   setInterval(function () { if (playing() && running()) savePos(); }, 1000);
 
   /* 首頁黑幕打開前問：瀏覽器准不准直接出聲（不准的話 resume() 會一直等，這裡最多等 250 ms） */
+  var autoplayOk = false;
   function autoplay() {
     if (!on || !ensureCtx() || !unlocked()) return Promise.resolve(false);
-    if (running()) return Promise.resolve(true);
+    if (running()) { autoplayOk = true; L('autoplay', { ok: true, testBlock: TEST_BLOCK }); return Promise.resolve(true); }
     return new Promise(function (res) {
       var t = setTimeout(function () { res(false); }, 250);
       (ctx.resume ? ctx.resume() : Promise.reject()).then(function () { clearTimeout(t); res(running()); }, function () { clearTimeout(t); res(false); });
-    }).then(function (ok) { L('autoplay', { ok: ok, testBlock: TEST_BLOCK }); return ok; });
+    }).then(function (ok) { autoplayOk = ok; L('autoplay', { ok: ok, testBlock: TEST_BLOCK }); return ok; });
   }
   function ready() {
     return Promise.all([load('intro'), load('loop')]).then(fixIntroTail);
@@ -435,6 +436,10 @@
     intro: intro,
     autoplay: autoplay,
     ready: ready,
+    /* 放行了、音檔還在下載 → 首頁黑幕多等一下 */
+    pendingAudio: function () { return autoplayOk && !(buf.intro && buf.loop); },
+    /* 首頁音檔太晚到、黑幕已走靜音版：放行的話直接讓循環檔淡入 */
+    resume: function () { resumeLoop(); },
     isOn: function () { return on; },
     set: function (v) { setOn(v, false); },
     ctx: function () { return ctx; },

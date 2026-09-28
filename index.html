@@ -120,6 +120,7 @@
 </script>
 <link rel="preload" as="image" href="/網頁首頁兩張/商空.webp" type="image/webp"><link rel="preload" as="image" href="/網頁首頁兩張/商空.jpg">
 <link rel="preload" as="image" href="/網頁首頁兩張/住家.webp" type="image/webp"><link rel="preload" as="image" href="/網頁首頁兩張/住家.jpg">
+<link rel="preload" as="fetch" href="/assets/audio/no1-intro-4bars-logo-20260928.m4a" crossorigin><link rel="preload" as="fetch" href="/assets/audio/no1-loop-12bars-20260928.m4a" crossorigin>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;background:#0a0a0a;font-family:var(--font);overflow:hidden}
@@ -342,19 +343,21 @@ a{color:#fafaf8;text-decoration:none}
 
 <script>
 /* ════════ 進場黑幕＋進站聲音（v2.58）════════
-   Mo 09-29 裁定（取代 09-28 的「輕觸進入」）：
-   - 黑幕照原本時間表自動打開，不等人點。
-   - 同一次瀏覽第一次到首頁：載入就試著出聲。瀏覽器放行 → 開場檔的第一拍（t 0）＝黑幕打開那一刻，
-       蒙太奇照 90 BPM 拍點（MONTAGE_SOUND）；被擋（多數新訪客）→ 原本的靜音版蒙太奇，
-       訪客第一次互動（任何地方）時 sound.js 讓循環檔淡入。
+   Mo 09-29 裁定（第二輪）：
+   - 同一次瀏覽第一次到首頁：一載入就試著出聲。
+       瀏覽器放行 → 音檔一就緒就開播（t 0＝開場檔第一拍，不等黑幕），黑幕打開移到拍點（ENTRY.beatCurtain，
+       預設 1.333 秒＝第 3 拍），收縮 2.667、ON 標誌＋聲音 logo 5.333、收完 8.000、10.667 接循環（MONTAGE_SOUND）。
+       被擋（多數新訪客）→ 黑幕照原本時間打開、原本的靜音版蒙太奇；第一次互動（任何地方）循環檔淡入。
    - 同一次瀏覽回首頁：不重播開場，黑幕照原本時間打開，聲音接著播。
    - 聲音本身（開關、續播、背景暫停）在 /assets/js/sound.js，全站共用。 */
 var ENTRY = {
-  curtain:   1800,  /* 載入後幾 ms 黑幕打開（原本的數字；有聲版就是開場檔 t 0 的時間） */
-  maxWait:   1200,  /* 瀏覽器放行、但音檔還沒下載好：黑幕最多再等幾 ms，等不到就走靜音版 */
-  pageDelay:  500,  /* 靜音版：黑幕開始淡出後幾 ms 主畫面出現（原本的數字） */
-  beatPage:     0,  /* 有聲版：重擊後幾 ms 主畫面出現（0＝同一拍，跟黑幕一起打開） */
-  fadeIn:     0.4   /* 有聲版：開場檔淡入秒數（Mo 09-28 定 0.4） */
+  curtain:     1800,  /* 靜音版（被擋／回首頁）：載入後幾 ms 黑幕打開（原本的數字） */
+  beatCurtain: 1.333, /* 有聲版：開場檔第幾秒黑幕打開（要落在拍上：一拍 0.667 秒；1.333＝第 3 拍） */
+  minCurtain:  1200,  /* 有聲版：黑幕最早在載入後幾 ms 打開（讓黑幕上的 ON 標誌先淡入完）；太早就順延到下一拍 */
+  maxWait:     1200,  /* 放行、但音檔還沒下載好：最多等到「原本黑幕時間＋這麼多 ms」，再等不到就走靜音版 */
+  pageDelay:    500,  /* 靜音版：黑幕開始淡出後幾 ms 主畫面出現（原本的數字） */
+  beatPage:       0,  /* 有聲版：黑幕打開後幾 ms 主畫面出現（0＝同一拍） */
+  fadeIn:       0.4   /* 有聲版：開場檔淡入秒數（Mo 09-28 定 0.4） */
 };
 
 /* 歌曲時鐘上的排程器：每次醒來都重新讀時鐘，算出離下一拍還差多少再睡（時鐘＝AudioContext，不是 setTimeout 累加）。
@@ -702,44 +705,63 @@ function perfClock(){ var z = performance.now(); return { t: function(){ return 
     if (MT) MT.play('auto', MT.M.start - ENTRY.curtain);
   }
 
-  /* 有聲版：開場檔 t 0（第一拍重擊）＝黑幕打開 */
+  /* 有聲版：音檔一就緒就開播（t 0），黑幕在拍點打開 */
   function openBeat(){
     if (opened) return;
     opened = true; done();
+    clearTimeout(silentTimer);
     var clock = ONSound.intro({ fadeIn: ENTRY.fadeIn });
+    var tLoad = performance.now() / 1000;            /* 從載入起算的秒數（t 0 大約就在這一刻＋50 ms） */
+    var beat = 60 / 90;
+    var c = ENTRY.beatCurtain;
+    while (tLoad + c < ENTRY.minCurtain / 1000) c += beat;   /* 太早就順延到下一拍，不硬切 */
+    beatLog('plan', c, null);
     var r = onBeatRunner(clock);
-    r.add(0, function(t){
-      beatLog('curtain', 0, t);
+    r.add(c, function(t){
+      beatLog('curtain', c, t);
       curtain.classList.add('out');
       if (ENTRY.beatPage) setTimeout(showPage, ENTRY.beatPage); else showPage();
     });
     if (MT) MT.play('beat', clock);
-    /* 保險：萬一時鐘一直沒起來（音訊被系統卡住），1.2 秒後黑幕照樣打開，不讓人卡在黑畫面 */
+    /* 保險：萬一時鐘一直沒起來（音訊被系統卡住），晚 1.2 秒黑幕照樣打開，不讓人卡在黑畫面 */
     setTimeout(function(){
       if (curtain.classList.contains('out')) return;
-      beatLog('curtain-watchdog', 0, clock.t());
+      beatLog('curtain-watchdog', c, clock.t());
       curtain.classList.add('out'); showPage();
-    }, 1200);
+    }, c * 1000 + 1200);
   }
 
-  /* 到黑幕該打開的時間：問 sound.js 瀏覽器放不放行、音檔好了沒 */
+  /* 一載入就問 sound.js：瀏覽器放不放行、音檔好了沒。放行＋就緒 → 有聲版；否則到原本時間走靜音版 */
+  var silentTimer = null;
   function decide(){
     var S = window.ONSound;
-    if (!first || !S || !S.isOn()) { openSilent(); return; }
-    var settled = false;
-    var giveUp = setTimeout(function(){ if (!settled){ settled = true; beatLog('silent-timeout', null, null); openSilent(); } }, ENTRY.maxWait);
+    if (!S || !S.isOn()) return;                 /* 聲音關著：等 silentTimer 走靜音版 */
     S.autoplay().then(function(ok){
-      if (!ok) { if (!settled){ settled = true; clearTimeout(giveUp); beatLog('silent-blocked', null, null); openSilent(); } return; }
+      if (!ok) { beatLog('blocked', null, null); return; }   /* 被擋：等 silentTimer */
       return S.ready().then(function(){
-        if (settled) return;
-        settled = true; clearTimeout(giveUp); openBeat();
+        /* 音檔太晚才到、黑幕已經照靜音版打開：不播開場，直接讓循環檔淡入 */
+        if (opened) { S.resume(); return; }
+        if (performance.now() > ENTRY.curtain + ENTRY.maxWait) { beatLog('audio-late', null, null); openSilent(); S.resume(); return; }
+        openBeat();
       });
-    }).catch(function(){ if (!settled){ settled = true; clearTimeout(giveUp); openSilent(); } });
+    }).catch(function(){});
   }
 
   window.ON_SOUND_INTRO = first ? 'pending' : 'done';
-  if (first && MT) setTimeout(MT.preload, 600);
-  setTimeout(decide, ENTRY.curtain);
+  if (!first) { silentTimer = setTimeout(openSilent, ENTRY.curtain); return; }
+  if (MT) setTimeout(MT.preload, 300);
+  /* 被擋時照原本時間走靜音版；放行但音檔慢，最多等到 curtain＋maxWait */
+  var silentAt = ENTRY.curtain;
+  silentTimer = setTimeout(function tryS(){
+    if (opened) return;
+    var S = window.ONSound;
+    if (S && S.isOn() && S.pendingAudio && S.pendingAudio() && performance.now() < ENTRY.curtain + ENTRY.maxWait) {
+      silentTimer = setTimeout(tryS, 100); return;           /* 放行、音檔還在下載：再等一下 */
+    }
+    beatLog('silent', null, null); openSilent();
+  }, silentAt);
+  if (window.ONSound) decide();
+  else document.addEventListener('DOMContentLoaded', decide);   /* sound.js 是 defer，DOMContentLoaded 前一定跑完 */
 })();
 </script>
 <script src="/assets/js/sound.js" defer></script>
