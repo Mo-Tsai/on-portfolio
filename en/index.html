@@ -143,17 +143,15 @@ a{color:#fafaf8;text-decoration:none}
   0%{opacity:0;transform:translateY(6px)}
   100%{opacity:1;transform:translateY(0)}
 }
-/* ── Entrance（Mo 09-29 第三輪）──
-   黑幕由左右兩片組成（手機是上下兩片），A 款按下去從中線拉開；B 款整片淡出。
-   金色只用在 A 款那條細線。字只有「Entrance」一個字。 */
-.c-half{position:absolute;top:0;bottom:0;width:50.5%;background:#0a0a0a;
-  transition:transform 1.2s cubic-bezier(.65,0,.35,1)}
-.c-l{left:0}.c-r{right:0}
-#curtain.split{pointer-events:none}
-#curtain.split .c-l{transform:translateX(-100%)}
-#curtain.split .c-r{transform:translateX(100%)}
+/* ── Entrance「斜線切開」（Mo 09-29 定案）──
+   黑幕＝ON 標誌＋「Entrance」，等按才進站。斜線＝ON 標誌本身那條切線（往右上 16.545°），
+   角度與位置從 ON_White_logo.png 量出來（見首頁 script 的 CUT）。
+   兩片黑幕用 clip-path 沿斜線分開，各自往垂直於斜線的方向滑出；金線只做 1px 細線。 */
+.c-half{position:absolute;left:0;right:0;top:0;bottom:0;background:#0a0a0a;
+  transition:transform 1.333s cubic-bezier(.65,0,.35,1)}
 #curtain-inner{position:relative;transition:opacity .35s ease}
-#curtain.split #curtain-inner{opacity:0}
+#curtain.cut #curtain-inner{opacity:0}
+#curtain.cut{pointer-events:none}
 #curtain.wait{cursor:pointer;-webkit-tap-highlight-color:transparent}
 #curtain:focus{outline:none}
 #curtain-logo{position:relative}
@@ -164,58 +162,22 @@ a{color:#fafaf8;text-decoration:none}
   font-size:12.8px;font-weight:400;letter-spacing:.42em;color:rgba(255,255,255,.5);
   opacity:0;animation:tapFade 1s ease 1.2s forwards;
 }
-#entrance-line{position:absolute;left:50%;top:100%;margin-top:58px;width:0;height:1px;
-  background:#BEA578;transform:translateX(-50%);opacity:.8}
 @keyframes tapFade{0%{opacity:0}100%{opacity:1}}
-/* A：標誌極慢呼吸、金線慢慢畫出 */
-#curtain.ent-a.wait #curtain-logo img{animation:breathe 5.4s ease-in-out 1.6s infinite}
-#curtain.ent-a #entrance-line{animation:drawLine 2.4s cubic-bezier(.4,0,.2,1) 1.8s forwards}
-@keyframes breathe{0%,100%{filter:brightness(1)}50%{filter:brightness(.66)}}
-@keyframes drawLine{0%{width:0}100%{width:64px}}
-/* B：一道很淡的光每隔幾秒掃過標誌；按下去亮一下 */
-#curtain.ent-b #entrance-line{display:none}
-#curtain.ent-b #curtain-logo img{opacity:.8}
-#sweep{display:none}
-#curtain.ent-b #sweep{display:block;position:absolute;inset:0;pointer-events:none;
-  -webkit-mask:url('/assets/ON_White_logo.png') center/contain no-repeat;mask:url('/assets/ON_White_logo.png') center/contain no-repeat;
-  background:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.9) 50%,transparent 58%) no-repeat;
-  background-size:300% 100%;background-position:130% 0}
-#curtain.ent-b.wait #sweep{animation:sweep 6.5s ease-in-out 2s infinite}
-@keyframes sweep{0%{background-position:130% 0}28%,100%{background-position:-30% 0}}
-#curtain.ent-b.flash #curtain-logo img{animation:flashOut 1s ease forwards}
-@keyframes flashOut{0%{opacity:.8;filter:brightness(1)}14%{opacity:1;filter:brightness(1.6) drop-shadow(0 0 16px rgba(255,255,255,.55))}100%{opacity:0}}
-/* 減少動態效果：不做待機動畫，金線直接畫好 */
-#curtain.calm #curtain-logo img,#curtain.calm #sweep{animation:none!important}
-#curtain.calm #entrance-line{animation:none;width:64px}
-#curtain.calm #entrance{animation:none;opacity:1}
-/* C：斜線切開（Mo 09-29 第四輪）。斜線＝ON 標誌本身那條切線，角度與位置從 ON_White_logo.png 量出來（見首頁 script 的 CUT）。
-   兩片黑幕用 clip-path 沿斜線分開，各自往垂直於斜線的方向滑出；金線只做 1px 細線。 */
-#curtain.ent-c #entrance-line{display:none}
-#curtain.ent-c .c-half{left:0;right:0;top:0;bottom:0;width:auto;height:auto;
-  transition:transform 1.333s cubic-bezier(.65,0,.35,1)}
-#slit,#slash{display:none;position:fixed;left:0;top:0;height:1px;transform-origin:0 50%;pointer-events:none}
-#curtain.ent-c #slit{display:block;z-index:1;opacity:0;
+#slit,#slash{position:fixed;left:0;top:0;height:1px;transform-origin:0 50%;pointer-events:none}
+#slit{z-index:1;opacity:0;
   background:linear-gradient(90deg,transparent 0,rgba(255,255,255,.7) 50%,transparent 100%) no-repeat;
   background-size:26% 100%;background-position:-30% 0}
-#curtain.ent-c.wait #slit{animation:slitIn 1s ease 1.6s forwards,slitRun 7.2s ease-in-out 2s infinite}
+#curtain.wait #slit{animation:slitIn 1s ease 1.6s forwards,slitRun 7.2s ease-in-out 2s infinite}
 @keyframes slitIn{to{opacity:.55}}
 @keyframes slitRun{0%{background-position:-30% 0}45%,100%{background-position:130% 0}}
-#curtain.ent-c #slash{z-index:3;background:#BEA578;opacity:0}
-#curtain.ent-c.cut #slash{display:block;animation:slashOut 1.1s ease forwards}
+#slash{display:none;z-index:3;background:#BEA578;opacity:0}
+#curtain.cut #slash{display:block;animation:slashOut 1.1s ease forwards}
 @keyframes slashOut{0%{opacity:0;clip-path:inset(0 50% 0 50%)}12%{opacity:.9}30%{clip-path:inset(0 0 0 0);opacity:.9}100%{clip-path:inset(0 0 0 0);opacity:0}}
-#curtain.ent-c.cut{pointer-events:none}
-#curtain.ent-c.cut #curtain-inner{opacity:0}
+/* 減少動態效果：不走光，按下只淡出 */
 #curtain.calm #slit{animation:none!important;opacity:0!important}
+#curtain.calm #entrance{animation:none;opacity:1}
 /* 站內換頁回首頁：牆直接停在收好的樣子（不跑轉場） */
 .still .wall,.still .hero,.still .tile,.still .logo img,.still .logo-veil{transition:none!important}
-@media(max-width:680px){
-  .c-half{left:0;right:0;width:auto;top:auto;bottom:auto;height:50.5%}
-  .c-l{top:0}.c-r{bottom:0}
-  #curtain.split .c-l{transform:translateY(-100%)}
-  #curtain.split .c-r{transform:translateY(100%)}
-  /* C 手機直式也用同一條斜線（不改上下） */
-  #curtain.ent-c .c-half{left:0;right:0;top:0;bottom:0;width:auto;height:auto}
-}
 
 /* ── Page layout ── */
 .page{
@@ -370,9 +332,7 @@ a{color:#fafaf8;text-decoration:none}
   <div id="curtain-inner">
     <div id="curtain-logo">
       <img src="/assets/ON_White_logo.png" alt="ON">
-      <span id="sweep"></span>
       <p id="entrance">Entrance</p>
-      <span id="entrance-line"></span>
     </div>
   </div>
 </div>
@@ -422,23 +382,16 @@ a{color:#fafaf8;text-decoration:none}
 <div style="position:fixed;bottom:10px;right:12px;z-index:30;font-size:12.8px;letter-spacing:.1em;color:rgba(255,255,255,.18);pointer-events:none">v2.58</div>
 
 <script>
-/* ════════ 進場黑幕＋進站聲音（v2.58）════════
-   Mo 09-29 第三輪裁定（覆蓋之前的進站設計）：
+/* ════════ 進場黑幕（Entrance）＋進站聲音（v2.58，Mo 09-29 定案上線）════════
    - 首頁黑幕＝ON 標誌＋「Entrance」一個字，一直等到按才進站（整片黑幕點哪都算，鍵盤 Enter／空白鍵也可以）。
-     按下去＝t 0：開場檔第一拍重擊＋黑幕打開＋對拍蒙太奇（MONTAGE_SOUND：收縮 2.667／ON 標誌＋聲音 logo 5.333／收完 8.0），
-     10.667 秒接 No.1 循環（sound.js）。
-   - 三款讓 Mo 挑（網址 ?entrance=a、b、c）：
-       A「中線劈開」：待機時 ON 標誌極慢呼吸、Entrance 下一條金色細線慢慢畫出；按下去黑幕從中線向左右拉開（手機是上下）。
-       B「一道光」：待機時一道很淡的光每隔幾秒掃過標誌；按下去標誌亮一下（跟重擊同拍），黑幕淡出。
-       C「斜線切開」（09-29 第四輪）：沿 ON 標誌本身的斜切線，待機時一道極淡的光沿縫走；按下去金色細線沿同一角度
-         延伸到螢幕兩端，黑幕沿這條線切成兩片，左上片往左上、右下片往右下滑開（2 拍）。手機也用同一條斜線。
-     減少動態效果：不做待機動畫、仍可按，黑幕直接淡出。
-   - 站內單頁式換頁回到首頁（nav.js）：不出 Entrance、不重播開場，畫面直接停在收好的牆上。 */
+   - 斜線切開：沿 ON 標誌本身的斜切線（往右上 16.545°）。待機時一道極淡的光沿縫走；按下去＝t 0：
+     金色 1px 細線沿同一角度延伸到螢幕兩端、黑幕沿線切成兩片往左上／右下滑開（2 拍 1.333 秒）；
+     同一拍：開場檔第一拍重擊，蒙太奇對拍（MONTAGE_SOUND：收縮 2.667／ON 標誌＋聲音 logo 5.333／收完 8.0），
+     10.667 秒接 No.1 循環（sound.js）。全站只用 No.1，不換歌。
+   - 減少動態效果：不走光，按下只淡出。
+   - 站內單頁式換頁（nav.js）回到首頁：不出 Entrance、不重播開場，牆直接停在收好的樣子。 */
 var ENTRY = {
-  variant:  'a',   /* 預設哪一款（a／b）；網址 ?entrance=a|b 可以換 */
-  splitMs:  1200,  /* A：黑幕拉開的時間（ms） */
-  cutMs:    1333,  /* C：兩片黑幕滑開的時間（ms；2 拍） */
-  fadeMs:   1000,  /* B：黑幕淡出的時間（ms） */
+  cutMs:    1333,  /* 兩片黑幕滑開的時間（ms；2 拍） */
   fadeIn:   0.4    /* 開場檔淡入秒數（Mo 09-28 定 0.4） */
 };
 
@@ -632,7 +585,7 @@ function beatLog(ev, target, t){
   var wasMobile = matchMedia('(max-width:680px)').matches;
   addEventListener('resize', function(){
     var m = matchMedia('(max-width:680px)').matches;
-    if (m !== wasMobile){ wasMobile = m; play('auto', 0); }
+    if (m !== wasMobile){ wasMobile = m; if (window.ON_SOUND_INTRO !== 'pending' && !window.ON_MONTAGE_BUSY) play('still'); }
   });
 
   /* ── 調整面板：網址加 ?tune=1 才出現，一般訪客不會載到 ── */
@@ -786,11 +739,7 @@ function perfClock(){ var z = performance.now(); return { t: function(){ return 
     return;
   }
 
-  /* 哪一款：網址 ?entrance=a|b ＞ #entrance-a|b ＞ ENTRY.variant */
-  var v = (/[?&]entrance=([abc])/i.exec(location.search) || [])[1] ||
-          (/#entrance-([abc])/i.exec(location.hash) || [])[1];
-  v = /^[abc]$/.test(v || '') ? v : ENTRY.variant;
-  curtain.classList.add('ent-' + v, 'wait');
+  curtain.classList.add('wait');
   if (reduce) curtain.classList.add('calm');
   curtain.setAttribute('role', 'button');
   curtain.setAttribute('tabindex', '0');
@@ -832,7 +781,7 @@ function perfClock(){ var z = performance.now(); return { t: function(){ return 
     slash.style.transform = 'translate(0,' + g.yL + 'px) rotate(' + g.ang + 'rad)';
     window.__onCut = g;                                  /* 驗證用 */
   }
-  if (v === 'c') {
+  {
     var lay = function(){ if (!opened) layoutCut(); };
     if (document.readyState === 'complete') lay(); else addEventListener('load', lay);
     var img0 = curtain.querySelector('#curtain-logo img');
@@ -853,10 +802,7 @@ function perfClock(){ var z = performance.now(); return { t: function(){ return 
     var r = onBeatRunner(clock);
     r.add(0, function(t){
       beatLog('curtain', 0, t);
-      if (v === 'a' && !reduce) {
-        curtain.classList.add('split');
-        setTimeout(function(){ curtain.classList.add('out'); }, ENTRY.splitMs);
-      } else if (v === 'c' && !reduce) {
+      if (!reduce) {
         layoutCut();
         var g = cutGeo, hv = curtain.querySelectorAll('.c-half');
         curtain.classList.add('cut');
@@ -864,14 +810,14 @@ function perfClock(){ var z = performance.now(); return { t: function(){ return 
         hv[1].style.transform = 'translate(' + (g.nx * g.far) + 'px,' + (g.ny * g.far) + 'px)';     /* 右下片往右下 */
         setTimeout(function(){ curtain.classList.add('out'); }, ENTRY.cutMs);
       } else {
-        curtain.classList.add('flash', 'out');
+        curtain.classList.add('out');
       }
       showPage();
     });
     if (MT) MT.play('beat', clock);
     /* 保險：萬一時鐘一直沒起來（音訊被系統卡住），1.2 秒後黑幕照樣打開，不讓人卡在黑畫面 */
     setTimeout(function(){
-      if (curtain.classList.contains('out') || curtain.classList.contains('split') || curtain.classList.contains('cut')) return;
+      if (curtain.classList.contains('out') || curtain.classList.contains('cut')) return;
       beatLog('curtain-watchdog', 0, clock.t());
       curtain.classList.add('out'); showPage();
     }, 1200);

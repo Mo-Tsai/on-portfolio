@@ -1,14 +1,14 @@
 /* ════════ ON Design Lab｜全站聲音（共用）════════
-   v2.58。Mo 09-29 第三輪裁定（覆蓋之前的進站設計）：
-   - 首頁黑幕＝ON 標誌＋「Entrance」，按下去＝t 0：開場檔（4 小節，含聲音 logo）第一拍＋黑幕打開＋對拍蒙太奇；
-     10.667 秒無縫接 No.1 循環。首頁的部分在首頁 inline script，這裡提供 intro() 歌曲時鐘。
+   v2.58（Mo 09-29 定案上線）：
+   - 全站只用 No.1（不分線）：首頁按 Entrance 時先播開場檔（4 小節，含聲音 logo）再無縫接 12 小節循環；
+     其他頁（直接網址、整頁重新載入）從記住的秒數接著播 12 小節循環。
    - 站內換頁是單頁式（/assets/js/nav.js），音樂一路不斷。
-   - 分線：首頁＝No.1、/commercial/ 系列＝City、/residential/ 系列＝Home、其他頁延續當下那首；
-     換歌在下一個小節線等功率交叉淡化 1 小節（90 BPM，一小節 2.667 秒）。
-   - 直接網址進其他頁（Google）：第一次互動（任何地方）開始播這頁的那首；瀏覽器若本來就准出聲，直接開始。
-   - 左下角細字 Sound on／Sound off，sessionStorage 記開關、目前那首、播到第幾秒（整頁重新載入時接得回來）。
-   - 背景分頁暫停、回來淡入。音量 0.5、淡入 0.4 秒（Mo 09-28）。
-   - 不設 navigator.audioSession（保留 iOS 靜音鍵會讓網頁無聲）。 */
+   - 直接網址進其他頁（Google）：第一次互動（任何地方）開始播；瀏覽器若本來就准出聲，直接開始。
+   - 左下角細字 Sound on／Sound off，sessionStorage 記開關、播到第幾秒。背景分頁暫停、回來淡入。
+   - 音量 0.5、淡入 0.4 秒（Mo 09-28）。不設 navigator.audioSession（保留 iOS 靜音鍵會讓網頁無聲）。
+   - 換歌（交叉淡化）的程式碼仍在，但 TRACKS 只有 no1、trackFor() 永遠回 no1 → 不會觸發。
+     之後要分線：TRACKS 加曲子、trackFor() 改回依網址回傳、音檔放 /assets/audio/（曲庫原稿在
+     09_媒體與素材\ONdesignlab\_品牌規範\聲音\曲庫）。 */
 (function () {
   'use strict';
   if (window.ONSound) return;
@@ -32,28 +32,15 @@
     var s = document.currentScript && document.currentScript.src;
     try { return new URL('../audio/', s || location.href).href; } catch (e) { return '/assets/audio/'; }
   })();
-  /* 各首循環檔。City 用 v3 有哼唱人聲版上線（Mo 09-29 定），無人聲版 10/27 之後換新檔名 */
+  /* 各首循環檔。目前只有 No.1（Mo 09-29：先不分線，No.1 到底） */
   var TRACKS = {
-    no1:  { file: 'no1-loop-12bars-20260928.m4a', bars: 12 },
-    city: { file: 'city-loop-24bars-v3vocal-20260928.m4a', bars: 24 },
-    home: { file: 'home-loop-16bars-20260928.m4a', bars: 16 }
+    no1:  { file: 'no1-loop-12bars-20260928.m4a', bars: 12 }
   };
   var INTRO_FILE = 'no1-intro-4bars-logo-20260928.m4a';
 
-  /* 網站根目錄（從 sound.js 自己的位置推回去；預覽放在子路徑時也對） */
-  var ROOT = (function () {
-    try { return new URL('../../', document.currentScript.src).pathname; } catch (e) { return '/'; }
-  })();
-  /* 哪一頁放哪一首；null＝延續當下那首 */
-  function trackFor(path) {
-    var p = (path || location.pathname);
-    if (p.indexOf(ROOT) === 0) p = '/' + p.slice(ROOT.length);
-    p = p.replace(/index\.html$/, '');
-    if (/^\/(en\/)?$/.test(p)) return 'no1';
-    if (/^\/(en\/)?commercial\//.test(p)) return 'city';
-    if (/^\/(en\/)?residential\//.test(p)) return 'home';
-    return null;
-  }
+  /* 哪一頁放哪一首。目前全站都是 No.1。
+     （要分線時：首頁 no1、/commercial/ 系列 city、/residential/ 系列 home，其他頁回傳 null＝延續當下那首） */
+  function trackFor() { return 'no1'; }
 
   /* ── sessionStorage（私密視窗可能丟例外，全部包起來） ── */
   var K_ON = 'on.sound', K_POS = 'on.sound.pos', K_TRACK = 'on.sound.track';
@@ -76,7 +63,7 @@
   var pend = null;         /* 正在交叉淡化進來的那首 */
   var introSrc = null;
   var songZero = null;     /* 歌曲時間 0（開場第一拍）對應的 ctx 時間 */
-  var want = trackFor() || sget(K_TRACK) || 'no1';   /* 這一頁想放的那首 */
+  var want = 'no1';        /* 這一頁想放的那首 */
   var hiddenPaused = false, suspendTimer = null, introInFlight = false;
   var log = window.__onSoundLog = [];
   function L(ev, extra) {
