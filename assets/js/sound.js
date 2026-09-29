@@ -32,10 +32,10 @@
     var s = document.currentScript && document.currentScript.src;
     try { return new URL('../audio/', s || location.href).href; } catch (e) { return '/assets/audio/'; }
   })();
-  /* 各首循環檔。City 目前是佔位（有人聲），拿到 Suno 無人聲版再換檔名 */
+  /* 各首循環檔。City 用 v3 有哼唱人聲版上線（Mo 09-29 定），無人聲版 10/27 之後換新檔名 */
   var TRACKS = {
     no1:  { file: 'no1-loop-12bars-20260928.m4a', bars: 12 },
-    city: { file: 'city-loop-24bars-20260928-placeholder.m4a', bars: 24 },
+    city: { file: 'city-loop-24bars-v3vocal-20260928.m4a', bars: 24 },
     home: { file: 'home-loop-16bars-20260928.m4a', bars: 16 }
   };
   var INTRO_FILE = 'no1-intro-4bars-logo-20260928.m4a';
