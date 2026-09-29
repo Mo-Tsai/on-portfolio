@@ -129,7 +129,7 @@ a{color:#fafaf8;text-decoration:none}
 /* ── Curtain ── */
 #curtain{
   position:fixed;inset:0;z-index:200;
-  background:#0a0a0a;
+  background:transparent;
   display:flex;align-items:center;justify-content:center;
   transition:opacity 1s ease;
 }
@@ -142,6 +142,59 @@ a{color:#fafaf8;text-decoration:none}
 @keyframes cFade{
   0%{opacity:0;transform:translateY(6px)}
   100%{opacity:1;transform:translateY(0)}
+}
+/* ── Entrance（Mo 09-29 第三輪）──
+   黑幕由左右兩片組成（手機是上下兩片），A 款按下去從中線拉開；B 款整片淡出。
+   金色只用在 A 款那條細線。字只有「Entrance」一個字。 */
+.c-half{position:absolute;top:0;bottom:0;width:50.5%;background:#0a0a0a;
+  transition:transform 1.2s cubic-bezier(.65,0,.35,1)}
+.c-l{left:0}.c-r{right:0}
+#curtain.split{pointer-events:none}
+#curtain.split .c-l{transform:translateX(-100%)}
+#curtain.split .c-r{transform:translateX(100%)}
+#curtain-inner{position:relative;transition:opacity .35s ease}
+#curtain.split #curtain-inner{opacity:0}
+#curtain.wait{cursor:pointer;-webkit-tap-highlight-color:transparent}
+#curtain:focus{outline:none}
+#curtain-logo{position:relative}
+#curtain-logo img{position:relative}
+#entrance{
+  position:absolute;left:50%;top:100%;transform:translateX(-50%);
+  margin-top:30px;padding-left:.42em;white-space:nowrap;
+  font-size:12.8px;font-weight:400;letter-spacing:.42em;color:rgba(255,255,255,.5);
+  opacity:0;animation:tapFade 1s ease 1.2s forwards;
+}
+#entrance-line{position:absolute;left:50%;top:100%;margin-top:58px;width:0;height:1px;
+  background:#BEA578;transform:translateX(-50%);opacity:.8}
+@keyframes tapFade{0%{opacity:0}100%{opacity:1}}
+/* A：標誌極慢呼吸、金線慢慢畫出 */
+#curtain.ent-a.wait #curtain-logo img{animation:breathe 5.4s ease-in-out 1.6s infinite}
+#curtain.ent-a #entrance-line{animation:drawLine 2.4s cubic-bezier(.4,0,.2,1) 1.8s forwards}
+@keyframes breathe{0%,100%{filter:brightness(1)}50%{filter:brightness(.66)}}
+@keyframes drawLine{0%{width:0}100%{width:64px}}
+/* B：一道很淡的光每隔幾秒掃過標誌；按下去亮一下 */
+#curtain.ent-b #entrance-line{display:none}
+#curtain.ent-b #curtain-logo img{opacity:.8}
+#sweep{display:none}
+#curtain.ent-b #sweep{display:block;position:absolute;inset:0;pointer-events:none;
+  -webkit-mask:url('/assets/ON_White_logo.png') center/contain no-repeat;mask:url('/assets/ON_White_logo.png') center/contain no-repeat;
+  background:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.9) 50%,transparent 58%) no-repeat;
+  background-size:300% 100%;background-position:130% 0}
+#curtain.ent-b.wait #sweep{animation:sweep 6.5s ease-in-out 2s infinite}
+@keyframes sweep{0%{background-position:130% 0}28%,100%{background-position:-30% 0}}
+#curtain.ent-b.flash #curtain-logo img{animation:flashOut 1s ease forwards}
+@keyframes flashOut{0%{opacity:.8;filter:brightness(1)}14%{opacity:1;filter:brightness(1.6) drop-shadow(0 0 16px rgba(255,255,255,.55))}100%{opacity:0}}
+/* 減少動態效果：不做待機動畫，金線直接畫好 */
+#curtain.calm #curtain-logo img,#curtain.calm #sweep{animation:none!important}
+#curtain.calm #entrance-line{animation:none;width:64px}
+#curtain.calm #entrance{animation:none;opacity:1}
+/* 站內換頁回首頁：牆直接停在收好的樣子（不跑轉場） */
+.still .wall,.still .hero,.still .tile,.still .logo img,.still .logo-veil{transition:none!important}
+@media(max-width:680px){
+  .c-half{left:0;right:0;width:auto;top:auto;bottom:auto;height:50.5%}
+  .c-l{top:0}.c-r{bottom:0}
+  #curtain.split .c-l{transform:translateY(-100%)}
+  #curtain.split .c-r{transform:translateY(100%)}
 }
 
 /* ── Page layout ── */
@@ -292,8 +345,14 @@ a{color:#fafaf8;text-decoration:none}
 
 <!-- 進場 curtain -->
 <div id="curtain">
-  <div id="curtain-logo">
-    <img src="/assets/ON_White_logo.png" alt="ON">
+  <div class="c-half c-l"></div><div class="c-half c-r"></div>
+  <div id="curtain-inner">
+    <div id="curtain-logo">
+      <img src="/assets/ON_White_logo.png" alt="ON">
+      <span id="sweep"></span>
+      <p id="entrance">Entrance</p>
+      <span id="entrance-line"></span>
+    </div>
   </div>
 </div>
 
@@ -343,21 +402,20 @@ a{color:#fafaf8;text-decoration:none}
 
 <script>
 /* ════════ 進場黑幕＋進站聲音（v2.58）════════
-   Mo 09-29 裁定（第二輪）：
-   - 同一次瀏覽第一次到首頁：一載入就試著出聲。
-       瀏覽器放行 → 音檔一就緒就開播（t 0＝開場檔第一拍，不等黑幕），黑幕打開移到拍點（ENTRY.beatCurtain，
-       預設 1.333 秒＝第 3 拍），收縮 2.667、ON 標誌＋聲音 logo 5.333、收完 8.000、10.667 接循環（MONTAGE_SOUND）。
-       被擋（多數新訪客）→ 黑幕照原本時間打開、原本的靜音版蒙太奇；第一次互動（任何地方）循環檔淡入。
-   - 同一次瀏覽回首頁：不重播開場，黑幕照原本時間打開，聲音接著播。
-   - 聲音本身（開關、續播、背景暫停）在 /assets/js/sound.js，全站共用。 */
+   Mo 09-29 第三輪裁定（覆蓋之前的進站設計）：
+   - 首頁黑幕＝ON 標誌＋「Entrance」一個字，一直等到按才進站（整片黑幕點哪都算，鍵盤 Enter／空白鍵也可以）。
+     按下去＝t 0：開場檔第一拍重擊＋黑幕打開＋對拍蒙太奇（MONTAGE_SOUND：收縮 2.667／ON 標誌＋聲音 logo 5.333／收完 8.0），
+     10.667 秒接 No.1 循環（sound.js）。
+   - 兩款讓 Mo 挑（網址 ?entrance=a 或 ?entrance=b）：
+       A「中線劈開」：待機時 ON 標誌極慢呼吸、Entrance 下一條金色細線慢慢畫出；按下去黑幕從中線向左右拉開（手機是上下）。
+       B「一道光」：待機時一道很淡的光每隔幾秒掃過標誌；按下去標誌亮一下（跟重擊同拍），黑幕淡出。
+     減少動態效果：不做待機動畫、仍可按，黑幕直接淡出。
+   - 站內單頁式換頁回到首頁（nav.js）：不出 Entrance、不重播開場，畫面直接停在收好的牆上。 */
 var ENTRY = {
-  curtain:     1800,  /* 靜音版（被擋／回首頁）：載入後幾 ms 黑幕打開（原本的數字） */
-  beatCurtain: 1.333, /* 有聲版：開場檔第幾秒黑幕打開（要落在拍上：一拍 0.667 秒；1.333＝第 3 拍） */
-  minCurtain:  1200,  /* 有聲版：黑幕最早在載入後幾 ms 打開（讓黑幕上的 ON 標誌先淡入完）；太早就順延到下一拍 */
-  maxWait:     1200,  /* 放行、但音檔還沒下載好：最多等到「原本黑幕時間＋這麼多 ms」，再等不到就走靜音版 */
-  pageDelay:    500,  /* 靜音版：黑幕開始淡出後幾 ms 主畫面出現（原本的數字） */
-  beatPage:       0,  /* 有聲版：黑幕打開後幾 ms 主畫面出現（0＝同一拍） */
-  fadeIn:       0.4   /* 有聲版：開場檔淡入秒數（Mo 09-28 定 0.4） */
+  variant:  'a',   /* 預設哪一款（a／b）；網址 ?entrance=a|b 可以換 */
+  splitMs:  1200,  /* A：黑幕拉開的時間（ms） */
+  fadeMs:   1000,  /* B：黑幕淡出的時間（ms） */
+  fadeIn:   0.4    /* 開場檔淡入秒數（Mo 09-28 定 0.4） */
 };
 
 /* 歌曲時鐘上的排程器：每次醒來都重新讀時鐘，算出離下一拍還差多少再睡（時鐘＝AudioContext，不是 setTimeout 累加）。
@@ -370,7 +428,7 @@ function onBeatRunner(clock){
     var t = clock.t();
     if (t !== null) while (evs.length && evs[0].t <= t + 0.002) { var e = evs.shift(); e.fn(t); }
     if (!evs.length) return;
-    var wait = (t === null) ? 8 : Math.max(0, (evs[0].t - t) * 1000 - 4);
+    var wait = (t === null) ? 4 : Math.max(0, (evs[0].t - t) * 1000 - 4);
     timer = setTimeout(tick, wait > 40 ? wait - 20 : wait);   /* 離很遠先睡大半，最後再精確補一刀 */
   }
   return {
@@ -455,8 +513,10 @@ function beatLog(ev, target, t){
     if (mode === 'beat') for (k in MONTAGE_SOUND) P[k] = MONTAGE_SOUND[k];
     applyVars(P);
     if (mode === 'beat') { runner = onBeatRunner(arg); window.ON_MONTAGE_BUSY = true; }
+    if (mode === 'still') root.classList.add('still');       /* 換頁回首頁：直接停在收好的牆上，不跑動畫 */
 
     function at(ms, fn, name){
+      if (mode === 'still') { fn(); return; }
       if (mode === 'beat') runner.add(ms / 1000, function(t){ if (my === runId){ beatLog(name, ms / 1000, t); fn(); } });
       else timers.push(setTimeout(function(){ if (my === runId) fn(); }, ms));
     }
@@ -531,9 +591,11 @@ function beatLog(ev, target, t){
       mark.style.opacity = '1';
       veil.style.opacity = M.veil ? '1' : '0';      /* 跟 logo 同時、同速 */
     }, 'logo');
+
+    if (mode === 'still') { void document.body.offsetWidth; setTimeout(function(){ root.classList.remove('still'); }, 60); }
   }
 
-  /* 第一次進站先把格子圖預載：有聲版黑幕打開後 2.667 秒就要用 */
+  /* 等 Entrance 時先把格子圖預載：按下去 2.667 秒就要用 */
   function preloadTiles(){
     var n = gridN(), total = n * n;
     for (var si = 0; si < 2; si++) for (var i = 0; i < total; i++){ var im = new Image(); im.src = tileUrl(si, i); }
@@ -604,7 +666,7 @@ function beatLog(ev, target, t){
   box.id = 'tune';
   var html = '<h4>蒙太奇調整</h4>' +
     '<div class="r"><span>調哪一版</span><select id="tVer"><option value="auto">自動進站（無聲）</option>' +
-    '<option value="beat">點黑幕（有聲，90 BPM）</option></select></div>';
+    '<option value="beat">按 Entrance（有聲，90 BPM）</option></select></div>';
   ROWS.forEach(function(row){
     var label = row[0], key = row[1], kind = row[2], cfg = row[3];
     if (kind === 'select'){
@@ -680,90 +742,78 @@ function beatLog(ev, target, t){
 /* 沒有 sound.js 時的備用時鐘（performance.now） */
 function perfClock(){ var z = performance.now(); return { t: function(){ return (performance.now() - z) / 1000; } }; }
 
-/* ════════ 黑幕 ════════ */
+/* ════════ 黑幕（Entrance）════════ */
 (function(){
   var curtain = document.getElementById('curtain');
   var page    = document.getElementById('page');
   var split   = document.getElementById('split');
   var MT      = window.__montage;
-  var first;
-  try { first = sessionStorage.getItem('on.sound.intro') !== 'done'; } catch(e){ first = true; }
-  var opened = false;
+  var reduce  = window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var opened  = false;
 
   function showPage(){ page.classList.add('visible'); split.style.transform = 'scaleY(1)'; }
-  function done(){
+
+  /* 單頁式換頁回到首頁：不出 Entrance、不重播開場，直接停在牆上 */
+  if (window.ON_SPA_NAV) {
+    curtain.style.display = 'none';
+    page.style.transition = 'none'; showPage();
+    if (MT) MT.play('still');
     window.ON_SOUND_INTRO = 'done';
-    try { sessionStorage.setItem('on.sound.intro', 'done'); } catch(e){}
+    return;
   }
 
-  /* 靜音版（被擋、聲音關著、回首頁）：原本的時間表 */
-  function openSilent(){
-    if (opened) return;
-    opened = true; done();
-    curtain.classList.add('out');
-    setTimeout(showPage, ENTRY.pageDelay);
-    if (MT) MT.play('auto', MT.M.start - ENTRY.curtain);
-  }
+  /* 哪一款：網址 ?entrance=a|b ＞ #entrance-a|b ＞ 預覽用的切換（localStorage）＞ 預設 */
+  var v = (/[?&]entrance=([ab])/i.exec(location.search) || [])[1] ||
+          (/#entrance-([ab])/i.exec(location.hash) || [])[1];
+  if (!v) { try { v = localStorage.getItem('on.entrance.preview'); } catch(e){} }
+  v = (v === 'a' || v === 'b') ? v : ENTRY.variant;
+  curtain.classList.add('ent-' + v, 'wait');
+  if (reduce) curtain.classList.add('calm');
+  curtain.setAttribute('role', 'button');
+  curtain.setAttribute('tabindex', '0');
+  curtain.setAttribute('aria-label', 'Entrance');
+  window.ON_SOUND_INTRO = 'pending';
+  if (MT) setTimeout(MT.preload, 800);
 
-  /* 有聲版：音檔一就緒就開播（t 0），黑幕在拍點打開 */
-  function openBeat(){
+  /* 按下去＝t 0：開場檔第一拍＋黑幕打開＋對拍蒙太奇 */
+  function enter(e){
     if (opened) return;
-    opened = true; done();
-    clearTimeout(silentTimer);
-    var clock = ONSound.intro({ fadeIn: ENTRY.fadeIn });
-    var tLoad = performance.now() / 1000;            /* 從載入起算的秒數（t 0 大約就在這一刻＋50 ms） */
-    var beat = 60 / 90;
-    var c = ENTRY.beatCurtain;
-    while (tLoad + c < ENTRY.minCurtain / 1000) c += beat;   /* 太早就順延到下一拍，不硬切 */
-    beatLog('plan', c, null);
+    opened = true;
+    window.ON_SOUND_INTRO = 'done';
+    if (e && e.cancelable && e.type !== 'keydown') e.preventDefault();   /* 不要再補一個 click 點到後面的連結 */
+    curtain.classList.remove('wait');
+    var clock = (window.ONSound && ONSound.intro({ fadeIn: ENTRY.fadeIn })) || perfClock();
     var r = onBeatRunner(clock);
-    r.add(c, function(t){
-      beatLog('curtain', c, t);
-      curtain.classList.add('out');
-      if (ENTRY.beatPage) setTimeout(showPage, ENTRY.beatPage); else showPage();
+    r.add(0, function(t){
+      beatLog('curtain', 0, t);
+      if (v === 'a' && !reduce) {
+        curtain.classList.add('split');
+        setTimeout(function(){ curtain.classList.add('out'); }, ENTRY.splitMs);
+      } else {
+        curtain.classList.add('flash', 'out');
+      }
+      showPage();
     });
     if (MT) MT.play('beat', clock);
-    /* 保險：萬一時鐘一直沒起來（音訊被系統卡住），晚 1.2 秒黑幕照樣打開，不讓人卡在黑畫面 */
+    /* 保險：萬一時鐘一直沒起來（音訊被系統卡住），1.2 秒後黑幕照樣打開，不讓人卡在黑畫面 */
     setTimeout(function(){
-      if (curtain.classList.contains('out')) return;
-      beatLog('curtain-watchdog', c, clock.t());
+      if (curtain.classList.contains('out') || curtain.classList.contains('split')) return;
+      beatLog('curtain-watchdog', 0, clock.t());
       curtain.classList.add('out'); showPage();
-    }, c * 1000 + 1200);
+    }, 1200);
   }
 
-  /* 一載入就問 sound.js：瀏覽器放不放行、音檔好了沒。放行＋就緒 → 有聲版；否則到原本時間走靜音版 */
-  var silentTimer = null;
-  function decide(){
-    var S = window.ONSound;
-    if (!S || !S.isOn()) return;                 /* 聲音關著：等 silentTimer 走靜音版 */
-    S.autoplay().then(function(ok){
-      if (!ok) { beatLog('blocked', null, null); return; }   /* 被擋：等 silentTimer */
-      return S.ready().then(function(){
-        /* 音檔太晚才到、黑幕已經照靜音版打開：不播開場，直接讓循環檔淡入 */
-        if (opened) { S.resume(); return; }
-        if (performance.now() > ENTRY.curtain + ENTRY.maxWait) { beatLog('audio-late', null, null); openSilent(); S.resume(); return; }
-        openBeat();
-      });
-    }).catch(function(){});
-  }
-
-  window.ON_SOUND_INTRO = first ? 'pending' : 'done';
-  if (!first) { silentTimer = setTimeout(openSilent, ENTRY.curtain); return; }
-  if (MT) setTimeout(MT.preload, 300);
-  /* 被擋時照原本時間走靜音版；放行但音檔慢，最多等到 curtain＋maxWait */
-  var silentAt = ENTRY.curtain;
-  silentTimer = setTimeout(function tryS(){
-    if (opened) return;
-    var S = window.ONSound;
-    if (S && S.isOn() && S.pendingAudio && S.pendingAudio() && performance.now() < ENTRY.curtain + ENTRY.maxWait) {
-      silentTimer = setTimeout(tryS, 100); return;           /* 放行、音檔還在下載：再等一下 */
-    }
-    beatLog('silent', null, null); openSilent();
-  }, silentAt);
-  if (window.ONSound) decide();
-  else document.addEventListener('DOMContentLoaded', decide);   /* sound.js 是 defer，DOMContentLoaded 前一定跑完 */
+  /* 滑鼠：按下那一刻；觸控：手指離開那一刻（瀏覽器只在這兩種時機准許出聲） */
+  curtain.addEventListener('pointerdown', function(e){ if (e.pointerType === 'mouse' && e.button === 0) enter(e); });
+  curtain.addEventListener('pointerup',   function(e){ if (e.pointerType !== 'mouse') enter(e); });
+  curtain.addEventListener('touchend', enter);
+  curtain.addEventListener('click', enter);
+  addEventListener('keydown', function(e){
+    if (!opened && (e.key === 'Enter' || e.key === ' ')) enter(e);
+  });
 })();
 </script>
+<script src="/assets/js/nav.js" defer></script>
 <script src="/assets/js/sound.js" defer></script>
 </body>
 </html>
