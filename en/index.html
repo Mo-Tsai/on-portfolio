@@ -120,6 +120,7 @@
 </script>
 <link rel="preload" as="image" href="/網頁首頁兩張/商空.webp" type="image/webp"><link rel="preload" as="image" href="/網頁首頁兩張/商空.jpg">
 <link rel="preload" as="image" href="/網頁首頁兩張/住家.webp" type="image/webp"><link rel="preload" as="image" href="/網頁首頁兩張/住家.jpg">
+<link rel="preload" as="fetch" href="/assets/audio/no1-intro-4bars-logo-20260928.m4a" crossorigin><link rel="preload" as="fetch" href="/assets/audio/no1-loop-12bars-20260928.m4a" crossorigin>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;background:#0a0a0a;font-family:var(--font);overflow:hidden}
@@ -128,7 +129,7 @@ a{color:#fafaf8;text-decoration:none}
 /* ── Curtain ── */
 #curtain{
   position:fixed;inset:0;z-index:200;
-  background:#0a0a0a;
+  background:transparent;
   display:flex;align-items:center;justify-content:center;
   transition:opacity 1s ease;
 }
@@ -142,6 +143,41 @@ a{color:#fafaf8;text-decoration:none}
   0%{opacity:0;transform:translateY(6px)}
   100%{opacity:1;transform:translateY(0)}
 }
+/* ── Entrance「斜線切開」（Mo 09-29 定案）──
+   黑幕＝ON 標誌＋「Entrance」，等按才進站。斜線＝ON 標誌本身那條切線（往右上 16.545°），
+   角度與位置從 ON_White_logo.png 量出來（見首頁 script 的 CUT）。
+   兩片黑幕用 clip-path 沿斜線分開，各自往垂直於斜線的方向滑出；金線只做 1px 細線。 */
+.c-half{position:absolute;left:0;right:0;top:0;bottom:0;background:#0a0a0a;
+  transition:transform 1.333s cubic-bezier(.65,0,.35,1)}
+#curtain-inner{position:relative;transition:opacity .35s ease}
+#curtain.cut #curtain-inner{opacity:0}
+#curtain.cut{pointer-events:none}
+#curtain.wait{cursor:pointer;-webkit-tap-highlight-color:transparent}
+#curtain:focus{outline:none}
+#curtain-logo{position:relative}
+#curtain-logo img{position:relative}
+#entrance{
+  position:absolute;left:50%;top:100%;transform:translateX(-50%);
+  margin-top:30px;padding-left:.42em;white-space:nowrap;
+  font-size:12.8px;font-weight:400;letter-spacing:.42em;color:rgba(255,255,255,.5);
+  opacity:0;animation:tapFade 1s ease 1.2s forwards;
+}
+@keyframes tapFade{0%{opacity:0}100%{opacity:1}}
+#slit,#slash{position:fixed;left:0;top:0;height:1px;transform-origin:0 50%;pointer-events:none}
+#slit{z-index:1;opacity:0;
+  background:linear-gradient(90deg,transparent 0,rgba(255,255,255,.7) 50%,transparent 100%) no-repeat;
+  background-size:26% 100%;background-position:-30% 0}
+#curtain.wait #slit{animation:slitIn 1s ease 1.6s forwards,slitRun 7.2s ease-in-out 2s infinite}
+@keyframes slitIn{to{opacity:.55}}
+@keyframes slitRun{0%{background-position:-30% 0}45%,100%{background-position:130% 0}}
+#slash{display:none;z-index:3;background:#BEA578;opacity:0}
+#curtain.cut #slash{display:block;animation:slashOut 1.1s ease forwards}
+@keyframes slashOut{0%{opacity:0;clip-path:inset(0 50% 0 50%)}12%{opacity:.9}30%{clip-path:inset(0 0 0 0);opacity:.9}100%{clip-path:inset(0 0 0 0);opacity:0}}
+/* 減少動態效果：不走光，按下只淡出 */
+#curtain.calm #slit{animation:none!important;opacity:0!important}
+#curtain.calm #entrance{animation:none;opacity:1}
+/* 站內換頁回首頁：牆直接停在收好的樣子（不跑轉場） */
+.still .wall,.still .hero,.still .tile,.still .logo img,.still .logo-veil{transition:none!important}
 
 /* ── Page layout ── */
 .page{
@@ -277,6 +313,7 @@ a{color:#fafaf8;text-decoration:none}
 
   .split{display:none}
   .half-content{padding:1.5rem}
+  .half:last-child .half-content{padding-bottom:2.6rem}  /* 讓出左下角 Sound on／off */
 }
 </style>
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
@@ -290,8 +327,13 @@ a{color:#fafaf8;text-decoration:none}
 
 <!-- 進場 curtain -->
 <div id="curtain">
-  <div id="curtain-logo">
-    <img src="/assets/ON_White_logo.png" alt="ON">
+  <div class="c-half c-l"></div><div class="c-half c-r"></div>
+  <span id="slit"></span><span id="slash"></span>
+  <div id="curtain-inner">
+    <div id="curtain-logo">
+      <img src="/assets/ON_White_logo.png" alt="ON">
+      <p id="entrance">Entrance</p>
+    </div>
   </div>
 </div>
 
@@ -337,29 +379,61 @@ a{color:#fafaf8;text-decoration:none}
 <a href="/" style="position:fixed;top:1.6rem;right:1.8rem;z-index:40;font-size:12.8px;letter-spacing:.18em;color:rgba(255,255,255,.4);text-decoration:none;border-bottom:0.5px solid rgba(255,255,255,.18);padding-bottom:2px;transition:color .2s">中文</a>
 
 <!-- 版本標記 -->
-<div style="position:fixed;bottom:10px;right:12px;z-index:30;font-size:12.8px;letter-spacing:.1em;color:rgba(255,255,255,.18);pointer-events:none">v2.57</div>
+<div style="position:fixed;bottom:10px;right:12px;z-index:30;font-size:12.8px;letter-spacing:.1em;color:rgba(255,255,255,.18);pointer-events:none">v2.58</div>
 
 <script>
-setTimeout(()=>{
-  document.getElementById('curtain').classList.add('out');
-  setTimeout(()=>{
-    document.getElementById('page').classList.add('visible');
-    document.getElementById('split').style.transform='scaleY(1)';
-  },500);
-},1800);
+/* ════════ 進場黑幕（Entrance）＋進站聲音（v2.58，Mo 09-29 定案上線）════════
+   - 首頁黑幕＝ON 標誌＋「Entrance」一個字，一直等到按才進站（整片黑幕點哪都算，鍵盤 Enter／空白鍵也可以）。
+   - 斜線切開：沿 ON 標誌本身的斜切線（往右上 16.545°）。待機時一道極淡的光沿縫走；按下去＝t 0：
+     金色 1px 細線沿同一角度延伸到螢幕兩端、黑幕沿線切成兩片往左上／右下滑開（2 拍 1.333 秒）；
+     同一拍：開場檔第一拍重擊，蒙太奇對拍（MONTAGE_SOUND：收縮 2.667／ON 標誌＋聲音 logo 5.333／收完 8.0），
+     10.667 秒接 No.1 循環（sound.js）。全站只用 No.1，不換歌。
+   - 減少動態效果：不走光，按下只淡出。
+   - 站內單頁式換頁（nav.js）回到首頁：不出 Entrance、不重播開場，牆直接停在收好的樣子。 */
+var ENTRY = {
+  cutMs:    1333,  /* 兩片黑幕滑開的時間（ms；2 拍） */
+  fadeIn:   0.4    /* 開場檔淡入秒數（Mo 09-28 定 0.4） */
+};
+
+/* 歌曲時鐘上的排程器：每次醒來都重新讀時鐘，算出離下一拍還差多少再睡（時鐘＝AudioContext，不是 setTimeout 累加）。
+   不用 requestAnimationFrame：有些內嵌瀏覽器／預覽框不跑 rAF，黑幕會卡住打不開。 */
+function onBeatRunner(clock){
+  var evs = [], timer = null, dead = false;
+  function tick(){
+    timer = null;
+    if (dead) return;
+    var t = clock.t();
+    if (t !== null) while (evs.length && evs[0].t <= t + 0.002) { var e = evs.shift(); e.fn(t); }
+    if (!evs.length) return;
+    var wait = (t === null) ? 4 : Math.max(0, (evs[0].t - t) * 1000 - 4);
+    timer = setTimeout(tick, wait > 40 ? wait - 20 : wait);   /* 離很遠先睡大半，最後再精確補一刀 */
+  }
+  return {
+    add: function(t, fn){ evs.push({ t: t, fn: fn }); evs.sort(function(a, b){ return a.t - b.t; }); if (!timer) timer = setTimeout(tick, 0); },
+    kill: function(){ dead = true; clearTimeout(timer); evs = []; }
+  };
+}
+/* 拍點紀錄（驗證用）：window.__onBeatLog */
+window.__onBeatLog = [];
+function beatLog(ev, target, t){
+  var ac = window.ONSound && ONSound.ctx && ONSound.ctx();
+  window.__onBeatLog.push({ ev: ev, target: target, songT: t == null ? null : +t.toFixed(4),
+    err_ms: (t == null || target == null) ? null : Math.round((t - target) * 1000),
+    ctx: ac ? +ac.currentTime.toFixed(4) : null, perf: Math.round(performance.now()) });
+}
 
 /* ════════ 進站蒙太奇 ════════
    大畫面停一下 → 左右同時以自己的中心點收成整面牆的其中一格 →
    收縮進行到一半時，ON logo 就開始從後面慢慢浮出來（跟收縮交會，不是接力）。
    只跑一次，不循環。
 
-   ★ 要調整只改下面這一組數字。
+   ★ 要調整只改下面這兩組數字（MONTAGE＝自動進站；MONTAGE_SOUND＝點黑幕有聲版，只覆蓋時間）。
    ★ 想在畫面上即時調：網址加 ?tune=1，右上角會出現面板（一般訪客看不到）。 */
 (function(){
   var MONTAGE = {
     n:        7,      /* 桌機格數（只能是奇數，中心格才會等於畫面中心） */
     nMobile:  5,      /* 手機格數 */
-    start:    2400,   /* 開場 curtain 收掉之後，等多久才開始計時（ms） */
+    start:    2400,   /* 自動進站：從載入起算的開始時間（黑幕在 ENTRY.curtain 打開；兩者相差＝黑幕打開後多久開始計時） */
     hold:     1400,   /* 大畫面停留（ms） */
     dur:      3700,   /* 收縮時間（ms） */
     fade:      600,   /* 格子浮現（ms） */
@@ -374,22 +448,28 @@ setTimeout(()=>{
     veil:     6,      /* logo 背後霧化 px，0 = 關掉 */
     tiles:    81      /* /images/montage/ 每邊的素材張數 */
   };
+  /* 點黑幕的有聲版：90 BPM，一拍 667 ms、一小節 2667 ms，時間從重擊（t 0）起算 */
+  var MONTAGE_SOUND = {
+    hold:     2667,   /* 第 2 小節（2.667 秒）大圖開始收縮 */
+    dur:      5333,   /* 收縮 2 小節，第 4 小節（8.000 秒）收完 */
+    logoAt:   50,     /* 收縮到 50%＝第 3 小節（5.333 秒）ON 標誌浮出，跟聲音 logo 同一拍 */
+    logoFade: 1333    /* logo 浮出 2 拍 */
+  };
 
-  /* 系統設定了「減少動態效果」就整段不跑，畫面維持原本的大圖，logo 由 CSS 直接顯示 */
-  if (window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches) return;
-
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches;
   var M = MONTAGE, root = document.documentElement;
   var mark   = document.getElementById('logoImg');    /* logo 的圖 */
   var veil   = document.getElementById('logoVeil');  /* logo 背後的霧化底 */
   var halves = [].slice.call(document.querySelectorAll('.page > .half'));
   var sides  = ['c', 'r'];
-  var runId  = 0, timers = [];
+  var runId  = 0, timers = [], runner = null;
 
   function gridN(){ return matchMedia('(max-width:680px)').matches ? M.nMobile : M.n; }
+  function tileUrl(si, i){ return '/images/montage/' + sides[si] + '-' + ('0' + ((i % M.tiles) + 1)).slice(-2) + '.webp'; }
 
-  function applyVars(){
+  function applyVars(P){
     root.style.setProperty('--n', gridN());
-    root.style.setProperty('--dur', M.dur + 'ms');
+    root.style.setProperty('--dur', P.dur + 'ms');
     root.style.setProperty('--fade', M.fade + 'ms');
     root.style.setProperty('--ease', M.ease);
     root.style.setProperty('--dens', M.dens / 100);
@@ -399,13 +479,24 @@ setTimeout(()=>{
     root.style.setProperty('--veil', M.veil + 'px');
   }
 
-  function at(ms, fn, my){ timers.push(setTimeout(function(){ if (my === runId) fn(); }, ms)); }
-
-  function play(firstRun){
+  /* mode：'auto'＝原本的 setTimeout 時間表（delay＝幾 ms 後開始計時）；'beat'＝跟著歌曲時鐘（clock） */
+  function play(mode, arg){
     runId++;
     var my = runId, n = gridN(), total = n * n;
     timers.forEach(clearTimeout); timers = [];
-    applyVars();
+    if (runner) { runner.kill(); runner = null; }
+    var P = {}, k;
+    for (k in M) P[k] = M[k];
+    if (mode === 'beat') for (k in MONTAGE_SOUND) P[k] = MONTAGE_SOUND[k];
+    applyVars(P);
+    if (mode === 'beat') { runner = onBeatRunner(arg); window.ON_MONTAGE_BUSY = true; }
+    if (mode === 'still') root.classList.add('still');       /* 換頁回首頁：直接停在收好的牆上，不跑動畫 */
+
+    function at(ms, fn, name){
+      if (mode === 'still') { fn(); return; }
+      if (mode === 'beat') runner.add(ms / 1000, function(t){ if (my === runId){ beatLog(name, ms / 1000, t); fn(); } });
+      else timers.push(setTimeout(function(){ if (my === runId) fn(); }, ms));
+    }
 
     /* logo 與背後的霧化底都先壓住（inline 蓋過 CSS 的預設顯示） */
     mark.style.transition = 'none'; mark.style.opacity = '0';
@@ -427,8 +518,7 @@ setTimeout(()=>{
         var d = document.createElement('div');
         d.className = 'tile';
         /* 先不掛圖 — 等大畫面停留那幾秒才載，不跟它搶頻寬 */
-        d.dataset.src = "url('/images/montage/" + sides[si] + "-"
-                      + ('0' + ((i % M.tiles) + 1)).slice(-2) + ".webp')";
+        d.dataset.src = "url('" + tileUrl(si, i) + "')";
         grid.appendChild(d);
         tiles.push(d);
       }
@@ -436,68 +526,88 @@ setTimeout(()=>{
     });
 
     void document.body.offsetWidth;              /* 讓上面的重置立刻生效，不要留殘影 */
-    mark.style.transition = 'opacity ' + M.logoFade + 'ms ease';
-    veil.style.transition = 'opacity ' + M.logoFade + 'ms ease';   /* 同一條曲線，一起浮 */
+    mark.style.transition = 'opacity ' + P.logoFade + 'ms ease';
+    veil.style.transition = 'opacity ' + P.logoFade + 'ms ease';   /* 同一條曲線，一起浮 */
     parts.forEach(function(p){ p.wall.style.transition = ''; p.hero.style.transition = ''; });
 
-    var t0 = firstRun ? M.start : 0;
+    var t0 = mode === 'beat' ? 0 : (arg || 0);
 
-    /* 大畫面停留期間，背景默默把整面格子的圖載進來 */
+    /* 大畫面停留期間，背景默默把整面格子的圖載進來（有聲版在黑幕等待時已經先預載） */
     at(t0, function(){
       parts.forEach(function(p){
         p.tiles.forEach(function(t){
           if (t.dataset.src){ t.style.backgroundImage = t.dataset.src; delete t.dataset.src; }
         });
       });
-    }, my);
+    }, 'tiles');
 
     /* 左右「同時」收縮 —— 不錯開 */
-    at(t0 + M.hold, function(){
+    at(t0 + P.hold, function(){
       var mid = (n - 1) / 2, cell = mid * n + mid;
       parts.forEach(function(p){
         p.tiles.forEach(function(t, i){
           if (i === cell) return;                /* 這格由大畫面自己佔著 */
           var d = Math.max(Math.abs(i % n - mid), Math.abs(Math.floor(i / n) - mid));
-          t.style.transitionDelay = (d * M.stagger) + 'ms';
+          t.style.transitionDelay = (d * P.stagger) + 'ms';
           t.className = 'tile on';
         });
         p.hero.style.transform = 'scale(' + (1 / n) + ')';
         p.wall.className = 'wall hazed';
       });
-    }, my);
+    }, 'shrink');
 
-    at(t0 + M.hold + M.dur, function(){
+    at(t0 + P.hold + P.dur, function(){
       parts.forEach(function(p){
         p.tiles.forEach(function(t){ t.style.transitionDelay = '0ms'; });
       });
-    }, my);
+      window.ON_MONTAGE_BUSY = false;
+    }, 'done');
 
     /* logo 在收縮進行到 logoAt% 時就開始浮出來 —— 兩件事交會，不是接力 */
-    at(t0 + M.hold + M.dur * M.logoAt / 100, function(){
+    at(t0 + P.hold + P.dur * P.logoAt / 100, function(){
       mark.style.opacity = '1';
       veil.style.opacity = M.veil ? '1' : '0';      /* 跟 logo 同時、同速 */
-    }, my);
+    }, 'logo');
+
+    if (mode === 'still') { void document.body.offsetWidth; setTimeout(function(){ root.classList.remove('still'); }, 60); }
   }
 
-  play(true);
+  /* 等 Entrance 時先把格子圖預載：按下去 2.667 秒就要用 */
+  function preloadTiles(){
+    var n = gridN(), total = n * n;
+    for (var si = 0; si < 2; si++) for (var i = 0; i < total; i++){ var im = new Image(); im.src = tileUrl(si, i); }
+  }
+
+  /* 系統設定了「減少動態效果」：蒙太奇整段不跑，畫面維持原本的大圖，logo 由 CSS 直接顯示（聲音照開關） */
+  window.__montage = reduce ? null : { play: play, preload: preloadTiles, M: MONTAGE, S: MONTAGE_SOUND };
+  if (reduce) return;
 
   var wasMobile = matchMedia('(max-width:680px)').matches;
   addEventListener('resize', function(){
     var m = matchMedia('(max-width:680px)').matches;
-    if (m !== wasMobile){ wasMobile = m; play(false); }
+    if (m !== wasMobile){ wasMobile = m; if (window.ON_SOUND_INTRO !== 'pending' && !window.ON_MONTAGE_BUSY) play('still'); }
   });
 
   /* ── 調整面板：網址加 ?tune=1 才出現，一般訪客不會載到 ── */
   if (!/[?&]tune=1/.test(location.search)) return;
 
+  var VER = 'auto';   /* 面板在調哪一版：auto＝自動進站、beat＝點黑幕有聲版 */
+  function tgt(k){ return (VER === 'beat' && k in MONTAGE_SOUND) ? MONTAGE_SOUND : M; }
+  function replay(){
+    if (VER === 'beat'){
+      var clock = (window.ONSound && ONSound.intro({ fadeIn: ENTRY.fadeIn })) || perfClock();
+      play('beat', clock);
+    } else play('auto', 0);
+  }
+
   var ROWS = [
     ['格數',         'n',        'select', [[5,'5×5（25 格）'],[7,'7×7（49 格）'],[9,'9×9（81 格）']]],
-    ['大畫面停留',   'hold',     'range',  [500, 6000, 100, 'ms']],
-    ['收縮時間',     'dur',      'range',  [600, 8000, 100, 'ms']],
+    ['大畫面停留',   'hold',     'range',  [500, 6000, 1, 'ms']],
+    ['收縮時間',     'dur',      'range',  [600, 8000, 1, 'ms']],
     ['格子浮現',     'fade',     'range',  [200, 3500, 50,  'ms']],
     ['格子間隔',     'stagger',  'range',  [0,   250,  5,   'ms']],
-    ['logo 何時開始', 'logoAt',  'range',  [0,   140,  5,   '%收縮']],
-    ['logo 浮現',    'logoFade', 'range',  [200, 6000, 100, 'ms']],
+    ['logo 何時開始', 'logoAt',  'range',  [0,   140,  1,   '%收縮']],
+    ['logo 浮現',    'logoFade', 'range',  [200, 6000, 1, 'ms']],
     ['緩動',         'ease',     'select', [['cubic-bezier(.22,.61,.36,1)','沉穩'],
                                             ['cubic-bezier(.16,1,.3,1)','慢收尾'],
                                             ['cubic-bezier(.4,0,.2,1)','俐落'],
@@ -531,7 +641,9 @@ setTimeout(()=>{
 
   var box = document.createElement('div');
   box.id = 'tune';
-  var html = '<h4>蒙太奇調整</h4>';
+  var html = '<h4>蒙太奇調整</h4>' +
+    '<div class="r"><span>調哪一版</span><select id="tVer"><option value="auto">自動進站（無聲）</option>' +
+    '<option value="beat">按 Entrance（有聲，90 BPM）</option></select></div>';
   ROWS.forEach(function(row){
     var label = row[0], key = row[1], kind = row[2], cfg = row[3];
     if (kind === 'select'){
@@ -556,29 +668,35 @@ setTimeout(()=>{
   ROWS.forEach(function(r){ if (r[2] === 'range') UNITS[r[1]] = r[3][3]; });
 
   function refresh(){
-    [].forEach.call(box.querySelectorAll('[data-k]'), function(el){ el.value = M[el.dataset.k]; });
+    [].forEach.call(box.querySelectorAll('[data-k]'), function(el){ el.value = tgt(el.dataset.k)[el.dataset.k]; });
     [].forEach.call(box.querySelectorAll('[data-v]'), function(el){
-      var k = el.dataset.v, u = UNITS[k];
-      el.textContent = (u === 'ms') ? (M[k] / 1000).toFixed(2) + 's' : M[k] + u;
+      var k = el.dataset.v, u = UNITS[k], v = tgt(k)[k];
+      el.textContent = (u === 'ms') ? (v / 1000).toFixed(3) + 's' : v + u;
     });
     var out = {};
     ROWS.forEach(function(r){ out[r[1]] = M[r[1]]; });
-    box.querySelector('#tDump').value = JSON.stringify(out);
-    try { localStorage.setItem('montageTune2', JSON.stringify(out)); } catch(e){}
+    box.querySelector('#tDump').value = 'MONTAGE=' + JSON.stringify(out) + '\nMONTAGE_SOUND=' + JSON.stringify(MONTAGE_SOUND);
+    try {
+      localStorage.setItem('montageTune2', JSON.stringify(out));
+      localStorage.setItem('montageTuneSound', JSON.stringify(MONTAGE_SOUND));
+    } catch(e){}
   }
 
   try {
     var saved = JSON.parse(localStorage.getItem('montageTune2') || '{}');
     Object.keys(saved).forEach(function(k){ if (k in M) M[k] = saved[k]; });
+    var savedS = JSON.parse(localStorage.getItem('montageTuneSound') || '{}');
+    Object.keys(savedS).forEach(function(k){ if (k in MONTAGE_SOUND) MONTAGE_SOUND[k] = savedS[k]; });
   } catch(e){}
 
   box.addEventListener('input', function(e){
+    if (e.target.id === 'tVer'){ VER = e.target.value; refresh(); return; }
     var k = e.target.dataset && e.target.dataset.k;
     if (!k) return;
-    M[k] = (k === 'ease') ? e.target.value : +e.target.value;
-    refresh(); play(false);
+    tgt(k)[k] = (k === 'ease') ? e.target.value : +e.target.value;
+    refresh(); if (VER === 'auto') replay();
   });
-  box.querySelector('#tReplay').onclick = function(){ play(false); };
+  box.querySelector('#tReplay').onclick = replay;
   box.querySelector('#tHide').onclick   = function(){ box.classList.add('hide'); };
   box.querySelector('#tCopy').onclick   = function(){
     var d = box.querySelector('#tDump');
@@ -589,14 +707,133 @@ setTimeout(()=>{
     setTimeout(function(){ self.textContent = '複製設定碼'; }, 1500);
   };
   addEventListener('keydown', function(e){
+    if (e.target && /INPUT|SELECT|TEXTAREA/.test(e.target.tagName)) return;
     var k = e.key.toLowerCase();
-    if (k === 'r') play(false);
+    if (k === 'r') replay();
     if (k === 'h') box.classList.toggle('hide');
   });
 
   refresh();
-  play(false);
+})();
+
+/* 沒有 sound.js 時的備用時鐘（performance.now） */
+function perfClock(){ var z = performance.now(); return { t: function(){ return (performance.now() - z) / 1000; } }; }
+
+/* ════════ 黑幕（Entrance）════════ */
+(function(){
+  var curtain = document.getElementById('curtain');
+  var page    = document.getElementById('page');
+  var split   = document.getElementById('split');
+  var MT      = window.__montage;
+  var reduce  = window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var opened  = false;
+
+  function showPage(){ page.classList.add('visible'); split.style.transform = 'scaleY(1)'; }
+
+  /* 單頁式換頁回到首頁：不出 Entrance、不重播開場，直接停在牆上 */
+  if (window.ON_SPA_NAV) {
+    curtain.style.display = 'none';
+    page.style.transition = 'none'; showPage();
+    if (MT) MT.play('still');
+    window.ON_SOUND_INTRO = 'done';
+    return;
+  }
+
+  curtain.classList.add('wait');
+  if (reduce) curtain.classList.add('calm');
+  curtain.setAttribute('role', 'button');
+  curtain.setAttribute('tabindex', '0');
+  curtain.setAttribute('aria-label', 'Entrance');
+  window.ON_SOUND_INTRO = 'pending';
+  if (MT) setTimeout(MT.preload, 800);
+
+  /* ── C：ON 標誌的斜切線 ──
+     2026-09-29 從 /assets/ON_White_logo.png（1537×1028）實際量：標誌有 5 個缺口（O 左下、O 右側、N 左直筆、N 斜筆、N 右直筆），
+     每個缺口兩條切邊擬合，缺口寬 32 px；五個缺口中心做最小最大偏差直線：往右上 16.545°，
+     在圖左緣 x=0 時 y=678.86、右緣 x=1537 時 y=222.27（最大偏差 8.5 px，小於半個缺口 16 px → 線一定在缺口裡）。
+     下面用「佔圖高的比例」存，畫面上照標誌實際顯示的位置換算（桌機、手機都一樣）。 */
+  var CUT = { yL: 678.86 / 1028, yR: 222.27 / 1028 };
+  var cutGeo = null;
+  function cutLine(){
+    var img = curtain.querySelector('#curtain-logo img');
+    var r = img.getBoundingClientRect(), W = innerWidth, H = innerHeight;
+    var x0 = r.left, y0 = r.top + r.height * CUT.yL, x1 = r.right, y1 = r.top + r.height * CUT.yR;
+    var k = (y1 - y0) / (x1 - x0);                       /* 斜率（負值＝往右上） */
+    var yAt = function(x){ return y0 + k * (x - x0); };
+    var ang = Math.atan(k), len = Math.sqrt(1 + k * k);
+    var nx = -k / len, ny = 1 / len;                     /* 法向量（指向右下） */
+    var far = 0;                                         /* 最遠的角落到斜線的距離：滑這麼遠才會完全出畫面 */
+    [[0,0],[W,0],[0,H],[W,H]].forEach(function(p){ far = Math.max(far, Math.abs((p[0] - x0) * nx + (p[1] - y0) * ny)); });
+    return { x0: x0, y0: y0, x1: x1, y1: y1, k: k, ang: ang, yL: yAt(0), yR: yAt(W), W: W, H: H, nx: nx, ny: ny, far: far + 40 };
+  }
+  function layoutCut(){
+    var g = cutGeo = cutLine();
+    var halves = curtain.querySelectorAll('.c-half');
+    halves[0].style.clipPath = 'polygon(0 0,' + g.W + 'px 0,' + g.W + 'px ' + g.yR + 'px,0 ' + g.yL + 'px)';
+    halves[1].style.clipPath = 'polygon(0 ' + g.yL + 'px,' + g.W + 'px ' + g.yR + 'px,' + g.W + 'px ' + g.H + 'px,0 ' + g.H + 'px)';
+    /* 待機走光：只走標誌那一段 */
+    var slit = document.getElementById('slit'), segLen = Math.hypot(g.x1 - g.x0, g.y1 - g.y0);
+    slit.style.width = segLen + 'px';
+    slit.style.transform = 'translate(' + g.x0 + 'px,' + g.y0 + 'px) rotate(' + g.ang + 'rad)';
+    /* 按下去的金線：從螢幕左緣到右緣 */
+    var slash = document.getElementById('slash'), full = Math.hypot(g.W, g.yR - g.yL);
+    slash.style.width = full + 'px';
+    slash.style.transform = 'translate(0,' + g.yL + 'px) rotate(' + g.ang + 'rad)';
+    window.__onCut = g;                                  /* 驗證用 */
+  }
+  {
+    var lay = function(){ if (!opened) layoutCut(); };
+    if (document.readyState === 'complete') lay(); else addEventListener('load', lay);
+    var img0 = curtain.querySelector('#curtain-logo img');
+    if (!img0.complete) img0.addEventListener('load', lay);
+    addEventListener('resize', lay);
+    lay();
+    setTimeout(lay, 1300);        /* 黑幕上的標誌淡入（有 6px 位移）做完後再量一次 */
+  }
+
+  /* 按下去＝t 0：開場檔第一拍＋黑幕打開＋對拍蒙太奇 */
+  function enter(e){
+    if (opened) return;
+    opened = true;
+    window.ON_SOUND_INTRO = 'done';
+    if (e && e.cancelable && e.type !== 'keydown') e.preventDefault();   /* 不要再補一個 click 點到後面的連結 */
+    curtain.classList.remove('wait');
+    var clock = (window.ONSound && ONSound.intro({ fadeIn: ENTRY.fadeIn })) || perfClock();
+    var r = onBeatRunner(clock);
+    r.add(0, function(t){
+      beatLog('curtain', 0, t);
+      if (!reduce) {
+        layoutCut();
+        var g = cutGeo, hv = curtain.querySelectorAll('.c-half');
+        curtain.classList.add('cut');
+        hv[0].style.transform = 'translate(' + (-g.nx * g.far) + 'px,' + (-g.ny * g.far) + 'px)';   /* 左上片往左上 */
+        hv[1].style.transform = 'translate(' + (g.nx * g.far) + 'px,' + (g.ny * g.far) + 'px)';     /* 右下片往右下 */
+        setTimeout(function(){ curtain.classList.add('out'); }, ENTRY.cutMs);
+      } else {
+        curtain.classList.add('out');
+      }
+      showPage();
+    });
+    if (MT) MT.play('beat', clock);
+    /* 保險：萬一時鐘一直沒起來（音訊被系統卡住），1.2 秒後黑幕照樣打開，不讓人卡在黑畫面 */
+    setTimeout(function(){
+      if (curtain.classList.contains('out') || curtain.classList.contains('cut')) return;
+      beatLog('curtain-watchdog', 0, clock.t());
+      curtain.classList.add('out'); showPage();
+    }, 1200);
+  }
+
+  /* 滑鼠：按下那一刻；觸控：手指離開那一刻（瀏覽器只在這兩種時機准許出聲） */
+  curtain.addEventListener('pointerdown', function(e){ if (e.pointerType === 'mouse' && e.button === 0) enter(e); });
+  curtain.addEventListener('pointerup',   function(e){ if (e.pointerType !== 'mouse') enter(e); });
+  curtain.addEventListener('touchend', enter);
+  curtain.addEventListener('click', enter);
+  addEventListener('keydown', function(e){
+    if (!opened && (e.key === 'Enter' || e.key === ' ')) enter(e);
+  });
 })();
 </script>
+<script src="/assets/js/nav.js" defer></script>
+<script src="/assets/js/sound.js" defer></script>
 </body>
 </html>
