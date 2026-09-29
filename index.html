@@ -762,10 +762,9 @@ function perfClock(){ var z = performance.now(); return { t: function(){ return 
     return;
   }
 
-  /* 哪一款：網址 ?entrance=a|b ＞ #entrance-a|b ＞ 預覽用的切換（localStorage）＞ 預設 */
+  /* 哪一款：網址 ?entrance=a|b ＞ #entrance-a|b ＞ ENTRY.variant */
   var v = (/[?&]entrance=([ab])/i.exec(location.search) || [])[1] ||
           (/#entrance-([ab])/i.exec(location.hash) || [])[1];
-  if (!v) { try { v = localStorage.getItem('on.entrance.preview'); } catch(e){} }
   v = (v === 'a' || v === 'b') ? v : ENTRY.variant;
   curtain.classList.add('ent-' + v, 'wait');
   if (reduce) curtain.classList.add('calm');
