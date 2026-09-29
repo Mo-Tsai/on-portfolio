@@ -188,6 +188,24 @@ a{color:#fafaf8;text-decoration:none}
 #curtain.calm #curtain-logo img,#curtain.calm #sweep{animation:none!important}
 #curtain.calm #entrance-line{animation:none;width:64px}
 #curtain.calm #entrance{animation:none;opacity:1}
+/* C：斜線切開（Mo 09-29 第四輪）。斜線＝ON 標誌本身那條切線，角度與位置從 ON_White_logo.png 量出來（見首頁 script 的 CUT）。
+   兩片黑幕用 clip-path 沿斜線分開，各自往垂直於斜線的方向滑出；金線只做 1px 細線。 */
+#curtain.ent-c #entrance-line{display:none}
+#curtain.ent-c .c-half{left:0;right:0;top:0;bottom:0;width:auto;height:auto;
+  transition:transform 1.333s cubic-bezier(.65,0,.35,1)}
+#slit,#slash{display:none;position:fixed;left:0;top:0;height:1px;transform-origin:0 50%;pointer-events:none}
+#curtain.ent-c #slit{display:block;z-index:1;opacity:0;
+  background:linear-gradient(90deg,transparent 0,rgba(255,255,255,.7) 50%,transparent 100%) no-repeat;
+  background-size:26% 100%;background-position:-30% 0}
+#curtain.ent-c.wait #slit{animation:slitIn 1s ease 1.6s forwards,slitRun 7.2s ease-in-out 2s infinite}
+@keyframes slitIn{to{opacity:.55}}
+@keyframes slitRun{0%{background-position:-30% 0}45%,100%{background-position:130% 0}}
+#curtain.ent-c #slash{z-index:3;background:#BEA578;opacity:0}
+#curtain.ent-c.cut #slash{display:block;animation:slashOut 1.1s ease forwards}
+@keyframes slashOut{0%{opacity:0;clip-path:inset(0 50% 0 50%)}12%{opacity:.9}30%{clip-path:inset(0 0 0 0);opacity:.9}100%{clip-path:inset(0 0 0 0);opacity:0}}
+#curtain.ent-c.cut{pointer-events:none}
+#curtain.ent-c.cut #curtain-inner{opacity:0}
+#curtain.calm #slit{animation:none!important;opacity:0!important}
 /* 站內換頁回首頁：牆直接停在收好的樣子（不跑轉場） */
 .still .wall,.still .hero,.still .tile,.still .logo img,.still .logo-veil{transition:none!important}
 @media(max-width:680px){
@@ -195,6 +213,8 @@ a{color:#fafaf8;text-decoration:none}
   .c-l{top:0}.c-r{bottom:0}
   #curtain.split .c-l{transform:translateY(-100%)}
   #curtain.split .c-r{transform:translateY(100%)}
+  /* C 手機直式也用同一條斜線（不改上下） */
+  #curtain.ent-c .c-half{left:0;right:0;top:0;bottom:0;width:auto;height:auto}
 }
 
 /* ── Page layout ── */
@@ -346,6 +366,7 @@ a{color:#fafaf8;text-decoration:none}
 <!-- 進場 curtain -->
 <div id="curtain">
   <div class="c-half c-l"></div><div class="c-half c-r"></div>
+  <span id="slit"></span><span id="slash"></span>
   <div id="curtain-inner">
     <div id="curtain-logo">
       <img src="/assets/ON_White_logo.png" alt="ON">
@@ -406,14 +427,17 @@ a{color:#fafaf8;text-decoration:none}
    - 首頁黑幕＝ON 標誌＋「Entrance」一個字，一直等到按才進站（整片黑幕點哪都算，鍵盤 Enter／空白鍵也可以）。
      按下去＝t 0：開場檔第一拍重擊＋黑幕打開＋對拍蒙太奇（MONTAGE_SOUND：收縮 2.667／ON 標誌＋聲音 logo 5.333／收完 8.0），
      10.667 秒接 No.1 循環（sound.js）。
-   - 兩款讓 Mo 挑（網址 ?entrance=a 或 ?entrance=b）：
+   - 三款讓 Mo 挑（網址 ?entrance=a、b、c）：
        A「中線劈開」：待機時 ON 標誌極慢呼吸、Entrance 下一條金色細線慢慢畫出；按下去黑幕從中線向左右拉開（手機是上下）。
        B「一道光」：待機時一道很淡的光每隔幾秒掃過標誌；按下去標誌亮一下（跟重擊同拍），黑幕淡出。
+       C「斜線切開」（09-29 第四輪）：沿 ON 標誌本身的斜切線，待機時一道極淡的光沿縫走；按下去金色細線沿同一角度
+         延伸到螢幕兩端，黑幕沿這條線切成兩片，左上片往左上、右下片往右下滑開（2 拍）。手機也用同一條斜線。
      減少動態效果：不做待機動畫、仍可按，黑幕直接淡出。
    - 站內單頁式換頁回到首頁（nav.js）：不出 Entrance、不重播開場，畫面直接停在收好的牆上。 */
 var ENTRY = {
   variant:  'a',   /* 預設哪一款（a／b）；網址 ?entrance=a|b 可以換 */
   splitMs:  1200,  /* A：黑幕拉開的時間（ms） */
+  cutMs:    1333,  /* C：兩片黑幕滑開的時間（ms；2 拍） */
   fadeMs:   1000,  /* B：黑幕淡出的時間（ms） */
   fadeIn:   0.4    /* 開場檔淡入秒數（Mo 09-28 定 0.4） */
 };
@@ -763,9 +787,9 @@ function perfClock(){ var z = performance.now(); return { t: function(){ return 
   }
 
   /* 哪一款：網址 ?entrance=a|b ＞ #entrance-a|b ＞ ENTRY.variant */
-  var v = (/[?&]entrance=([ab])/i.exec(location.search) || [])[1] ||
-          (/#entrance-([ab])/i.exec(location.hash) || [])[1];
-  v = (v === 'a' || v === 'b') ? v : ENTRY.variant;
+  var v = (/[?&]entrance=([abc])/i.exec(location.search) || [])[1] ||
+          (/#entrance-([abc])/i.exec(location.hash) || [])[1];
+  v = /^[abc]$/.test(v || '') ? v : ENTRY.variant;
   curtain.classList.add('ent-' + v, 'wait');
   if (reduce) curtain.classList.add('calm');
   curtain.setAttribute('role', 'button');
@@ -773,6 +797,50 @@ function perfClock(){ var z = performance.now(); return { t: function(){ return 
   curtain.setAttribute('aria-label', 'Entrance');
   window.ON_SOUND_INTRO = 'pending';
   if (MT) setTimeout(MT.preload, 800);
+
+  /* ── C：ON 標誌的斜切線 ──
+     2026-09-29 從 /assets/ON_White_logo.png（1537×1028）實際量：標誌有 5 個缺口（O 左下、O 右側、N 左直筆、N 斜筆、N 右直筆），
+     每個缺口兩條切邊擬合，缺口寬 32 px；五個缺口中心做最小最大偏差直線：往右上 16.545°，
+     在圖左緣 x=0 時 y=678.86、右緣 x=1537 時 y=222.27（最大偏差 8.5 px，小於半個缺口 16 px → 線一定在缺口裡）。
+     下面用「佔圖高的比例」存，畫面上照標誌實際顯示的位置換算（桌機、手機都一樣）。 */
+  var CUT = { yL: 678.86 / 1028, yR: 222.27 / 1028 };
+  var cutGeo = null;
+  function cutLine(){
+    var img = curtain.querySelector('#curtain-logo img');
+    var r = img.getBoundingClientRect(), W = innerWidth, H = innerHeight;
+    var x0 = r.left, y0 = r.top + r.height * CUT.yL, x1 = r.right, y1 = r.top + r.height * CUT.yR;
+    var k = (y1 - y0) / (x1 - x0);                       /* 斜率（負值＝往右上） */
+    var yAt = function(x){ return y0 + k * (x - x0); };
+    var ang = Math.atan(k), len = Math.sqrt(1 + k * k);
+    var nx = -k / len, ny = 1 / len;                     /* 法向量（指向右下） */
+    var far = 0;                                         /* 最遠的角落到斜線的距離：滑這麼遠才會完全出畫面 */
+    [[0,0],[W,0],[0,H],[W,H]].forEach(function(p){ far = Math.max(far, Math.abs((p[0] - x0) * nx + (p[1] - y0) * ny)); });
+    return { x0: x0, y0: y0, x1: x1, y1: y1, k: k, ang: ang, yL: yAt(0), yR: yAt(W), W: W, H: H, nx: nx, ny: ny, far: far + 40 };
+  }
+  function layoutCut(){
+    var g = cutGeo = cutLine();
+    var halves = curtain.querySelectorAll('.c-half');
+    halves[0].style.clipPath = 'polygon(0 0,' + g.W + 'px 0,' + g.W + 'px ' + g.yR + 'px,0 ' + g.yL + 'px)';
+    halves[1].style.clipPath = 'polygon(0 ' + g.yL + 'px,' + g.W + 'px ' + g.yR + 'px,' + g.W + 'px ' + g.H + 'px,0 ' + g.H + 'px)';
+    /* 待機走光：只走標誌那一段 */
+    var slit = document.getElementById('slit'), segLen = Math.hypot(g.x1 - g.x0, g.y1 - g.y0);
+    slit.style.width = segLen + 'px';
+    slit.style.transform = 'translate(' + g.x0 + 'px,' + g.y0 + 'px) rotate(' + g.ang + 'rad)';
+    /* 按下去的金線：從螢幕左緣到右緣 */
+    var slash = document.getElementById('slash'), full = Math.hypot(g.W, g.yR - g.yL);
+    slash.style.width = full + 'px';
+    slash.style.transform = 'translate(0,' + g.yL + 'px) rotate(' + g.ang + 'rad)';
+    window.__onCut = g;                                  /* 驗證用 */
+  }
+  if (v === 'c') {
+    var lay = function(){ if (!opened) layoutCut(); };
+    if (document.readyState === 'complete') lay(); else addEventListener('load', lay);
+    var img0 = curtain.querySelector('#curtain-logo img');
+    if (!img0.complete) img0.addEventListener('load', lay);
+    addEventListener('resize', lay);
+    lay();
+    setTimeout(lay, 1300);        /* 黑幕上的標誌淡入（有 6px 位移）做完後再量一次 */
+  }
 
   /* 按下去＝t 0：開場檔第一拍＋黑幕打開＋對拍蒙太奇 */
   function enter(e){
@@ -788,6 +856,13 @@ function perfClock(){ var z = performance.now(); return { t: function(){ return 
       if (v === 'a' && !reduce) {
         curtain.classList.add('split');
         setTimeout(function(){ curtain.classList.add('out'); }, ENTRY.splitMs);
+      } else if (v === 'c' && !reduce) {
+        layoutCut();
+        var g = cutGeo, hv = curtain.querySelectorAll('.c-half');
+        curtain.classList.add('cut');
+        hv[0].style.transform = 'translate(' + (-g.nx * g.far) + 'px,' + (-g.ny * g.far) + 'px)';   /* 左上片往左上 */
+        hv[1].style.transform = 'translate(' + (g.nx * g.far) + 'px,' + (g.ny * g.far) + 'px)';     /* 右下片往右下 */
+        setTimeout(function(){ curtain.classList.add('out'); }, ENTRY.cutMs);
       } else {
         curtain.classList.add('flash', 'out');
       }
@@ -796,7 +871,7 @@ function perfClock(){ var z = performance.now(); return { t: function(){ return 
     if (MT) MT.play('beat', clock);
     /* 保險：萬一時鐘一直沒起來（音訊被系統卡住），1.2 秒後黑幕照樣打開，不讓人卡在黑畫面 */
     setTimeout(function(){
-      if (curtain.classList.contains('out') || curtain.classList.contains('split')) return;
+      if (curtain.classList.contains('out') || curtain.classList.contains('split') || curtain.classList.contains('cut')) return;
       beatLog('curtain-watchdog', 0, clock.t());
       curtain.classList.add('out'); showPage();
     }, 1200);
