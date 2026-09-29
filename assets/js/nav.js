@@ -61,12 +61,24 @@
       .filter(function (el) { return !el.hasAttribute('data-persist'); });
     var have = {};
     olds.forEach(function (el) { have[key(el)] = el; });
-    var keep = {}, waits = [];
+    var keep = [], waits = [];
+    /* 照新頁的順序排（樣式的先後會影響誰蓋過誰）；舊頁已經有、一模一樣的就留著不重載 */
+    var cursor = null;
+    function place(el) {
+      var ref = cursor ? cursor.nextSibling : (olds[0] || null);
+      if (el !== ref) head.insertBefore(el, ref);
+      cursor = el;
+    }
     [].slice.call(doc.head.querySelectorAll(HEAD_SEL)).forEach(function (n) {
       var el = document.importNode(n, true);
       if (el.tagName === 'LINK') el.href = el.href;              /* 相對路徑照新網址解析 */
       var k = key(el);
-      if (have[k]) { keep[k] = 1; return; }
+      if (have[k] && keep.indexOf(have[k]) < 0) {
+        keep.push(have[k]);
+        if (cursor && !(cursor.compareDocumentPosition(have[k]) & Node.DOCUMENT_POSITION_FOLLOWING)) place(have[k]);
+        else cursor = have[k];
+        return;
+      }
       if (el.tagName === 'LINK' && el.rel === 'stylesheet') {
         el.removeAttribute('onload');
         if (el.media === 'print') el.media = 'all';               /* 原本的「非阻塞載入」寫法，已經載過了 */
@@ -74,10 +86,10 @@
           el.addEventListener('load', res); el.addEventListener('error', res); setTimeout(res, 1500);
         }));
       }
-      head.appendChild(el);
+      place(el);
     });
     return Promise.all(waits).then(function () {
-      olds.forEach(function (el) { if (!keep[key(el)]) el.remove(); });
+      olds.forEach(function (el) { if (keep.indexOf(el) < 0) el.remove(); });
     });
   }
 

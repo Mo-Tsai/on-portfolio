@@ -40,9 +40,15 @@
   };
   var INTRO_FILE = 'no1-intro-4bars-logo-20260928.m4a';
 
+  /* 網站根目錄（從 sound.js 自己的位置推回去；預覽放在子路徑時也對） */
+  var ROOT = (function () {
+    try { return new URL('../../', document.currentScript.src).pathname; } catch (e) { return '/'; }
+  })();
   /* 哪一頁放哪一首；null＝延續當下那首 */
   function trackFor(path) {
-    var p = (path || location.pathname).replace(/index\.html$/, '');
+    var p = (path || location.pathname);
+    if (p.indexOf(ROOT) === 0) p = '/' + p.slice(ROOT.length);
+    p = p.replace(/index\.html$/, '');
     if (/^\/(en\/)?$/.test(p)) return 'no1';
     if (/^\/(en\/)?commercial\//.test(p)) return 'city';
     if (/^\/(en\/)?residential\//.test(p)) return 'home';
