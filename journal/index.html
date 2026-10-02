@@ -83,6 +83,14 @@
   .nav { flex-direction: column; align-items: flex-start; gap: 12px; padding: 14px 24px; }
   .nav-links { gap: 16px; flex-wrap: wrap; row-gap: 8px; }
 }
+
+  /* ---- 篩選 ---- */
+  .filter { display: flex; gap: 28px; flex-wrap: wrap; padding: 0 40px 8px; }
+  .filter button { font: inherit; font-size: 12.8px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); background: none; border: 0; border-bottom: 0.5px solid transparent; padding: 0 0 2px; cursor: pointer; transition: all 0.2s; }
+  .filter button:hover, .filter button[aria-pressed="true"] { color: var(--white); border-color: var(--white); }
+  .entry-video { margin-left: 12px; padding-left: 12px; border-left: 0.5px solid var(--dim); color: var(--accent); }
+  .entry[hidden] { display: none; }
+  @media (max-width: 640px) { .filter { padding: 0 24px 8px; gap: 16px; } }
 </style>
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
@@ -111,147 +119,168 @@
   <p class="question-zh">設計觀點與方法的紀錄——每一篇，都來自一個真實的案子。</p>
 </div>
 
+
+<nav class="filter" aria-label="篩選文章">
+  <button type="button" data-f="all" aria-pressed="true">全部</button>
+  <button type="button" data-f="technique" aria-pressed="false">特殊工法</button>
+  <button type="button" data-f="commercial" aria-pressed="false">商業空間</button>
+  <button type="button" data-f="residential" aria-pressed="false">住宅空間</button>
+</nav>
+
 <main class="list">
 
-  <a class="entry" href="/journal/belvoir/">
+  <a class="entry" data-tags="residential technique" href="/journal/hidden-projector/">
+    <p class="entry-cat">住宅空間 · 特殊工法</p>
+    <p class="entry-title">位置不是挑的</p>
+    <p class="entry-desc">消防管線、投射斜度、挑高，位置一個一個被排掉。最後剩下的那一個，藏不住它。</p>
+  </a>
+
+  <a class="entry" data-tags="commercial technique" href="/journal/monte-lamp/">
+    <p class="entry-cat">餐飲空間 · 特殊工法<span class="entry-video">影片</span></p>
+    <p class="entry-title">先印一段，再設計整支燈</p>
+    <p class="entry-desc">Monte 的弧形吧檯上，那條光是 3D 列印的。機台印不長，打樣色差又大，所以第一段就是整支燈的標準。</p>
+  </a>
+
+
+  <a class="entry" data-tags="commercial" href="/journal/belvoir/">
     <p class="entry-cat">餐飲空間 · 製圖方法</p>
     <p class="entry-title">誤差要在哪裡發生</p>
     <p class="entry-desc">Belvoir 的門面、吧檯、卡座都是先在別的地方做完再運到現場。成不成立不看工廠，看圖上哪些尺寸寫死、哪些標成可以退讓。</p>
   </a>
 
-  <a class="entry" href="/journal/on-operation-narrative/">
+  <a class="entry" data-tags="other" href="/journal/on-operation-narrative/">
     <p class="entry-cat">品牌定義 · 設計方法</p>
     <p class="entry-title">ON 是兩個字</p>
     <p class="entry-desc">Operation 與 Narrative。只有敘事是布景，只有營運是工廠——空間要活下來，兩個都得成立。</p>
   </a>
 
-  <a class="entry" href="/journal/design-fee/">
+  <a class="entry" data-tags="other" href="/journal/design-fee/">
     <p class="entry-cat">合作方式 · 計價邏輯</p>
     <p class="entry-title">設計費一坪多少？我們把數字和它背後的邏輯一起公開</p>
     <p class="entry-desc">住宅每坪 8,000–12,000、工務管理費 12%。數字不是重點，重點是這筆錢對應到什麼。</p>
   </a>
 
-  <a class="entry" href="/journal/de-nuit/">
+  <a class="entry" data-tags="commercial" href="/journal/de-nuit/">
     <p class="entry-cat">餐飲空間 · 經營者視角</p>
     <p class="entry-title">如果設計只為了好看，它可能是餐廳最昂貴的負擔</p>
     <p class="entry-desc">一份付過學費之後，才有資格寫下來的紀錄——de nuit 重新設計的三個問題。</p>
   </a>
 
-  <a class="entry" href="/journal/dunhua-32f/">
+  <a class="entry" data-tags="commercial" href="/journal/dunhua-32f/">
     <p class="entry-cat">辦公空間 · 設計方法</p>
     <p class="entry-title">限制不是障礙，是顯影劑——一個月完工的辦公室教我們的事</p>
     <p class="entry-desc">場外預製、現場只做定位組裝。限制把猶豫去掉，剩下的才是設計師真正相信的東西。</p>
   </a>
 
-  <a class="entry" href="/journal/r-sanderson/">
+  <a class="entry" data-tags="commercial" href="/journal/r-sanderson/">
     <p class="entry-cat">零售空間 · 動線設計</p>
     <p class="entry-title">路徑，才是零售設計真正的產品</p>
     <p class="entry-desc">慾望不是被展示品點燃的——它是在「走了下一步」之後才升溫的。</p>
   </a>
 
-  <a class="entry" href="/journal/monte/">
+  <a class="entry" data-tags="commercial" href="/journal/monte/">
     <p class="entry-cat">餐飲空間 · 小坪數設計</p>
     <p class="entry-title">13 坪，第一個決定是廚房的位置——限制是精確解法的條件</p>
-    <p class="entry-desc">弧形吧台的社交幾何，四套系統不封板。整合，是比設計更難的事。</p>
+    <p class="entry-desc">弧形吧檯的社交幾何，四套系統不封板。整合，是比設計更難的事。</p>
   </a>
 
-  <a class="entry" href="/journal/residence-h/">
+  <a class="entry" data-tags="residential" href="/journal/residence-h/">
     <p class="entry-cat">住宅空間 · 石材工法</p>
     <p class="entry-title">這不是一面發光的牆，是一塊只在特定位置亮起來的石頭</p>
     <p class="entry-desc">光只從石英結晶透出來，底材幾乎不透。要控的從來不是石頭，是燈。</p>
   </a>
 
-  <a class="entry" href="/journal/residence-h-counter/">
+  <a class="entry" data-tags="residential" href="/journal/residence-h-counter/">
     <p class="entry-cat">住宅空間 · 餐廚規劃</p>
     <p class="entry-title">直的吧檯，會讓四個人並排坐成一列</p>
     <p class="entry-desc">取消餐桌之後：兩側斜邊、中間圓弧。檯面沒有變大，讓出來的是中間。</p>
   </a>
 
-  <a class="entry" href="/journal/residence-h-pipe/">
+  <a class="entry" data-tags="residential" href="/journal/residence-h-pipe/">
     <p class="entry-cat">住宅空間 · 客變</p>
     <p class="entry-title">一支不能動的管，決定了這個家最後好不好住</p>
     <p class="entry-desc">客變做完了，比例卻沒跟著對。要動的不是房間，是衛浴——難處不在牆，在管。</p>
   </a>
 
-  <a class="entry" href="/journal/lezun/">
+  <a class="entry" data-tags="commercial" href="/journal/lezun/">
     <p class="entry-cat">餐飲空間 · 街邊店立面</p>
     <p class="entry-title">立面，是品牌開口前的第一句話</p>
     <p class="entry-desc">街道在說很多話。白不是空，是把街景雜訊收束成安定的嚴謹留白。</p>
   </a>
 
-  <a class="entry" href="/journal/analog-and-little-ladies/">
+  <a class="entry" data-tags="commercial" href="/journal/analog-and-little-ladies/">
     <p class="entry-cat">複合空間 · 業態整合</p>
     <p class="entry-title">設計最難的不是讓東西一致，是讓差異可以並存</p>
     <p class="entry-desc">刺青和理髮是同一種信任的兩種語言。縫合它們的是一條線，不是一道牆。</p>
   </a>
 
-  <a class="entry" href="/journal/la-vie-wine/">
+  <a class="entry" data-tags="commercial" href="/journal/la-vie-wine/">
     <p class="entry-cat">零售空間 · 品牌世界觀</p>
     <p class="entry-title">兩根不必要的柱子——空間誠實，品牌才有引力</p>
     <p class="entry-desc">現代建築不需要那兩根柱子，但沒有它們，空間就會說謊。iF Design Award 2023 得獎作品。</p>
   </a>
 
-  <a class="entry" href="/journal/mu-clinic/">
+  <a class="entry" data-tags="commercial" href="/journal/mu-clinic/">
     <p class="entry-cat">醫療空間 · 立面設計</p>
     <p class="entry-title">在踏進門之前，你已經到了——診所空間的第一句話</p>
     <p class="entry-desc">放鬆不來自「像真的自然」，而來自「讓人脫離當下的城市感」。</p>
   </a>
 
-  <a class="entry" href="/journal/elle-cafe/">
+  <a class="entry" data-tags="commercial" href="/journal/elle-cafe/">
     <p class="entry-cat">餐飲空間 · 燈光與色彩</p>
     <p class="entry-title">顏色可以有開關——ELLE Café 的桃紅色只從燈光出現</p>
     <p class="entry-desc">一個空間要讓別人在裡面發光，它自己必須先知道什麼時候退。</p>
   </a>
 
-  <a class="entry" href="/journal/dunnan-9f/">
+  <a class="entry" data-tags="commercial" href="/journal/dunnan-9f/">
     <p class="entry-cat">辦公空間 · 企業品牌空間</p>
     <p class="entry-title">沒有一個選擇是只做一件事的——企業辦公室的品牌翻譯</p>
     <p class="entry-desc">百歲磚不上漆、品牌色藏在地毯裡、吸音板同時解決迴音與照明。</p>
   </a>
 
-  <a class="entry" href="/journal/yun-jiao/">
+  <a class="entry" data-tags="commercial" href="/journal/yun-jiao/">
     <p class="entry-cat">展示空間 · 材料敘事</p>
     <p class="entry-title">牆不是背景，是展品——材料品牌展示間的設計悖論</p>
     <p class="entry-desc">設計太強材料被吃掉，太弱沒理由走進去。設計師的工作是幫材料找到敘述位置，然後退後一步。</p>
   </a>
 
-  <a class="entry" href="/journal/residence-l/">
+  <a class="entry" data-tags="residential" href="/journal/residence-l/">
     <p class="entry-cat">住宅空間 · 細部設計</p>
     <p class="entry-title">同一個白，三種說話的方式——精確是唯一的裝飾</p>
     <p class="entry-desc">Precision is the only ornament this space allows.</p>
   </a>
 
-  <a class="entry" href="/journal/residence-p/">
+  <a class="entry" data-tags="residential" href="/journal/residence-p/">
     <p class="entry-cat">住宅空間 · 新舊並存</p>
     <p class="entry-title">收藏不需要展示廳，它需要的是日常</p>
     <p class="entry-desc">A collection does not need a gallery — it needs a daily life.</p>
   </a>
 
-  <a class="entry" href="/journal/residence-c/">
+  <a class="entry" data-tags="residential" href="/journal/residence-c/">
     <p class="entry-cat">住宅空間 · 空間與材質</p>
     <p class="entry-title">柱子動不了，那就讓其他東西動</p>
     <p class="entry-desc">Two columns could not be moved. So we moved everything else.</p>
   </a>
 
-  <a class="entry" href="/journal/residence-m/">
+  <a class="entry" data-tags="residential" href="/journal/residence-m/">
     <p class="entry-cat">住宅空間 · 開放式格局</p>
     <p class="entry-title">一條路徑，不是一組房間——用天花的高度取代隔間</p>
     <p class="entry-desc">The entire home is a path, not a set of rooms.</p>
   </a>
 
-  <a class="entry" href="/journal/residence-r/">
+  <a class="entry" data-tags="residential" href="/journal/residence-r/">
     <p class="entry-cat">住宅空間 · 空間與材質</p>
     <p class="entry-title">一個家，三種音量——拿掉一道門之後的 Residence R</p>
     <p class="entry-desc">A door is a decision about where the room ends.</p>
   </a>
 
-  <a class="entry" href="/journal/residence-r-island/">
+  <a class="entry" data-tags="residential" href="/journal/residence-r-island/">
     <p class="entry-cat">住宅空間 · 工法與製造</p>
     <p class="entry-title">誤差要在哪裡發生——一座中島的切割</p>
     <p class="entry-desc">Every cut is a decision about where the error goes.</p>
   </a>
 
-  <a class="entry" href="/journal/residence-c-curves/">
+  <a class="entry" data-tags="residential technique" href="/journal/residence-c-curves/">
     <p class="entry-cat">住宅空間 · 工法與製造</p>
     <p class="entry-title">曲面沒有通解——機器做形，人做面</p>
     <p class="entry-desc">Everything that keeps this home simple is hidden inside it.</p>
@@ -263,6 +292,22 @@
   <a href="/faq/">← FAQ</a>
   <a href="/contact/">Contact →</a>
 </div>
+
+
+<script>
+/* 篩選：網址帶 #technique 會直接打開工法那一組，方便從 YouTube／IG 連過來 */
+(function () {
+  var btns = document.querySelectorAll('.filter button'), entries = document.querySelectorAll('.entry');
+  function apply(f) {
+    btns.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.f === f); });
+    entries.forEach(function (e) { e.hidden = f !== 'all' && (e.dataset.tags || '').split(' ').indexOf(f) < 0; });
+  }
+  btns.forEach(function (b) { b.addEventListener('click', function () {
+    apply(b.dataset.f); history.replaceState(null, '', b.dataset.f === 'all' ? location.pathname : '#' + b.dataset.f);
+  }); });
+  var h = location.hash.slice(1); if (h) apply(h);
+})();
+</script>
 
 <script src="/assets/js/nav.js" defer></script>
 <script src="/assets/js/sound.js" defer></script>

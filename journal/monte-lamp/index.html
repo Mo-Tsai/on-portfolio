@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6VJY51HQTQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-6VJY51HQTQ');
+  // ON-contact-tracking：有人點 Email、Instagram 或 Contact 時送一筆 GA 事件（詢問追蹤）
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a');
+    if (!a) return;
+    var h = a.getAttribute('href') || '', p = location.pathname;
+    if (h.indexOf('mailto:') === 0) gtag('event', 'contact_email', { page_path: p });
+    else if (/instagram\.com/i.test(h)) gtag('event', 'contact_instagram', { page_path: p });
+    else if (/(^|\/)contact\/?$/.test(h.split('#')[0].split('?')[0])) gtag('event', 'contact_page_click', { page_path: p });
+  });
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>先印一段，再設計整支燈｜Monte 的 3D 列印吧檯燈 — ON Design Lab Journal</title>
+<meta name="description" content="弧形吧檯的燈，市面上沒有現成的。機台一次印不到 66 公分、兩家樹脂一白一黃，我們先印一段當標準，燈架和吊點再跟著它設計。">
+<link rel="canonical" href="https://ondesignlabltd.com/journal/monte-lamp/">
+<link rel="alternate" hreflang="zh-Hant" href="https://ondesignlabltd.com/journal/monte-lamp/">
+<link rel="alternate" hreflang="x-default" href="https://ondesignlabltd.com/journal/monte-lamp/">
+<meta property="og:title" content="先印一段，再設計整支燈">
+<meta property="og:description" content="The first piece we printed became the rule for the rest.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ondesignlabltd.com/journal/monte-lamp/">
+<meta property="og:image" content="https://ondesignlabltd.com/assets/og-on.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "先印一段，再設計整支燈",
+  "description": "弧形吧檯的燈，市面上沒有現成的。機台一次印不到 66 公分、兩家樹脂一白一黃，我們先印一段當標準，燈架和吊點再跟著它設計。",
+  "author": {
+    "@type": "Organization",
+    "name": "ON Design Lab",
+    "url": "https://ondesignlabltd.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "ON Design Lab",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ondesignlabltd.com/assets/logo-square.png"
+    }
+  },
+  "datePublished": "2026-10-01",
+  "dateModified": "2026-10-01",
+  "inLanguage": "zh-Hant",
+  "image": "https://ondesignlabltd.com/assets/og-cover.jpg",
+  "mainEntityOfPage": "https://ondesignlabltd.com/journal/monte-lamp/",
+  "about": [
+    "訂製燈具",
+    "3D 列印",
+    "餐飲空間設計",
+    "吧檯照明"
+  ]
+}
+</script>
+<style>
+  :root {
+    --bg: #0e0e0c; --bg2: #141412; --bg3: #1a1a17;
+    --line: #252520; --white: #f0efe8;
+    --muted: #4a4a44; --dim: #2a2a26; --accent: #666660;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--font); background: var(--bg); color: var(--white); }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 20px 40px; border-bottom: 0.5px solid var(--line); position: sticky; top: 0; background: var(--bg); z-index: 100; }
+  .nav-logo { font-size: 12.8px; font-weight: 400; letter-spacing: 0.26em; text-transform: uppercase; color: var(--white); text-decoration: none; }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-link { font-size: 12.8px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding-bottom: 2px; border-bottom: 0.5px solid transparent; transition: all 0.2s; }
+  .nav-link:hover { color: var(--white); border-color: var(--white); }
+  .nav-link.active { color: var(--white); border-color: var(--white); }
+
+  .article { max-width: 680px; padding: 64px 40px 80px; }
+  .article-meta { font-size: 12.8px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+  .article-title { font-size: clamp(25px, 3.6vw, 39px); font-weight: 300; line-height: 1.25; letter-spacing: 0.02em; color: var(--white); margin-bottom: 16px; }@media(min-width:1084px){.article-title{font-weight:200}}
+  .article-hook { font-size: 16px; font-style: italic; color: var(--accent); letter-spacing: 0.03em; margin-bottom: 48px; padding-bottom: 32px; border-bottom: 0.5px solid var(--line); }
+  .article h2 { font-size: 16px; font-weight: 400; color: #c8c7c0; letter-spacing: 0.04em; margin: 44px 0 16px; line-height: 1.6; }
+  .article p { font-size: 16px; font-weight: 400; line-height: 1.85; color: #9a9a92; letter-spacing: 0.02em; margin-bottom: 20px; }
+  .article p.quote { font-size: 16px; color: #c8c7c0;  border-left: 1px solid var(--accent); padding-left: 20px; margin: 36px 0; }
+  .article p.en { font-style: italic; color: #6a6a62; font-size: 12.8px; line-height: 1.6; }
+  .article strong { color: #c8c7c0; font-weight: 400; }
+  .article-footer { margin-top: 56px; padding-top: 28px; border-top: 0.5px solid var(--line); font-size: 12.8px; color: var(--muted); line-height: 1.85; }
+  .article-footer a { color: var(--accent); text-decoration: none; border-bottom: 0.5px solid var(--dim); }
+  .article-footer a:hover { color: var(--white); }
+
+  .bottom { padding: 24px 40px; display: flex; gap: 32px; font-size: 12.8px; letter-spacing: 0.2em; text-transform: uppercase; border-top: 0.5px solid var(--line); }
+  .bottom a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .bottom a:hover { color: var(--white); }
+  @media (max-width: 768px) { .article { padding: 44px 24px 56px; } }
+
+/* mobile nav */
+@media (max-width: 640px) {
+  .nav { flex-direction: column; align-items: flex-start; gap: 12px; padding: 14px 24px; }
+  .nav-links { gap: 16px; flex-wrap: wrap; row-gap: 8px; }
+}
+
+  /* ---- 工法影片區塊 ---- */
+  .tv { width: min(100%, 360px); margin: 0 0 48px; }
+  .tv[hidden] { display: none; }
+  .tv-frame { position: relative; aspect-ratio: 9 / 16; background: var(--bg2); overflow: hidden; }
+  .tv-frame img, .tv-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border: 0; display: block; }
+  .tv-play { position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; background: none; cursor: pointer; }
+  .tv-play::after { content: ""; position: absolute; right: 20px; bottom: 20px; width: 52px; height: 52px; border: 0.5px solid rgba(240,239,232,0.7); border-radius: 50%; background: rgba(14,14,12,0.35); transition: background 0.2s, border-color 0.2s; }
+  .tv-play::before { content: ""; position: absolute; right: 36px; bottom: 38px; border-style: solid; border-width: 8px 0 8px 13px; border-color: transparent transparent transparent var(--white); z-index: 1; }
+  .tv-play:hover::after { background: rgba(14,14,12,0.6); border-color: var(--white); }
+  .tv-cap { margin-top: 12px; font-size: 12.8px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); display: flex; justify-content: space-between; gap: 16px; }
+  .tv-cap a { color: var(--accent); text-decoration: none; border-bottom: 0.5px solid var(--dim); }
+  .tv-cap a:hover { color: var(--white); }
+  .article p a.cta { color: #c8c7c0; text-decoration: none; border-bottom: 0.5px solid var(--muted); }
+  @media (max-width: 768px) { .tv { width: 100%; max-width: 420px; } }
+</style>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/NotoSansTC-ON.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/type.css?v=2.57">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..500&amp;display=swap" media="print" onload="this.media='all'">
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo on-logo" href="/"><img class="on-mark" src="/assets/ON_mark_white.png" alt="ON" width="44" height="22"><span class="on-word">Design Lab</span></a>
+  <div class="nav-links">
+    <a class="nav-link" href="/commercial/">Commercial</a>
+    <a class="nav-link" href="/residential/">Residential</a>
+    <a class="nav-link" href="/info/">Info</a>
+    <a class="nav-link active" href="/journal/">Journal</a>
+    <a class="nav-link" href="/faq/">FAQ</a>
+  </div>
+</nav>
+
+<article class="article">
+  <p class="article-meta">Journal · 餐飲空間 · 特殊工法</p>
+  <h1 class="article-title">先印一段，再設計整支燈</h1>
+  <p class="article-hook">The first piece we printed became the rule for the rest.</p>
+
+  <figure class="tv" data-yt="kPnU0VdJVbM" data-title="先印一段，再設計整支燈">
+    <div class="tv-frame">
+      <img src="/images/journal/monte-lamp-poster.jpg" alt="先印一段，再設計整支燈" width="540" height="960" loading="lazy">
+      <button class="tv-play" aria-label="播放影片：先印一段，再設計整支燈"></button>
+    </div>
+    <figcaption class="tv-cap"><span>特殊工法 · 1:42</span><a href="https://www.youtube.com/shorts/kPnU0VdJVbM">在 YouTube 看</a></figcaption>
+  </figure>
+
+  <p>這條光轉了一個彎，它是照著座位切的。</p>
+
+  <h2>直的買得到，彎的沒有</h2>
+  <p>市面上有現成的壓克力罩，直的買得到，裁一裁就能用，只是它彎不過去。Monte 的吧檯是弧形的，彎的沒有現成的。硬彎，斷面就塌，那條線就不再是同一條，所以只能自己印，這支燈連直段也是自己印的。</p>
+
+  <h2>極限先接受，設計才開始</h2>
+  <p>機台一次印得下的不到 66 公分，到這裡就是極限，只能接受。接受之後，才輪到設計：平均切，接縫就只是接縫，光會落在沒有人的地方。</p>
+
+  <h2>卡住我們的是顏色</h2>
+  <p>真正卡住我們的不是強度，是顏色。打樣回來，兩家的樹脂一家偏白、一家偏黃，只要有一段不對，一亮就看得出來。</p>
+
+  <h2>第一段就是標準</h2>
+  <p>我們先印一段，量準了，那一段就是標準，尺寸跟顏色一起定死，燈架、吊點和間距再跟著它往後設計。接縫不藏，套一個不鏽鋼環，下緣嵌一顆一瓦燈，一個座位一顆，桌面才打得勻；接縫斷了光的連續，就補回一顆燈。</p>
+
+  <h2>那一道縫，是我們自己要的</h2>
+  <p>後面的保溫燈會拉上拉下，跟主燈連在一起，拉一次就震到客人桌上。我們在中間留了一道 45 公釐的縫。</p>
+  <p>怎麼分段、怎麼接，這題我們留著。影片裡拆開的是這支燈的原始模型，列印機的畫面是我們印第一段時錄的，實景都在 Monte 現場；九段，沒有一段重印。</p>
+
+  <p class="quote">「不是先設計再印，是先印再設計。」</p>
+
+  <p>餐廳、酒吧、吧檯要一盞買不到的燈，<a class="cta" href="/contact/">跟我們談</a>。</p>
+
+  <p class="en">Monte's bar counter curves, and a curved light has no off-the-shelf version: bend a straight acrylic diffuser and its section collapses, so the line stops being one line. We printed it, straight runs included. The printer could not make a piece as long as 66 cm, and that limit was simply accepted; design started after it. What actually stopped us was colour, not strength: sample resins from two suppliers came back one whiter, one yellower, and a single mismatched segment shows the moment it lights up. So we printed one segment first, measured it, and made it the standard. The frame, the hanging points and the spacing were designed to follow it. The joints are not hidden; each wears a stainless ring with a one-watt light beneath it, one per seat. Where the heat lamp behind is pulled up and down, we left a 45 mm gap so the movement never reaches a guest's table. Nine segments, none reprinted.</p>
+
+  <div class="article-footer">
+    <p>ON DESIGN LAB｜設計 · 開發 · 施工</p>
+    <p>看這個案子的空間：<a href="/commercial/monte/">Monte — 餐飲空間</a>　·　同一個案子：<a href="/journal/monte/">13 坪，第一個決定是廚房的位置</a>　·　更多特殊工法：<a href="/journal/#technique">Journal</a>　·　合作洽詢：<a href="/contact/">Contact</a></p>
+  </div>
+</article>
+
+<div class="bottom">
+  <a href="/journal/">← Journal</a>
+  <a href="/contact/">Contact →</a>
+</div>
+
+<script>
+/* 工法影片：點了才載入 YouTube（youtube-nocookie），沒點之前不連 YouTube。 */
+document.querySelectorAll('.tv').forEach(function (fig) {
+  var btn = fig.querySelector('.tv-play');
+  if (!btn) return;
+  btn.addEventListener('click', function () {
+    if (!fig.dataset.yt) return;
+    var frame = fig.querySelector('.tv-frame'), el = document.createElement('iframe');
+    el.src = 'https://www.youtube-nocookie.com/embed/' + fig.dataset.yt + '?autoplay=1&rel=0&playsinline=1';
+    el.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+    el.title = fig.dataset.title || '影片';
+    frame.innerHTML = ''; frame.appendChild(el);
+  });
+});
+</script>
+
+<script src="/assets/js/nav.js" defer></script>
+<script src="/assets/js/sound.js" defer></script>
+</body>
+</html>
