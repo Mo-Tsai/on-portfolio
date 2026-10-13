@@ -83,6 +83,13 @@
   .nav { flex-direction: column; align-items: flex-start; gap: 12px; padding: 14px 24px; }
   .nav-links { gap: 16px; flex-wrap: wrap; row-gap: 8px; }
 }
+
+  /* ---- filter ---- */
+  .filter { display: flex; gap: 28px; flex-wrap: wrap; padding: 0 40px 8px; }
+  .filter button { font: inherit; font-size: 12.8px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); background: none; border: 0; border-bottom: 0.5px solid transparent; padding: 0 0 2px; cursor: pointer; transition: all 0.2s; }
+  .filter button:hover, .filter button[aria-pressed="true"] { color: var(--white); border-color: var(--white); }
+  .entry[hidden] { display: none; }
+  @media (max-width: 640px) { .filter { padding: 0 24px 8px; gap: 16px; } }
 </style>
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
@@ -111,104 +118,113 @@
   <p class="question-zh">Design method, recorded — every essay comes from a real project.</p>
 </div>
 
+
+<nav class="filter" aria-label="Filter essays">
+  <button type="button" data-f="all" aria-pressed="true">All</button>
+  <button type="button" data-f="technique" aria-pressed="false">Technique</button>
+  <button type="button" data-f="commercial" aria-pressed="false">Commercial</button>
+  <button type="button" data-f="residential" aria-pressed="false">Residential</button>
+  <button type="button" data-f="operation" aria-pressed="false">Operations</button>
+</nav>
+
 <main class="list">
 
-  <a class="entry" href="/en/journal/on-operation-narrative/">
+  <a class="entry" data-tags="other operation" href="/en/journal/on-operation-narrative/">
     <p class="entry-cat">Brand Definition · Design Method</p>
     <p class="entry-title">ON Stands for Two Words</p>
     <p class="entry-desc">Operation and Narrative. A space with only narrative is a stage set; one with only operation is a factory. To survive, it has to be both.</p>
   </a>
 
-  <a class="entry" href="/en/journal/design-fee/">
+  <a class="entry" data-tags="other operation" href="/en/journal/design-fee/">
     <p class="entry-cat">How We Work · Pricing Logic</p>
     <p class="entry-title">What does design cost per ping? We publish the number, and the logic behind it</p>
     <p class="entry-desc">NT$8,000–12,000 per ping, plus 12% for site supervision. The number is not the point — what it buys is.</p>
   </a>
-  <a class="entry" href="/en/journal/dunhua-32f/">
+  <a class="entry" data-tags="commercial" href="/en/journal/dunhua-32f/">
     <p class="entry-cat">Office Space · Design Method</p>
     <p class="entry-title">Constraints Don't Limit Design. They Reveal It — Lessons from a One-Month Office Build</p>
     <p class="entry-desc">When time compresses to a single month, every element that stays has to justify itself out loud.</p>
   </a>
 
-  <a class="entry" href="/en/journal/r-sanderson/">
+  <a class="entry" data-tags="commercial operation" href="/en/journal/r-sanderson/">
     <p class="entry-cat">Retail Space · Circulation Design</p>
     <p class="entry-title">The Path Is the Real Product of Retail Design</p>
     <p class="entry-desc">Desire isn't ignited by the display — it warms up only after you take the next step.</p>
   </a>
 
-  <a class="entry" href="/en/journal/monte/">
+  <a class="entry" data-tags="commercial operation" href="/en/journal/monte/">
     <p class="entry-cat">F&B Space · Small-Footprint Design</p>
     <p class="entry-title">Thirteen Pings, and the First Decision Was the Kitchen — Constraint as the Condition for Precision</p>
     <p class="entry-desc">Design doesn't begin its work in abundance. It produces under constraint, for the sake of an exact solution.</p>
   </a>
 
-  <a class="entry" href="/en/journal/residence-h/">
+  <a class="entry" data-tags="residential technique" href="/en/journal/residence-h/">
     <p class="entry-cat">Residential · Stonework</p>
     <p class="entry-title">It Is Not a Glowing Wall — It Is a Stone That Lights Up Only Where It Can</p>
     <p class="entry-desc">The stone lights up only where it can.</p>
   </a>
 
-  <a class="entry" href="/en/journal/residence-h-counter/">
+  <a class="entry" data-tags="residential" href="/en/journal/residence-h-counter/">
     <p class="entry-cat">Residential · Kitchen Planning</p>
     <p class="entry-title">A Straight Bar Seats Four People in a Row</p>
     <p class="entry-desc">The shape of a counter decides how people sit at it.</p>
   </a>
 
-  <a class="entry" href="/en/journal/residence-h-pipe/">
+  <a class="entry" data-tags="residential technique" href="/en/journal/residence-h-pipe/">
     <p class="entry-cat">Residential · Bathroom Planning</p>
     <p class="entry-title">What You Cannot Move Decides Everything You Can</p>
     <p class="entry-desc">What you cannot move decides everything you can.</p>
   </a>
 
-  <a class="entry" href="/en/journal/residence-r/">
+  <a class="entry" data-tags="residential" href="/en/journal/residence-r/">
     <p class="entry-cat">Residential · Space &amp; Material</p>
     <p class="entry-title">One Home, Three Volumes — Residence R After a Door Was Removed</p>
     <p class="entry-desc">A door is a decision about where the room ends.</p>
   </a>
 
-  <a class="entry" href="/en/journal/residence-r-island/">
+  <a class="entry" data-tags="residential technique" href="/en/journal/residence-r-island/">
     <p class="entry-cat">Residential · Method &amp; Making</p>
     <p class="entry-title">Where the Error Is Allowed to Happen — Cutting an Island</p>
     <p class="entry-desc">Every cut is a decision about where the error goes.</p>
   </a>
 
-  <a class="entry" href="/en/journal/lezun/">
+  <a class="entry" data-tags="commercial" href="/en/journal/lezun/">
     <p class="entry-cat">F&B Space · Street Facade</p>
     <p class="entry-title">The Facade Is the First Thing a Brand Says — Before It Speaks</p>
     <p class="entry-desc">What does a facade actually say before you walk in?</p>
   </a>
 
-  <a class="entry" href="/en/journal/analog-and-little-ladies/">
+  <a class="entry" data-tags="commercial" href="/en/journal/analog-and-little-ladies/">
     <p class="entry-cat">Hybrid Space · Programme Integration</p>
     <p class="entry-title">The Hardest Part of Design Isn't Uniformity — It's Letting Differences Coexist</p>
     <p class="entry-desc">What holds two different things together without making them the same?</p>
   </a>
 
-  <a class="entry" href="/en/journal/la-vie-wine/">
+  <a class="entry" data-tags="commercial" href="/en/journal/la-vie-wine/">
     <p class="entry-cat">Retail Space · Brand Worldbuilding</p>
     <p class="entry-title">Two Unnecessary Columns — When a Space Is Honest, a Brand Gains Gravity</p>
     <p class="entry-desc">What does a brand need to believe in before it builds a world?</p>
   </a>
 
-  <a class="entry" href="/en/journal/mu-clinic/">
+  <a class="entry" data-tags="commercial" href="/en/journal/mu-clinic/">
     <p class="entry-cat">Medical Space · Facade Design</p>
     <p class="entry-title">You've Already Arrived Before You Walk In — A Clinic's Opening Line</p>
     <p class="entry-desc">You've already arrived before you walk in.</p>
   </a>
 
-  <a class="entry" href="/en/journal/elle-cafe/">
+  <a class="entry" data-tags="commercial" href="/en/journal/elle-cafe/">
     <p class="entry-cat">F&B Space · Light and Color</p>
     <p class="entry-title">A Color With a Switch — ELLE Café's Pink Appears Only in Light</p>
     <p class="entry-desc">What if a color could decide when to show up?</p>
   </a>
 
-  <a class="entry" href="/en/journal/dunnan-9f/">
+  <a class="entry" data-tags="commercial" href="/en/journal/dunnan-9f/">
     <p class="entry-cat">Office Space · Corporate Brand Space</p>
     <p class="entry-title">No Decision Here Does Only One Thing — Translating a Corporate Brand into an Office</p>
     <p class="entry-desc">Every decision above your head was made for a reason.</p>
   </a>
 
-  <a class="entry" href="/en/journal/de-nuit/">
+  <a class="entry" data-tags="commercial operation" href="/en/journal/de-nuit/">
     <p class="entry-cat">F&B Space · Owner's Perspective</p>
     <p class="entry-title">If Design Only Looks Good, It May Be a Restaurant's Most Expensive Liability</p>
     <p class="entry-desc">A record we earned the right to write only after paying the tuition — three questions from the redesign of de nuit.</p>
@@ -219,6 +235,21 @@
   <a href="/en/faq/">← FAQ (EN)</a>
   <a href="/contact/">Contact →</a>
 </div>
+
+<script>
+/* Filter: #technique / #operation in the URL opens that group directly (links from YouTube / IG). */
+(function () {
+  var btns = document.querySelectorAll('.filter button'), entries = document.querySelectorAll('.entry');
+  function apply(f) {
+    btns.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.f === f); });
+    entries.forEach(function (e) { e.hidden = f !== 'all' && (e.dataset.tags || '').split(' ').indexOf(f) < 0; });
+  }
+  btns.forEach(function (b) { b.addEventListener('click', function () {
+    apply(b.dataset.f); history.replaceState(null, '', b.dataset.f === 'all' ? location.pathname : '#' + b.dataset.f);
+  }); });
+  var h = location.hash.slice(1); if (h) apply(h);
+})();
+</script>
 
 <script src="/assets/js/nav.js" defer></script>
 <script src="/assets/js/sound.js" defer></script>

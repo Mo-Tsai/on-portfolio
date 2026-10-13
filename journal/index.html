@@ -125,6 +125,7 @@
   <button type="button" data-f="technique" aria-pressed="false">特殊工法</button>
   <button type="button" data-f="commercial" aria-pressed="false">商業空間</button>
   <button type="button" data-f="residential" aria-pressed="false">住宅空間</button>
+  <button type="button" data-f="operation" aria-pressed="false">營運</button>
 </nav>
 
 <main class="list">
@@ -162,19 +163,19 @@
     <p class="entry-desc">Belvoir 的門面、吧檯、卡座都是先在別的地方做完再運到現場。成不成立不看工廠，看圖上哪些尺寸寫死、哪些標成可以退讓。</p>
   </a>
 
-  <a class="entry" data-tags="other" href="/journal/on-operation-narrative/">
+  <a class="entry" data-tags="other operation" href="/journal/on-operation-narrative/">
     <p class="entry-cat">品牌定義 · 設計方法</p>
     <p class="entry-title">ON 是兩個字</p>
     <p class="entry-desc">Operation 與 Narrative。只有敘事是布景，只有營運是工廠——空間要活下來，兩個都得成立。</p>
   </a>
 
-  <a class="entry" data-tags="other" href="/journal/design-fee/">
+  <a class="entry" data-tags="other operation" href="/journal/design-fee/">
     <p class="entry-cat">合作方式 · 計價邏輯</p>
     <p class="entry-title">設計費一坪多少？我們把數字和它背後的邏輯一起公開</p>
     <p class="entry-desc">住宅每坪 8,000–12,000、工務管理費 12%。數字不是重點，重點是這筆錢對應到什麼。</p>
   </a>
 
-  <a class="entry" data-tags="commercial" href="/journal/de-nuit/">
+  <a class="entry" data-tags="commercial operation" href="/journal/de-nuit/">
     <p class="entry-cat">餐飲空間 · 經營者視角</p>
     <p class="entry-title">如果設計只為了好看，它可能是餐廳最昂貴的負擔</p>
     <p class="entry-desc">一份付過學費之後，才有資格寫下來的紀錄——de nuit 重新設計的三個問題。</p>
@@ -186,13 +187,13 @@
     <p class="entry-desc">場外預製、現場只做定位組裝。限制把猶豫去掉，剩下的才是設計師真正相信的東西。</p>
   </a>
 
-  <a class="entry" data-tags="commercial" href="/journal/r-sanderson/">
+  <a class="entry" data-tags="commercial operation" href="/journal/r-sanderson/">
     <p class="entry-cat">零售空間 · 動線設計</p>
     <p class="entry-title">路徑，才是零售設計真正的產品</p>
     <p class="entry-desc">慾望不是被展示品點燃的——它是在「走了下一步」之後才升溫的。</p>
   </a>
 
-  <a class="entry" data-tags="commercial" href="/journal/monte/">
+  <a class="entry" data-tags="commercial operation" href="/journal/monte/">
     <p class="entry-cat">餐飲空間 · 小坪數設計</p>
     <p class="entry-title">13 坪，第一個決定是廚房的位置——限制是精確解法的條件</p>
     <p class="entry-desc">弧形吧檯的社交幾何，四套系統不封板。整合，是比設計更難的事。</p>
@@ -309,7 +310,7 @@
 
 
 <script>
-/* 篩選：網址帶 #technique 會直接打開工法那一組，方便從 YouTube／IG 連過來 */
+/* 篩選：網址帶 #technique 會直接打開工法那一組，方便從 YouTube／IG 連過來；#operation 是營運那一組 */
 (function () {
   var btns = document.querySelectorAll('.filter button'), entries = document.querySelectorAll('.entry');
   function apply(f) {
