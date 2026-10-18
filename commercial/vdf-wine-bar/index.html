@@ -44,16 +44,22 @@
 <link rel="stylesheet" href="/assets/css/type.css?v=2.57">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..500&amp;display=swap" media="print" onload="this.media='all'">
 <style>
-/* ===== VDF Hero C：直式整張置中，兩側同一張照片放大模糊壓暗填滿 ===== */
+/* ===== VDF Hero C：直式照片置中，取景從屋瓦上緣上方開始（砍掉最上方約 37% 的暗部），兩側同一張放大模糊壓暗填滿 ===== */
 .vdf-hc{position:relative;width:100%;height:100vh;height:100svh;min-height:560px;overflow:hidden;display:flex;align-items:flex-end;background:var(--black)}
-.vdf-hc-bg{position:absolute;inset:-60px}
-.vdf-hc-bg img{width:100%;height:100%;object-fit:cover;filter:blur(38px) brightness(.38) saturate(1.15)}
-.vdf-hc-fg{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(100%,calc(100vh * 2 / 3));aspect-ratio:2/3}
-.vdf-hc-fg img{display:block;width:100%;height:100%;object-fit:cover;filter:brightness(.92)}
-.vdf-hc .hero-caption{position:absolute;left:50%;bottom:0;transform:translateX(-50%);z-index:2;width:min(100%,calc(100vh * 2 / 3));padding:2.5rem 2rem 2.2rem;border-top:0;background:linear-gradient(to top,rgba(10,10,10,.78),rgba(10,10,10,0))}
+.vdf-hc-bg{position:absolute;inset:-60px;overflow:hidden}
+.vdf-hc-bg picture{position:absolute;left:0;bottom:0;width:100%;height:158.7%;display:block}
+.vdf-hc-bg img{width:100%;height:100%;object-fit:cover;object-position:50% 100%;filter:blur(38px) brightness(.38) saturate(1.15)}
+.vdf-hc-fg{position:absolute;left:50%;bottom:0;transform:translateX(-50%);height:calc(100% - 72px);aspect-ratio:2/1.89;max-width:100%;overflow:hidden}
+.vdf-hc-fg picture{position:absolute;left:0;bottom:0;width:100%;height:158.7%;display:block}
+.vdf-hc-fg img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 100%;filter:brightness(.92)}
+.vdf-hc .hero-caption{position:absolute;left:50%;bottom:0;transform:translateX(-50%);z-index:2;width:min(100%,calc((100svh - 72px) * 1.0582));padding:2.5rem 2rem 2.2rem;border-top:0;background:linear-gradient(to top,rgba(10,10,10,.78),rgba(10,10,10,0))}
 .vdf-hc .hero-title{font-size:clamp(39px,min(7vw,8.2vh),84px)}
-@media(max-width:700px){.vdf-hc-fg{width:100%}.vdf-hc .hero-caption{padding:2rem 1.4rem}}
-
+@media(max-width:700px){
+  .vdf-hc{height:auto;min-height:0;flex-direction:column;align-items:stretch;justify-content:flex-start;padding-top:124px}
+  .vdf-hc-fg{position:relative;left:auto;bottom:auto;transform:none;width:100%;height:auto;aspect-ratio:3/4;max-height:calc(100svh - 124px - 150px)}
+  .vdf-hc-fg img{object-position:74% 100%}
+  .vdf-hc .hero-caption{position:relative;left:auto;bottom:auto;transform:none;width:100%;padding:1.4rem 1.4rem 1.8rem;background:none}
+}
 /* ===== VDF 內頁方案 B（雜誌式）：12 欄格線，直式與橫裁穿插 ===== */
 .vdf-b .vdf-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(10px,1.6vw,20px);padding:clamp(2rem,5vw,4.5rem) 2.5rem;border-bottom:1px solid var(--dim);align-items:start}
 .vdf-b .vdf-fig{grid-column:var(--ds);aspect-ratio:var(--r);margin:var(--mt) 0 0;align-self:var(--al);min-width:0}
