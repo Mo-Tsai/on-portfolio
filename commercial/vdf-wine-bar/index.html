@@ -43,6 +43,26 @@
 <link rel="preload" href="/assets/fonts/NotoSansTC-ON.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/type.css?v=2.57">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..500&amp;display=swap" media="print" onload="this.media='all'">
+<style>
+/* ===== VDF Hero C：直式整張置中，兩側同一張照片放大模糊壓暗填滿 ===== */
+.vdf-hc{position:relative;width:100%;height:100vh;height:100svh;min-height:560px;overflow:hidden;display:flex;align-items:flex-end;background:var(--black)}
+.vdf-hc-bg{position:absolute;inset:-60px}
+.vdf-hc-bg img{width:100%;height:100%;object-fit:cover;filter:blur(38px) brightness(.38) saturate(1.15)}
+.vdf-hc-fg{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(100%,calc(100vh * 2 / 3));aspect-ratio:2/3}
+.vdf-hc-fg img{display:block;width:100%;height:100%;object-fit:cover;filter:brightness(.92)}
+.vdf-hc .hero-caption{position:absolute;left:50%;bottom:0;transform:translateX(-50%);z-index:2;width:min(100%,calc(100vh * 2 / 3));padding:2.5rem 2rem 2.2rem;border-top:0;background:linear-gradient(to top,rgba(10,10,10,.78),rgba(10,10,10,0))}
+.vdf-hc .hero-title{font-size:clamp(39px,min(7vw,8.2vh),84px)}
+@media(max-width:700px){.vdf-hc-fg{width:100%}.vdf-hc .hero-caption{padding:2rem 1.4rem}}
+
+/* ===== VDF 內頁方案 B（雜誌式）：12 欄格線，直式與橫裁穿插 ===== */
+.vdf-b .vdf-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(10px,1.6vw,20px);padding:clamp(2rem,5vw,4.5rem) 2.5rem;border-bottom:1px solid var(--dim);align-items:start}
+.vdf-b .vdf-fig{grid-column:var(--ds);aspect-ratio:var(--r);margin:var(--mt) 0 0;align-self:var(--al);min-width:0}
+.vdf-b .vdf-fig img{object-position:var(--pos)}
+@media(max-width:700px){
+  .vdf-b .vdf-grid{padding:1.6rem 1.4rem;gap:12px}
+  .vdf-b .vdf-fig{grid-column:var(--ms);margin-top:var(--mmt);align-self:start}
+}
+</style>
 </head>
 <body>
 
@@ -58,15 +78,16 @@
   </ul>
 </nav>
 
-<div class="hero">
-  <picture><source srcset="../../images/vdf-wine-bar/00.webp" type="image/webp"><img src="../../images/vdf-wine-bar/00.jpg" fetchpriority="high" loading="eager" decoding="async" alt="VDF Wine Bar｜餐飲空間設計 — 夜裡亮燈的老屋門面，格子窗透出暖光"></picture>
+<div class="vdf-hero vdf-hc">
+  <div class="vdf-hc-bg" aria-hidden="true"><picture><source srcset="../../images/vdf-wine-bar/00.webp" type="image/webp"><img src="../../images/vdf-wine-bar/00.jpg" loading="eager"  alt=""></picture></div>
+  <div class="vdf-hc-fg"><picture><source srcset="../../images/vdf-wine-bar/00.webp" type="image/webp"><img src="../../images/vdf-wine-bar/00.jpg" loading="eager" fetchpriority="high" decoding="async" alt="VDF Wine Bar｜餐飲空間設計 — 夜裡亮燈的老屋門面，格子窗透出暖光"></picture></div>
   <div class="hero-caption">
     <h1 class="hero-title">VDF Wine Bar</h1>
     <p class="hero-tags">餐飲空間 &middot; Wine Bar</p>
   </div>
 </div>
 
-<div class="content">
+<div class="content vdf-b">
 
   <div class="intro">
     <p class="intro-zh">一間 wine bar 的主題不是風格，是誰挑的酒。</p>
@@ -80,52 +101,32 @@
     <div><dt>面積 <span>Area</span></dt><dd>14 坪</dd></div>
   </dl>
 
-  <div class="mag-row r-6040">
-    <div class="mag-cell tall"><picture><source srcset="../../images/vdf-wine-bar/01.webp" type="image/webp"><img src="../../images/vdf-wine-bar/01.jpg" loading="lazy" alt="VDF Wine Bar｜餐飲空間設計 — 日光下的老屋門面，黑瓦屋簷與直條木板"></picture></div>
-    <div class="mag-cell tall"><picture><source srcset="../../images/vdf-wine-bar/02.webp" type="image/webp"><img src="../../images/vdf-wine-bar/02.jpg" loading="lazy" alt="VDF Wine Bar｜餐飲空間設計 — 門面近景，格子窗與直條木板，門牌上的店名"></picture></div>
-  </div>
-  <div class="mag-row r-6040">
-    <div class="mag-cell tall"><picture><source srcset="../../images/vdf-wine-bar/03.webp" type="image/webp"><img src="../../images/vdf-wine-bar/03.jpg" loading="lazy" alt="VDF Wine Bar｜餐飲空間設計 — 仿舊米牆與吊燈，一張木椅與兩瓶酒"></picture></div>
-    <div class="mag-cell tall"><picture><source srcset="../../images/vdf-wine-bar/04.webp" type="image/webp"><img src="../../images/vdf-wine-bar/04.jpg" loading="lazy" alt="VDF Wine Bar｜餐飲空間設計 — 隔著玻璃窗看進室內，木框與米牆"></picture></div>
-  </div>
-  <div class="text-break">
+  <div class="vdf-grid"><figure class="mag-cell vdf-fig" style="--ds:1 / span 7;--ms:1 / span 12;--r:2/3;--pos:50% 50%;--mt:0;--mmt:0;--al:end"><picture><source srcset="../../images/vdf-wine-bar/01.webp" type="image/webp"><img src="../../images/vdf-wine-bar/01.jpg" loading="lazy"  alt="VDF Wine Bar｜餐飲空間設計 — 日光下的老屋門面，黑瓦屋簷與直條木板"></picture></figure><figure class="mag-cell vdf-fig" style="--ds:8 / span 5;--ms:5 / span 8;--r:2/3;--pos:50% 50%;--mt:0;--mmt:-1.2rem;--al:end"><picture><source srcset="../../images/vdf-wine-bar/02.webp" type="image/webp"><img src="../../images/vdf-wine-bar/02.jpg" loading="lazy"  alt="VDF Wine Bar｜餐飲空間設計 — 門面近景，格子窗與直條木板，門牌上的店名"></picture></figure><figure class="mag-cell vdf-fig" style="--ds:1 / span 5;--ms:1 / span 8;--r:2/3;--pos:50% 50%;--mt:0;--mmt:0;--al:end"><picture><source srcset="../../images/vdf-wine-bar/03.webp" type="image/webp"><img src="../../images/vdf-wine-bar/03.jpg" loading="lazy"  alt="VDF Wine Bar｜餐飲空間設計 — 仿舊米牆與吊燈，一張木椅與兩瓶酒"></picture></figure><figure class="mag-cell vdf-fig" style="--ds:6 / span 7;--ms:1 / span 12;--r:2/3;--pos:50% 50%;--mt:7rem;--mmt:0;--al:start"><picture><source srcset="../../images/vdf-wine-bar/04.webp" type="image/webp"><img src="../../images/vdf-wine-bar/04.jpg" loading="lazy"  alt="VDF Wine Bar｜餐飲空間設計 — 隔著玻璃窗看進室內，木框與米牆"></picture></figure></div>
+<div class="text-break">
     <p class="tb-num">01</p>
     <p class="tb-zh">店主人最早的想法是，外國人走進來要記得這裡是台灣。這件事我們來回討論過很多次，最後沒有往那個方向走。題目下得太明確，客人會先記住題目，人和酒都退到後面去。牆從黑色改成仿舊米色，暗度交給燈光去做，牆本身要沉得住。米牆不抹平，留著手做的深淺，安靜，但不會空。</p>
     <p class="tb-en">The owner’s first idea was that a foreign guest should walk in and remember this was Taiwan. We went back and forth on it many times, and in the end did not go that way. Set the theme too clearly and guests remember the theme first, while the people and the wine recede behind it. The walls went from black to an aged beige. The darkness is left to the lighting; the wall itself has to hold its weight. The plaster is not smoothed flat but keeps the depth of the hand that made it. Quiet, but not empty.</p>
   </div>
-  <div class="mag-row r-6040">
-    <div class="mag-cell tall"><picture><source srcset="../../images/vdf-wine-bar/05.webp" type="image/webp"><img src="../../images/vdf-wine-bar/05.jpg" loading="lazy" alt="VDF Wine Bar｜餐飲空間設計 — 酒藏門口，木框後一整面牆的酒"></picture></div>
-    <div class="mag-cell tall"><picture><source srcset="../../images/vdf-wine-bar/06.webp" type="image/webp"><img src="../../images/vdf-wine-bar/06.jpg" loading="lazy" alt="VDF Wine Bar｜餐飲空間設計 — 酒櫃牆架，酒瓶與酒杯在燈光下排開"></picture></div>
-  </div>
-  <div class="text-break">
+<div class="vdf-grid"><figure class="mag-cell vdf-fig" style="--ds:4 / span 6;--ms:2 / span 10;--r:2/3;--pos:50% 50%;--mt:0;--mmt:0;--al:start"><picture><source srcset="../../images/vdf-wine-bar/05.webp" type="image/webp"><img src="../../images/vdf-wine-bar/05.jpg" loading="lazy"  alt="VDF Wine Bar｜餐飲空間設計 — 酒藏門口，木框後一整面牆的酒"></picture></figure><figure class="mag-cell vdf-fig" style="--ds:1 / span 12;--ms:1 / span 12;--r:3/2;--pos:50% 58%;--mt:0;--mmt:0;--al:start"><picture><source srcset="../../images/vdf-wine-bar/06.webp" type="image/webp"><img src="../../images/vdf-wine-bar/06.jpg" loading="lazy"  alt="VDF Wine Bar｜餐飲空間設計 — 酒櫃牆架，酒瓶與酒杯在燈光下排開"></picture></figure></div>
+<div class="text-break">
     <p class="tb-num">02</p>
     <p class="tb-zh">酒窖是這樣長出來的。原本的包廂臥榻拆掉，改成一間可以走進去的小房間，酒立著躺著排滿整面牆，像書櫃。你進去是挑，不是看。挑的不是酒，是今天晚上的心情。</p>
     <p class="tb-en">This is how the cellar came about. The old booth bench came out, and in its place is a small room you can walk into, bottles standing and lying across a whole wall like a bookcase. You go in to choose, not to look. What you are choosing is not the wine but tonight’s mood.</p>
   </div>
-  <div class="mag-row r-6040">
-    <div class="mag-cell tall"><picture><source srcset="../../images/vdf-wine-bar/07.webp" type="image/webp"><img src="../../images/vdf-wine-bar/07.jpg" loading="lazy" alt="VDF Wine Bar｜餐飲空間設計 — 吧檯後的酒櫃全景，檯面與吧椅"></picture></div>
-    <div class="mag-cell tall"><picture><source srcset="../../images/vdf-wine-bar/08.webp" type="image/webp"><img src="../../images/vdf-wine-bar/08.jpg" loading="lazy" alt="VDF Wine Bar｜餐飲空間設計 — 老酒窗與舊燈，木框玻璃裡一排酒"></picture></div>
-  </div>
-  <div class="text-break">
+<div class="vdf-grid"><figure class="mag-cell vdf-fig" style="--ds:1 / span 8;--ms:1 / span 12;--r:3/2;--pos:50% 56%;--mt:0;--mmt:0;--al:end"><picture><source srcset="../../images/vdf-wine-bar/07.webp" type="image/webp"><img src="../../images/vdf-wine-bar/07.jpg" loading="lazy"  alt="VDF Wine Bar｜餐飲空間設計 — 吧檯後的酒櫃全景，檯面與吧椅"></picture></figure><figure class="mag-cell vdf-fig" style="--ds:9 / span 4;--ms:5 / span 8;--r:2/3;--pos:50% 50%;--mt:0;--mmt:0;--al:end"><picture><source srcset="../../images/vdf-wine-bar/08.webp" type="image/webp"><img src="../../images/vdf-wine-bar/08.jpg" loading="lazy"  alt="VDF Wine Bar｜餐飲空間設計 — 老酒窗與舊燈，木框玻璃裡一排酒"></picture></figure></div>
+<div class="text-break">
     <p class="tb-num">03</p>
     <p class="tb-zh">店名 VDF 來自 Vin de France，法國酒裡不屬於任何分級的那一類。沒有產區規範，不必符合誰的標準，剩下的只有好不好喝。wine bar 賣的其實是店主人的選擇。同樣的預算，換一個人進的就是完全不同的一牆酒，客人是為了他挑的那些東西才來的。所以主題不必另外想，酒單本身就是主題，空間要做的只是讓那面牆站得住，讓人願意在裡面待久一點、多看兩排。</p>
     <p class="tb-en">The name VDF comes from Vin de France, the category of French wine that belongs to no classification. No appellation rules, no one’s standard to meet; what is left is only whether it tastes good. What a wine bar sells is really the owner’s selection. With the same budget, a different person buys an entirely different wall of wine, and guests come for what the owner chose. So the theme needs no separate invention: the wine list is the theme. The space only has to make that wall stand up, and make people willing to stay a little longer and look along one more row.</p>
   </div>
-  <div class="mag-row r-third">
-    <div class="mag-cell tall"><picture><source srcset="../../images/vdf-wine-bar/09.webp" type="image/webp"><img src="../../images/vdf-wine-bar/09.jpg" loading="lazy" alt="VDF Wine Bar｜餐飲空間設計 — 石材檯身與腳邊燈帶，吧椅與木格柵"></picture></div>
-    <div class="mag-cell tall"><picture><source srcset="../../images/vdf-wine-bar/10.webp" type="image/webp"><img src="../../images/vdf-wine-bar/10.jpg" loading="lazy" alt="VDF Wine Bar｜餐飲空間設計 — 光條掠過地面，白簾後的木椅與酒"></picture></div>
-    <div class="mag-cell tall"><picture><source srcset="../../images/vdf-wine-bar/11.webp" type="image/webp"><img src="../../images/vdf-wine-bar/11.jpg" loading="lazy" alt="VDF Wine Bar｜餐飲空間設計 — 門開一半，暖光從格子窗與門縫透出"></picture></div>
-  </div>
-  <div class="text-break">
+<div class="vdf-grid"><figure class="mag-cell vdf-fig" style="--ds:1 / span 4;--ms:1 / span 8;--r:2/3;--pos:50% 50%;--mt:0;--mmt:0;--al:start"><picture><source srcset="../../images/vdf-wine-bar/09.webp" type="image/webp"><img src="../../images/vdf-wine-bar/09.jpg" loading="lazy"  alt="VDF Wine Bar｜餐飲空間設計 — 石材檯身與腳邊燈帶，吧椅與木格柵"></picture></figure><figure class="mag-cell vdf-fig" style="--ds:5 / span 4;--ms:5 / span 8;--r:2/3;--pos:50% 50%;--mt:4.5rem;--mmt:0;--al:start"><picture><source srcset="../../images/vdf-wine-bar/10.webp" type="image/webp"><img src="../../images/vdf-wine-bar/10.jpg" loading="lazy"  alt="VDF Wine Bar｜餐飲空間設計 — 光條掠過地面，白簾後的木椅與酒"></picture></figure><figure class="mag-cell vdf-fig" style="--ds:9 / span 4;--ms:1 / span 8;--r:2/3;--pos:50% 50%;--mt:0;--mmt:0;--al:start"><picture><source srcset="../../images/vdf-wine-bar/11.webp" type="image/webp"><img src="../../images/vdf-wine-bar/11.jpg" loading="lazy"  alt="VDF Wine Bar｜餐飲空間設計 — 門開一半，暖光從格子窗與門縫透出"></picture></figure></div>
+<div class="text-break">
     <p class="tb-num">04</p>
     <p class="tb-zh">進場到完成，十五到十八天。做得完不是因為趕，是因為沒有全拆。只拆掉不必要的東西，該留的留著，力氣全部押在表面。牆改成米色以後，整套燈重新配過。石材檯身的燈帶嵌在腳邊往上掠，凹凸才讀得出來。門和牆同色，在暗處讀成一片平面。做舊交給美術團隊一寸一寸仿，難的不是弄髒，是讓它看起來被人用了很多年，而不是被人做舊過一次。</p>
     <p class="tb-en">From site entry to completion, fifteen to eighteen days. It got done not because it was rushed, but because not everything was torn down. Only what was unnecessary came out; what should stay stayed, and all the effort went into the surfaces. Once the walls turned beige, the whole lighting scheme was laid again. The strip light in the stone counter base is set at the foot and grazes upward, so the relief of the surface can be read. The doors and walls share one colour and read as a single plane in the dark. The ageing was handed to an art team, copied inch by inch. The hard part is not making it dirty. It is making it look used for many years, rather than aged once by someone.</p>
   </div>
-  <div class="mag-row r-6040">
-    <div class="mag-cell tall"><picture><source srcset="../../images/vdf-wine-bar/12.webp" type="image/webp"><img src="../../images/vdf-wine-bar/12.jpg" loading="lazy" alt="VDF Wine Bar｜餐飲空間設計 — 白簾後看進土間，遠處的吧檯與酒櫃"></picture></div>
-    <div class="mag-cell tall"><picture><source srcset="../../images/vdf-wine-bar/13.webp" type="image/webp"><img src="../../images/vdf-wine-bar/13.jpg" loading="lazy" alt="VDF Wine Bar｜餐飲空間設計 — 吊燈、木梁與吧椅，石材檯身上緣的暖光"></picture></div>
-  </div>
-  <div class="text-break">
+<div class="vdf-grid"><figure class="mag-cell vdf-fig" style="--ds:2 / span 5;--ms:2 / span 9;--r:2/3;--pos:50% 50%;--mt:0;--mmt:0;--al:start"><picture><source srcset="../../images/vdf-wine-bar/12.webp" type="image/webp"><img src="../../images/vdf-wine-bar/12.jpg" loading="lazy"  alt="VDF Wine Bar｜餐飲空間設計 — 白簾後看進土間，遠處的吧檯與酒櫃"></picture></figure><figure class="mag-cell vdf-fig" style="--ds:1 / span 12;--ms:1 / span 12;--r:3/2;--pos:50% 28%;--mt:0;--mmt:0;--al:start"><picture><source srcset="../../images/vdf-wine-bar/13.webp" type="image/webp"><img src="../../images/vdf-wine-bar/13.jpg" loading="lazy"  alt="VDF Wine Bar｜餐飲空間設計 — 吊燈、木梁與吧椅，石材檯身上緣的暖光"></picture></figure></div>
+<div class="text-break">
     <p class="tb-num">05</p>
     <p class="tb-zh">吧台上那根老木頭，本來要用真的漂流木吊上去。評估之後放棄：木頭重，吊具要另外算結構，多花的預算還算小事，真正的問題是它就在客人頭上。最後改成 3D 列印，把那根木頭印出來。看起來一樣舊，重量留在圖檔裡。最後進場的是店主人自己挑的家具和舊燈。那些東西不是我們做的，但整個空間是為了讓它們站得住才那樣做的。新的東西只要做好。舊的東西要做得像沒有人做過。</p>
     <p class="tb-en">The old timber above the bar was meant to be real driftwood, hung from above. After weighing it we gave that up: timber is heavy, the hangers would need a separate structural calculation, and the extra cost was the smaller matter. The real problem is that it sits directly over the guests’ heads. In the end it was 3D-printed, the timber itself printed out. It looks just as old, and the weight stays in the file. The last things to arrive were the owner’s own furniture and old lamps. We did not make them, but the whole space was made the way it is so that they could stand. New things only need to be made well. Old things have to be made as if no one made them.</p>
