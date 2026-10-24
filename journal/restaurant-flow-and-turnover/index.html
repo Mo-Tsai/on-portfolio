@@ -90,23 +90,6 @@
   .nav { flex-direction: column; align-items: flex-start; gap: 12px; padding: 14px 24px; }
   .nav-links { gap: 16px; flex-wrap: wrap; row-gap: 8px; }
 }
-
-  /* 配圖與先看結論（待 Mo 決定是否保留） */
-  .tldr { margin: 0 0 40px; padding-bottom: 28px; border-bottom: 0.5px solid var(--line); }
-  .tldr-label { font-size: 12.8px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px !important; }
-  .tldr ul { list-style: none; padding: 0; }
-  .tldr li { font-size: 16px; line-height: 1.85; color: #c8c7c0; letter-spacing: 0.02em; margin-bottom: 6px; }
-  .fig { margin: 36px 0; }
-  .fig svg { display: block; width: 100%; max-width: 420px; height: auto; }
-  .fig svg text { font-family: inherit; font-weight: 400; }
-  .fig .t1 { fill: #c8c7c0; }
-  .fig .t2 { fill: #9a9a92; }
-  .fig .ln { fill: none; stroke: var(--accent); stroke-width: 1; }
-  .fig .ls { fill: none; stroke: #c8c7c0; stroke-width: 1; }
-  .fig .lm { fill: none; stroke: #9a9a92; stroke-width: 1; }
-  .fig .fa { fill: #9a9a92; }
-  .fig .fs { fill: #c8c7c0; }
-  .fig figcaption { font-size: 12.8px; line-height: 1.7; color: #9a9a92; margin-top: 12px; letter-spacing: 0.02em; }
 </style>
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
@@ -134,19 +117,11 @@
   <h1 class="article-title">餐廳動線與坪效，怎麼在設計階段就算好</h1>
   <p class="article-hook">A floor plan is a schedule of footsteps.</p>
 
-  <div class="tldr">
-    <p class="tldr-label">先看結論</p>
-    <ul><li>先畫三條路：客人、菜、碗盤。交叉的地方，尖峰就會卡住。</li><li>座位數從人力反推，不是看塞得下幾張。</li><li>坪效拆成席數、翻桌、客單價，設計動得到前兩個。</li><li>檯前座位縮短出餐路線，代價是廚房要經得起被看。</li><li>平面圖用五個步驟檢查。</li></ul>
-  </div>
-
-
   <p>餐廳的動線和坪效，要在平面圖階段算好，因為牆砌起來以後，每一步路都已經決定了。坪效是營業額除以營業坪數，那是結果；設計階段能動的，是產生這個結果的原因：座位數、出餐路徑，和尖峰時段需要幾個人。</p>
   <p>我們名字裡有一個字是 Operation，指的就是這件事。這篇不講理念，講在平面圖上怎麼檢查。</p>
   <h2>一、先畫三條路，再排座位</h2>
   <p>餐廳的平面上同時有三條路。客人的路：入口、等位、座位、廁所、結帳。菜的路：廚房、出餐口、桌子。碗盤的路：桌子、回收、洗碗區。三條路在哪裡交叉，尖峰時段就會在哪裡卡住。</p>
   <p>先把三條路畫出來，看交叉點能不能減少、能不能錯開，再決定吧檯和桌子放哪裡。順序反過來，會得到一個很漂亮、外場卻要繞路的空間，這個學費我們在<a href="/journal/on-operation-narrative/">ON 是兩個字</a>裡寫過。</p>
-  <figure class="fig"><svg viewBox="0 0 360 292" role="img" aria-labelledby="rt rd"><title id="rt">餐廳平面的三條路</title><desc id="rd">客人的路：入口、等位、座位、廁所、結帳。菜的路：廚房、出餐口、桌子。碗盤的路：桌子、回收、洗碗區。三條路交叉的地方，尖峰時段會卡住。</desc><text class="t1" x="7" y="16" font-size="12.8">客人的路</text><rect class="ls" x="7.0" y="26" width="54" height="32"/><text class="t1" x="34.0" y="47" font-size="12.8" text-anchor="middle">入口</text><line class="ls" x1="62.0" y1="42" x2="73.0" y2="42"/><polygon class="fs" points="72.0,38 72.0,46 79.0,42"/><rect class="ls" x="80.0" y="26" width="54" height="32"/><text class="t1" x="107.0" y="47" font-size="12.8" text-anchor="middle">等位</text><line class="ls" x1="135.0" y1="42" x2="146.0" y2="42"/><polygon class="fs" points="145.0,38 145.0,46 152.0,42"/><rect class="ls" x="153.0" y="26" width="54" height="32"/><text class="t1" x="180.0" y="47" font-size="12.8" text-anchor="middle">座位</text><line class="ls" x1="208.0" y1="42" x2="219.0" y2="42"/><polygon class="fs" points="218.0,38 218.0,46 225.0,42"/><rect class="ls" x="226.0" y="26" width="54" height="32"/><text class="t1" x="253.0" y="47" font-size="12.8" text-anchor="middle">廁所</text><line class="ls" x1="281.0" y1="42" x2="292.0" y2="42"/><polygon class="fs" points="291.0,38 291.0,46 298.0,42"/><rect class="ls" x="299.0" y="26" width="54" height="32"/><text class="t1" x="326.0" y="47" font-size="12.8" text-anchor="middle">結帳</text><text class="t1" x="14" y="98" font-size="12.8">菜的路</text><rect class="lm" x="14.0" y="108" width="76" height="32"/><text class="t1" x="52.0" y="129" font-size="12.8" text-anchor="middle">廚房</text><line class="lm" x1="91.0" y1="124" x2="135.0" y2="124" stroke-dasharray="6 4"/><polygon class="fa" points="134.0,120 134.0,128 141.0,124"/><rect class="lm" x="142.0" y="108" width="76" height="32"/><text class="t1" x="180.0" y="129" font-size="12.8" text-anchor="middle">出餐口</text><line class="lm" x1="219.0" y1="124" x2="263.0" y2="124" stroke-dasharray="6 4"/><polygon class="fa" points="262.0,120 262.0,128 269.0,124"/><rect class="lm" x="270.0" y="108" width="76" height="32"/><text class="t1" x="308.0" y="129" font-size="12.8" text-anchor="middle">桌子</text><text class="t1" x="14" y="180" font-size="12.8">碗盤的路</text><rect class="lm" x="14.0" y="190" width="76" height="32"/><text class="t1" x="52.0" y="211" font-size="12.8" text-anchor="middle">桌子</text><line class="lm" x1="91.0" y1="206" x2="135.0" y2="206" stroke-dasharray="2 4"/><polygon class="fa" points="134.0,202 134.0,210 141.0,206"/><rect class="lm" x="142.0" y="190" width="76" height="32"/><text class="t1" x="180.0" y="211" font-size="12.8" text-anchor="middle">回收</text><line class="lm" x1="219.0" y1="206" x2="263.0" y2="206" stroke-dasharray="2 4"/><polygon class="fa" points="262.0,202 262.0,210 269.0,206"/><rect class="lm" x="270.0" y="190" width="76" height="32"/><text class="t1" x="308.0" y="211" font-size="12.8" text-anchor="middle">洗碗區</text><line class="ln" x1="0" y1="256" x2="360" y2="256"/><text class="t2" x="0" y="280" font-size="12.8">三條路交叉的地方，尖峰時段就會卡住</text></svg><figcaption>圖：先畫三條路，再排座位（示意）</figcaption></figure>
-
   <h2>二、座位數從人力反推</h2>
   <p>座位數不是「塞得下幾張」，是「這個編制在尖峰時段能好好服務幾席」。先問外場和內場在尖峰各有幾個人、一個外場能照顧幾桌，再回頭決定放幾席。</p>
   <p>這個數字還要和客單價一起看。同樣的空間，座位少、客單高、停留久，和座位多、客單低、翻桌快，是兩種完全不同的店，平面配置也會跟著不同。</p>

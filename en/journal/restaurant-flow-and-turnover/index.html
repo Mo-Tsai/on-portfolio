@@ -91,23 +91,6 @@
   .nav { flex-direction: column; align-items: flex-start; gap: 12px; padding: 14px 24px; }
   .nav-links { gap: 16px; flex-wrap: wrap; row-gap: 8px; }
 }
-
-  /* 配圖與先看結論（待 Mo 決定是否保留） */
-  .tldr { margin: 0 0 40px; padding-bottom: 28px; border-bottom: 0.5px solid var(--line); }
-  .tldr-label { font-size: 12.8px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px !important; }
-  .tldr ul { list-style: none; padding: 0; }
-  .tldr li { font-size: 16px; line-height: 1.85; color: #c8c7c0; letter-spacing: 0.02em; margin-bottom: 6px; }
-  .fig { margin: 36px 0; }
-  .fig svg { display: block; width: 100%; max-width: 420px; height: auto; }
-  .fig svg text { font-family: inherit; font-weight: 400; }
-  .fig .t1 { fill: #c8c7c0; }
-  .fig .t2 { fill: #9a9a92; }
-  .fig .ln { fill: none; stroke: var(--accent); stroke-width: 1; }
-  .fig .ls { fill: none; stroke: #c8c7c0; stroke-width: 1; }
-  .fig .lm { fill: none; stroke: #9a9a92; stroke-width: 1; }
-  .fig .fa { fill: #9a9a92; }
-  .fig .fs { fill: #c8c7c0; }
-  .fig figcaption { font-size: 12.8px; line-height: 1.7; color: #9a9a92; margin-top: 12px; letter-spacing: 0.02em; }
 </style>
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
@@ -136,19 +119,11 @@
   <h1 class="article-title">Restaurant Circulation and Yield per Ping: Work It Out at the Design Stage</h1>
   <p class="article-hook">A floor plan is a schedule of footsteps.</p>
 
-  <div class="tldr">
-    <p class="tldr-label">Key points</p>
-    <ul><li>Draw three routes first: guest, food, dishes. Where they cross, peak service jams.</li><li>Derive seat count from staffing, not from how many chairs fit.</li><li>Yield breaks into seats, turns and average spend; design can move the first two.</li><li>Counter seating shortens the service route; the kitchen must withstand being watched.</li><li>Five checks on a floor plan.</li></ul>
-  </div>
-
-
   <p>Restaurant circulation and yield per ping have to be worked out on the floor plan, because once the walls are up every footstep has been decided. Yield is revenue divided by floor area, and that is a result. What design can move are the causes behind it: the number of seats, the route a dish travels, and how many people are needed at peak.</p>
   <p>One of the two words in our name is Operation, and this is what it means. This piece is not about philosophy. It is about how to check a plan.</p>
   <h2>1. Draw three routes before you place seats</h2>
   <p>A restaurant plan carries three routes at once. The guest's route: entrance, waiting, seat, toilet, payment. The food's route: kitchen, pass, table. The dishes' route: table, clearing, dishwash. Wherever the three cross is where peak service will jam.</p>
   <p>Draw the three first, see whether the crossings can be reduced or staggered, and only then place the bar and the tables. Reverse the order and you get a beautiful room in which the floor team has to walk the long way round. We wrote about paying that tuition in <a href="/en/journal/on-operation-narrative/">ON Stands for Two Words</a>.</p>
-  <figure class="fig"><svg viewBox="0 0 360 292" role="img" aria-labelledby="rt rd"><title id="rt">The three routes on a restaurant plan</title><desc id="rd">Guest route: door, waiting, seat, toilet, payment. Food route: kitchen, pass, table. Dish route: table, clearing, dishwash. Where the routes cross, peak service jams.</desc><text class="t1" x="7" y="16" font-size="12.8">Guest route</text><rect class="ls" x="7.0" y="26" width="54" height="32"/><text class="t1" x="34.0" y="47" font-size="12.8" text-anchor="middle">Door</text><line class="ls" x1="62.0" y1="42" x2="73.0" y2="42"/><polygon class="fs" points="72.0,38 72.0,46 79.0,42"/><rect class="ls" x="80.0" y="26" width="54" height="32"/><text class="t1" x="107.0" y="47" font-size="12.8" text-anchor="middle">Wait</text><line class="ls" x1="135.0" y1="42" x2="146.0" y2="42"/><polygon class="fs" points="145.0,38 145.0,46 152.0,42"/><rect class="ls" x="153.0" y="26" width="54" height="32"/><text class="t1" x="180.0" y="47" font-size="12.8" text-anchor="middle">Seat</text><line class="ls" x1="208.0" y1="42" x2="219.0" y2="42"/><polygon class="fs" points="218.0,38 218.0,46 225.0,42"/><rect class="ls" x="226.0" y="26" width="54" height="32"/><text class="t1" x="253.0" y="47" font-size="12.8" text-anchor="middle">WC</text><line class="ls" x1="281.0" y1="42" x2="292.0" y2="42"/><polygon class="fs" points="291.0,38 291.0,46 298.0,42"/><rect class="ls" x="299.0" y="26" width="54" height="32"/><text class="t1" x="326.0" y="47" font-size="12.8" text-anchor="middle">Pay</text><text class="t1" x="14" y="98" font-size="12.8">Food route</text><rect class="lm" x="14.0" y="108" width="76" height="32"/><text class="t1" x="52.0" y="129" font-size="12.8" text-anchor="middle">Kitchen</text><line class="lm" x1="91.0" y1="124" x2="135.0" y2="124" stroke-dasharray="6 4"/><polygon class="fa" points="134.0,120 134.0,128 141.0,124"/><rect class="lm" x="142.0" y="108" width="76" height="32"/><text class="t1" x="180.0" y="129" font-size="12.8" text-anchor="middle">Pass</text><line class="lm" x1="219.0" y1="124" x2="263.0" y2="124" stroke-dasharray="6 4"/><polygon class="fa" points="262.0,120 262.0,128 269.0,124"/><rect class="lm" x="270.0" y="108" width="76" height="32"/><text class="t1" x="308.0" y="129" font-size="12.8" text-anchor="middle">Table</text><text class="t1" x="14" y="180" font-size="12.8">Dish route</text><rect class="lm" x="14.0" y="190" width="76" height="32"/><text class="t1" x="52.0" y="211" font-size="12.8" text-anchor="middle">Table</text><line class="lm" x1="91.0" y1="206" x2="135.0" y2="206" stroke-dasharray="2 4"/><polygon class="fa" points="134.0,202 134.0,210 141.0,206"/><rect class="lm" x="142.0" y="190" width="76" height="32"/><text class="t1" x="180.0" y="211" font-size="12.8" text-anchor="middle">Clear</text><line class="lm" x1="219.0" y1="206" x2="263.0" y2="206" stroke-dasharray="2 4"/><polygon class="fa" points="262.0,202 262.0,210 269.0,206"/><rect class="lm" x="270.0" y="190" width="76" height="32"/><text class="t1" x="308.0" y="211" font-size="12.8" text-anchor="middle">Dishwash</text><line class="ln" x1="0" y1="256" x2="360" y2="256"/><text class="t2" x="0" y="280" font-size="12.8">Where routes cross, peak service jams</text></svg><figcaption>Figure: draw the three routes first, then place seats (schematic)</figcaption></figure>
-
   <h2>2. Derive seat count backwards from staffing</h2>
   <p>Seat count is not how many chairs fit. It is how many seats this team can serve well at peak. Ask how many people will be on the floor and in the kitchen at peak and how many tables one person on the floor can look after, then decide how many seats.</p>
   <p>The number also has to be read together with average spend. In the same room, few seats, high spend and long stays make a different restaurant from many seats, low spend and fast turns, and the plan changes with it.</p>
