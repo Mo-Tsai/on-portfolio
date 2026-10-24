@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6VJY51HQTQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-6VJY51HQTQ');
+  // ON-contact-tracking：有人點 Email、Instagram 或 Contact 時送一筆 GA 事件（詢問追蹤）
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a');
+    if (!a) return;
+    var h = a.getAttribute('href') || '', p = location.pathname;
+    if (h.indexOf('mailto:') === 0) gtag('event', 'contact_email', { page_path: p });
+    else if (/instagram\.com/i.test(h)) gtag('event', 'contact_instagram', { page_path: p });
+    else if (/(^|\/)contact\/?$/.test(h.split('#')[0].split('?')[0])) gtag('event', 'contact_page_click', { page_path: p });
+  });
+</script>
+
+<!-- DRAFT：英文草案，交 Mo 定；未經 Mo 確認前不要 push -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Choosing a Commercial Interior Design Firm in Taipei: Eight Questions for the First Meeting — ON Design Lab Journal</title>
+<meta name="description" content="Choosing a commercial design firm in Taipei? Eight questions for the first meeting, from drawing scope and fee structure to who is on site.">
+<link rel="canonical" href="https://ondesignlabltd.com/en/journal/choosing-a-commercial-design-firm/">
+<link rel="alternate" hreflang="zh-Hant" href="https://ondesignlabltd.com/journal/choosing-a-commercial-design-firm/">
+<link rel="alternate" hreflang="en" href="https://ondesignlabltd.com/en/journal/choosing-a-commercial-design-firm/">
+<link rel="alternate" hreflang="x-default" href="https://ondesignlabltd.com/journal/choosing-a-commercial-design-firm/">
+<meta property="og:title" content="Choosing a Commercial Design Firm: Eight Questions for the First Meeting">
+<meta property="og:description" content="Every firm has a portfolio. What differs is who answers when something goes wrong.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ondesignlabltd.com/en/journal/choosing-a-commercial-design-firm/">
+<meta property="og:image" content="https://ondesignlabltd.com/assets/og-on.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Choosing a Commercial Design Firm: Eight Questions for the First Meeting",
+  "description": "Eight questions to ask at the first meeting when choosing a commercial design firm in Taipei: current state of built venues, same-sector experience, scope of drawings, fee structure, revisions and variations, supervision, readable drawings and rights, and what the firm asks first.",
+  "author": { "@type": "Organization", "name": "ON Design Lab", "url": "https://ondesignlabltd.com/" },
+  "publisher": { "@type": "Organization", "name": "ON Design Lab", "logo": { "@type": "ImageObject", "url": "https://ondesignlabltd.com/assets/logo-square.png" } },
+  "datePublished": "2026-10-24",
+  "dateModified": "2026-10-24",
+  "inLanguage": "en",
+  "image": "https://ondesignlabltd.com/assets/og-cover.jpg",
+  "mainEntityOfPage": "https://ondesignlabltd.com/en/journal/choosing-a-commercial-design-firm/",
+  "about": ["Commercial interior design firm", "Taipei", "Choosing a designer", "Design fees", "Restaurant design"]
+}
+</script>
+<style>
+  :root {
+    --bg: #0e0e0c; --bg2: #141412; --bg3: #1a1a17;
+    --line: #252520; --white: #f0efe8;
+    --muted: #4a4a44; --dim: #2a2a26; --accent: #666660;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--font); background: var(--bg); color: var(--white); }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 20px 40px; border-bottom: 0.5px solid var(--line); position: sticky; top: 0; background: var(--bg); z-index: 100; }
+  .nav-logo { font-size: 12.8px; font-weight: 400; letter-spacing: 0.26em; text-transform: uppercase; color: var(--white); text-decoration: none; }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-link { font-size: 12.8px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding-bottom: 2px; border-bottom: 0.5px solid transparent; transition: all 0.2s; }
+  .nav-link:hover { color: var(--white); border-color: var(--white); }
+  .nav-link.active { color: var(--white); border-color: var(--white); }
+
+  .article { max-width: 680px; padding: 64px 40px 80px; }
+  .article-meta { font-size: 12.8px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+  .article-title { font-size: clamp(25px, 3.6vw, 39px); font-weight: 300; line-height: 1.25; letter-spacing: 0.02em; color: var(--white); margin-bottom: 16px; }@media(min-width:1084px){.article-title{font-weight:200}}
+  .article-hook { font-size: 16px; font-style: italic; color: var(--accent); letter-spacing: 0.03em; margin-bottom: 48px; padding-bottom: 32px; border-bottom: 0.5px solid var(--line); }
+  .article h2 { font-size: 16px; font-weight: 400; color: #c8c7c0; letter-spacing: 0.04em; margin: 44px 0 16px; line-height: 1.6; }
+  .article p { font-size: 16px; font-weight: 400; line-height: 1.6; color: #9a9a92; letter-spacing: 0.02em; margin-bottom: 20px; }
+  .article p.quote { font-size: 16px; color: #c8c7c0; font-style: italic; border-left: 1px solid var(--accent); padding-left: 20px; margin: 36px 0; }
+  .article p.en { font-style: italic; color: #6a6a62; font-size: 12.8px; line-height: 1.6; }
+  .article a { color: var(--accent); text-decoration: none; border-bottom: 0.5px solid var(--dim); }
+  .article a:hover { color: var(--white); }
+  .article p a.cta { color: #c8c7c0; text-decoration: none; border-bottom: 0.5px solid var(--muted); }
+  .article-footer { margin-top: 56px; padding-top: 28px; border-top: 0.5px solid var(--line); font-size: 12.8px; color: var(--muted); line-height: 1.6; }
+  .article-footer a { color: var(--accent); text-decoration: none; border-bottom: 0.5px solid var(--dim); }
+  .article-footer a:hover { color: var(--white); }
+
+  .bottom { padding: 24px 40px; display: flex; gap: 32px; font-size: 12.8px; letter-spacing: 0.2em; text-transform: uppercase; border-top: 0.5px solid var(--line); }
+  .bottom a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .bottom a:hover { color: var(--white); }
+  @media (max-width: 768px) { .article { padding: 44px 24px 56px; } }
+
+/* mobile nav */
+@media (max-width: 640px) {
+  .nav { flex-direction: column; align-items: flex-start; gap: 12px; padding: 14px 24px; }
+  .nav-links { gap: 16px; flex-wrap: wrap; row-gap: 8px; }
+}
+</style>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/NotoSansTC-ON.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/type.css?v=2.57">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..500&amp;display=swap" media="print" onload="this.media='all'">
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo on-logo" href="/en/"><img class="on-mark" src="/assets/ON_mark_white.png" alt="ON" width="44" height="22"><span class="on-word">Design Lab</span></a>
+  <div class="nav-links">
+    <a class="nav-link" href="/en/commercial/">Commercial</a>
+    <a class="nav-link" href="/en/residential/">Residential</a>
+    <a class="nav-link" href="/en/info/">Info</a>
+    <a class="nav-link active" href="/en/journal/">Journal</a>
+    <a class="nav-link" href="/en/faq/">FAQ</a>
+    <a class="nav-link" href="/en/contact/">Contact</a>
+    <a class="nav-link" href="/journal/choosing-a-commercial-design-firm/">中文</a>
+  </div>
+</nav>
+
+<article class="article">
+  <p class="article-meta">Journal · How We Work · Choosing a Firm</p>
+  <h1 class="article-title">Choosing a Commercial Design Firm: Eight Questions for the First Meeting</h1>
+  <p class="article-hook">Portfolios show what a designer drew. Contracts show what a designer answers for.</p>
+
+  <p>When you look for a commercial design firm in Taipei, a portfolio can only tell you what they have drawn. What is worth asking at the first meeting is what they answer for when something goes wrong. These eight questions are useful whoever you end up working with, and we answer them ourselves as a demonstration.</p>
+  <h2>1. Are the venues they built still trading?</h2>
+  <p>Photographs are taken on opening day, and operation only starts after it. If you can, visit one of their venues and sit through a peak service. Our project pages state the business type, floor area and completion year so that you can compare in just this way.</p>
+  <h2>2. Have they done your kind of business, at your scale?</h2>
+  <p>A 13-ping open-kitchen restaurant and a 110-ping teppanyaki are different jobs, not only in size but in what has to be decided first. Ask which of their projects is closest to yours and where it is the same and where it differs. Among our restaurants, Monte is 13 ping, Belvoir 30, Cava Baja 54, de nuit 65 and IRON CHEF 110.</p>
+  <h2>3. How far do the drawings in the design fee go?</h2>
+  <p>A floor plan only, and a full set with elevations, ceilings, services and details, are two different deliverables that are often quoted under the same name. Ask them to list the drawings the design fee will deliver.</p>
+  <h2>4. How is the fee split?</h2>
+  <p>The design fee buys judgment, the construction cost pays the trades and suppliers, and the supervision fee buys delivery on site. Read the three separately. Our supervision fee is 12% of construction cost; commercial projects are always quoted individually, because pricing by floor area distorts; and for repeat venues of a brand we charge only a drawing-adaptation fee. Every firm works differently. What matters is that they can say what each line corresponds to. The details are in <a href="/en/journal/design-fee/">what design costs per ping</a>.</p>
+  <h2>5. How are revisions and variations handled?</h2>
+  <p>We include two revisions in the concept stage and two in the 3D drawing stage; once confirmed, a reversal or an item outside the original scope is quoted separately. Whether a clear boundary exists directly affects the cost of communication later. How variations usually arise, and how to plan for them, is in <a href="/en/journal/restaurant-fitout-budget/">how to set a restaurant fit-out budget</a>. The stages and proportions of staged payments should also be written into the contract; we invoice by project stage, with proportions and timing agreed in the contract.</p>
+  <h2>6. Who is on site during construction?</h2>
+  <p>Handing over to the contractor after design, and supervising through to completion, are two different services. The first is cheaper, but the risk of deviation is yours. A circulation route that works on paper fails the moment a joiner builds a unit five centimetres deeper than drawn, and nobody will tell you about those five centimetres unless someone is on site watching. We keep construction supervision inside the process rather than handing it off.</p>
+  <h2>7. Once the drawings leave the office, can someone else read them?</h2>
+  <p>A set of working drawings is read by many people: joiners, metalworkers, suppliers, often people who have never visited the site and will not call to ask. Ask to see an actual drawing, with the elevations and details, and see which dimensions are fixed and which are marked as confirmed on site. How we draw is in <a href="/journal/belvoir/">Every cut is a decision about where the error goes</a> (Chinese). Ask about rights over the drawings too: with us, once the fee is paid, the copyright in the design belongs to the owner, and the studio keeps the right to show the work in its portfolio, website and award entries.</p>
+  <h2>8. What do they ask you first?</h2>
+  <p>Asking first what style you like, and asking first about your floor area, budget, opening date and lease, are two different starting points. Our contact page asks anyone writing in to include the type of business, location and floor area, budget, target opening date and lease status, plus average spend and seats for food and beverage, and then we tell you whether it can be done and roughly where it will get stuck. A firm that can tell you at the first meeting where it will get stuck is worth more than one that says anything is possible.</p>
+  <p>It is also where the name ON comes from: we handle both Operation and Narrative, whether a space can be used and whether it is remembered. The full explanation is in <a href="/en/journal/on-operation-narrative/">ON Stands for Two Words</a>.</p>
+  <p class="quote">&ldquo;Every firm has a portfolio. What differs is who answers when something goes wrong.&rdquo;</p>
+  <p>It is normal to talk to several firms before deciding. Take the same material to each, and the comparison is fair. What else to prepare before you start is in <a href="/en/journal/before-you-open-a-restaurant/">what a designer will ask you to prepare before you open a restaurant</a>.</p>
+  <p class="en">在台北選商業空間設計公司，作品集只能告訴你他們畫過什麼。第一次見面值得問八件事：做過的店現在還開著嗎、有沒有同業態同尺度的案子、設計費包含哪些圖說、費用怎麼拆、修改與追加怎麼算、工程期間誰在現場、圖交出去別人讀不讀得懂與權利歸誰、對方第一個問的是什麼。</p>
+  <p>Bring the idea for your shop and the site, and <a class="cta" href="/en/contact/">we will run the numbers together first</a>.</p>
+
+  <div class="article-footer">
+    <p>ON Design Lab — Brand Logic Translated into Space</p>
+    <p>Related reading: <a href="/en/journal/design-fee/">What design costs per ping</a>　·　<a href="/en/journal/restaurant-fitout-budget/">Restaurant fit-out budget</a>　·　<a href="/en/journal/on-operation-narrative/">ON Stands for Two Words</a></p>
+    <p>How we work: <a href="/en/process/">Five-stage process</a>　·　<a href="/en/faq/">FAQ</a>　·　Talk to us: <a href="/en/contact/">Contact</a>　·　<a href="/journal/choosing-a-commercial-design-firm/">中文版</a></p>
+  </div>
+</article>
+
+<div class="bottom">
+  <a href="/en/journal/">← Journal</a>
+  <a href="/en/contact/">Contact →</a>
+</div>
+
+<script src="/assets/js/nav.js" defer></script>
+<script src="/assets/js/sound.js" defer></script>
+</body>
+</html>
