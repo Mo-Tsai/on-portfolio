@@ -91,6 +91,23 @@
   .nav { flex-direction: column; align-items: flex-start; gap: 12px; padding: 14px 24px; }
   .nav-links { gap: 16px; flex-wrap: wrap; row-gap: 8px; }
 }
+
+  /* 配圖與先看結論（待 Mo 決定是否保留） */
+  .tldr { margin: 0 0 40px; padding-bottom: 28px; border-bottom: 0.5px solid var(--line); }
+  .tldr-label { font-size: 12.8px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px !important; }
+  .tldr ul { list-style: none; padding: 0; }
+  .tldr li { font-size: 16px; line-height: 1.85; color: #c8c7c0; letter-spacing: 0.02em; margin-bottom: 6px; }
+  .fig { margin: 36px 0; }
+  .fig svg { display: block; width: 100%; max-width: 420px; height: auto; }
+  .fig svg text { font-family: inherit; font-weight: 400; }
+  .fig .t1 { fill: #c8c7c0; }
+  .fig .t2 { fill: #9a9a92; }
+  .fig .ln { fill: none; stroke: var(--accent); stroke-width: 1; }
+  .fig .ls { fill: none; stroke: #c8c7c0; stroke-width: 1; }
+  .fig .lm { fill: none; stroke: #9a9a92; stroke-width: 1; }
+  .fig .fa { fill: #9a9a92; }
+  .fig .fs { fill: #c8c7c0; }
+  .fig figcaption { font-size: 12.8px; line-height: 1.7; color: #9a9a92; margin-top: 12px; letter-spacing: 0.02em; }
 </style>
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
@@ -119,6 +136,12 @@
   <h1 class="article-title">How to Set a Restaurant Fit-Out Budget, and Where It Overruns</h1>
   <p class="article-hook">A budget is a list of things you have not decided yet.</p>
 
+  <div class="tldr">
+    <p class="tldr-label">Key points</p>
+    <ul><li>Price the base works first: masonry, electrical and plumbing, partitions, air-conditioning and extraction, fire and waterproofing, power and low-voltage, plus structural metalwork where there is any.</li><li>Finishes depend on material and detail, so reserve a range and bring them in later.</li><li>Give two parts: the base-works figure, plus a reserved range for finishes.</li><li>Variations are staged: gathered, confirmed, carried into the next stage.</li><li>To start early, price the base works first and add the finishes afterwards.</li></ul>
+  </div>
+
+
   <p>A restaurant fit-out budget overruns most where nothing has been decided yet, not where the guest can see. Our way of setting one is in two parts: first the base works that truly have to be done, then the finishes, brought in afterwards.</p>
   <p>So this piece does not give a price per ping. We quote commercial projects individually, because pricing by floor area becomes too distorted to be a useful reference, and restaurants more than most: equipment, extraction and the condition of the site pull the unit price apart. What follows is the order: what to price first, what to price after, and why variations arrive in stages.</p>
   <h2>1. First, understand how the space will be used</h2>
@@ -130,6 +153,8 @@
   <p>Finishes are the joinery, stone, paint, glass, lighting, decorative metalwork and hardware a guest can see, and they depend on material and detail. In the same space, a different material or edge detail changes the cost, so this part should not be fixed at the start.</p>
   <h2>4. Give two parts, not one total</h2>
   <p>At the first budget conversation we give two parts: the base-works figure, plus a range reserved for the finishes. We then explain how much is left to work with for the decorative layer once the base works are taken out, and how far it can go. The owner gets a broad direction without being tied to a total that was set too early.</p>
+  <figure class="fig"><svg viewBox="0 0 360 354" role="img" aria-labelledby="bt bd"><title id="bt">Stages of a fit-out budget</title><desc id="bd">Three boxes from top to bottom: price the base works, reserve a range for finishes, then carry variations into the next stage.</desc><rect class="ln" x="1" y="1" width="358" height="118"/><text class="t2" x="14" y="23" font-size="12.8">Step 1 · Price first</text><text class="t1" x="14" y="47" font-size="16">Base works</text><text class="t2" x="14" y="69" font-size="12.8">Masonry · Services · Partitions</text><text class="t2" x="14" y="87" font-size="12.8">Extraction · Fire · Waterproofing · Low-voltage</text><text class="t2" x="14" y="105" font-size="12.8">Structural metalwork, if any</text><line class="lm" x1="180" y1="119" x2="180" y2="143"/><polygon class="fa" points="175,142 185,142 180,149"/><rect class="ln" x="1" y="150" width="358" height="82"/><text class="t2" x="14" y="172" font-size="12.8">Step 2 · Reserve a range</text><text class="t1" x="14" y="196" font-size="16">Finishes</text><text class="t2" x="14" y="218" font-size="12.8">Joinery · Stone · Paint · Glass · Lighting</text><line class="lm" x1="180" y1="232" x2="180" y2="256"/><polygon class="fa" points="175,255 185,255 180,262"/><rect class="ln" x="1" y="263" width="358" height="82"/><text class="t2" x="14" y="285" font-size="12.8">Then · Carried into the next stage</text><text class="t1" x="14" y="309" font-size="16">Variations</text><text class="t2" x="14" y="331" font-size="12.8">Later functions · Items grown from quality</text></svg><figcaption>Figure: the budget comes in two parts, and variations are carried into the next stage (schematic, no figures)</figcaption></figure>
+
   <h2>5. Variations come in stages, not continuously</h2>
   <p>Variations are not an anomaly, and they do not run on without end. They usually come from two places: functions the owner decides to add later, such as another electrical run or another piece of equipment; and items that grow out of the original design when the aim is to get the quality right. Both are needs the project itself produced, not anyone's failure.</p>
   <p>Our way is to carry variations into the next stage in batches: when one stage is done, the items added in it are gathered, confirmed and priced, then placed in the next stage, rather than added piecemeal as work goes on. Each variation is confirmed, and the whole budget stays visible. Items outside scope are quoted separately, as set out in our <a href="/en/faq/">FAQ</a>.</p>
