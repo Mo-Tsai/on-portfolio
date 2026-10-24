@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6VJY51HQTQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-6VJY51HQTQ');
+  // ON-contact-tracking：有人點 Email、Instagram 或 Contact 時送一筆 GA 事件（詢問追蹤）
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a');
+    if (!a) return;
+    var h = a.getAttribute('href') || '', p = location.pathname;
+    if (h.indexOf('mailto:') === 0) gtag('event', 'contact_email', { page_path: p });
+    else if (/instagram\.com/i.test(h)) gtag('event', 'contact_instagram', { page_path: p });
+    else if (/(^|\/)contact\/?$/.test(h.split('#')[0].split('?')[0])) gtag('event', 'contact_page_click', { page_path: p });
+  });
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>開餐廳前，設計師會要你先準備什麼？餐廳裝潢前的七件事 — ON Design Lab Journal</title>
+<meta name="description" content="準備開餐廳、找設計師之前，先把開幕日、租約與場地現況、菜單與出餐方式、座位數與客單價、預算範圍想清楚。ON Design Lab 依實際餐廳案，說明每一項為什麼會影響設計。">
+<link rel="canonical" href="https://ondesignlabltd.com/journal/before-you-open-a-restaurant/">
+<link rel="alternate" hreflang="zh-Hant" href="https://ondesignlabltd.com/journal/before-you-open-a-restaurant/">
+<link rel="alternate" hreflang="en" href="https://ondesignlabltd.com/en/journal/before-you-open-a-restaurant/">
+<link rel="alternate" hreflang="x-default" href="https://ondesignlabltd.com/journal/before-you-open-a-restaurant/">
+<meta property="og:title" content="開餐廳前，設計師會要你先準備什麼">
+<meta property="og:description" content="你說得清楚的部分，設計師畫得出來；說不清楚的部分，會在工程裡變成追加。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ondesignlabltd.com/journal/before-you-open-a-restaurant/">
+<meta property="og:image" content="https://ondesignlabltd.com/assets/og-on.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "開餐廳前，設計師會要你先準備什麼",
+  "description": "準備開餐廳、找設計師之前要先準備的七件事：預計開幕時間、租約與場地現況、菜單與出餐方式、座位數與客單價、預算範圍、第幾家店、參考與不要。",
+  "author": { "@type": "Organization", "name": "ON Design Lab", "url": "https://ondesignlabltd.com/" },
+  "publisher": { "@type": "Organization", "name": "ON Design Lab", "logo": { "@type": "ImageObject", "url": "https://ondesignlabltd.com/assets/logo-square.png" } },
+  "datePublished": "2026-10-24",
+  "dateModified": "2026-10-24",
+  "inLanguage": "zh-Hant",
+  "image": "https://ondesignlabltd.com/assets/og-cover.jpg",
+  "mainEntityOfPage": "https://ondesignlabltd.com/journal/before-you-open-a-restaurant/",
+  "about": ["開餐廳", "餐廳裝潢", "餐廳設計", "開店準備"]
+}
+</script>
+<style>
+  :root {
+    --bg: #0e0e0c; --bg2: #141412; --bg3: #1a1a17;
+    --line: #252520; --white: #f0efe8;
+    --muted: #4a4a44; --dim: #2a2a26; --accent: #666660;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--font); background: var(--bg); color: var(--white); }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 20px 40px; border-bottom: 0.5px solid var(--line); position: sticky; top: 0; background: var(--bg); z-index: 100; }
+  .nav-logo { font-size: 12.8px; font-weight: 400; letter-spacing: 0.26em; text-transform: uppercase; color: var(--white); text-decoration: none; }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-link { font-size: 12.8px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding-bottom: 2px; border-bottom: 0.5px solid transparent; transition: all 0.2s; }
+  .nav-link:hover { color: var(--white); border-color: var(--white); }
+  .nav-link.active { color: var(--white); border-color: var(--white); }
+
+  .article { max-width: 680px; padding: 64px 40px 80px; }
+  .article-meta { font-size: 12.8px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+  .article-title { font-size: clamp(25px, 3.6vw, 39px); font-weight: 300; line-height: 1.25; letter-spacing: 0.02em; color: var(--white); margin-bottom: 16px; }@media(min-width:1084px){.article-title{font-weight:200}}
+  .article-hook { font-size: 16px; font-style: italic; color: var(--accent); letter-spacing: 0.03em; margin-bottom: 48px; padding-bottom: 32px; border-bottom: 0.5px solid var(--line); }
+  .article h2 { font-size: 16px; font-weight: 400; color: #c8c7c0; letter-spacing: 0.04em; margin: 44px 0 16px; line-height: 1.6; }
+  .article p { font-size: 16px; font-weight: 400; line-height: 1.85; color: #9a9a92; letter-spacing: 0.02em; margin-bottom: 20px; }
+  .article p.quote { font-size: 16px; color: #c8c7c0;  border-left: 1px solid var(--accent); padding-left: 20px; margin: 36px 0; }
+  .article p.en { font-style: italic; color: #6a6a62; font-size: 12.8px; line-height: 1.6; }
+  .article a { color: var(--accent); text-decoration: none; border-bottom: 0.5px solid var(--dim); }
+  .article a:hover { color: var(--white); }
+  .article p a.cta { color: #c8c7c0; text-decoration: none; border-bottom: 0.5px solid var(--muted); }
+  .article-footer { margin-top: 56px; padding-top: 28px; border-top: 0.5px solid var(--line); font-size: 12.8px; color: var(--muted); line-height: 1.85; }
+  .article-footer a { color: var(--accent); text-decoration: none; border-bottom: 0.5px solid var(--dim); }
+  .article-footer a:hover { color: var(--white); }
+
+  .bottom { padding: 24px 40px; display: flex; gap: 32px; font-size: 12.8px; letter-spacing: 0.2em; text-transform: uppercase; border-top: 0.5px solid var(--line); }
+  .bottom a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .bottom a:hover { color: var(--white); }
+  @media (max-width: 768px) { .article { padding: 44px 24px 56px; } }
+
+/* mobile nav */
+@media (max-width: 640px) {
+  .nav { flex-direction: column; align-items: flex-start; gap: 12px; padding: 14px 24px; }
+  .nav-links { gap: 16px; flex-wrap: wrap; row-gap: 8px; }
+}
+</style>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/NotoSansTC-ON.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/type.css?v=2.57">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..500&amp;display=swap" media="print" onload="this.media='all'">
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo on-logo" href="/"><img class="on-mark" src="/assets/ON_mark_white.png" alt="ON" width="44" height="22"><span class="on-word">Design Lab</span></a>
+  <div class="nav-links">
+    <a class="nav-link" href="/commercial/">Commercial</a>
+    <a class="nav-link" href="/residential/">Residential</a>
+    <a class="nav-link" href="/info/">Info</a>
+    <a class="nav-link active" href="/journal/">Journal</a>
+    <a class="nav-link" href="/faq/">FAQ</a>
+    <a class="nav-link" href="/en/journal/before-you-open-a-restaurant/">EN</a>
+  </div>
+</nav>
+
+<article class="article">
+  <p class="article-meta">Journal · 開店準備 · 餐飲空間</p>
+  <h1 class="article-title">開餐廳前，設計師會要你先準備什麼</h1>
+  <p class="article-hook">Before you brief a designer, brief yourself.</p>
+
+  <p>準備開餐廳、要找設計師之前，手上先有幾樣東西，第一次見面就能直接談這個場地能不能做、會卡在哪，不必花一個小時在討論喜歡什麼風格。</p>
+  <p>我們的<a href="/contact/">聯絡頁</a>請來信的人附上幾項資料：業種、地點與坪數、預算、預計開幕時間、租約狀況；餐飲再加客單價和座位數。這不是為了把表格填滿，是因為每一項都會改變設計的做法。這篇把開餐廳會用到的幾項，一項一項講它為什麼重要。</p>
+  <h2>一、預計開幕時間</h2>
+  <p>先有開幕日，再談設計。餐廳的時間表要從開幕日往回推，不是從簽約日往後排：設計、圖說確認、發包、進場、驗收，每一段都得放進去，加起來才知道現在開始來不來得及。如果開幕日是被起租日、商場檔期或季節決定的，請直接告訴我們，那是整張時間表上最不能動的一端。</p>
+  <p>工期怎麼算，我們另外寫了一篇：<a href="/journal/restaurant-design-timeline/">餐廳設計要多久</a>。</p>
+  <h2>二、租約狀況與場地現況</h2>
+  <p>租約簽到哪一步，決定我們能不能進場量、能不能動管線、能動到哪裡。場地的現況圖也一樣：Belvoir 那棟老房子，我們開案先拿到的是它的使用執照圖。老房子不會照圖面長，管線和結構要先解，後面的設計才有地方放。</p>
+  <p>商場和大樓還會有自己的施工規定，例如週末不能施工。這些規定請在簽約前就拿給我們，因為它們會直接改變工程怎麼排。</p>
+  <h2>三、菜單與出餐方式</h2>
+  <p>菜單決定廚房。現做、半預製，還是別處備好送來，對應的設備、排煙、給排水、瓦斯與電量都不一樣，而這些要在設計早期就定案：晚一週決定，工程就晚一週開始。</p>
+  <p>Belvoir 開案的時候，業主交給我們的是一份附尺寸的內廚設備清單：爐台、工作台冰箱、蒸烤箱、洗碗機、洗杯機、製冰機、水槽，每一項的數量與大小都寫好了。廚房要多大、流程怎麼排，從這份清單就能開始畫。菜單還沒完全定也沒關係，告訴我們哪幾道是確定的、哪一類設備一定要有，我們就能先抓出廚房的範圍。</p>
+  <h2>四、座位數與客單價</h2>
+  <p>這兩個數字我們一定會問。座位數不是越多越好，我們從人力反推：先問這個編制在尖峰時段能好好服務幾桌，再決定放幾席。</p>
+  <p>客單價則決定預算大致要花在哪。客單價高、客人待得久的店，座位間距、聲音和燈光值得花錢；客單價低、要靠翻桌的店，出餐路線和耐用的檯面更值得花錢。座位和動線怎麼一起算，寫在<a href="/journal/restaurant-flow-and-turnover/">餐廳動線與坪效</a>。</p>
+  <h2>五、預算，以及這個預算包含什麼</h2>
+  <p>預算只有一個數字還不夠，要說清楚這個數字算到哪裡。只含裝修工程，還是含廚具、空調、冷凍這類設備？含不含家具與燈具？設計費、工務管理費和稅金在裡面還是外面？消防與室內裝修的建築師簽證呢？我們的估價單把費用分成基礎工程、裝修工程、設備工程等幾大類，設計費、工務管理費和稅金另列。預算的範圍沒講清楚，第一次談就會各說各話。</p>
+  <p>預算會被什麼吃掉，我們另外寫了一篇：<a href="/journal/restaurant-fitout-budget/">餐廳裝潢預算怎麼抓</a>。</p>
+  <h2>六、這是第幾家店</h2>
+  <p>首發店和續店是兩種工作。首發店要從品牌定位重新推導，續店是把已經成立的概念因地制宜。第一次見面請直接說，因為這會改變費用怎麼算：續店我們只收製圖調整費，細節在<a href="/journal/design-fee/">設計費一坪多少</a>。</p>
+  <h2>七、你已經知道的參考與不要</h2>
+  <p>喜歡的店、不喜歡的店，一定不要的材質或做法，有的話都帶來。Belvoir 的業主開案時給了我們一份寫給設計師的 playbook，和一組參考概念圖。資料越具體，第一輪方案就越少繞路。</p>
+  <p class="quote">「你說得清楚的部分，設計師畫得出來；說不清楚的部分，會在工程裡變成追加。」</p>
+  <p>這七樣不用一次備齊。我們的聯絡頁寫得很直接：帶著平面圖和想法來聊，不用先決定，我們會先告訴你能不能做、大概會卡在哪。</p>
+  <p>帶店的想法和場地來，<a class="cta" href="/contact/">我們先一起算</a>。</p>
+  <p class="en">Before you meet a designer for a restaurant, bring seven things: the opening date, the lease and the condition of the site, the menu and how it is served, seat count and average spend, what the budget actually includes, whether this is the first venue or a repeat, and the references you love and refuse. Each one changes how the space is designed. What you can state clearly, the designer can draw; what you cannot, shows up later as extras on site.</p>
+
+  <div class="article-footer">
+    <p>ON Design Lab｜品牌翻譯成空間</p>
+    <p>相關閱讀：<a href="/journal/restaurant-design-timeline/">餐廳設計要多久</a>　·　<a href="/journal/restaurant-fitout-budget/">餐廳裝潢預算怎麼抓</a>　·　<a href="/journal/design-fee/">設計費一坪多少</a></p>
+    <p>我們怎麼工作：<a href="/process/">五階段設計流程</a>　·　<a href="/faq/">常見問題 FAQ</a>　·　合作洽詢：<a href="/contact/">Contact</a></p>
+  </div>
+</article>
+
+<div class="bottom">
+  <a href="/journal/">← Journal</a>
+  <a href="/contact/">Contact →</a>
+</div>
+
+<script src="/assets/js/nav.js" defer></script>
+<script src="/assets/js/sound.js" defer></script>
+</body>
+</html>

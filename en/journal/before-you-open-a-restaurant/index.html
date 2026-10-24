@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6VJY51HQTQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-6VJY51HQTQ');
+  // ON-contact-tracking：有人點 Email、Instagram 或 Contact 時送一筆 GA 事件（詢問追蹤）
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a');
+    if (!a) return;
+    var h = a.getAttribute('href') || '', p = location.pathname;
+    if (h.indexOf('mailto:') === 0) gtag('event', 'contact_email', { page_path: p });
+    else if (/instagram\.com/i.test(h)) gtag('event', 'contact_instagram', { page_path: p });
+    else if (/(^|\/)contact\/?$/.test(h.split('#')[0].split('?')[0])) gtag('event', 'contact_page_click', { page_path: p });
+  });
+</script>
+
+<!-- DRAFT：英文草案，交 Mo 定；未經 Mo 確認前不要 push -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Opening a Restaurant in Taipei: Seven Things to Prepare Before You Meet a Designer — ON Design Lab Journal</title>
+<meta name="description" content="Before you hire a restaurant designer, settle the opening date, lease and site, menu, seats and spend per guest, and what the budget covers.">
+<link rel="canonical" href="https://ondesignlabltd.com/en/journal/before-you-open-a-restaurant/">
+<link rel="alternate" hreflang="zh-Hant" href="https://ondesignlabltd.com/journal/before-you-open-a-restaurant/">
+<link rel="alternate" hreflang="en" href="https://ondesignlabltd.com/en/journal/before-you-open-a-restaurant/">
+<link rel="alternate" hreflang="x-default" href="https://ondesignlabltd.com/journal/before-you-open-a-restaurant/">
+<meta property="og:title" content="What a Designer Will Ask You to Prepare Before You Open a Restaurant">
+<meta property="og:description" content="What you can state clearly, the designer can draw. What you cannot shows up later as extras on site.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ondesignlabltd.com/en/journal/before-you-open-a-restaurant/">
+<meta property="og:image" content="https://ondesignlabltd.com/assets/og-on.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "What a Designer Will Ask You to Prepare Before You Open a Restaurant",
+  "description": "Seven things to prepare before you meet a restaurant designer: opening date, lease and site condition, menu and service style, seat count and average spend, what the budget includes, first venue or repeat, and your references.",
+  "author": { "@type": "Organization", "name": "ON Design Lab", "url": "https://ondesignlabltd.com/" },
+  "publisher": { "@type": "Organization", "name": "ON Design Lab", "logo": { "@type": "ImageObject", "url": "https://ondesignlabltd.com/assets/logo-square.png" } },
+  "datePublished": "2026-10-24",
+  "dateModified": "2026-10-24",
+  "inLanguage": "en",
+  "image": "https://ondesignlabltd.com/assets/og-cover.jpg",
+  "mainEntityOfPage": "https://ondesignlabltd.com/en/journal/before-you-open-a-restaurant/",
+  "about": ["Opening a restaurant", "Restaurant fit-out", "Restaurant design", "Taipei"]
+}
+</script>
+<style>
+  :root {
+    --bg: #0e0e0c; --bg2: #141412; --bg3: #1a1a17;
+    --line: #252520; --white: #f0efe8;
+    --muted: #4a4a44; --dim: #2a2a26; --accent: #666660;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--font); background: var(--bg); color: var(--white); }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 20px 40px; border-bottom: 0.5px solid var(--line); position: sticky; top: 0; background: var(--bg); z-index: 100; }
+  .nav-logo { font-size: 12.8px; font-weight: 400; letter-spacing: 0.26em; text-transform: uppercase; color: var(--white); text-decoration: none; }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-link { font-size: 12.8px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding-bottom: 2px; border-bottom: 0.5px solid transparent; transition: all 0.2s; }
+  .nav-link:hover { color: var(--white); border-color: var(--white); }
+  .nav-link.active { color: var(--white); border-color: var(--white); }
+
+  .article { max-width: 680px; padding: 64px 40px 80px; }
+  .article-meta { font-size: 12.8px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+  .article-title { font-size: clamp(25px, 3.6vw, 39px); font-weight: 300; line-height: 1.25; letter-spacing: 0.02em; color: var(--white); margin-bottom: 16px; }@media(min-width:1084px){.article-title{font-weight:200}}
+  .article-hook { font-size: 16px; font-style: italic; color: var(--accent); letter-spacing: 0.03em; margin-bottom: 48px; padding-bottom: 32px; border-bottom: 0.5px solid var(--line); }
+  .article h2 { font-size: 16px; font-weight: 400; color: #c8c7c0; letter-spacing: 0.04em; margin: 44px 0 16px; line-height: 1.6; }
+  .article p { font-size: 16px; font-weight: 400; line-height: 1.6; color: #9a9a92; letter-spacing: 0.02em; margin-bottom: 20px; }
+  .article p.quote { font-size: 16px; color: #c8c7c0; font-style: italic; border-left: 1px solid var(--accent); padding-left: 20px; margin: 36px 0; }
+  .article p.en { font-style: italic; color: #6a6a62; font-size: 12.8px; line-height: 1.6; }
+  .article a { color: var(--accent); text-decoration: none; border-bottom: 0.5px solid var(--dim); }
+  .article a:hover { color: var(--white); }
+  .article p a.cta { color: #c8c7c0; text-decoration: none; border-bottom: 0.5px solid var(--muted); }
+  .article-footer { margin-top: 56px; padding-top: 28px; border-top: 0.5px solid var(--line); font-size: 12.8px; color: var(--muted); line-height: 1.6; }
+  .article-footer a { color: var(--accent); text-decoration: none; border-bottom: 0.5px solid var(--dim); }
+  .article-footer a:hover { color: var(--white); }
+
+  .bottom { padding: 24px 40px; display: flex; gap: 32px; font-size: 12.8px; letter-spacing: 0.2em; text-transform: uppercase; border-top: 0.5px solid var(--line); }
+  .bottom a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .bottom a:hover { color: var(--white); }
+  @media (max-width: 768px) { .article { padding: 44px 24px 56px; } }
+
+/* mobile nav */
+@media (max-width: 640px) {
+  .nav { flex-direction: column; align-items: flex-start; gap: 12px; padding: 14px 24px; }
+  .nav-links { gap: 16px; flex-wrap: wrap; row-gap: 8px; }
+}
+</style>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/NotoSansTC-ON.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/type.css?v=2.57">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..500&amp;display=swap" media="print" onload="this.media='all'">
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo on-logo" href="/en/"><img class="on-mark" src="/assets/ON_mark_white.png" alt="ON" width="44" height="22"><span class="on-word">Design Lab</span></a>
+  <div class="nav-links">
+    <a class="nav-link" href="/en/commercial/">Commercial</a>
+    <a class="nav-link" href="/en/residential/">Residential</a>
+    <a class="nav-link" href="/en/info/">Info</a>
+    <a class="nav-link active" href="/en/journal/">Journal</a>
+    <a class="nav-link" href="/en/faq/">FAQ</a>
+    <a class="nav-link" href="/en/contact/">Contact</a>
+    <a class="nav-link" href="/journal/before-you-open-a-restaurant/">中文</a>
+  </div>
+</nav>
+
+<article class="article">
+  <p class="article-meta">Journal · Before You Start · Restaurants</p>
+  <h1 class="article-title">What a Designer Will Ask You to Prepare Before You Open a Restaurant</h1>
+  <p class="article-hook">Before you brief a designer, brief yourself.</p>
+
+  <p>If you are about to open a restaurant and look for a designer, arrive with a few things in hand. The first meeting can then go straight to whether the site can be done and where it will get stuck, instead of an hour on which style you like.</p>
+  <p>Our <a href="/en/contact/">contact page</a> asks anyone writing in to include the type of business, location and floor area, budget, target opening date and lease status; for food and beverage, the average spend per guest and the number of seats. That is not to fill a form. Each item changes how we design. Here is why each one matters for a restaurant.</p>
+  <h2>1. The target opening date</h2>
+  <p>Start with the opening date, then talk design. A restaurant schedule is counted backwards from opening day, not forwards from the day you sign: design, drawing approval, tendering, site entry and handover all have to fit, and only the sum tells you whether you can still make it. If the date is fixed by a rent-start date, a mall's calendar or a season, tell us. It is the one end of the schedule that cannot move.</p>
+  <p>How long each stage takes is covered in a separate piece: <a href="/en/journal/restaurant-design-timeline/">how long restaurant design takes</a>.</p>
+  <h2>2. The lease and the condition of the site</h2>
+  <p>How far the lease has got decides whether we can measure on site, whether we can touch the services, and how far we can go. The same goes for existing drawings: on the old building that became Belvoir, the first thing we received was its occupancy permit drawings. Old buildings do not grow to match their drawings. Services and structure have to be resolved first, so the design has somewhere to land.</p>
+  <p>Malls and office towers also carry their own works rules, such as no work at weekends. Please hand those over before you sign, because they change how the works are sequenced.</p>
+  <h2>3. The menu and how it is served</h2>
+  <p>The menu decides the kitchen. Cooked to order, part-prepared, or prepared elsewhere and sent in: each needs different equipment, extraction, water and drainage, gas and power, and these have to be fixed early. Decide a week later and the works start a week later.</p>
+  <p>When Belvoir began, the owner gave us a list of kitchen equipment with dimensions: range, undercounter fridges, combi oven, dishwasher, glasswasher, ice machine and sinks, each with quantity and size. How large the kitchen needs to be and how the flow runs could be drawn straight from that list. If the menu is not final, that is fine. Tell us which dishes are certain and which equipment is a must, and we can mark out the kitchen first.</p>
+  <h2>4. Seat count and average spend</h2>
+  <p>We always ask for these two numbers. More seats is not better. We work backwards from staffing: how many tables can this team serve well at peak, and only then how many seats to place.</p>
+  <p>Average spend tells us roughly where the budget should go. In a place where guests stay long and spend more, seat spacing, sound and lighting are worth paying for. In a place that depends on turning tables, the service route and a hard-wearing counter matter more. How seats and circulation are worked out together is in <a href="/en/journal/restaurant-flow-and-turnover/">restaurant circulation and yield per ping</a>.</p>
+  <h2>5. The budget, and what it includes</h2>
+  <p>One number is not enough. You also have to say what the number covers. Fit-out only, or equipment such as kitchen, air-conditioning and refrigeration too? Furniture and lighting? Are design fees, supervision fees and tax inside or outside? What about the architect's sign-off for fire safety and interior renovation permits? Our estimates group the cost into base works, fit-out works and equipment works, with design fees, supervision fees and tax listed separately. If the scope of the budget is not stated, the first meeting becomes two people talking about different numbers.</p>
+  <p>What tends to eat a budget is covered in <a href="/en/journal/restaurant-fitout-budget/">how to set a restaurant fit-out budget</a>.</p>
+  <h2>6. Is this the first venue or a repeat</h2>
+  <p>A first venue and a repeat are two different jobs. A first venue is derived from the brand's position; a repeat adapts an established concept to a new site. Please say so at the first meeting, because it changes how the fee is calculated: for repeat venues we charge only a drawing-adaptation fee. The details are in <a href="/en/journal/design-fee/">what design costs per ping</a>.</p>
+  <h2>7. What you already know you like, and refuse</h2>
+  <p>Places you love, places you do not, materials or methods you will never accept: bring whatever you have. The owner of Belvoir gave us a playbook written for designers, together with a set of reference concept images. The more specific the material, the fewer detours the first round takes.</p>
+  <p class="quote">&ldquo;What you can state clearly, the designer can draw. What you cannot shows up on site as extras.&rdquo;</p>
+  <p>You do not need all seven at once. Our contact page says it plainly: bring your floor plan and your ideas, nothing needs to be decided yet, and we will tell you first whether it can be done and roughly where it will get stuck.</p>
+  <p class="en">準備開餐廳、找設計師之前，先備好七件事：預計開幕時間、租約與場地現況、菜單與出餐方式、座位數與客單價、預算範圍、第幾家店、參考與不要。每一項都會改變設計的做法。你說得清楚的部分，設計師畫得出來；說不清楚的部分，會在工程裡變成追加。</p>
+  <p>Bring the idea for your shop and the site, and <a class="cta" href="/en/contact/">we will run the numbers together first</a>.</p>
+
+  <div class="article-footer">
+    <p>ON Design Lab — Brand Logic Translated into Space</p>
+    <p>Related reading: <a href="/en/journal/restaurant-design-timeline/">How long restaurant design takes</a>　·　<a href="/en/journal/restaurant-fitout-budget/">Restaurant fit-out budget</a>　·　<a href="/en/journal/design-fee/">What design costs per ping</a></p>
+    <p>How we work: <a href="/en/process/">Five-stage process</a>　·　<a href="/en/faq/">FAQ</a>　·　Talk to us: <a href="/en/contact/">Contact</a>　·　<a href="/journal/before-you-open-a-restaurant/">中文版</a></p>
+  </div>
+</article>
+
+<div class="bottom">
+  <a href="/en/journal/">← Journal</a>
+  <a href="/en/contact/">Contact →</a>
+</div>
+
+<script src="/assets/js/nav.js" defer></script>
+<script src="/assets/js/sound.js" defer></script>
+</body>
+</html>
