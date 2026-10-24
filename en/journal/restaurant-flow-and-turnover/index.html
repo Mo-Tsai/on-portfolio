@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6VJY51HQTQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-6VJY51HQTQ');
+  // ON-contact-tracking：有人點 Email、Instagram 或 Contact 時送一筆 GA 事件（詢問追蹤）
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a');
+    if (!a) return;
+    var h = a.getAttribute('href') || '', p = location.pathname;
+    if (h.indexOf('mailto:') === 0) gtag('event', 'contact_email', { page_path: p });
+    else if (/instagram\.com/i.test(h)) gtag('event', 'contact_instagram', { page_path: p });
+    else if (/(^|\/)contact\/?$/.test(h.split('#')[0].split('?')[0])) gtag('event', 'contact_page_click', { page_path: p });
+  });
+</script>
+
+<!-- DRAFT：英文草案，交 Mo 定；未經 Mo 確認前不要 push -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restaurant Circulation and Yield per Ping: Work It Out on the Floor Plan — ON Design Lab Journal</title>
+<meta name="description" content="Restaurant circulation and yield per ping are decided on the floor plan: three routes, seats from staffing, and five checks, with Monte and Belvoir.">
+<link rel="canonical" href="https://ondesignlabltd.com/en/journal/restaurant-flow-and-turnover/">
+<link rel="alternate" hreflang="zh-Hant" href="https://ondesignlabltd.com/journal/restaurant-flow-and-turnover/">
+<link rel="alternate" hreflang="en" href="https://ondesignlabltd.com/en/journal/restaurant-flow-and-turnover/">
+<link rel="alternate" hreflang="x-default" href="https://ondesignlabltd.com/journal/restaurant-flow-and-turnover/">
+<meta property="og:title" content="Restaurant Circulation and Yield per Ping: Work It Out at the Design Stage">
+<meta property="og:description" content="Seats are what you sell. Circulation is the cost you pay every day.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ondesignlabltd.com/en/journal/restaurant-flow-and-turnover/">
+<meta property="og:image" content="https://ondesignlabltd.com/assets/og-on.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Restaurant Circulation and Yield per Ping: Work It Out at the Design Stage",
+  "description": "How to work out restaurant circulation and yield per ping at floor-plan stage: guest, food and dish routes, seat count derived from staffing, the three variables behind yield, counter seating, and how to check a plan.",
+  "author": { "@type": "Organization", "name": "ON Design Lab", "url": "https://ondesignlabltd.com/" },
+  "publisher": { "@type": "Organization", "name": "ON Design Lab", "logo": { "@type": "ImageObject", "url": "https://ondesignlabltd.com/assets/logo-square.png" } },
+  "datePublished": "2026-10-24",
+  "dateModified": "2026-10-24",
+  "inLanguage": "en",
+  "image": "https://ondesignlabltd.com/assets/og-cover.jpg",
+  "mainEntityOfPage": "https://ondesignlabltd.com/en/journal/restaurant-flow-and-turnover/",
+  "about": ["Restaurant circulation", "Yield per ping", "Restaurant floor plan", "Seat count"]
+}
+</script>
+<style>
+  :root {
+    --bg: #0e0e0c; --bg2: #141412; --bg3: #1a1a17;
+    --line: #252520; --white: #f0efe8;
+    --muted: #4a4a44; --dim: #2a2a26; --accent: #666660;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--font); background: var(--bg); color: var(--white); }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 20px 40px; border-bottom: 0.5px solid var(--line); position: sticky; top: 0; background: var(--bg); z-index: 100; }
+  .nav-logo { font-size: 12.8px; font-weight: 400; letter-spacing: 0.26em; text-transform: uppercase; color: var(--white); text-decoration: none; }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-link { font-size: 12.8px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding-bottom: 2px; border-bottom: 0.5px solid transparent; transition: all 0.2s; }
+  .nav-link:hover { color: var(--white); border-color: var(--white); }
+  .nav-link.active { color: var(--white); border-color: var(--white); }
+
+  .article { max-width: 680px; padding: 64px 40px 80px; }
+  .article-meta { font-size: 12.8px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+  .article-title { font-size: clamp(25px, 3.6vw, 39px); font-weight: 300; line-height: 1.25; letter-spacing: 0.02em; color: var(--white); margin-bottom: 16px; }@media(min-width:1084px){.article-title{font-weight:200}}
+  .article-hook { font-size: 16px; font-style: italic; color: var(--accent); letter-spacing: 0.03em; margin-bottom: 48px; padding-bottom: 32px; border-bottom: 0.5px solid var(--line); }
+  .article h2 { font-size: 16px; font-weight: 400; color: #c8c7c0; letter-spacing: 0.04em; margin: 44px 0 16px; line-height: 1.6; }
+  .article p { font-size: 16px; font-weight: 400; line-height: 1.6; color: #9a9a92; letter-spacing: 0.02em; margin-bottom: 20px; }
+  .article p.quote { font-size: 16px; color: #c8c7c0; font-style: italic; border-left: 1px solid var(--accent); padding-left: 20px; margin: 36px 0; }
+  .article p.en { font-style: italic; color: #6a6a62; font-size: 12.8px; line-height: 1.6; }
+  .article a { color: var(--accent); text-decoration: none; border-bottom: 0.5px solid var(--dim); }
+  .article a:hover { color: var(--white); }
+  .article p a.cta { color: #c8c7c0; text-decoration: none; border-bottom: 0.5px solid var(--muted); }
+  .article-footer { margin-top: 56px; padding-top: 28px; border-top: 0.5px solid var(--line); font-size: 12.8px; color: var(--muted); line-height: 1.6; }
+  .article-footer a { color: var(--accent); text-decoration: none; border-bottom: 0.5px solid var(--dim); }
+  .article-footer a:hover { color: var(--white); }
+
+  .bottom { padding: 24px 40px; display: flex; gap: 32px; font-size: 12.8px; letter-spacing: 0.2em; text-transform: uppercase; border-top: 0.5px solid var(--line); }
+  .bottom a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .bottom a:hover { color: var(--white); }
+  @media (max-width: 768px) { .article { padding: 44px 24px 56px; } }
+
+/* mobile nav */
+@media (max-width: 640px) {
+  .nav { flex-direction: column; align-items: flex-start; gap: 12px; padding: 14px 24px; }
+  .nav-links { gap: 16px; flex-wrap: wrap; row-gap: 8px; }
+}
+</style>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/NotoSansTC-ON.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/type.css?v=2.57">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..500&amp;display=swap" media="print" onload="this.media='all'">
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo on-logo" href="/en/"><img class="on-mark" src="/assets/ON_mark_white.png" alt="ON" width="44" height="22"><span class="on-word">Design Lab</span></a>
+  <div class="nav-links">
+    <a class="nav-link" href="/en/commercial/">Commercial</a>
+    <a class="nav-link" href="/en/residential/">Residential</a>
+    <a class="nav-link" href="/en/info/">Info</a>
+    <a class="nav-link active" href="/en/journal/">Journal</a>
+    <a class="nav-link" href="/en/faq/">FAQ</a>
+    <a class="nav-link" href="/en/contact/">Contact</a>
+    <a class="nav-link" href="/journal/restaurant-flow-and-turnover/">中文</a>
+  </div>
+</nav>
+
+<article class="article">
+  <p class="article-meta">Journal · Operational Logic · Restaurants</p>
+  <h1 class="article-title">Restaurant Circulation and Yield per Ping: Work It Out at the Design Stage</h1>
+  <p class="article-hook">A floor plan is a schedule of footsteps.</p>
+
+  <p>Restaurant circulation and yield per ping have to be worked out on the floor plan, because once the walls are up every footstep has been decided. Yield is revenue divided by floor area, and that is a result. What design can move are the causes behind it: the number of seats, the route a dish travels, and how many people are needed at peak.</p>
+  <p>One of the two words in our name is Operation, and this is what it means. This piece is not about philosophy. It is about how to check a plan.</p>
+  <h2>1. Draw three routes before you place seats</h2>
+  <p>A restaurant plan carries three routes at once. The guest's route: entrance, waiting, seat, toilet, payment. The food's route: kitchen, pass, table. The dishes' route: table, clearing, dishwash. Wherever the three cross is where peak service will jam.</p>
+  <p>Draw the three first, see whether the crossings can be reduced or staggered, and only then place the bar and the tables. Reverse the order and you get a beautiful room in which the floor team has to walk the long way round. We wrote about paying that tuition in <a href="/en/journal/on-operation-narrative/">ON Stands for Two Words</a>.</p>
+  <h2>2. Derive seat count backwards from staffing</h2>
+  <p>Seat count is not how many chairs fit. It is how many seats this team can serve well at peak. Ask how many people will be on the floor and in the kitchen at peak and how many tables one person on the floor can look after, then decide how many seats. 【待 Mo 補：ON 抓座位數的經驗值，例如每席多少坪、外場一人照顧幾席】</p>
+  <p>The number also has to be read together with average spend. In the same room, few seats, high spend and long stays make a different restaurant from many seats, low spend and fast turns, and the plan changes with it.</p>
+  <h2>3. The three variables behind yield</h2>
+  <p>Revenue breaks down into three things: seats, turns (how long a guest stays) and average spend. Design does not set average spend directly, but it can move the first two: seats through the plan, and stay time through comfort, speed of service and the experience of waiting.</p>
+  <p>If the seat is too comfortable, guests do not want to leave; too hard, and spend will not rise. The balance depends on the kind of business, which is why at a first meeting we ask what kind of restaurant yours is.</p>
+  <h2>4. Counter seating: guests and kitchen share one edge</h2>
+  <p>The bar and counter seating are the elements that change routes most on a plan. The bar at Belvoir is one counter shared by cook, sommelier and guest; the open kitchen is not for display, it lets people seated at the counter reach the rhythm of the kitchen. Fire Play follows the same logic: the bar is always the core, and guests always sit where they can best watch the chef.</p>
+  <p>The benefit of counter seating is a short service route; the cost is that the kitchen has to withstand being watched. Monte is only 13 ping, and the first decision was where the kitchen goes. Once that was fixed, the bar could consider how to receive the people sitting down, and the four systems of extraction, ventilation, air-conditioning and lighting were arranged together at that scale.</p>
+  <h2>5. Checking a floor plan</h2>
+  <p>One. Walk from the seat furthest from the pass to the pass and count the steps; then imagine it with a tray in your hands and people in the aisle at peak.</p>
+  <p>Two. Where two routes cross, is there a width at which one person stopping blocks another? 【待 Mo 補：ON 的走道最小寬度】</p>
+  <p>Three. How far is the dishwash from the point where dishes are cleared, and do dishes have to cross the guests' seating area on the way back?</p>
+  <p>Four. At peak, where does the floor team stand to see every table, and is there a service station there?</p>
+  <p>Five. Multiply seats by your expected turns and average spend, and see whether revenue can carry the cost of the space. The sum will not be precise, but it shows obvious mismatches before work starts.</p>
+  <p class="quote">&ldquo;Seats are what you sell. Circulation is the cost you pay every day.&rdquo;</p>
+  <p>Found at plan stage, these cost an eraser. Found after the walls are up, they cost demolition. How to set the budget is in <a href="/en/journal/restaurant-fitout-budget/">how to set a restaurant fit-out budget</a>; what else to prepare before work starts is in <a href="/en/journal/before-you-open-a-restaurant/">what a designer will ask you to prepare before you open a restaurant</a>.</p>
+  <p class="en">餐廳的動線和坪效，要在平面圖階段算好，因為牆砌起來以後，每一步路都已經決定了。先畫客人、菜、碗盤三條路，座位數從人力反推，坪效拆成席數、翻桌與客單價。檯前座位讓出餐路線變短，也要求廚房經得起被看。最後是檢查平面圖的五個步驟。</p>
+  <p>Bring the idea for your shop and the site, and <a class="cta" href="/en/contact/">we will run the numbers together first</a>.</p>
+
+  <div class="article-footer">
+    <p>ON Design Lab — Brand Logic Translated into Space</p>
+    <p>Related projects: <a href="/commercial/belvoir/">Belvoir</a>　·　<a href="/commercial/monte/">Monte</a>　·　<a href="/commercial/fire-play/">Fire Play</a></p>
+    <p>How we work: <a href="/en/process/">Five-stage process</a>　·　<a href="/en/journal/on-operation-narrative/">ON Stands for Two Words</a>　·　Talk to us: <a href="/en/contact/">Contact</a>　·　<a href="/journal/restaurant-flow-and-turnover/">中文版</a></p>
+  </div>
+</article>
+
+<div class="bottom">
+  <a href="/en/journal/">← Journal</a>
+  <a href="/en/contact/">Contact →</a>
+</div>
+
+<script src="/assets/js/nav.js" defer></script>
+<script src="/assets/js/sound.js" defer></script>
+</body>
+</html>

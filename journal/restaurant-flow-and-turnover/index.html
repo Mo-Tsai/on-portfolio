@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6VJY51HQTQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-6VJY51HQTQ');
+  // ON-contact-tracking：有人點 Email、Instagram 或 Contact 時送一筆 GA 事件（詢問追蹤）
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a');
+    if (!a) return;
+    var h = a.getAttribute('href') || '', p = location.pathname;
+    if (h.indexOf('mailto:') === 0) gtag('event', 'contact_email', { page_path: p });
+    else if (/instagram\.com/i.test(h)) gtag('event', 'contact_instagram', { page_path: p });
+    else if (/(^|\/)contact\/?$/.test(h.split('#')[0].split('?')[0])) gtag('event', 'contact_page_click', { page_path: p });
+  });
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>餐廳動線設計與坪效：怎麼在平面圖階段就算好 — ON Design Lab Journal</title>
+<meta name="description" content="餐廳動線設計與坪效，要在平面圖階段算好。ON Design Lab 從三條路線、座位數與人力、坪效的三個變數說起，並以 Monte、Belvoir 等實際餐廳案說明怎麼檢查平面。">
+<link rel="canonical" href="https://ondesignlabltd.com/journal/restaurant-flow-and-turnover/">
+<link rel="alternate" hreflang="zh-Hant" href="https://ondesignlabltd.com/journal/restaurant-flow-and-turnover/">
+<link rel="alternate" hreflang="en" href="https://ondesignlabltd.com/en/journal/restaurant-flow-and-turnover/">
+<link rel="alternate" hreflang="x-default" href="https://ondesignlabltd.com/journal/restaurant-flow-and-turnover/">
+<meta property="og:title" content="餐廳動線與坪效，怎麼在設計階段就算好">
+<meta property="og:description" content="座位是你賣的東西，動線是你每天付的成本。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ondesignlabltd.com/journal/restaurant-flow-and-turnover/">
+<meta property="og:image" content="https://ondesignlabltd.com/assets/og-on.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "餐廳動線與坪效，怎麼在設計階段就算好",
+  "description": "餐廳動線設計與坪效在平面圖階段的算法：客人、菜、碗盤三條路線，座位數從人力反推，坪效的三個變數，檯前座位，以及檢查平面圖的方法。",
+  "author": { "@type": "Organization", "name": "ON Design Lab", "url": "https://ondesignlabltd.com/" },
+  "publisher": { "@type": "Organization", "name": "ON Design Lab", "logo": { "@type": "ImageObject", "url": "https://ondesignlabltd.com/assets/logo-square.png" } },
+  "datePublished": "2026-10-24",
+  "dateModified": "2026-10-24",
+  "inLanguage": "zh-Hant",
+  "image": "https://ondesignlabltd.com/assets/og-cover.jpg",
+  "mainEntityOfPage": "https://ondesignlabltd.com/journal/restaurant-flow-and-turnover/",
+  "about": ["餐廳動線設計", "坪效", "餐廳平面配置", "座位數"]
+}
+</script>
+<style>
+  :root {
+    --bg: #0e0e0c; --bg2: #141412; --bg3: #1a1a17;
+    --line: #252520; --white: #f0efe8;
+    --muted: #4a4a44; --dim: #2a2a26; --accent: #666660;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--font); background: var(--bg); color: var(--white); }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 20px 40px; border-bottom: 0.5px solid var(--line); position: sticky; top: 0; background: var(--bg); z-index: 100; }
+  .nav-logo { font-size: 12.8px; font-weight: 400; letter-spacing: 0.26em; text-transform: uppercase; color: var(--white); text-decoration: none; }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-link { font-size: 12.8px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding-bottom: 2px; border-bottom: 0.5px solid transparent; transition: all 0.2s; }
+  .nav-link:hover { color: var(--white); border-color: var(--white); }
+  .nav-link.active { color: var(--white); border-color: var(--white); }
+
+  .article { max-width: 680px; padding: 64px 40px 80px; }
+  .article-meta { font-size: 12.8px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+  .article-title { font-size: clamp(25px, 3.6vw, 39px); font-weight: 300; line-height: 1.25; letter-spacing: 0.02em; color: var(--white); margin-bottom: 16px; }@media(min-width:1084px){.article-title{font-weight:200}}
+  .article-hook { font-size: 16px; font-style: italic; color: var(--accent); letter-spacing: 0.03em; margin-bottom: 48px; padding-bottom: 32px; border-bottom: 0.5px solid var(--line); }
+  .article h2 { font-size: 16px; font-weight: 400; color: #c8c7c0; letter-spacing: 0.04em; margin: 44px 0 16px; line-height: 1.6; }
+  .article p { font-size: 16px; font-weight: 400; line-height: 1.85; color: #9a9a92; letter-spacing: 0.02em; margin-bottom: 20px; }
+  .article p.quote { font-size: 16px; color: #c8c7c0;  border-left: 1px solid var(--accent); padding-left: 20px; margin: 36px 0; }
+  .article p.en { font-style: italic; color: #6a6a62; font-size: 12.8px; line-height: 1.6; }
+  .article a { color: var(--accent); text-decoration: none; border-bottom: 0.5px solid var(--dim); }
+  .article a:hover { color: var(--white); }
+  .article p a.cta { color: #c8c7c0; text-decoration: none; border-bottom: 0.5px solid var(--muted); }
+  .article-footer { margin-top: 56px; padding-top: 28px; border-top: 0.5px solid var(--line); font-size: 12.8px; color: var(--muted); line-height: 1.85; }
+  .article-footer a { color: var(--accent); text-decoration: none; border-bottom: 0.5px solid var(--dim); }
+  .article-footer a:hover { color: var(--white); }
+
+  .bottom { padding: 24px 40px; display: flex; gap: 32px; font-size: 12.8px; letter-spacing: 0.2em; text-transform: uppercase; border-top: 0.5px solid var(--line); }
+  .bottom a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .bottom a:hover { color: var(--white); }
+  @media (max-width: 768px) { .article { padding: 44px 24px 56px; } }
+
+/* mobile nav */
+@media (max-width: 640px) {
+  .nav { flex-direction: column; align-items: flex-start; gap: 12px; padding: 14px 24px; }
+  .nav-links { gap: 16px; flex-wrap: wrap; row-gap: 8px; }
+}
+</style>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/NotoSansTC-ON.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/type.css?v=2.57">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..500&amp;display=swap" media="print" onload="this.media='all'">
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo on-logo" href="/"><img class="on-mark" src="/assets/ON_mark_white.png" alt="ON" width="44" height="22"><span class="on-word">Design Lab</span></a>
+  <div class="nav-links">
+    <a class="nav-link" href="/commercial/">Commercial</a>
+    <a class="nav-link" href="/residential/">Residential</a>
+    <a class="nav-link" href="/info/">Info</a>
+    <a class="nav-link active" href="/journal/">Journal</a>
+    <a class="nav-link" href="/faq/">FAQ</a>
+    <a class="nav-link" href="/en/journal/restaurant-flow-and-turnover/">EN</a>
+  </div>
+</nav>
+
+<article class="article">
+  <p class="article-meta">Journal · 營運邏輯 · 餐飲空間</p>
+  <h1 class="article-title">餐廳動線與坪效，怎麼在設計階段就算好</h1>
+  <p class="article-hook">A floor plan is a schedule of footsteps.</p>
+
+  <p>餐廳的動線和坪效，要在平面圖階段算好，因為牆砌起來以後，每一步路都已經決定了。坪效是營業額除以營業坪數，那是結果；設計階段能動的，是產生這個結果的原因：座位數、出餐路徑，和尖峰時段需要幾個人。</p>
+  <p>我們名字裡有一個字是 Operation，指的就是這件事。這篇不講理念，講在平面圖上怎麼檢查。</p>
+  <h2>一、先畫三條路，再排座位</h2>
+  <p>餐廳的平面上同時有三條路。客人的路：入口、等位、座位、廁所、結帳。菜的路：廚房、出餐口、桌子。碗盤的路：桌子、回收、洗碗區。三條路在哪裡交叉，尖峰時段就會在哪裡卡住。</p>
+  <p>先把三條路畫出來，看交叉點能不能減少、能不能錯開，再決定吧檯和桌子放哪裡。順序反過來，會得到一個很漂亮、外場卻要繞路的空間，這個學費我們在<a href="/journal/on-operation-narrative/">ON 是兩個字</a>裡寫過。</p>
+  <h2>二、座位數從人力反推</h2>
+  <p>座位數不是「塞得下幾張」，是「這個編制在尖峰時段能好好服務幾席」。先問外場和內場在尖峰各有幾個人、一個外場能照顧幾桌，再回頭決定放幾席。【待 Mo 補：ON 抓座位數的經驗值，例如每席多少坪、外場一人照顧幾席】</p>
+  <p>這個數字還要和客單價一起看。同樣的空間，座位少、客單高、停留久，和座位多、客單低、翻桌快，是兩種完全不同的店，平面配置也會跟著不同。</p>
+  <h2>三、坪效的三個變數</h2>
+  <p>營業額可以拆成三件事：席數、翻桌（客人平均待多久）、客單價。設計不直接決定客單價，但動得到前兩個：席數靠平面，用餐時間靠座位的舒適度、出餐的速度，和等待時的體驗。</p>
+  <p>座位太舒服，客人不想走；太硬，客單價上不去。這個平衡點跟業態有關，所以第一次見面，我們會先問你是哪一種店。</p>
+  <h2>四、檯前座位：讓客人和廚房共用同一條邊</h2>
+  <p>吧檯和檯前座位，是平面上最會改變路線的元件。Belvoir 的吧檯，做成廚師、侍酒師和客人共用的那一張檯面；開放廚房不是為了展示，是讓坐在檯前的人接得到廚房的節奏。Fire Play 也是同一個邏輯：吧台永遠是核心，客人永遠坐在最好的位置看廚師工作。</p>
+  <p>檯前座位的好處，是出餐路線短；代價，是廚房要經得起被看。Monte 只有 13 坪，第一個決定是廚房的位置，確定了，吧台才能思考怎麼迎接坐下來的人；排煙、通風、空調、燈光四套系統，也在這個尺度裡一起排進去。</p>
+  <h2>五、拿一張平面圖，這樣檢查</h2>
+  <p>一，從離出餐口最遠的那一席走到出餐口，數步數；再想像端著餐盤、走道上有人的尖峰時段。</p>
+  <p>二，兩條路交叉的地方，有沒有一個人停下來就會擋住另一個人的寬度。【待 Mo 補：ON 的走道最小寬度】</p>
+  <p>三，洗碗區離收碗點多遠，碗盤回收會不會穿過客人的座位區。</p>
+  <p>四，尖峰時段，外場人員站在哪裡看得到所有桌；那個位置有沒有放服務站。</p>
+  <p>五，把席數乘上預估的翻桌和客單價，看營業額撐不撐得起這個空間的成本。這個算式不會很準，但能在開工前看出明顯對不上的地方。</p>
+  <p class="quote">「座位是你賣的東西，動線是你每天付的成本。」</p>
+  <p>這些在平面階段發現，只要擦掉重畫；等到牆砌起來，就是拆。預算怎麼抓見<a href="/journal/restaurant-fitout-budget/">餐廳裝潢預算怎麼抓</a>，開工前還要準備什麼見<a href="/journal/before-you-open-a-restaurant/">開餐廳前，設計師會要你先準備什麼</a>。</p>
+  <p>帶店的想法和場地來，<a class="cta" href="/contact/">我們先一起算</a>。</p>
+  <p class="en">Restaurant circulation and yield per ping are settled at the floor-plan stage, because once the walls are up every footstep has been decided. Draw three routes first (guest, food, dishes), derive seat count backwards from staffing, and treat yield as seats, turns and average spend. A counter facing the kitchen shortens the service route but asks the kitchen to withstand being watched. Five checks on a plan, before work starts.</p>
+
+  <div class="article-footer">
+    <p>ON Design Lab｜品牌翻譯成空間</p>
+    <p>相關案例：<a href="/commercial/belvoir/">Belvoir 河狸</a>　·　<a href="/commercial/monte/">Monte</a>　·　<a href="/commercial/fire-play/">Fire Play</a></p>
+    <p>我們怎麼工作：<a href="/process/">五階段設計流程</a>　·　<a href="/journal/on-operation-narrative/">ON 是兩個字</a>　·　合作洽詢：<a href="/contact/">Contact</a></p>
+  </div>
+</article>
+
+<div class="bottom">
+  <a href="/journal/">← Journal</a>
+  <a href="/contact/">Contact →</a>
+</div>
+
+<script src="/assets/js/nav.js" defer></script>
+<script src="/assets/js/sound.js" defer></script>
+</body>
+</html>
