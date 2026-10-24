@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6VJY51HQTQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-6VJY51HQTQ');
+  // ON-contact-tracking：有人點 Email、Instagram 或 Contact 時送一筆 GA 事件（詢問追蹤）
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a');
+    if (!a) return;
+    var h = a.getAttribute('href') || '', p = location.pathname;
+    if (h.indexOf('mailto:') === 0) gtag('event', 'contact_email', { page_path: p });
+    else if (/instagram\.com/i.test(h)) gtag('event', 'contact_instagram', { page_path: p });
+    else if (/(^|\/)contact\/?$/.test(h.split('#')[0].split('?')[0])) gtag('event', 'contact_page_click', { page_path: p });
+  });
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>餐廳裝潢預算怎麼抓？哪些項目最容易超支 — ON Design Lab Journal</title>
+<meta name="description" content="餐廳裝潢費用怎麼抓、哪裡最容易超支？ON Design Lab 用自己做過的餐廳估價單與追加紀錄，說明預算被哪三類項目吃掉，以及簽約前該先問清楚什麼。">
+<link rel="canonical" href="https://ondesignlabltd.com/journal/restaurant-fitout-budget/">
+<link rel="alternate" hreflang="zh-Hant" href="https://ondesignlabltd.com/journal/restaurant-fitout-budget/">
+<link rel="alternate" hreflang="en" href="https://ondesignlabltd.com/en/journal/restaurant-fitout-budget/">
+<link rel="alternate" hreflang="x-default" href="https://ondesignlabltd.com/journal/restaurant-fitout-budget/">
+<meta property="og:title" content="餐廳裝潢預算怎麼抓，哪些地方最容易超支">
+<meta property="og:description" content="預算超支不是突然發生的，是簽約時留白的地方，在工程裡一個一個被填滿。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ondesignlabltd.com/journal/restaurant-fitout-budget/">
+<meta property="og:image" content="https://ondesignlabltd.com/assets/og-on.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "餐廳裝潢預算怎麼抓，哪些地方最容易超支",
+  "description": "餐廳裝潢預算的結構與最容易超支的三類項目：現場才看得到的現況、估價單之後才決定的功能、規格調整；以及如何在簽約前先抓。",
+  "author": { "@type": "Organization", "name": "ON Design Lab", "url": "https://ondesignlabltd.com/" },
+  "publisher": { "@type": "Organization", "name": "ON Design Lab", "logo": { "@type": "ImageObject", "url": "https://ondesignlabltd.com/assets/logo-square.png" } },
+  "datePublished": "2026-10-24",
+  "dateModified": "2026-10-24",
+  "inLanguage": "zh-Hant",
+  "image": "https://ondesignlabltd.com/assets/og-cover.jpg",
+  "mainEntityOfPage": "https://ondesignlabltd.com/journal/restaurant-fitout-budget/",
+  "about": ["餐廳裝潢費用", "餐廳裝潢預算", "商業空間設計預算", "追加工程"]
+}
+</script>
+<style>
+  :root {
+    --bg: #0e0e0c; --bg2: #141412; --bg3: #1a1a17;
+    --line: #252520; --white: #f0efe8;
+    --muted: #4a4a44; --dim: #2a2a26; --accent: #666660;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--font); background: var(--bg); color: var(--white); }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 20px 40px; border-bottom: 0.5px solid var(--line); position: sticky; top: 0; background: var(--bg); z-index: 100; }
+  .nav-logo { font-size: 12.8px; font-weight: 400; letter-spacing: 0.26em; text-transform: uppercase; color: var(--white); text-decoration: none; }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-link { font-size: 12.8px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding-bottom: 2px; border-bottom: 0.5px solid transparent; transition: all 0.2s; }
+  .nav-link:hover { color: var(--white); border-color: var(--white); }
+  .nav-link.active { color: var(--white); border-color: var(--white); }
+
+  .article { max-width: 680px; padding: 64px 40px 80px; }
+  .article-meta { font-size: 12.8px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+  .article-title { font-size: clamp(25px, 3.6vw, 39px); font-weight: 300; line-height: 1.25; letter-spacing: 0.02em; color: var(--white); margin-bottom: 16px; }@media(min-width:1084px){.article-title{font-weight:200}}
+  .article-hook { font-size: 16px; font-style: italic; color: var(--accent); letter-spacing: 0.03em; margin-bottom: 48px; padding-bottom: 32px; border-bottom: 0.5px solid var(--line); }
+  .article h2 { font-size: 16px; font-weight: 400; color: #c8c7c0; letter-spacing: 0.04em; margin: 44px 0 16px; line-height: 1.6; }
+  .article p { font-size: 16px; font-weight: 400; line-height: 1.85; color: #9a9a92; letter-spacing: 0.02em; margin-bottom: 20px; }
+  .article p.quote { font-size: 16px; color: #c8c7c0;  border-left: 1px solid var(--accent); padding-left: 20px; margin: 36px 0; }
+  .article p.en { font-style: italic; color: #6a6a62; font-size: 12.8px; line-height: 1.6; }
+  .article a { color: var(--accent); text-decoration: none; border-bottom: 0.5px solid var(--dim); }
+  .article a:hover { color: var(--white); }
+  .article p a.cta { color: #c8c7c0; text-decoration: none; border-bottom: 0.5px solid var(--muted); }
+  .article-footer { margin-top: 56px; padding-top: 28px; border-top: 0.5px solid var(--line); font-size: 12.8px; color: var(--muted); line-height: 1.85; }
+  .article-footer a { color: var(--accent); text-decoration: none; border-bottom: 0.5px solid var(--dim); }
+  .article-footer a:hover { color: var(--white); }
+
+  .bottom { padding: 24px 40px; display: flex; gap: 32px; font-size: 12.8px; letter-spacing: 0.2em; text-transform: uppercase; border-top: 0.5px solid var(--line); }
+  .bottom a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .bottom a:hover { color: var(--white); }
+  @media (max-width: 768px) { .article { padding: 44px 24px 56px; } }
+
+/* mobile nav */
+@media (max-width: 640px) {
+  .nav { flex-direction: column; align-items: flex-start; gap: 12px; padding: 14px 24px; }
+  .nav-links { gap: 16px; flex-wrap: wrap; row-gap: 8px; }
+}
+</style>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/NotoSansTC-ON.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/type.css?v=2.57">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..500&amp;display=swap" media="print" onload="this.media='all'">
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo on-logo" href="/"><img class="on-mark" src="/assets/ON_mark_white.png" alt="ON" width="44" height="22"><span class="on-word">Design Lab</span></a>
+  <div class="nav-links">
+    <a class="nav-link" href="/commercial/">Commercial</a>
+    <a class="nav-link" href="/residential/">Residential</a>
+    <a class="nav-link" href="/info/">Info</a>
+    <a class="nav-link active" href="/journal/">Journal</a>
+    <a class="nav-link" href="/faq/">FAQ</a>
+    <a class="nav-link" href="/en/journal/restaurant-fitout-budget/">EN</a>
+  </div>
+</nav>
+
+<article class="article">
+  <p class="article-meta">Journal · 開店準備 · 預算</p>
+  <h1 class="article-title">餐廳裝潢預算怎麼抓，哪些地方最容易超支</h1>
+  <p class="article-hook">A budget is a list of things you have not decided yet.</p>
+
+  <p>餐廳裝潢預算最容易超支的地方，通常不是客人看得到的地方。我們翻了自己做過的幾間餐廳的估價單和追加紀錄，超出去的錢，大多落在牆後面、天花裡，和估價單之後才決定的功能。</p>
+  <p>所以這篇不給「每坪多少」。商業案我們一律專案報價，因為用坪數報價會失真到沒有參考價值；餐廳尤其如此，設備、排煙和場地現況，都會把單價拉開。這篇改講預算被什麼吃掉，以及怎麼先抓。</p>
+  <h2>一、先分清楚預算裡有幾個口袋</h2>
+  <p>預算和報價單上的數字，常常不是同一個範圍。我們的估價單大致分幾塊：基礎工程（拆除、假設、水電、泥作這類）、裝修工程（木作、油漆、玻璃、燈具這類）、設備工程（空調、廚具、冷凍、消防這類），再加上設計費、工務管理費（工程費的 12%），最後是 5% 的營業稅。另外還有一塊常被漏掉：消防與室內裝修的建築師簽證，費用另計。</p>
+  <p>還有一件事要在簽約前講清楚：設備由誰買。我們做過的一間 110 坪餐廳，空調、廚具和冷凍列在「業主支付」；另一間 30 坪的餐酒館，空調和消防則是統包在我們的估價單裡。哪一種都可以，但預算的數字就不是同一個範圍。</p>
+  <h2>二、看不到的工程，占了多大一塊</h2>
+  <p>一間 30 坪、在老房子裡的餐酒館，估價單的本工程裡，假設、水電、泥作三項加起來，占了將近一半。客人看得到的木作、油漆、玻璃、燈具和木地板，加起來只有三分之一出頭。【待 Mo 確認：這兩個比例出自 Belvoir 的估價單，可否以匿名方式公開】</p>
+  <p>這不是哪裡做錯，是老房子和餐廳本來就是這樣：管線要重拉，防水要處理，排煙、排水要有路可走。但如果預算是用「看得到的東西」去抓，一開始就會短一大截。</p>
+  <h2>三、追加是怎麼發生的</h2>
+  <p>追加工程不是意外，是估價單上沒寫、或當時還沒決定的東西，後來出現了。我們對照了兩份結算，規模差很多，來源卻很像。</p>
+  <p>一間 14 坪的 wine bar，結算時有五個項目追加：水電、空調、木作、假設和鐵件，合計約占原本工程費的 9%。油漆和特殊效果兩大項完全沒動。假設工程在估價時就寫「預抓、實報實銷」，結算時照實際算；每一筆追加，估價單上都標了「追加已確認」。</p>
+  <p>一間 110 坪的餐廳，在最初的報價之後前後追加了三輪，追加的總額約是原報價的五成，其中包含業主自購的設備。【待 Mo 確認：這個比例出自 IRON CHEF 的追加報價，可否以匿名方式公開，或整段刪掉】</p>
+  <p>這些追加的項目，大致可以分三類。第一類是現場才看得到的現況：消防灑水頭要新增和移位、天花裡沒有可以吊的支撐要補強、車位的重度油汙要先清掉。第二類是估價單之後才決定的功能：自動門、電控玻璃、隱藏門、酒窖的地台結構、間接照明。第三類是規格調整：檯面石材換成另一個系列。</p>
+  <h2>四、怎麼先抓</h2>
+  <p>第一，把還沒決定的事寫在估價單上，不要留空。能預抓的預抓一個數字，標明實報實銷；現況不明的項目，寫明要現場確認後才報價。拆除這一項，我們不憑圖估價，要到現場看過才報。</p>
+  <p>第二，追加要有確認。範圍外的追加項目另行報價，這是寫在我們<a href="/faq/">常見問題</a>裡的做法；結算時，每一筆追加都在估價單上標明已確認。</p>
+  <p>第三，設備與尺寸早一點定。廚具、空調和排煙的規格與尺寸越早進圖，現場的意外越少。圖準，報價才準，因為報價是逐項對照圖面的數量算出來的。</p>
+  <p>第四，預備金要留，但不要只留一個比例。上面兩個例子，一個約 9%，一個約五成，差了好幾倍，單一個比例回答不了。比較實際的做法，是照上面三類，一類一類去估。【待 Mo 補：ON 建議業主預留的預備金做法或比例】</p>
+  <p class="quote">「預算不是突然超支的，是簽約時留白的地方，在工程裡一個一個被填滿。」</p>
+  <p>設計費、工務管理費，以及商業案為什麼專案報價，寫在<a href="/journal/design-fee/">設計費一坪多少</a>。開工前還該準備哪些東西，見<a href="/journal/before-you-open-a-restaurant/">開餐廳前，設計師會要你先準備什麼</a>。</p>
+  <p>帶店的想法和場地來，<a class="cta" href="/contact/">我們先一起算</a>。</p>
+  <p class="en">Budgets for a restaurant fit-out tend to overrun in places the guest never sees: behind the walls, inside the ceiling, and in functions decided after the estimate. In the estimates and variation records of our own restaurants, two settlements look alike in origin though far apart in size, one around 9% and one around half of the original quote. Write undecided items into the estimate, confirm every variation, fix equipment sizes early, and do not rely on a single contingency percentage.</p>
+
+  <div class="article-footer">
+    <p>ON Design Lab｜品牌翻譯成空間</p>
+    <p>相關閱讀：<a href="/journal/design-fee/">設計費一坪多少</a>　·　<a href="/journal/before-you-open-a-restaurant/">開餐廳前先準備什麼</a>　·　<a href="/journal/restaurant-design-timeline/">餐廳設計要多久</a></p>
+    <p>我們怎麼工作：<a href="/process/">五階段設計流程</a>　·　<a href="/faq/">常見問題 FAQ</a>　·　合作洽詢：<a href="/contact/">Contact</a></p>
+  </div>
+</article>
+
+<div class="bottom">
+  <a href="/journal/">← Journal</a>
+  <a href="/contact/">Contact →</a>
+</div>
+
+<script src="/assets/js/nav.js" defer></script>
+<script src="/assets/js/sound.js" defer></script>
+</body>
+</html>
