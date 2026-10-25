@@ -118,8 +118,9 @@
   }
 }
 </script>
-<link rel="preload" as="image" href="/網頁首頁兩張/商空.webp" type="image/webp"><link rel="preload" as="image" href="/網頁首頁兩張/商空.jpg">
-<link rel="preload" as="image" href="/網頁首頁兩張/住家.webp" type="image/webp"><link rel="preload" as="image" href="/網頁首頁兩張/住家.jpg">
+<!-- 大入口圖（桌機手機共用）：商業＝VDF Wine Bar、住家＝Residence C；預載 webp（CSS 用 image-set，webp 優先、jpg 備用） -->
+<link rel="preload" as="image" href="/網頁首頁兩張/商空_VDF.webp" type="image/webp">
+<link rel="preload" as="image" href="/網頁首頁兩張/住家_C.webp" type="image/webp">
 <link rel="preload" as="fetch" href="/assets/audio/no1-intro-4bars-logo-20260928.m4a" crossorigin><link rel="preload" as="fetch" href="/assets/audio/no1-loop-12bars-20260928.m4a" crossorigin>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -223,8 +224,8 @@ a{color:#fafaf8;text-decoration:none}
   will-change:transform;
 }
 .wall.hazed .hero{filter:brightness(1)}   /* 收進去之後，亮度統一交給整面牆控制 */
-.half:first-child .hero{background-image:url('/網頁首頁兩張/商空.jpg')}
-.half:last-child .hero{background-image:url('/網頁首頁兩張/住家.jpg')}
+.half:first-child .hero{background-image:url('/網頁首頁兩張/商空_VDF.jpg');background-image:image-set(url('/網頁首頁兩張/商空_VDF.webp') type('image/webp'),url('/網頁首頁兩張/商空_VDF.jpg') type('image/jpeg'));background-position:center 78%}  /* VDF 是直幅，取偏下的位置：店面與燈窗在畫面中，上方陽台（很暗）少露 */
+.half:last-child .hero{background-image:url('/網頁首頁兩張/住家_C.jpg');background-image:image-set(url('/網頁首頁兩張/住家_C.webp') type('image/webp'),url('/網頁首頁兩張/住家_C.jpg') type('image/jpeg'))}
 
 /* 還沒收縮前：維持原本的 hover 行為 */
 .half:hover .wall:not(.hazed){transform:scale(1.10)}
@@ -304,9 +305,7 @@ a{color:#fafaf8;text-decoration:none}
     height:100dvh;             /* 用 dvh 避免 Safari 位址列影響 */
   }
   .half{height:50dvh}          /* 每個 half 絕對 50% */
-
-  .half:first-child .hero{background-image:url('/手機首頁兩張/商空.jpg')}
-  .half:last-child .hero{background-image:url('/手機首頁兩張/住家.jpg')}
+  /* 大入口圖與桌機共用同一張（原本手機另用 /手機首頁兩張/，已不再使用） */
 
   /* 手機不出現中央 logo（Mo 指定）—— 開場 curtain 的 logo 不受影響 */
   .logo{display:none}
