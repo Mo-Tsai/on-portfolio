@@ -34,6 +34,7 @@
 - [誤差要在哪裡發生——一座中島的切割](https://ondesignlabltd.com/journal/residence-r-island/)：多面切角中島為什麼不在現場打樣，而是在數位模型裡算完、切割機下料（[English](https://ondesignlabltd.com/en/journal/residence-r-island/)）
 - [柱子動不了，那就讓其他東西動](https://ondesignlabltd.com/journal/residence-c/)：住宅案 Residence C——兩根拆不掉的戶內柱，如何用連續弧面吃進牆裡；三個圓的上下對位、從石材萃出來的灰度、無框門後的書房與主臥
 - [曲面沒有通解——機器做形，人做面](https://ondesignlabltd.com/journal/residence-c-curves/)：曲面石材為什麼機器只能下料、霧面只能手磨；浴室圓角用 3D 列印直接成型當基底；樑身造型側板讓投影機不露臉
+- [這一面石頭，是用手捏出來的](https://ondesignlabltd.com/journal/canyon-wall/)：商業空間裡一面自由曲面的岩層牆：圖畫不出來就沒有人做得出來，到現場一個點一個點捏出形狀，再切成件、刻好、拼回同一塊（[English](https://ondesignlabltd.com/en/journal/canyon-wall/)）
 - [設計流程 Process](https://ondesignlabltd.com/process/)：五階段流程——品牌理解、空間策略、設計發展、施工監造、交付
 - [Contact](https://ondesignlabltd.com/contact/)：聯絡方式
 - English versions: [FAQ (EN)](https://ondesignlabltd.com/en/faq/)、[Journal (EN)](https://ondesignlabltd.com/en/journal/)

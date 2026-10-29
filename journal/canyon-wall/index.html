@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6VJY51HQTQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-6VJY51HQTQ');
+  // ON-contact-tracking：有人點 Email、Instagram 或 Contact 時送一筆 GA 事件（詢問追蹤）
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a');
+    if (!a) return;
+    var h = a.getAttribute('href') || '', p = location.pathname;
+    if (h.indexOf('mailto:') === 0) gtag('event', 'contact_email', { page_path: p });
+    else if (/instagram\.com/i.test(h)) gtag('event', 'contact_instagram', { page_path: p });
+    else if (/(^|\/)contact\/?$/.test(h.split('#')[0].split('?')[0])) gtag('event', 'contact_page_click', { page_path: p });
+  });
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>這一面石頭，是用手捏出來的｜自由曲面的岩層牆 — ON Design Lab Journal</title>
+<meta name="description" content="自由曲面沒有一張圖裝得下，圖畫不出來，就沒有人做得出來。我們到現場，照著現場一個點一個點捏出形狀，再切開、刻好、拼回同一塊。">
+<link rel="canonical" href="https://ondesignlabltd.com/journal/canyon-wall/">
+<link rel="alternate" hreflang="zh-Hant" href="https://ondesignlabltd.com/journal/canyon-wall/">
+<link rel="alternate" hreflang="en" href="https://ondesignlabltd.com/en/journal/canyon-wall/">
+<link rel="alternate" hreflang="x-default" href="https://ondesignlabltd.com/journal/canyon-wall/">
+<meta property="og:title" content="這一面石頭，是用手捏出來的">
+<meta property="og:description" content="A form no drawing can hold has to be made by hand first.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ondesignlabltd.com/journal/canyon-wall/">
+<meta property="og:image" content="https://ondesignlabltd.com/assets/og-on.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "這一面石頭，是用手捏出來的",
+  "description": "自由曲面沒有一張圖裝得下，圖畫不出來，就沒有人做得出來。我們到現場，照著現場一個點一個點捏出形狀，再切開、刻好、拼回同一塊。",
+  "author": {
+    "@type": "Organization",
+    "name": "ON Design Lab",
+    "url": "https://ondesignlabltd.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "ON Design Lab",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ondesignlabltd.com/assets/logo-square.png"
+    }
+  },
+  "datePublished": "2026-10-29",
+  "dateModified": "2026-10-29",
+  "inLanguage": "zh-Hant",
+  "image": "https://ondesignlabltd.com/assets/og-cover.jpg",
+  "mainEntityOfPage": "https://ondesignlabltd.com/journal/canyon-wall/",
+  "about": [
+    "自由曲面",
+    "岩層牆",
+    "商業空間",
+    "造型牆"
+  ]
+}
+</script>
+<style>
+  :root {
+    --bg: #0e0e0c; --bg2: #141412; --bg3: #1a1a17;
+    --line: #252520; --white: #f0efe8;
+    --muted: #4a4a44; --dim: #2a2a26; --accent: #666660;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--font); background: var(--bg); color: var(--white); }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 20px 40px; border-bottom: 0.5px solid var(--line); position: sticky; top: 0; background: var(--bg); z-index: 100; }
+  .nav-logo { font-size: 12.8px; font-weight: 400; letter-spacing: 0.26em; text-transform: uppercase; color: var(--white); text-decoration: none; }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-link { font-size: 12.8px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding-bottom: 2px; border-bottom: 0.5px solid transparent; transition: all 0.2s; }
+  .nav-link:hover { color: var(--white); border-color: var(--white); }
+  .nav-link.active { color: var(--white); border-color: var(--white); }
+
+  .article { max-width: 680px; margin: 0 auto; padding: 64px 40px 80px; }
+  .article-meta { font-size: 12.8px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+  .article-title { font-size: clamp(25px, 3.6vw, 39px); font-weight: 300; line-height: 1.25; letter-spacing: 0.02em; color: var(--white); margin-bottom: 16px; }@media(min-width:1084px){.article-title{font-weight:200}}
+  .article-hook { font-size: 16px; font-style: italic; color: var(--accent); letter-spacing: 0.03em; margin-bottom: 48px; padding-bottom: 32px; border-bottom: 0.5px solid var(--line); }
+  .article h2 { font-size: 16px; font-weight: 400; color: #c8c7c0; letter-spacing: 0.04em; margin: 44px 0 16px; line-height: 1.6; }
+  .article p { font-size: 16px; font-weight: 400; line-height: 1.85; color: #9a9a92; letter-spacing: 0.02em; margin-bottom: 20px; }
+  .article p.quote { font-size: 16px; color: #c8c7c0;  border-left: 1px solid var(--accent); padding-left: 20px; margin: 36px 0; }
+  .article p.en { font-style: italic; color: #6a6a62; font-size: 12.8px; line-height: 1.6; }
+  .article strong { color: #c8c7c0; font-weight: 400; }
+  .article-footer { margin-top: 56px; padding-top: 28px; border-top: 0.5px solid var(--line); font-size: 12.8px; color: var(--muted); line-height: 1.85; }
+  .article-footer a { color: var(--accent); text-decoration: none; border-bottom: 0.5px solid var(--dim); }
+  .article-footer a:hover { color: var(--white); }
+
+  .bottom { padding: 24px 40px; display: flex; gap: 32px; font-size: 12.8px; letter-spacing: 0.2em; text-transform: uppercase; border-top: 0.5px solid var(--line); }
+  .bottom a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .bottom a:hover { color: var(--white); }
+  @media (max-width: 768px) { .article { padding: 44px 24px 56px; } }
+
+/* mobile nav */
+@media (max-width: 640px) {
+  .nav { flex-direction: column; align-items: flex-start; gap: 12px; padding: 14px 24px; }
+  .nav-links { gap: 16px; flex-wrap: wrap; row-gap: 8px; }
+}
+
+  /* ---- 工法影片區塊 ---- */
+  .tv { width: min(100%, 360px); margin: 0 0 48px; }
+  .tv[hidden] { display: none; }
+  .tv-frame { position: relative; aspect-ratio: 9 / 16; background: var(--bg2); overflow: hidden; }
+  .tv-frame img, .tv-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border: 0; display: block; }
+  .tv-play { position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; background: none; cursor: pointer; }
+  .tv-play::after { content: ""; position: absolute; right: 20px; bottom: 20px; width: 52px; height: 52px; border: 0.5px solid rgba(240,239,232,0.7); border-radius: 50%; background: rgba(14,14,12,0.35); transition: background 0.2s, border-color 0.2s; }
+  .tv-play::before { content: ""; position: absolute; right: 36px; bottom: 38px; border-style: solid; border-width: 8px 0 8px 13px; border-color: transparent transparent transparent var(--white); z-index: 1; }
+  .tv-play:hover::after { background: rgba(14,14,12,0.6); border-color: var(--white); }
+  .tv-cap { margin-top: 12px; font-size: 12.8px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); display: flex; justify-content: space-between; gap: 16px; }
+  .tv-cap a { color: var(--accent); text-decoration: none; border-bottom: 0.5px solid var(--dim); }
+  .tv-cap a:hover { color: var(--white); }
+  .article p a.cta { color: #c8c7c0; text-decoration: none; border-bottom: 0.5px solid var(--muted); }
+  @media (max-width: 768px) { .tv { width: 100%; max-width: 420px; } }
+</style>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/NotoSansTC-ON.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/type.css?v=2.57">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..500&amp;display=swap" media="print" onload="this.media='all'">
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo on-logo" href="/"><img class="on-mark" src="/assets/ON_mark_white.png" alt="ON" width="44" height="22"><span class="on-word">Design Lab</span></a>
+  <div class="nav-links">
+    <a class="nav-link" href="/commercial/">Commercial</a>
+    <a class="nav-link" href="/residential/">Residential</a>
+    <a class="nav-link" href="/info/">Info</a>
+    <a class="nav-link active" href="/journal/">Journal</a>
+    <a class="nav-link" href="/faq/">FAQ</a>
+    <a class="nav-link" href="/en/journal/canyon-wall/">EN</a>
+  </div>
+</nav>
+
+<article class="article">
+  <p class="article-meta">Journal · 商業空間 · 特殊工法</p>
+  <h1 class="article-title">這一面石頭，是用手捏出來的</h1>
+  <p class="article-hook">A form no drawing can hold has to be made by hand first.</p>
+
+  <figure class="tv" data-yt="hLQEIW7znFQ" data-title="這一面石頭，是用手捏出來的">
+    <div class="tv-frame">
+      <img src="/images/journal/canyon-wall-poster.jpg" alt="這一面石頭，是用手捏出來的" width="540" height="960" loading="lazy">
+      <button class="tv-play" aria-label="播放影片：這一面石頭，是用手捏出來的"></button>
+    </div>
+    <figcaption class="tv-cap"><span>特殊工法 · 2:30</span><a href="https://www.youtube.com/shorts/hLQEIW7znFQ">在 YouTube 看</a></figcaption>
+  </figure>
+
+  <p>這一面石頭，是用手捏出來的。它是同一塊東西，而它一開始不存在。</p>
+  <h2>現場已經做好了，峽谷還沒有</h2>
+  <p>我們接手的時候，隔間和拱門都立好了，天花封好了，空調也裝好了。還沒有的，是一座峽谷。牆和天花要長成同一塊，而且要長進這個已經做好的現場。刻得出來，也架得起來，難的在那之前。</p>
+  <h2>給您一張圖，您做得出這個嗎</h2>
+  <p>這是自由曲面，也就是不照任何公式走的曲面。沒有一張圖裝得下它。畫成平面圖，起伏全部不見。畫成立面圖，只剩一條輪廓。圖畫不出來，就沒有人做得出來，現場只能停在那裡。</p>
+  <h2>照著現場，一個點一個點捏</h2>
+  <p>所以我們到現場，照著現場，一個點一個點用手把它捏出來。怎麼捏的，這裡先不展開。</p>
+  <p>形狀定了，燈光、維修孔、空調出風口也跟著全部重畫。設計不是畫開心的，能用，才算數。</p>
+  <h2>切開，再拼回同一塊</h2>
+  <p>一整片運不進來，所以先在模型上切開。每一件都套進 85 × 175 公分的框裡，照尺寸切出材料，再一刀一刀刻出來。運到現場，拼回同一塊，看不出是拼的。</p>
+  <p>影片裡的白色形體不是示意圖，是當初捏出來的那個檔案本人。全部 148 平方米，光是其中一面牆，就切成 13 件。</p>
+  <p class="quote">「這一面，是我們捏的。」</p>
+  <p>做到一半卡住的曲面，或是一直被說做不出來的曲面，場地和想法都可以先帶來，我們<a class="cta" href="/contact/">先告訴您能不能做、大概會卡在哪</a>。</p>
+
+  <p class="en">When we arrived, the partitions and arches were built, the ceiling was closed and the air conditioning installed. What did not exist yet was a canyon: wall and ceiling grown into one piece, and grown into a site that was already finished. A free-form surface fits in no drawing. Flatten it into a plan and the relief disappears; flatten it into an elevation and only an outline remains. So we went to the site and shaped it by hand, point by point, against the site itself. How, we keep to ourselves. Too large to bring in whole, it was cut apart in the model, carved piece by piece, and joined again on site without showing where. 148 square metres in all; one wall alone is 13 pieces.</p>
+
+  <div class="article-footer">
+    <p>ON DESIGN LAB｜設計 · 開發 · 施工</p>
+    <p>更多特殊工法：<a href="/journal/#technique">Journal</a>　·　合作洽詢：<a href="/contact/">Contact</a>　·　<a href="/en/journal/canyon-wall/">English</a></p>
+    <p>另一面不是雕出來的牆：<a href="/journal/parametric-cream-wall/">形狀不是雕的，是算的</a></p>
+  </div>
+</article>
+
+<div class="bottom">
+  <a href="/journal/">← Journal</a>
+  <a href="/contact/">Contact →</a>
+</div>
+
+<script>
+/* 工法影片：點了才載入 YouTube（youtube-nocookie），沒點之前不連 YouTube。 */
+document.querySelectorAll('.tv').forEach(function (fig) {
+  var btn = fig.querySelector('.tv-play');
+  if (!btn) return;
+  btn.addEventListener('click', function () {
+    if (!fig.dataset.yt) return;
+    var frame = fig.querySelector('.tv-frame'), el = document.createElement('iframe');
+    el.src = 'https://www.youtube-nocookie.com/embed/' + fig.dataset.yt + '?autoplay=1&rel=0&playsinline=1';
+    el.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+    el.title = fig.dataset.title || '影片';
+    frame.innerHTML = ''; frame.appendChild(el);
+  });
+});
+</script>
+
+<script src="/assets/js/nav.js" defer></script>
+<script src="/assets/js/sound.js" defer></script>
+</body>
+</html>
