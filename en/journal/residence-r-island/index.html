@@ -88,6 +88,19 @@
   .nav { flex-direction: column; align-items: flex-start; gap: 12px; padding: 14px 24px; }
   .nav-links { gap: 16px; flex-wrap: wrap; row-gap: 8px; }
 }
+  /* ---- 工法影片區塊 ---- */
+  .tv { width: min(100%, 360px); margin: 0 0 48px; }
+  .tv[hidden] { display: none; }
+  .tv-frame { position: relative; aspect-ratio: 9 / 16; background: var(--bg2); overflow: hidden; }
+  .tv-frame img, .tv-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border: 0; display: block; }
+  .tv-play { position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; background: none; cursor: pointer; }
+  .tv-play::after { content: ""; position: absolute; right: 20px; bottom: 20px; width: 52px; height: 52px; border: 0.5px solid rgba(240,239,232,0.7); border-radius: 50%; background: rgba(14,14,12,0.35); transition: background 0.2s, border-color 0.2s; }
+  .tv-play::before { content: ""; position: absolute; right: 36px; bottom: 38px; border-style: solid; border-width: 8px 0 8px 13px; border-color: transparent transparent transparent var(--white); z-index: 1; }
+  .tv-play:hover::after { background: rgba(14,14,12,0.6); border-color: var(--white); }
+  .tv-cap { margin-top: 12px; font-size: 12.8px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); display: flex; justify-content: space-between; gap: 16px; }
+  .tv-cap a { color: var(--accent); text-decoration: none; border-bottom: 0.5px solid var(--dim); }
+  .tv-cap a:hover { color: var(--white); }
+  @media (max-width: 768px) { .tv { width: 100%; max-width: 420px; } }
 </style>
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
@@ -116,6 +129,14 @@
   <h1 class="article-title">Where the Error Is Allowed to Happen — Cutting an Island</h1>
   <p class="article-hook">Every cut is a decision about where the error goes.</p>
 
+  <figure class="tv" data-yt="CfdzwHukUDk" data-title="Where the Error Is Allowed to Happen — Cutting an Island">
+    <div class="tv-frame">
+      <img src="/images/journal/residence-r-island-poster.jpg" alt="Where the Error Is Allowed to Happen — Cutting an Island" width="540" height="960" loading="lazy">
+      <button class="tv-play" aria-label="Play video: Where the Error Is Allowed to Happen — Cutting an Island"></button>
+    </div>
+    <figcaption class="tv-cap"><span>Special techniques · 1:58</span><a href="https://www.youtube.com/shorts/CfdzwHukUDk">Watch on YouTube</a></figcaption>
+  </figure>
+
 <p>How the island in the previous entry was actually cut.</p>
 
   <h2>The Site Is the Most Expensive Place</h2>
@@ -139,6 +160,22 @@
   <a href="/en/journal/">← Journal (EN)</a>
   <a href="/contact/">Contact →</a>
 </div>
+
+<script>
+/* 工法影片：點了才載入 YouTube（youtube-nocookie），沒點之前不連 YouTube。 */
+document.querySelectorAll('.tv').forEach(function (fig) {
+  var btn = fig.querySelector('.tv-play');
+  if (!btn) return;
+  btn.addEventListener('click', function () {
+    if (!fig.dataset.yt) return;
+    var frame = fig.querySelector('.tv-frame'), el = document.createElement('iframe');
+    el.src = 'https://www.youtube-nocookie.com/embed/' + fig.dataset.yt + '?autoplay=1&rel=0&playsinline=1';
+    el.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+    el.title = fig.dataset.title || '影片';
+    frame.innerHTML = ''; frame.appendChild(el);
+  });
+});
+</script>
 
 <script src="/assets/js/nav.js" defer></script>
 <script src="/assets/js/sound.js" defer></script>
