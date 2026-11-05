@@ -8,7 +8,13 @@
    - 音量 0.5、淡入 0.4 秒（Mo 09-28）。不設 navigator.audioSession（保留 iOS 靜音鍵會讓網頁無聲）。
    - 換歌（交叉淡化）的程式碼仍在，但 TRACKS 只有 no1、trackFor() 永遠回 no1 → 不會觸發。
      之後要分線：TRACKS 加曲子、trackFor() 改回依網址回傳、音檔放 /assets/audio/（曲庫原稿在
-     09_媒體與素材\ONdesignlab\_品牌規範\聲音\曲庫）。 */
+     09_媒體與素材\ONdesignlab\_品牌規範\聲音\曲庫）。
+   v2.108（Mo 11-05 定）：工法影片（Journal 的 YouTube）一播，音樂淡出；影片播完、按暫停、或換頁，音樂淡回來。
+   - 「被壓住」狀態：ONSound.hold(reason)／ONSound.release(reason)，reason 用 Set 記（可多個，目前只有 'video'，由 /assets/js/tv.js 叫）。
+     hold：在播就把 master 淡到 0（CFG.fadeOut）；release：reason 清空且開關是開 → 在播就淡回 CFG.volume（CFG.resumeFade），沒在播就開始播。
+   - 被壓住時 resumeLoop／onGesture／setOn(true)／分頁回來 都不實際出聲（master 停在 0），等 release 才出來。
+   - 點影片播放鍵那一下不算「第一次互動」：onGesture 看到事件目標在 .tv 裡就不管。
+   - 不改 Sound on/off 設定、不寫 sessionStorage；單頁式換頁（page()）時 release 全部 reason。 */
 (function () {
   'use strict';
   if (window.ONSound) return;
@@ -65,6 +71,9 @@
   var songZero = null;     /* 歌曲時間 0（開場第一拍）對應的 ctx 時間 */
   var want = 'no1';        /* 這一頁想放的那首 */
   var hiddenPaused = false, suspendTimer = null, introInFlight = false;
+  var held = new Set();    /* v2.108：被壓住的原因（'video'…）；非空＝音樂該安靜 */
+  function isHeld() { return held.size > 0; }
+  function vol() { return isHeld() ? 0 : CFG.volume; }   /* 淡回來時的目標音量 */
   var log = window.__onSoundLog = [];
   function L(ev, extra) {
     var o = { ev: ev, perf: Math.round(performance.now()), ctx: ctx ? +ctx.currentTime.toFixed(4) : null, state: ctx ? ctx.state : 'none' };
@@ -213,7 +222,8 @@
       var pos = sget(K_TRACK) === name ? (parseFloat(sget(K_POS)) || 0) : 0;
       master.gain.setValueAtTime(0, ctx.currentTime);
       cur = makeTrack(name, ctx.currentTime + 0.03, pos, 1);
-      ramp(master.gain, CFG.volume, CFG.resumeFade);
+      if (isHeld()) L('resume-held', { held: Array.from(held) });   /* v2.108：被影片壓住，先不出聲，release 再淡入 */
+      else ramp(master.gain, CFG.volume, CFG.resumeFade);
       render();
       if (want !== name) switchTo(want);
     }).catch(function (e) { L('resume-fail', { err: String(e) }); });
@@ -355,7 +365,7 @@
     L(on ? 'on' : 'off', { byUser: !!byUser });
     clearTimeout(suspendTimer);
     if (on) {
-      if (playing()) (ctx.resume ? ctx.resume() : Promise.resolve()).then(function () { ramp(master.gain, CFG.volume, CFG.resumeFade); });
+      if (playing()) (ctx.resume ? ctx.resume() : Promise.resolve()).then(function () { ramp(master.gain, vol(), CFG.resumeFade); });
       else resumeLoop();
     } else if (ctx) {
       ramp(master.gain, 0, CFG.fadeOut);
@@ -410,13 +420,31 @@
   /* ── 第一次互動：開始出聲 ── */
   function onGesture(e) {
     if (e && e.isTrusted !== false) gestureSeen = true;
+    if (e && e.target && e.target.closest && e.target.closest('.tv')) return;   /* v2.108：點影片播放鍵不算「開始放音樂」那一下 */
     if (btn && e && e.target && btn.contains(e.target)) return;   /* 開關自己處理 */
     if (!on) return;
+    if (isHeld()) return;                                          /* v2.108：被影片壓住，不出聲 */
     if (playing()) {
-      if (!running() && !hiddenPaused && ctx.resume) ctx.resume().then(function () { ramp(master.gain, CFG.volume, CFG.resumeFade); });
+      if (!running() && !hiddenPaused && ctx.resume) ctx.resume().then(function () { ramp(master.gain, vol(), CFG.resumeFade); });
       return;
     }
     resumeLoop();
+  }
+
+  /* ── v2.108：被影片壓住／放開 ── */
+  function hold(reason) {
+    held.add(reason || 'video');
+    L('hold', { held: Array.from(held) });
+    if (ctx && playing()) ramp(master.gain, 0, CFG.fadeOut);
+  }
+  function release(reason) {
+    if (reason === undefined) held.clear(); else held.delete(reason);
+    L('release', { held: Array.from(held) });
+    if (isHeld() || !on || hiddenPaused) return;
+    if (playing()) {
+      if (!ctx) return;
+      (ctx.resume ? ctx.resume() : Promise.resolve()).then(function () { if (!isHeld() && on) ramp(master.gain, CFG.volume, CFG.resumeFade); });
+    } else resumeLoop();
   }
   ['pointerdown', 'touchend', 'keydown', 'click'].forEach(function (t) {
     window.addEventListener(t, onGesture, { capture: true, passive: true });
@@ -435,12 +463,12 @@
     } else if (hiddenPaused) {
       hiddenPaused = false;
       if (!on) return;
-      (ctx.resume ? ctx.resume() : Promise.resolve()).then(function () { ramp(master.gain, CFG.volume, CFG.resumeFade); L('visible-resume'); });
+      (ctx.resume ? ctx.resume() : Promise.resolve()).then(function () { ramp(master.gain, vol(), CFG.resumeFade); L('visible-resume'); });
     }
   });
   window.addEventListener('pagehide', savePos);
   window.addEventListener('pageshow', function (e) {
-    if (e.persisted && on && ctx && playing() && ctx.resume) ctx.resume().then(function () { ramp(master.gain, CFG.volume, CFG.resumeFade); });
+    if (e.persisted && on && ctx && playing() && ctx.resume) ctx.resume().then(function () { ramp(master.gain, vol(), CFG.resumeFade); });
   });
   setInterval(function () { if (playing() && running() && !pend) savePos(); }, 1000);
 
@@ -450,16 +478,21 @@
     /* 單頁式換頁後由 nav.js 呼叫：照新網址決定要不要換歌，並把開關補回畫面 */
     page: function (path) {
       makeButton();
+      if (isHeld()) release();                   /* v2.108：換頁＝影片不在了，全部放開 */
       var t = trackFor(path);
       if (t) switchTo(t);
     },
+    /* v2.108：影片播放中壓住音樂／放開（tv.js 用） */
+    hold: hold,
+    release: release,
+    isHeld: isHeld,
     track: function () { return pend ? pend.name : cur ? cur.name : null; },
     isOn: function () { return on; },
     set: function (v) { setOn(v, false); },
     ctx: function () { return ctx; },
     loopPos: function () { return posOf(cur); },
     CFG: CFG, BAR: BAR, INTRO_LEN: INTRO_LEN,
-    _debug: function () { return { buf: buf, cur: cur, pend: pend, want: want, introSrc: !!introSrc }; }
+    _debug: function () { return { buf: buf, cur: cur, pend: pend, want: want, introSrc: !!introSrc, held: Array.from(held), masterGain: master && master.gain.value }; }
   };
 
   /* ── 開場 ── */
