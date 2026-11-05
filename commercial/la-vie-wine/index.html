@@ -236,21 +236,7 @@ function updLb(){document.getElementById('lb-img').src=imgs[ci];document.getElem
 document.addEventListener('keydown',e=>{if(!document.getElementById('lb').classList.contains('open'))return;if(e.key==='ArrowRight')lbNext();if(e.key==='ArrowLeft')lbPrev();if(e.key==='Escape')closeLb()});
 </script>
 
-<script>
-/* 影片：點了才載入 YouTube（youtube-nocookie），沒點之前不連 YouTube 播放器。 */
-document.querySelectorAll('.tv').forEach(function (fig) {
-  var btn = fig.querySelector('.tv-play');
-  if (!btn) return;
-  btn.addEventListener('click', function () {
-    if (!fig.dataset.yt) return;
-    var frame = fig.querySelector('.tv-frame'), el = document.createElement('iframe');
-    el.src = 'https://www.youtube-nocookie.com/embed/' + fig.dataset.yt + '?autoplay=1&rel=0&playsinline=1';
-    el.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
-    el.title = fig.dataset.title || '影片';
-    frame.innerHTML = ''; frame.appendChild(el);
-  });
-});
-</script>
+<script src="/assets/js/tv.js" defer></script>
 
 <script src="/assets/js/nav.js" defer></script>
 <script src="/assets/js/sound.js" defer></script>
