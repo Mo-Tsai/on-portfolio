@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6VJY51HQTQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-6VJY51HQTQ');
+  // ON-contact-tracking：有人點 Email、Instagram 或 Contact 時送一筆 GA 事件（詢問追蹤）
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a');
+    if (!a) return;
+    var h = a.getAttribute('href') || '', p = location.pathname;
+    if (h.indexOf('mailto:') === 0) gtag('event', 'contact_email', { page_path: p });
+    else if (/instagram\.com/i.test(h)) gtag('event', 'contact_instagram', { page_path: p });
+    else if (/(^|\/)contact\/?$/.test(h.split('#')[0].split('?')[0])) gtag('event', 'contact_page_click', { page_path: p });
+  });
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How long does restaurant design take, and how is it priced? Start from the opening day. — ON Design Lab Journal</title>
+<meta name="description" content="How long does restaurant design take? ON Design Lab explains with real projects: design typically takes 3 to 6 weeks and construction about 45 to 75 working days, how to read those ranges, what stretches the timeline, how commercial design fees work, and why follow-up stores are charged only for drawing adaptation.">
+<link rel="canonical" href="https://ondesignlabltd.com/en/journal/restaurant-design-timeline/">
+<link rel="alternate" hreflang="zh-Hant" href="https://ondesignlabltd.com/journal/restaurant-design-timeline/">
+<link rel="alternate" hreflang="en" href="https://ondesignlabltd.com/en/journal/restaurant-design-timeline/">
+<link rel="alternate" hreflang="x-default" href="https://ondesignlabltd.com/journal/restaurant-design-timeline/">
+<meta property="og:title" content="How long does restaurant design take, and how is it priced? Start from the opening day.">
+<meta property="og:description" content="A schedule should be worked backwards from the opening day, not forwards from the contract.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ondesignlabltd.com/en/journal/restaurant-design-timeline/">
+<meta property="og:image" content="https://ondesignlabltd.com/assets/og-on.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How long does restaurant design take, and how is it priced? Start from the opening day.",
+  "description": "How long does restaurant design take? ON Design Lab explains with real projects: design typically takes 3 to 6 weeks and construction about 45 to 75 working days, how to read those ranges, what stretches the timeline, how commercial design fees work, and why follow-up stores are charged only for drawing adaptation.",
+  "author": {
+    "@type": "Organization",
+    "name": "ON Design Lab",
+    "url": "https://ondesignlabltd.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "ON Design Lab",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ondesignlabltd.com/assets/logo-square.png"
+    }
+  },
+  "datePublished": "2026-11-06",
+  "dateModified": "2026-11-06",
+  "inLanguage": "en",
+  "image": "https://ondesignlabltd.com/assets/og-cover.jpg",
+  "mainEntityOfPage": "https://ondesignlabltd.com/en/journal/restaurant-design-timeline/",
+  "about": [
+    "Restaurant design",
+    "F&B interior design",
+    "Design and construction timeline",
+    "Design fees"
+  ],
+  "translationOfWork": {
+    "@type": "Article",
+    "@id": "https://ondesignlabltd.com/journal/restaurant-design-timeline/"
+  }
+}
+</script>
+<style>
+  :root {
+    --bg: #0e0e0c; --bg2: #141412; --bg3: #1a1a17;
+    --line: #252520; --white: #f0efe8;
+    --muted: #4a4a44; --dim: #2a2a26; --accent: #666660;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--font); background: var(--bg); color: var(--white); }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 20px 40px; border-bottom: 0.5px solid var(--line); position: sticky; top: 0; background: var(--bg); z-index: 100; }
+  .nav-logo { font-size: 12.8px; font-weight: 400; letter-spacing: 0.26em; text-transform: uppercase; color: var(--white); text-decoration: none; }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-link { font-size: 12.8px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding-bottom: 2px; border-bottom: 0.5px solid transparent; transition: all 0.2s; }
+  .nav-link:hover { color: var(--white); border-color: var(--white); }
+  .nav-link.active { color: var(--white); border-color: var(--white); }
+
+  .article { max-width: 680px; margin: 0 auto; padding: 64px 40px 80px; }
+  .article-meta { font-size: 12.8px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+  .article-title { font-size: clamp(25px, 3.6vw, 39px); font-weight: 300; line-height: 1.25; letter-spacing: 0.02em; color: var(--white); margin-bottom: 16px; }@media(min-width:1084px){.article-title{font-weight:200}}
+  .article-hook { font-size: 16px; font-style: italic; color: var(--accent); letter-spacing: 0.03em; margin-bottom: 48px; padding-bottom: 32px; border-bottom: 0.5px solid var(--line); }
+  .article h2 { font-size: 16px; font-weight: 400; color: #c8c7c0; letter-spacing: 0.04em; margin: 44px 0 16px; line-height: 1.6; }
+  .article p { font-size: 16px; font-weight: 400; line-height: 1.6; color: #9a9a92; letter-spacing: 0.02em; margin-bottom: 20px; }
+  .article p.quote { font-size: 16px; color: #c8c7c0; font-style: italic; border-left: 1px solid var(--accent); padding-left: 20px; margin: 36px 0; }
+  .article p.en { font-style: italic; color: #6a6a62; font-size: 12.8px; line-height: 1.6; }
+  .article a { color: var(--accent); text-decoration: none; border-bottom: 0.5px solid var(--dim); }
+  .article a:hover { color: var(--white); }
+  .article p a.cta { color: #c8c7c0; text-decoration: none; border-bottom: 0.5px solid var(--muted); }
+  .article-footer { margin-top: 56px; padding-top: 28px; border-top: 0.5px solid var(--line); font-size: 12.8px; color: var(--muted); line-height: 1.6; }
+  .article-footer a { color: var(--accent); text-decoration: none; border-bottom: 0.5px solid var(--dim); }
+  .article-footer a:hover { color: var(--white); }
+
+  .bottom { padding: 24px 40px; display: flex; gap: 32px; font-size: 12.8px; letter-spacing: 0.2em; text-transform: uppercase; border-top: 0.5px solid var(--line); }
+  .bottom a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .bottom a:hover { color: var(--white); }
+  @media (max-width: 768px) { .article { padding: 44px 24px 56px; } }
+
+/* mobile nav */
+@media (max-width: 640px) {
+  .nav { flex-direction: column; align-items: flex-start; gap: 12px; padding: 14px 24px; }
+  .nav-links { gap: 16px; flex-wrap: wrap; row-gap: 8px; }
+}
+</style>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/NotoSansTC-ON.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/type.css?v=2.57">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..500&amp;display=swap" media="print" onload="this.media='all'">
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo on-logo" href="/en/"><img class="on-mark" src="/assets/ON_mark_white.png" alt="ON" width="44" height="22"><span class="on-word">Design Lab</span></a>
+  <div class="nav-links">
+    <a class="nav-link" href="/en/commercial/">Commercial</a>
+    <a class="nav-link" href="/en/residential/">Residential</a>
+    <a class="nav-link" href="/en/info/">Info</a>
+    <a class="nav-link active" href="/en/journal/">Journal</a>
+    <a class="nav-link" href="/en/faq/">FAQ</a>
+    <a class="nav-link" href="/en/contact/">Contact</a>
+    <a class="nav-link" href="/journal/restaurant-design-timeline/">中文</a>
+  </div>
+</nav>
+
+<article class="article">
+  <p class="article-meta">Journal · Working with us · F&amp;B</p>
+  <h1 class="article-title">How long does restaurant design take, and how is it priced? Start from the opening day.</h1>
+  <p class="article-hook">A schedule starts from the opening day, not the signing day.</p>
+
+  <p>Anyone preparing to open a restaurant asks the same two questions first: how much, and how long.</p>
+  <p>Both have answers. But the answers are not in the floor area. They are in your opening date, your menu, and the stage your brand is at.</p>
+
+  <h2>1. Time first: how many weeks of design, how many working days of construction, and what each depends on</h2>
+  <p>From the first conversation to the first service, a restaurant goes through two periods.</p>
+  <p>Design typically takes three to six weeks, depending mainly on how quickly each stage is confirmed and how many rounds of revision it needs. It covers brand understanding, spatial strategy, layout, elevations and 3D, then construction drawings. The concept stage and the 3D stage each include two rounds of revision, and every step is signed off before the next begins. Where it lands between three and six weeks depends mostly on how quickly decisions are made — each sign-off is where the next stage starts.</p>
+  <p>Construction typically takes about 45 to 75 working days (roughly 2 to 3.5 months) for a restaurant of 30–60 ping (about 100–200 m&sup2;) whose building has no serious problems; buildings in poor condition, venues that need approvals, and long lead times on imported materials or equipment will run longer. Demolition, plumbing and electrical, masonry, joinery, metalwork, paint, lighting and kitchen equipment arrive in sequence, some in parallel; joinery is usually the longest. We count working days, not weeks: many malls and buildings do not allow weekend work, and a schedule counted in weeks is wrong from day one.</p>
+  <p>What stretches a timeline is rarely the design itself. It is the condition of the building and the lead times: no high-capacity power supply, faulty water supply and drainage, or serious leaks all have to be resolved before work can go on; imported materials and kitchen equipment run from the day they are ordered, not the day they arrive.</p>
+  <p>Venues that need the architect&rsquo;s sign-off for fire safety and interior renovation have review time added.</p>
+  <p>These are ranges from past projects, not a promise. The real figure depends on the condition of the building and approvals, and we can only give it after the first conversation and a look at the site.</p>
+  <p>A schedule is worked backwards from the opening day; how, is covered in <a href="/en/journal/before-you-open-a-restaurant/">what a designer will ask you to prepare before you open a restaurant</a>. This piece only covers how long each stage takes, and what stretches it.</p>
+  <p class="quote">&ldquo;How long a build takes is often decided at the design stage.&rdquo;</p>
+  <p>Three things are decided there: how much to take out, the order the trades come in, and — most important — how the time on site is planned.</p>
+  <p>A good schedule has no idle days, no days when the site sits empty with no one working. Even when no crew is on site, off-site fabrication keeps going, ready to move in the moment the site is free. The fastest builds do not come from rushing. They come from work running in parallel.</p>
+  <p>VDF Wine Bar took fifteen to eighteen days on site. Not because we rushed, but because we did not strip everything out: we removed only what had to go, kept what could stay, and put the effort into the surfaces.</p>
+
+  <h2>2. Then cost: why commercial projects have no per-area price</h2>
+  <p>F&amp;B projects are always quoted per project, not per area: for the same floor area, a flagship whose identity has to be worked out from scratch and a follow-up store with an established concept can differ several times in workload. The fee has three parts: the design fee, the construction cost, and site supervision at 12% of construction cost; for brands opening more locations, follow-up stores are charged only for drawing adaptation. What each part buys, and why it is split this way, is in <a href="/en/journal/design-fee/">what design costs per ping</a>.</p>
+
+  <h2>3. What keeps time and budget under control is accurate drawings and quotes</h2>
+  <p>The most common delay on a restaurant site is not a slow crew. It is a detail the drawings did not settle, and everyone waiting for an answer.</p>
+  <p>So before drawings and quotes go out, we add a layer of checking. Every dimension is referenced to the walls on both sides, so the crew can measure from either end. Setting out, levels, door swings, equipment and service points, materials and edge details are checked item by item. Quotes are reconciled against the quantities in the drawings, and every variation is confirmed in writing. After the checks, a designer judges whether each item is right. Why the budget comes in two parts, and why variations arrive in stages, is in <a href="/en/journal/restaurant-fitout-budget/">how to set a restaurant fit-out budget</a>.</p>
+
+  <h2>4. Three things worth preparing before you start</h2>
+  <p>One: the opening date. It is where the schedule starts; the two periods above have to fit before it.</p>
+  <p>Two: the menu and how food is served. It sets the size of the kitchen, the flow and the equipment — and where most of the budget goes.</p>
+  <p>Three: which store this is. A flagship and a follow-up store are two different kinds of work.</p>
+  <p>The full list has seven items, set out in <a href="/en/journal/before-you-open-a-restaurant/">what a designer will ask you to prepare before you open a restaurant</a>.</p>
+
+  <p>If you are opening a restaurant, where should the clock start?</p>
+  <p>Bring the site and your ideas, and <a class="cta" href="/en/contact/">we will tell you first whether it can be done, and where it is likely to get stuck</a>.</p>
+
+  <div class="article-footer">
+    <p>ON Design Lab — Brand Logic Translated into Space</p>
+    <p>Related reading: <a href="/en/journal/design-fee/">What design costs per ping</a>　·　<a href="/en/journal/before-you-open-a-restaurant/">Before you open a restaurant</a>　·　<a href="/en/journal/restaurant-fitout-budget/">Restaurant fit-out budget</a></p>
+    <p>How we work: <a href="/en/process/">Five-stage process</a>　·　<a href="/en/faq/">FAQ</a>　·　Talk to us: <a href="/en/contact/">Contact</a>　·　<a href="/journal/restaurant-design-timeline/">中文版</a></p>
+  </div>
+</article>
+
+<div class="bottom">
+  <a href="/en/journal/">← Journal</a>
+  <a href="/en/contact/">Contact →</a>
+</div>
+
+<script src="/assets/js/nav.js" defer></script>
+<script src="/assets/js/sound.js" defer></script>
+</body>
+</html>
