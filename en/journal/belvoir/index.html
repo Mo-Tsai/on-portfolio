@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6VJY51HQTQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-6VJY51HQTQ');
+  // ON-contact-tracking：有人點 Email、Instagram 或 Contact 時送一筆 GA 事件（詢問追蹤）
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a');
+    if (!a) return;
+    var h = a.getAttribute('href') || '', p = location.pathname;
+    if (h.indexOf('mailto:') === 0) gtag('event', 'contact_email', { page_path: p });
+    else if (/instagram\.com/i.test(h)) gtag('event', 'contact_instagram', { page_path: p });
+    else if (/(^|\/)contact\/?$/.test(h.split('#')[0].split('?')[0])) gtag('event', 'contact_page_click', { page_path: p });
+  });
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Where the Error Is Allowed to Happen — The Drawing Set at Belvoir — ON Design Lab Journal</title>
+<meta name="description" content="The shopfront, bar and banquettes at Belvoir were all built elsewhere and brought to site. Whether that works depends not on the factory but on the drawings: why the elevations show no joinery, why one sheet carries two kinds of number, and what a designer should not draw.">
+<link rel="canonical" href="https://ondesignlabltd.com/en/journal/belvoir/">
+<link rel="alternate" hreflang="zh-Hant" href="https://ondesignlabltd.com/journal/belvoir/">
+<link rel="alternate" hreflang="en" href="https://ondesignlabltd.com/en/journal/belvoir/">
+<link rel="alternate" hreflang="x-default" href="https://ondesignlabltd.com/journal/belvoir/">
+<meta property="og:title" content="Where the Error Is Allowed to Happen — The Drawing Set at Belvoir">
+<meta property="og:description" content="Every cut is a decision about where the error goes.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ondesignlabltd.com/en/journal/belvoir/">
+<meta property="og:image" content="https://ondesignlabltd.com/assets/og-on.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Where the Error Is Allowed to Happen — The Drawing Set at Belvoir",
+  "description": "The shopfront, bar and banquettes at Belvoir were all built elsewhere and brought to site. Whether that works depends not on the factory but on the drawings: why the elevations show no joinery, why one sheet carries two kinds of number, and what a designer should not draw.",
+  "author": {
+    "@type": "Organization",
+    "name": "ON Design Lab",
+    "url": "https://ondesignlabltd.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "ON Design Lab",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ondesignlabltd.com/assets/logo-square.png"
+    }
+  },
+  "datePublished": "2026-09-09",
+  "dateModified": "2026-09-09",
+  "inLanguage": "en",
+  "image": "https://ondesignlabltd.com/assets/og-cover.jpg",
+  "mainEntityOfPage": "https://ondesignlabltd.com/en/journal/belvoir/",
+  "about": [
+    "F&B space design",
+    "construction drawings",
+    "drawing method",
+    "dimensioning"
+  ],
+  "translationOfWork": {
+    "@type": "Article",
+    "@id": "https://ondesignlabltd.com/journal/belvoir/"
+  }
+}
+</script>
+<style>
+  :root {
+    --bg: #0e0e0c; --bg2: #141412; --bg3: #1a1a17;
+    --line: #252520; --white: #f0efe8;
+    --muted: #4a4a44; --dim: #2a2a26; --accent: #666660;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--font); background: var(--bg); color: var(--white); }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 20px 40px; border-bottom: 0.5px solid var(--line); position: sticky; top: 0; background: var(--bg); z-index: 100; }
+  .nav-logo { font-size: 12.8px; font-weight: 400; letter-spacing: 0.26em; text-transform: uppercase; color: var(--white); text-decoration: none; }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-link { font-size: 12.8px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding-bottom: 2px; border-bottom: 0.5px solid transparent; transition: all 0.2s; }
+  .nav-link:hover { color: var(--white); border-color: var(--white); }
+  .nav-link.active { color: var(--white); border-color: var(--white); }
+
+  .article { max-width: 680px; margin: 0 auto; padding: 64px 40px 80px; }
+  .article-meta { font-size: 12.8px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+  .article-title { font-size: clamp(25px, 3.6vw, 39px); font-weight: 300; line-height: 1.25; letter-spacing: 0.02em; color: var(--white); margin-bottom: 16px; }@media(min-width:1084px){.article-title{font-weight:200}}
+  .article-hook { font-size: 16px; font-style: italic; color: var(--accent); letter-spacing: 0.03em; margin-bottom: 48px; padding-bottom: 32px; border-bottom: 0.5px solid var(--line); }
+  .article h2 { font-size: 16px; font-weight: 400; color: #c8c7c0; letter-spacing: 0.04em; margin: 44px 0 16px; line-height: 1.6; }
+  .article p { font-size: 16px; font-weight: 400; line-height: 1.6; color: #9a9a92; letter-spacing: 0.02em; margin-bottom: 20px; }
+  .article p.quote { font-size: 16px; color: #c8c7c0; font-style: italic; border-left: 1px solid var(--accent); padding-left: 20px; margin: 36px 0; }
+  .article strong { color: #c8c7c0; font-weight: 400; }
+  .article p a.cta { color: #c8c7c0; text-decoration: none; border-bottom: 0.5px solid var(--muted); }
+  .article-footer { margin-top: 56px; padding-top: 28px; border-top: 0.5px solid var(--line); font-size: 12.8px; color: var(--muted); line-height: 1.6; }
+  .article-footer a { color: var(--accent); text-decoration: none; border-bottom: 0.5px solid var(--dim); }
+  .article-footer a:hover { color: var(--white); }
+
+  .bottom { padding: 24px 40px; display: flex; gap: 32px; font-size: 12.8px; letter-spacing: 0.2em; text-transform: uppercase; border-top: 0.5px solid var(--line); }
+  .bottom a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .bottom a:hover { color: var(--white); }
+  @media (max-width: 768px) { .article { padding: 44px 24px 56px; } }
+
+/* mobile nav */
+@media (max-width: 640px) {
+  .nav { flex-direction: column; align-items: flex-start; gap: 12px; padding: 14px 24px; }
+  .nav-links { gap: 16px; flex-wrap: wrap; row-gap: 8px; }
+}
+</style>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/NotoSansTC-ON.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/type.css?v=2.57">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..500&amp;display=swap" media="print" onload="this.media='all'">
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo on-logo" href="/en/"><img class="on-mark" src="/assets/ON_mark_white.png" alt="ON" width="44" height="22"><span class="on-word">Design Lab</span></a>
+  <div class="nav-links">
+    <a class="nav-link" href="/en/commercial/">Commercial</a>
+    <a class="nav-link" href="/en/residential/">Residential</a>
+    <a class="nav-link" href="/en/info/">Info</a>
+    <a class="nav-link active" href="/en/journal/">Journal</a>
+    <a class="nav-link" href="/en/faq/">FAQ</a>
+    <a class="nav-link" href="/en/contact/">Contact</a>
+    <a class="nav-link" href="/journal/belvoir/">中文</a>
+  </div>
+</nav>
+
+<article class="article">
+  <p class="article-meta">Journal · F&amp;B Space · Drawing Method</p>
+  <h1 class="article-title">Where the Error Is Allowed to Happen — The Drawing Set at Belvoir</h1>
+  <p class="article-hook">Every cut is a decision about where the error goes.</p>
+
+  <p>Much of Belvoir, a bistro and wine bar, was made somewhere else and brought into this old Taipei building to be assembled: the shopfront, the bar, the banquette seating, the hanging glass rack, the bookshelf wall and sliding doors of the private room. Only a few things were made on site: column casings, wall panelling, partitions and the beam enclosures. Those are the parts the building itself gets to influence.</p>
+  <p>For this to work, the factory’s skill is not the deciding factor. However good the factory, it can only build what the drawing says. What decides it is the drawing itself: it has to be readable by someone who has never been to the site and will not call to ask, and once read, it has to be impossible to get wrong.</p>
+  <p>Looking back at this set, three decisions did the real work.</p>
+
+  <h2>1. Why the Elevations Show No Joinery</h2>
+  <p>The drawings come in two series. The E series is the elevations, at 1:30. They govern what each wall looks like and where things sit. Wherever a cabinet, a bar or a banquette appears, the elevation says one thing only: see object drawing.</p>
+  <p>The F series is the object drawings, at 1:20. One object, one sheet, and every sheet is paired with a 3D page.</p>
+  <p>The reason for the split is simple. An elevation answers “where is this”; an object drawing answers “what is this”. Put both on one sheet and the factory has to work out for itself which set of dimensions is in charge, and if it guesses wrong the whole piece is remade. The 3D page is there so the maker understands the form before reading the numbers. Reverse that order, and however precise the dimensions, the wrong thing gets built.</p>
+
+  <h2>2. Why One Sheet Carries Two Kinds of Number</h2>
+  <p>The first kind is fixed. The section of the shopfront timber frame, the thickness of the steelwork, the divisions of the glass rack: all dimensioned precisely. There is no room for discussion, because the factory can hit these numbers on its own floor.</p>
+  <p>The second kind is declared flexible, and declared on the drawing itself: shopfront overall height ±240 (site dimension governs); banquette overall length ±400 (confirm on site); rack hanging points ±150.5 (confirm on site); ±58, confirm finished stair height. These are the places where an object meets the existing building.</p>
+  <p>There is only one dividing line: who decides this dimension. What the factory can control, fix. What it cannot, hand over, and say clearly to whom.</p>
+  <p>The tiled elevation follows the same logic. The whole wall is dimensioned in whole tiles: ±5 (whole tiles), ±10 (whole tiles), 99 (whole tiles). Where the cut falls is decided on the drawing, not left for the day on site.</p>
+
+  <h2>3. What a Designer Should Not Draw</h2>
+  <p>Internal timber structure, metal structure, the number of screws: the drawing says “factory to determine”. The thickness and proportion of the banquette upholstery: “factory to discuss seat comfort with the client”. Downlight selection: “factory’s choice, ultra-thin recommended”. Even who buys the sliding-door hardware is written on the sheet: the factory is advised to purchase it and ship it to the site contractor.</p>
+  <p>Every object sheet carries the same line in its footer: should the factory or the contractor have any structural concern, confirm with the designer; structure already built takes priority.</p>
+  <p>The designer draws the finished face. The factory draws what holds it up. Draw what you should not, and it looks responsible, but the responsibility is now tangled. When something does go wrong, nobody knows who decided that screw.</p>
+
+  <p class="quote">"The error does not disappear. If you do not assign it a place, it finds one on its own."</p>
+
+  <h2>How Far a Drawing Travels Depends on Where It Gives Way First</h2>
+  <p><strong>Precision does not mean fixing everything.</strong> A drawing with every dimension locked meets a forty-year-old building and fails on the first day. Real precision is knowing which numbers must be held, and which must be left blank.</p>
+  <p><strong>Flexibility has to be written on the drawing; it cannot rest on an understanding.</strong> ±400 followed by “confirm on site” and a bare 400 are two completely different drawings. The first is a blank that has been assigned. The second is a number waiting to be misread.</p>
+  <p><strong>Not drawing is also a way of drawing.</strong> Writing “factory to determine” is not laziness. It hands the decision to the people actually able to make it, and leaves a record of who did.</p>
+  <p>Once finished, this set left the office. Whether it can be read with no one standing beside it to explain is the drawing’s own business. How far a design can travel depends not on how full the drawing is, but on where it has given way first.</p>
+
+  <p>Bring the idea for your shop and the site, and <a class="cta" href="/en/contact/">we will run the numbers together first</a>.</p>
+
+  <div class="article-footer">
+    <p>ON Design Lab — Brand Logic Translated into Space</p>
+    <p>See the space: <a href="/commercial/belvoir/">Belvoir — F&amp;B Space</a> · Related: <a href="/en/journal/residence-r-island/">Where the Error Is Allowed to Happen — Cutting an Island</a> · Inquiries: <a href="/en/contact/">Contact</a> · <a href="/journal/belvoir/">中文版</a></p>
+  </div>
+</article>
+
+<div class="bottom">
+  <a href="/en/journal/">← Journal (EN)</a>
+  <a href="/en/contact/">Contact →</a>
+</div>
+
+<script src="/assets/js/nav.js" defer></script>
+<script src="/assets/js/sound.js" defer></script>
+</body>
+</html>
