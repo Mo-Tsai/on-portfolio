@@ -103,6 +103,20 @@
   .nav { flex-direction: column; align-items: flex-start; gap: 12px; padding: 14px 24px; }
   .nav-links { gap: 16px; flex-wrap: wrap; row-gap: 8px; }
 }
+
+  /* ---- 工法影片區塊 ---- */
+  .tv { width: min(100%, 360px); margin: 0 0 48px; }
+  .tv[hidden] { display: none; }
+  .tv-frame { position: relative; aspect-ratio: 9 / 16; background: var(--bg2); overflow: hidden; }
+  .tv-frame img, .tv-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border: 0; display: block; }
+  .tv-play { position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; background: none; cursor: pointer; }
+  .tv-play::after { content: ""; position: absolute; right: 20px; bottom: 20px; width: 52px; height: 52px; border: 0.5px solid rgba(240,239,232,0.7); border-radius: 50%; background: rgba(14,14,12,0.35); transition: background 0.2s, border-color 0.2s; }
+  .tv-play::before { content: ""; position: absolute; right: 36px; bottom: 38px; border-style: solid; border-width: 8px 0 8px 13px; border-color: transparent transparent transparent var(--white); z-index: 1; }
+  .tv-play:hover::after { background: rgba(14,14,12,0.6); border-color: var(--white); }
+  .tv-cap { margin-top: 12px; font-size: 12.8px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); display: flex; justify-content: space-between; gap: 16px; }
+  .tv-cap a { color: var(--accent); text-decoration: none; border-bottom: 0.5px solid var(--dim); }
+  .tv-cap a:hover { color: var(--white); }
+  @media (max-width: 768px) { .tv { width: 100%; max-width: 420px; } }
 </style>
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
@@ -130,6 +144,14 @@
   <h1 class="article-title">It Is Not a Glowing Wall — It Is a Stone That Lights Up Only Where It Can</h1>
   <p class="article-hook">The stone lights up only where it can.</p>
 
+  <figure class="tv" data-yt="F_GrjU_DaGM" data-title="It Is Not a Glowing Wall — It Is a Stone That Lights Up Only Where It Can">
+    <div class="tv-frame">
+      <img src="/images/journal/residence-h-poster.jpg" alt="It Is Not a Glowing Wall — It Is a Stone That Lights Up Only Where It Can" width="540" height="960" loading="lazy">
+      <button class="tv-play" aria-label="Play video: It Is Not a Glowing Wall — It Is a Stone That Lights Up Only Where It Can"></button>
+    </div>
+    <figcaption class="tv-cap"><span>Special techniques · 1:45</span><a href="https://www.youtube.com/shorts/F_GrjU_DaGM">Watch on YouTube</a></figcaption>
+  </figure>
+
 <p>The first thing you meet at the door is two things side by side: one thick, one transparent.</p>
   <p>The thick one is a single wall of stone; the transparent one is an aquarium visible from three sides. Between them they set the centre of gravity for the whole home — the weight gathered in one place, so everywhere else can afford to be empty. This piece is about the thick one.</p>
 
@@ -147,7 +169,7 @@
 
   <p class="quote">"It is not a glowing wall. It is a stone that lights up only where it can."</p>
 
-  <p>If the lights went out on the most expensive wall in your home, would it still hold up?</p>
+  <p>If you switched off the lights on the most important wall in your home, would it still look the way you like it?</p>
 
   <p>Bring your floor plan, and <a class="cta" href="/en/contact/">we will look at it together</a>.</p>
 
@@ -161,6 +183,8 @@
   <a href="/en/journal/">← Journal (EN)</a>
   <a href="/en/contact/">Contact →</a>
 </div>
+
+<script src="/assets/js/tv.js" defer></script>
 
 <script src="/assets/js/nav.js" defer></script>
 <script src="/assets/js/sound.js" defer></script>
