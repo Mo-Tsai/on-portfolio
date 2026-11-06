@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6VJY51HQTQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-6VJY51HQTQ');
+  // ON-contact-tracking：有人點 Email、Instagram 或 Contact 時送一筆 GA 事件（詢問追蹤）
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a');
+    if (!a) return;
+    var h = a.getAttribute('href') || '', p = location.pathname;
+    if (h.indexOf('mailto:') === 0) gtag('event', 'contact_email', { page_path: p });
+    else if (/instagram\.com/i.test(h)) gtag('event', 'contact_instagram', { page_path: p });
+    else if (/(^|\/)contact\/?$/.test(h.split('#')[0].split('?')[0])) gtag('event', 'contact_page_click', { page_path: p });
+  });
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Wall Is Not the Background. It Is the Exhibit. — The Paradox of a Material Brand’s Showroom — ON Design Lab Journal</title>
+<meta name="description" content="The contradiction in designing a showroom for a coatings brand: too much design and the material disappears into the space; too little and there is no reason to walk in. The answer is to make the wall the exhibit: built-up structure shows the texture, warm and cool, matte and gloss sit side by side in the light, and movement becomes the medium of display.">
+<link rel="canonical" href="https://ondesignlabltd.com/en/journal/yun-jiao/">
+<link rel="alternate" hreflang="zh-Hant" href="https://ondesignlabltd.com/journal/yun-jiao/">
+<link rel="alternate" hreflang="en" href="https://ondesignlabltd.com/en/journal/yun-jiao/">
+<link rel="alternate" hreflang="x-default" href="https://ondesignlabltd.com/journal/yun-jiao/">
+<meta property="og:title" content="The Wall Is Not the Background. It Is the Exhibit.">
+<meta property="og:description" content="If the product is the space, what is the designer's job?">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ondesignlabltd.com/en/journal/yun-jiao/">
+<meta property="og:image" content="https://ondesignlabltd.com/assets/og-on.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "The Wall Is Not the Background. It Is the Exhibit.",
+  "description": "The contradiction in designing a showroom for a coatings brand: too much design and the material disappears into the space; too little and there is no reason to walk in. The answer is to make the wall the exhibit: built-up structure shows the texture, warm and cool, matte and gloss sit side by side in the light, and movement becomes the medium of display.",
+  "author": {
+    "@type": "Organization",
+    "name": "ON Design Lab",
+    "url": "https://ondesignlabltd.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "ON Design Lab",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ondesignlabltd.com/assets/logo-square.png"
+    }
+  },
+  "datePublished": "2026-07-10",
+  "dateModified": "2026-07-10",
+  "inLanguage": "en",
+  "image": "https://ondesignlabltd.com/assets/og-cover.jpg",
+  "mainEntityOfPage": "https://ondesignlabltd.com/en/journal/yun-jiao/",
+  "about": [
+    "showroom design",
+    "material narrative",
+    "coatings brand",
+    "commercial space design"
+  ],
+  "translationOfWork": {
+    "@type": "Article",
+    "@id": "https://ondesignlabltd.com/journal/yun-jiao/"
+  }
+}
+</script>
+<style>
+  :root {
+    --bg: #0e0e0c; --bg2: #141412; --bg3: #1a1a17;
+    --line: #252520; --white: #f0efe8;
+    --muted: #4a4a44; --dim: #2a2a26; --accent: #666660;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--font); background: var(--bg); color: var(--white); }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 20px 40px; border-bottom: 0.5px solid var(--line); position: sticky; top: 0; background: var(--bg); z-index: 100; }
+  .nav-logo { font-size: 12.8px; font-weight: 400; letter-spacing: 0.26em; text-transform: uppercase; color: var(--white); text-decoration: none; }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-link { font-size: 12.8px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding-bottom: 2px; border-bottom: 0.5px solid transparent; transition: all 0.2s; }
+  .nav-link:hover { color: var(--white); border-color: var(--white); }
+  .nav-link.active { color: var(--white); border-color: var(--white); }
+
+  .article { max-width: 680px; margin: 0 auto; padding: 64px 40px 80px; }
+  .article-meta { font-size: 12.8px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+  .article-title { font-size: clamp(25px, 3.6vw, 39px); font-weight: 300; line-height: 1.25; letter-spacing: 0.02em; color: var(--white); margin-bottom: 16px; }@media(min-width:1084px){.article-title{font-weight:200}}
+  .article-hook { font-size: 16px; font-style: italic; color: var(--accent); letter-spacing: 0.03em; margin-bottom: 48px; padding-bottom: 32px; border-bottom: 0.5px solid var(--line); }
+  .article h2 { font-size: 16px; font-weight: 400; color: #c8c7c0; letter-spacing: 0.04em; margin: 44px 0 16px; line-height: 1.6; }
+  .article p { font-size: 16px; font-weight: 400; line-height: 1.6; color: #9a9a92; letter-spacing: 0.02em; margin-bottom: 20px; }
+  .article p.quote { font-size: 16px; color: #c8c7c0; font-style: italic; border-left: 1px solid var(--accent); padding-left: 20px; margin: 36px 0; }
+  .article strong { color: #c8c7c0; font-weight: 400; }
+  .article p a.cta { color: #c8c7c0; text-decoration: none; border-bottom: 0.5px solid var(--muted); }
+  .article-footer { margin-top: 56px; padding-top: 28px; border-top: 0.5px solid var(--line); font-size: 12.8px; color: var(--muted); line-height: 1.6; }
+  .article-footer a { color: var(--accent); text-decoration: none; border-bottom: 0.5px solid var(--dim); }
+  .article-footer a:hover { color: var(--white); }
+
+  .bottom { padding: 24px 40px; display: flex; gap: 32px; font-size: 12.8px; letter-spacing: 0.2em; text-transform: uppercase; border-top: 0.5px solid var(--line); }
+  .bottom a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .bottom a:hover { color: var(--white); }
+  @media (max-width: 768px) { .article { padding: 44px 24px 56px; } }
+
+/* mobile nav */
+@media (max-width: 640px) {
+  .nav { flex-direction: column; align-items: flex-start; gap: 12px; padding: 14px 24px; }
+  .nav-links { gap: 16px; flex-wrap: wrap; row-gap: 8px; }
+}
+</style>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/NotoSansTC-ON.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/type.css?v=2.57">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..500&amp;display=swap" media="print" onload="this.media='all'">
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo on-logo" href="/en/"><img class="on-mark" src="/assets/ON_mark_white.png" alt="ON" width="44" height="22"><span class="on-word">Design Lab</span></a>
+  <div class="nav-links">
+    <a class="nav-link" href="/en/commercial/">Commercial</a>
+    <a class="nav-link" href="/en/residential/">Residential</a>
+    <a class="nav-link" href="/en/info/">Info</a>
+    <a class="nav-link active" href="/en/journal/">Journal</a>
+    <a class="nav-link" href="/en/faq/">FAQ</a>
+    <a class="nav-link" href="/en/contact/">Contact</a>
+    <a class="nav-link" href="/journal/yun-jiao/">中文</a>
+  </div>
+</nav>
+
+<article class="article">
+  <p class="article-meta">Journal · Showroom · Material Narrative</p>
+  <h1 class="article-title">The Wall Is Not the Background. It Is the Exhibit.</h1>
+  <p class="article-hook">If the product is the space, what is the designer's job?</p>
+
+  <p>Designing a showroom for a brand that sells material is a contradiction. Too much design, and the material is swallowed by the space. Too little, and there is no reason to walk in.</p>
+  <p>We chose one thing: to let the coating speak, through the space itself.</p>
+
+  <h2>The Wall Is Not Only the Background. It Is the Exhibit.</h2>
+  <p>Built-up structure means the texture of the coating is visible at every corner, and every reflection is made by coating and light together. The wall is no longer a passive background. It is the subject.</p>
+  <p>Linear structural frames hold a dialogue with large blank walls. The blank is not an absence; it is room for the coating to breathe. For a material to be felt, what sits beside it has to be quiet, with nothing competing for attention. The frame is rhythm, the blank is pause, the coating is voice.</p>
+
+  <h2>Movement Is the Medium of Display</h2>
+  <p>Cool and warm, matte and gloss, side by side in one space. Not to show the range of products, but so a visitor experiences for themselves how a material changes with light. As you move, the light moves with you, and the material shows a different face under each. This is not a display. It is letting someone feel how a material changes the feeling of a space.</p>
+  <p>Furniture and lighting are supporting context here, not the lead. The designer's work is to keep pushing the eye back to the wall, back to the material, back to the question: what did you feel?</p>
+
+  <p class="quote">"The designer's job is to find the position from which the material tells its story best, and then step back."</p>
+
+  <p>A showroom succeeds not by how many products a visitor sees, but by what they remember feeling after they leave. A coating has to be felt in person; looking is not enough. So this showroom carries no explanatory text. Walking in is the exhibition.</p>
+
+  <p>What should your showroom leave people remembering? Bring your floor plan and your ideas and <a class="cta" href="/en/contact/">let us talk</a>. Nothing needs deciding first.</p>
+
+  <div class="article-footer">
+    <p>ON Design Lab — Brand Logic Translated into Space</p>
+    <p>See the space: <a href="/commercial/yun-jiao/">Yun Jiao — Showroom</a> · Inquiries: <a href="/en/contact/">Contact</a> · <a href="/journal/yun-jiao/">中文版</a></p>
+  </div>
+</article>
+
+<div class="bottom">
+  <a href="/en/journal/">← Journal (EN)</a>
+  <a href="/en/contact/">Contact →</a>
+</div>
+
+<script src="/assets/js/nav.js" defer></script>
+<script src="/assets/js/sound.js" defer></script>
+</body>
+</html>
